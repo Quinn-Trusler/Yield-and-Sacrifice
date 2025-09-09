@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5o8bu16f8iqk"]
+
+[ext_resource type="SpriteFrames" uid="uid://bi17cyiy48070" path="res://scenes/draggable_item.tres" id="1_a4jc7"]
+[ext_resource type="Script" uid="uid://yvfg2nfbt1md" path="res://scripts/draggable_item.gd" id="1_c446u"]
+
+[node name="DraggableItem" type="AnimatedSprite2D"]
+z_index = 3
+sprite_frames = ExtResource("1_a4jc7")
+script = ExtResource("1_c446u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]

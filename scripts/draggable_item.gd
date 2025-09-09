@@ -1,0 +1,38 @@
+extends AnimatedSprite2D
+
+
+
+var item_name;
+var mouse_in_area = false
+var dragging = false
+
+
+func initialize(n,is_animated):
+	item_name = n
+	print(sprite_frames.get_frame_count("default"))
+	sprite_frames.add_frame("default",load("res://art/items/"+n+".png"))
+	print(sprite_frames.get_frame_count("default"))
+	play("default")
+	#set_sprite_frames(value)
+	#$sprite_frames.default = load("res://art/items/+"+n+"+.png")
+	
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("mouse_down"):
+		if mouse_in_area and dragging == false:
+			$PickUp.play()
+			dragging = true
+	elif dragging:
+		dragging = false
+		$Drop.play()
+		
+	if dragging:
+		position = get_global_mouse_position()
+
+
+func _on_area_2d_mouse_entered() -> void:
+	print("mouse entered")
+	mouse_in_area = true
+
+
+func _on_area_2d_mouse_exited() -> void:
+	mouse_in_area = false
