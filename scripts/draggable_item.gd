@@ -18,12 +18,14 @@ func initialize(n,is_animated):
 	
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("mouse_down"):
-		if mouse_in_area and dragging == false:
+		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
 			$PickUp.play()
 			dragging = true
+			get_parent().pickup_item()
 	elif dragging:
 		dragging = false
 		$Drop.play()
+		get_parent().drop_item(self)
 		
 	if dragging:
 		position = get_global_mouse_position()
