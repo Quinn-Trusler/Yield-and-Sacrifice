@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=8 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://cmhjk84cerm3n" path="res://art/worksheet.png" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_sugp2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
 texture = ExtResource("2_0wfyh")
@@ -28,7 +29,6 @@ texture = ExtResource("2_0wfyh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("2_0wfyh")
-margins = Vector2i(16, 6)
 texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 2:1/0 = 0
@@ -50,6 +50,9 @@ texture_region_size = Vector2i(32, 32)
 0:8/0 = 0
 1:8/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jyhfs"]
+scenes/1/scene = ExtResource("3_sugp2")
+
 [sub_resource type="TileSet" id="TileSet_o5qli"]
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
@@ -60,6 +63,7 @@ custom_data_layer_0/name = "Name"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_sugp2")
 sources/1 = SubResource("TileSetAtlasSource_0wfyh")
+sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o5qli")
@@ -75,6 +79,4 @@ tile_set = SubResource("TileSet_o5qli")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 position = Vector2(72, -59)
-scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAD2/wMAAAACAAQAAAD3/wMAAAACAAQAAAD4/wMAAAACAAQAAAD5/wMAAAABAAYAAAD6/wMAAAABAAYAAAD7/wMAAAABAAYAAAD2/wEAAAABAAgAAAD3/wEAAAABAAgAAAD4/wEAAAABAAgAAAD5/wEAAAABAAgAAAA=")
 tile_set = SubResource("TileSet_o5qli")

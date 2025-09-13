@@ -6,6 +6,9 @@ var dragging_item = false
 
 var RNG = RandomNumberGenerator.new()
 
+var atlas_decoded = {"carrot_0":Vector2(2,4)}
+
+
 func _ready():
 	create_draggable_item("carrot")
 	create_draggable_item("carrot")
@@ -15,7 +18,7 @@ func create_draggable_item(item_name):
 	add_child(temp)
 	draggable_items.append(temp)
 	temp.initialize(item_name,false)
-	temp.position.x = RNG.randi_range(-200,200)
+	temp.position.x = RNG.randi_range(-100,100)
 	
 func _process(delta: float) -> void:
 	#print(get_mouse_tile_name())
@@ -36,8 +39,18 @@ func drop_item(item):
 	dragging_item = false
 	var pos = $TileMapLayer.to_local(item.position)
 	var tile_name = get_tile_name(pos)
-	print(tile_name)
+	pos = $TileMapLayer.local_to_map(pos)
+	var delete_item = false
 	if tile_name == "lava":
+		delete_item = true
+	if item.item_name == "carrot":
+		if tile_name == "farmland":
+			if $TileMapLayer2.get_cell_source_id(pos) ==-1:
+				delete_item = true
+				$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,1)
+			else:
+				print("Error: Cannot plant on already planted farmland")
+	if delete_item:
 		draggable_items.erase(item)
 		item.queue_free()
 		
