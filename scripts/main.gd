@@ -10,19 +10,19 @@ var atlas_decoded = {"carrot_0":Vector2(2,4)}
 
 
 func _ready():
-	create_draggable_item("carrot")
-	create_draggable_item("carrot")
+	create_draggable_item("carrot",Vector2(50,10))
+	create_draggable_item("carrot",Vector2(-70,-30))
 	
-func create_draggable_item(item_name):
+func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
 	add_child(temp)
 	draggable_items.append(temp)
 	temp.initialize(item_name,false)
-	temp.position.x = RNG.randi_range(-100,100)
+	temp.position = pos
 	
 func _process(delta: float) -> void:
-	#print(get_mouse_tile_name())
-	pass
+	if Input.is_action_just_pressed("mouse_down"):
+		click_tile()
 func get_mouse_tile_name():
 	var mouse_cell = $TileMapLayer.get_local_mouse_position()
 	return get_tile_name(mouse_cell)
@@ -37,22 +37,45 @@ func pickup_item():
 	dragging_item = true
 func drop_item(item):
 	dragging_item = false
+	
+	var delete_item = false
 	var pos = $TileMapLayer.to_local(item.position)
 	var tile_name = get_tile_name(pos)
 	pos = $TileMapLayer.local_to_map(pos)
-	var delete_item = false
+	
+	
 	if tile_name == "lava":
+		$SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
 	if item.item_name == "carrot":
 		if tile_name == "farmland":
-			if $TileMapLayer2.get_cell_source_id(pos) ==-1:
+			if $TileMapLayer2.get_cell_source_id(pos) ==-1:#empty cell
 				delete_item = true
-				$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,1)
+				$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,1)#plant carrot crop
 			else:
 				print("Error: Cannot plant on already planted farmland")
+				
+				
+				
 	if delete_item:
 		draggable_items.erase(item)
 		item.queue_free()
+func click_tile():
+	var tile_name = get_mouse_tile_name()
+	
+	
+	if tile_name == "farmland":
+		var pos = $TileMapLayer.get_local_mouse_position()
+		pos = $TileMapLayer.local_to_map(pos)
+		
+		if $TileMapLayer2.get_cell_source_id(pos) !=-1:#cell not empty
+			var scene = $TileMapLayer2.get_cell_scene(pos)#	get_cell_scene_instance(pos)
+			if scene.growth_complete:
+				$TileMapLayer2.set_cell(pos,-1)#delete cell
+				create_draggable_item("carrot",get_global_mouse_position())
+				create_draggable_item("carrot",get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
+			else:
+				print("Error: growth not complete")
 		
 		
 	

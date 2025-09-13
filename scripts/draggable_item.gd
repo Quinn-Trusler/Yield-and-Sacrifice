@@ -17,12 +17,12 @@ func initialize(n,is_animated):
 	#$sprite_frames.default = load("res://art/items/+"+n+"+.png")
 	
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("mouse_down"):
+	if Input.is_action_just_pressed("mouse_down"):
 		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
 			$PickUp.play()
 			dragging = true
 			get_parent().pickup_item()
-	elif dragging:
+	elif not Input.is_action_pressed("mouse_down") and dragging:
 		dragging = false
 		$Drop.play()
 		get_parent().drop_item(self)
