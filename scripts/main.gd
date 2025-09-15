@@ -3,6 +3,7 @@ extends Node2D
 var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var draggable_items = []
 var dragging_item = false
+var MAPSIZE = [-13,5,4,-4]
 
 var RNG = RandomNumberGenerator.new()
 
@@ -12,6 +13,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4)}
 func _ready():
 	create_draggable_item("carrot",Vector2(50,10))
 	create_draggable_item("carrot",Vector2(-70,-30))
+	
 	
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -78,4 +80,7 @@ func click_tile():
 				print("Error: growth not complete")
 		
 		
-	
+func punish():
+	$GodChoiceManager.display_punishments()
+func reward():
+	$GodChoiceManager.display_rewards()

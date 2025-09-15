@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://284n533bqlq8"]
 
-[ext_resource type="Texture2D" uid="uid://3ntf285hbnhc" path="res://art/carrot_crop.png" id="1_fe780"]
+[ext_resource type="Texture2D" uid="uid://3ntf285hbnhc" path="res://art/crops/carrot_crop.png" id="1_fe780"]
 [ext_resource type="Script" uid="uid://cngroc4l3rkj6" path="res://crop.gd" id="1_pl0dt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pfmy0"]

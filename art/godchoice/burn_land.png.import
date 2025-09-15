@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ntf285hbnhc"
-path="res://.godot/imported/carrot_crop.png-3d803d60151cdff6b02d915db9a7355c.ctex"
+uid="uid://dmfrwxdp03bf3"
+path="res://.godot/imported/burn_land.png-787f6c1b5eccaed6e8d835cf5287c15a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/carrot_crop.png"
-dest_files=["res://.godot/imported/carrot_crop.png-3d803d60151cdff6b02d915db9a7355c.ctex"]
+source_file="res://art/godchoice/burn_land.png"
+dest_files=["res://.godot/imported/burn_land.png-787f6c1b5eccaed6e8d835cf5287c15a.ctex"]
 
 [params]
 

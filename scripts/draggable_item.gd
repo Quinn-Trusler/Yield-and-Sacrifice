@@ -9,9 +9,7 @@ var dragging = false
 
 func initialize(n,is_animated):
 	item_name = n
-	print(sprite_frames.get_frame_count("default"))
 	sprite_frames.add_frame("default",load("res://art/items/"+n+".png"))
-	print(sprite_frames.get_frame_count("default"))
 	play("default")
 	#set_sprite_frames(value)
 	#$sprite_frames.default = load("res://art/items/+"+n+"+.png")
@@ -32,7 +30,6 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
-	print("mouse entered")
 	mouse_in_area = true
 
 

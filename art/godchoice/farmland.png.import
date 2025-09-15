@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c80qq1wdfk5mk"
-path="res://.godot/imported/tree3.png-2b169882319cdbad68a25dbb70db3d14.ctex"
+uid="uid://bytvxt8eu0w4v"
+path="res://.godot/imported/farmland.png-cd4eba682e3eedff414a4ed484b679f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tree3.png"
-dest_files=["res://.godot/imported/tree3.png-2b169882319cdbad68a25dbb70db3d14.ctex"]
+source_file="res://art/godchoice/farmland.png"
+dest_files=["res://.godot/imported/farmland.png-cd4eba682e3eedff414a4ed484b679f4.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

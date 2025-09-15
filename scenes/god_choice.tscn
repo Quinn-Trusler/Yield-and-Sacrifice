@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsgo3g82nilvu"]
+
+[ext_resource type="Script" uid="uid://b1gjtnncn37w0" path="res://scenes/god_choice.gd" id="1_7ipnc"]
+
+[node name="GodChoice" type="Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7ipnc")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
