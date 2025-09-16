@@ -2,9 +2,13 @@ extends AnimatedSprite2D
 
 
 
+#var types = 
+
 var item_name;
 var mouse_in_area = false
 var dragging = false
+
+
 
 
 func initialize(n,is_animated):

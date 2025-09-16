@@ -64,20 +64,21 @@ func drop_item(item):
 		item.queue_free()
 func click_tile():
 	var tile_name = get_mouse_tile_name()
+	#if tile_name == "farmland":
+	var pos = $TileMapLayer.get_local_mouse_position()
+	pos = $TileMapLayer.local_to_map(pos)
 	
-	
-	if tile_name == "farmland":
-		var pos = $TileMapLayer.get_local_mouse_position()
-		pos = $TileMapLayer.local_to_map(pos)
+	if $TileMapLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+		var scene = $TileMapLayer2.get_cell_scene(pos)
 		
-		if $TileMapLayer2.get_cell_source_id(pos) !=-1:#cell not empty
-			var scene = $TileMapLayer2.get_cell_scene(pos)#	get_cell_scene_instance(pos)
-			if scene.growth_complete:
-				$TileMapLayer2.set_cell(pos,-1)#delete cell
-				create_draggable_item("carrot",get_global_mouse_position())
-				create_draggable_item("carrot",get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
-			else:
-				print("Error: growth not complete")
+		if scene.IS_CROP:#growth_complete:
+			if scene.harvest_on_click:
+				var temp = scene.harvest()
+				if temp:
+					$TileMapLayer2.set_cell(pos,-1)#delete cell
+					for i in range(len(temp)):
+						create_draggable_item(temp[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
+			#create_draggable_item("carrot",get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
 		
 		
 func punish():
