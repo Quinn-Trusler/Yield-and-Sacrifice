@@ -9,7 +9,28 @@ var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4)}
 
+var ITEMS_FOLDER = "res://art/items/"
+var CROP_SCENE_ID =1
+var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"]}}
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","place_on":["farmland"]}}
+var ANIMAL_DEF
+var BUILDING_DEF
 
+
+var last_crop = "null"
+
+#var stage_growth_duration = 2
+#var total_stages = 4
+#
+#var harvest_on_click = true
+#var pick_on_click = 0 #number of picks allowed
+#var pick_stage_setback = 0 #how far crop is setback when picked
+#var resources = ["carrot","carrot"]
+#
+##change as plant grows
+#var stage = 0
+#var timer = 0
+#var growth_complete = false
 func _ready():
 	create_draggable_item("carrot",Vector2(50,10))
 	create_draggable_item("carrot",Vector2(-70,-30))
@@ -49,13 +70,16 @@ func drop_item(item):
 	if tile_name == "lava":
 		$SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
-	if item.item_name == "carrot":
-		if tile_name == "farmland":
-			if $TileMapLayer2.get_cell_source_id(pos) ==-1:#empty cell
-				delete_item = true
-				$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,1)#plant carrot crop
-			else:
-				print("Error: Cannot plant on already planted farmland")
+	#if item.item_name == "carrot":
+	if tile_name in ITEM_DEF[item.item_name]["place_on"]:
+		if $TileMapLayer2.get_cell_source_id(pos) ==-1:#empty cell
+			delete_item = true
+
+			$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,CROP_SCENE_ID)#plant carrot crop
+			var scene = $TileMapLayer2.get_cell_scene(pos)
+			last_crop = item.item_name
+		else:
+			print("Error: Cannot plant on already planted farmland")
 				
 				
 				
@@ -64,24 +88,25 @@ func drop_item(item):
 		item.queue_free()
 func click_tile():
 	var tile_name = get_mouse_tile_name()
-	#if tile_name == "farmland":
+
 	var pos = $TileMapLayer.get_local_mouse_position()
 	pos = $TileMapLayer.local_to_map(pos)
 	
 	if $TileMapLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
 		var scene = $TileMapLayer2.get_cell_scene(pos)
-		
-		if scene.IS_CROP:#growth_complete:
+		print("accessing scene but better this time?",scene)
+		if scene.IS_CROP:
 			if scene.harvest_on_click:
 				var temp = scene.harvest()
 				if temp:
 					$TileMapLayer2.set_cell(pos,-1)#delete cell
 					for i in range(len(temp)):
 						create_draggable_item(temp[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
-			#create_draggable_item("carrot",get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
 		
 		
 func punish():
 	$GodChoiceManager.display_punishments()
 func reward():
 	$GodChoiceManager.display_rewards()
+func get_last_crop():
+	return CROP_DEF[last_crop]

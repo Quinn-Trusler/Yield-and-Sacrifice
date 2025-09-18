@@ -1,22 +1,25 @@
 extends TileMapLayer
-
+	
 #used code from https://www.reddit.com/r/godot/comments/10ql0ch/godot_4_does_tilemap_have_a_way_to_retrieve_the/
 class_name SceneTileMapLayer
-
+	
 var scene_coords: Dictionary[Vector2i, Node] = {}
-
+	
 func _enter_tree():
-  child_entered_tree.connect(_register_child)
-  child_exiting_tree.connect(_unregister_child)
-
+	child_entered_tree.connect(_register_child)
+	child_exiting_tree.connect(_unregister_child)
+	
 func _register_child(child):
-  await child.ready
-  var coords = local_to_map(to_local(child.global_position))
-  scene_coords[coords] = child
-  child.set_meta("tile_coords", coords)
-
-func _unregister_child(child):
-  scene_coords.erase(child.get_meta("tile_coords"))
-
+	await child.ready
+	var coords = local_to_map(to_local(child.global_position))
+	scene_coords[coords] = child
+	child.set_meta("tile_coords", coords)
+	if child.IS_CROP:
+		child.initialize(get_parent().get_last_crop())
+		
+func _unregister_child(child):	
+	scene_coords.erase(child.get_meta("tile_coords"))
+	
 func get_cell_scene(coords: Vector2i) -> Node:
-  return scene_coords.get(coords, null)
+	return scene_coords.get(coords, null)
+	

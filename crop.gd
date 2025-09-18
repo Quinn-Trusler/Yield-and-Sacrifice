@@ -17,7 +17,15 @@ var stage = 0
 var timer = 0
 var growth_complete = false
 
-
+func initialize(crop_def):
+	stage_growth_duration = crop_def["stage_growth_duration"]
+	total_stages = crop_def["total_stages"]
+	
+	harvest_on_click = crop_def["harvest_on_click"]
+	pick_on_click = crop_def["pick_on_click"]
+	pick_stage_setback = crop_def["pick_stage_setback"]
+	resources = crop_def["resources"]
+	
 
 func _process(delta: float) -> void:
 	timer += delta

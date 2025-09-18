@@ -64,7 +64,6 @@ func god_choice_chosen(choice_name):
 		var count = 0
 		while count < choice["amt"]:
 			var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
-			print(pos)
 			var tile_name = get_tile_name(pos)
 			if tile_name in choice["reward"]:
 				get_parent().get_node("TileMapLayer2").set_cell(pos,-1)#delete cell
