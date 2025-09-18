@@ -9,10 +9,15 @@ var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4)}
 
+var CROP_FRAMES_FOLDER = "res://scenes/sprite_frames/"
 var ITEMS_FOLDER = "res://art/items/"
 var CROP_SCENE_ID =1
-var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"]}}
-var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","place_on":["farmland"]}}
+var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
+"potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)}
+}
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","place_on":["farmland"]},
+"potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe.png","place_on":["farmland"]}
+}
 var ANIMAL_DEF
 var BUILDING_DEF
 
@@ -32,15 +37,15 @@ var last_crop = "null"
 #var timer = 0
 #var growth_complete = false
 func _ready():
-	create_draggable_item("carrot",Vector2(50,10))
-	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("potatoe",Vector2(50,10))
+	create_draggable_item("potatoe",Vector2(-70,-30))
 	
 	
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
 	add_child(temp)
 	draggable_items.append(temp)
-	temp.initialize(item_name,false)
+	temp.initialize(item_name,ITEM_DEF[item_name])
 	temp.position = pos
 	
 func _process(delta: float) -> void:

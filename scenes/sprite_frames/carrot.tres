@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://de7sugb8eywio"]
+
+[ext_resource type="Texture2D" uid="uid://3ntf285hbnhc" path="res://art/crops/carrot_crop.png" id="1_2nxso"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfmy0"]
+atlas = ExtResource("1_2nxso")
+region = Rect2(0, 0, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dbbp"]
+atlas = ExtResource("1_2nxso")
+region = Rect2(17, 0, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_221fb"]
+atlas = ExtResource("1_2nxso")
+region = Rect2(34, 0, 17, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_248e2"]
+atlas = ExtResource("1_2nxso")
+region = Rect2(51, 0, 17, 18)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfmy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dbbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_221fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_248e2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

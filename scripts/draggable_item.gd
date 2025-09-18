@@ -11,9 +11,9 @@ var dragging = false
 
 
 
-func initialize(n,is_animated):
+func initialize(n,item_def):
 	item_name = n
-	sprite_frames.add_frame("default",load("res://art/items/"+n+".png"))
+	sprite_frames.add_frame("default",load(item_def["img_name"]))
 	play("default")
 	#set_sprite_frames(value)
 	#$sprite_frames.default = load("res://art/items/+"+n+"+.png")

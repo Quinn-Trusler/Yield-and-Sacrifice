@@ -10,7 +10,7 @@ var total_stages = 4
 var harvest_on_click = true
 var pick_on_click = 0 #number of picks allowed
 var pick_stage_setback = 0 #how far crop is setback when picked
-var resources = ["carrot","carrot"]
+var resources = []#ex ["carrot","carrot"] for 2 carrots
 
 #change as plant grows
 var stage = 0
@@ -25,6 +25,8 @@ func initialize(crop_def):
 	pick_on_click = crop_def["pick_on_click"]
 	pick_stage_setback = crop_def["pick_stage_setback"]
 	resources = crop_def["resources"]
+	offset = crop_def["offset"]
+	sprite_frames = load(crop_def["frames"])
 	
 
 func _process(delta: float) -> void:
