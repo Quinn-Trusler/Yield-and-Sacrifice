@@ -37,7 +37,6 @@ func _on_texture_button_pressed() -> void:
 
 func _on_texture_button_mouse_entered() -> void:
 	$Description.visible = true
-	print("description visible ")
 
 func _on_texture_button_mouse_exited() -> void:
 	$Description.visible = false

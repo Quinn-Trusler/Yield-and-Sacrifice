@@ -1,7 +1,8 @@
 extends AnimatedSprite2D
 
 #don't touch this
-var IS_CROP = true
+var BUILDING_TYPE = "crop"
+var IS_BUILDING = false
 
 #differ by plant
 var stage_growth_duration = 2

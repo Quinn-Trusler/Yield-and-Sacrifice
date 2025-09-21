@@ -14,7 +14,7 @@ func _register_child(child):
 	var coords = local_to_map(to_local(child.global_position))
 	scene_coords[coords] = child
 	child.set_meta("tile_coords", coords)
-	if child.IS_CROP:
+	if child.BUILDING_TYPE == "crop":
 		child.initialize(get_parent().get_last_crop())
 		
 func _unregister_child(child):	

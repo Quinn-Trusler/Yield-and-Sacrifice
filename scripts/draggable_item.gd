@@ -8,22 +8,27 @@ var item_name;
 var mouse_in_area = false
 var dragging = false
 
+var timer = 0
 
-
+func get_tip_pos():
+	return $Tip.global_position
 
 func initialize(n,item_def):
 	item_name = n
-	sprite_frames.add_frame("default",load(item_def["img_name"]))
-	play("default")
+	if item_def["is_animated"]:
+		sprite_frames = load(item_def["img_name"])
+	else:
+		sprite_frames.add_frame("default",load(item_def["img_name"]))
+	#play("default")
 	#set_sprite_frames(value)
-	#$sprite_frames.default = load("res://art/items/+"+n+"+.png")
+	
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
 		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
 			$PickUp.play()
 			dragging = true
-			get_parent().pickup_item()
+			get_parent().pickup_item(self)
 	elif not Input.is_action_pressed("mouse_down") and dragging:
 		dragging = false
 		$Drop.play()

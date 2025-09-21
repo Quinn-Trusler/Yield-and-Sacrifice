@@ -9,6 +9,7 @@ var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","t
 "Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
 "Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["farmland"],"amt": 3}
 }
+var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
 
 var choice_instances = []
@@ -51,7 +52,6 @@ func god_choice_chosen(choice_name):
 	delete_choice_instances()
 	
 	var choice = choices[choice_name]
-	print("choice name",choice_name)
 	
 	if choice["type"] == TYPES.Item:
 		get_tree().paused = false
@@ -66,8 +66,9 @@ func god_choice_chosen(choice_name):
 			var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
 			var tile_name = get_tile_name(pos)
 			if tile_name in choice["reward"]:
-				get_parent().get_node("TileMapLayer2").set_cell(pos,-1)#delete cell
-				get_parent().get_node("TileMapLayer").set_cell(pos,0,BURNT_LAND,0)#burnt land cell
+				#get_parent().get_node("TileMapLayer2").set_cell(pos,-1)#delete cell
+				get_parent().get_node("TileMapLayer2").set_cell(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+				#get_parent().get_node("TileMapLayer").set_cell(pos,0,BURNT_LAND,0)#burnt land cell
 				count+=1
 					
 				

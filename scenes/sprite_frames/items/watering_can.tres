@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://ddvwug5g7g8fg"]
+
+[ext_resource type="Texture2D" uid="uid://bjlxvv1wl33mc" path="res://art/items/watering_can.png" id="1_lo8ii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo8ii"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(0, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e78fh"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(28, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sbgw"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(56, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc236"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(84, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vyiu"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(112, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpoiw"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(140, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oggs8"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(168, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chk2c"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(196, 0, 28, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwhgw"]
+atlas = ExtResource("1_lo8ii")
+region = Rect2(224, 0, 28, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo8ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e78fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sbgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc236")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vyiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpoiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oggs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chk2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwhgw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

@@ -9,7 +9,7 @@ var round = 0
 var requirements = {}
 var filled_requirements = {}
 var requirements_met = false
-var round_time = 5
+var round_time = 20
 
 func _ready():
 	$Timer.wait_time = round_time
@@ -45,7 +45,6 @@ func update_sacrafice_text():
 	for key in requirements:
 		$SacraficeText.add_image(load("res://art/items/carrot.png"))
 		$SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
-	print("sacrafice text updated")
 		
 func sacrafice(sacrafice_name):
 	if sacrafice_name in requirements:
