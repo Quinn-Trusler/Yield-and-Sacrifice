@@ -58,7 +58,7 @@ func god_choice_chosen(choice_name):
 		get_parent().create_draggable_item(choice["reward"],Vector2.ZERO)
 		
 		
-	elif choice["type"] == TYPES.Destroy_Land:
+	elif choice["type"] == TYPES.Destroy_Land:#burns land
 		get_tree().paused = false
 		var map_size = get_parent().MAPSIZE
 		var count = 0
@@ -71,9 +71,9 @@ func god_choice_chosen(choice_name):
 			if tries> TRY_MAX:
 				count +=1
 			if tile_name in choice["reward"]:
-				#get_parent().get_node("TileMapLayer2").set_cell(pos,-1)#delete cell
-				get_parent().get_node("TileMapLayer2").set_cell(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
-				#get_parent().get_node("TileMapLayer").set_cell(pos,0,BURNT_LAND,0)#burnt land cell
+				get_parent().get_node("TileMapLayer2").set_cell_scene(pos,-1)#delete cell
+				get_parent().get_node("TileMapLayer2").set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+				#get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell
 				count+=1
 					
 				

@@ -75,7 +75,7 @@ func process_watering_can(delta):
 	var CAN_STARTING_ROTATION = PI/6
 	
 	var tile_name = get_mouse_tile_name()
-	print(tile_name)
+	#print(tile_name)
 	if tile_name == "water":
 		can.frame = 0 #starts full and last frame is empty
 		can.rotation = CAN_STARTING_ROTATION
@@ -86,8 +86,9 @@ func process_watering_can(delta):
 		#can.position = can.
 		var pos = $TileMapLayer.local_to_map($TileMapLayer.get_local_mouse_position())#get_tip_pos())
 		#tile_name = get_tile_name(pos)
-		var tip_pos = pos#$TileMapLayer.to_local(can.position)
+		
 		can.rotation = CAN_STARTING_ROTATION+ (can.frame +can.timer/TIME_PER_FRAME) *(PI/3/MAX_CAN_FRAME)
+		var tip_pos = pos#$TileMapLayer.to_local(can.position)
 		
 		if can.timer >= TIME_PER_FRAME:
 			can.timer = 0
@@ -97,10 +98,12 @@ func process_watering_can(delta):
 			#var tip_pos = $TileMapLayer.local_to_map($TileMapLayer.get_local_mouse_position())
 			$TileMapLayer.set_cell(tip_pos,0,atlas_decoded["farmland"],0)
 		if $TileMapLayer2.get_cell_source_id(tip_pos) !=-1:#2nd layer cell not empty
-			can.timer += TIME_PER_FRAME
 			var scene = $TileMapLayer2.get_cell_scene(tip_pos)
+			print(scene)
 			if scene and scene.BUILDING_TYPE == "fire":
-				$TileMapLayer2.set_cell(tip_pos,-1)
+				print("found fire")
+				can.timer += TIME_PER_FRAME
+				$TileMapLayer2.set_cell_scene(tip_pos,-1)
 	
 	
 func get_mouse_tile_name():
@@ -116,7 +119,7 @@ func get_tile_name2(pos):
 	return "null"
 func get_tile_name22(pos):
 	var data = $TileMapLayer2.get_cell_tile_data(pos)
-	if data != null:
+	if data != null: 
 		return data.get_custom_data_by_layer_id(0)
 	return "null"
 		
@@ -144,7 +147,7 @@ func drop_item(item):
 		if $TileMapLayer2.get_cell_source_id(pos) ==-1:#empty cell
 			delete_item = true
 
-			$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,CROP_SCENE_ID)#plant carrot crop
+			$TileMapLayer2.set_cell_scene(pos,2,Vector2.ZERO,CROP_SCENE_ID)#plant carrot crop
 			var scene = $TileMapLayer2.get_cell_scene(pos)
 			last_crop = item.item_name
 			
@@ -167,12 +170,12 @@ func click_tile():
 		if scene:
 			if scene.BUILDING_TYPE == "crop":
 				if scene.harvest_on_click:
-					var temp = scene.harvest()
-					if temp:
+					var resources = scene.harvest()#a list of resources or False
+					if resources:
 						$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
-						$TileMapLayer2.set_cell(pos,-1)#delete cell
-						for i in range(len(temp)):
-							create_draggable_item(temp[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
+						$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
+						for i in range(len(resources)):
+							create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
 			
 		
 func punish():
@@ -184,7 +187,7 @@ func get_last_crop():
 	
 func spread_fire(pos):
 	
-	$TileMapLayer2.set_cell(pos,-1)#delete cell
+	$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 	$TileMapLayer.set_cell(pos,0,atlas_decoded["burnt tile"],0)#set under to burnt
 	var o_pos = Vector2(pos.x,pos.y)
 	for i in range(2):
@@ -192,7 +195,7 @@ func spread_fire(pos):
 		pos.y += RNG.randi_range(-1,1)
 		var tile_name = get_tile_name2(pos)
 		if not (tile_name in UNBURNABLE_TILES) :
-			$TileMapLayer2.set_cell(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+			$TileMapLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 		pos = Vector2(o_pos.x,o_pos.y)
 	
 	
