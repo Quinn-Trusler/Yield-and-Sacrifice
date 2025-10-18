@@ -62,9 +62,14 @@ func god_choice_chosen(choice_name):
 		get_tree().paused = false
 		var map_size = get_parent().MAPSIZE
 		var count = 0
+		var tries = 0
+		var TRY_MAX = 1000
 		while count < choice["amt"]:
 			var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
 			var tile_name = get_tile_name(pos)
+			tries +=1
+			if tries> TRY_MAX:
+				count +=1
 			if tile_name in choice["reward"]:
 				#get_parent().get_node("TileMapLayer2").set_cell(pos,-1)#delete cell
 				get_parent().get_node("TileMapLayer2").set_cell(pos,2,Vector2.ZERO,FIRE_SCENE_ID)

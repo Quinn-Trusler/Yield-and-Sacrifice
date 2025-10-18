@@ -17,7 +17,9 @@ func initialize(n,item_def):
 	item_name = n
 	if item_def["is_animated"]:
 		sprite_frames = load(item_def["img_name"])
+		print("loading set of items")
 	else:
+		sprite_frames = SpriteFrames.new()
 		sprite_frames.add_frame("default",load(item_def["img_name"]))
 	#play("default")
 	#set_sprite_frames(value)
@@ -36,6 +38,8 @@ func _process(delta: float) -> void:
 		
 	if dragging:
 		position = get_global_mouse_position()
+		if item_name == "watering_can":
+			position -= get_tip_pos() - get_global_mouse_position()
 
 
 func _on_area_2d_mouse_entered() -> void:

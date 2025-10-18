@@ -49,7 +49,9 @@ var last_crop = "null"
 #var growth_complete = false
 func _ready():
 	create_draggable_item("watering_can",Vector2(50,10))
+	create_draggable_item("carrot",Vector2(-50,-30))
 	create_draggable_item("potatoe",Vector2(-70,-30))
+	
 	
 	
 func create_draggable_item(item_name,pos):
@@ -73,6 +75,7 @@ func process_watering_can(delta):
 	var CAN_STARTING_ROTATION = PI/6
 	
 	var tile_name = get_mouse_tile_name()
+	print(tile_name)
 	if tile_name == "water":
 		can.frame = 0 #starts full and last frame is empty
 		can.rotation = CAN_STARTING_ROTATION
@@ -80,21 +83,24 @@ func process_watering_can(delta):
 	elif can.frame == MAX_CAN_FRAME:
 		can.rotation = 0
 	else:#work on emptying it
-		var pos = $TileMapLayer.to_local(can.get_tip_pos())
-		tile_name = get_tile_name(pos)
-		pos = $TileMapLayer.local_to_map(pos)
+		#can.position = can.
+		var pos = $TileMapLayer.local_to_map($TileMapLayer.get_local_mouse_position())#get_tip_pos())
+		#tile_name = get_tile_name(pos)
+		var tip_pos = pos#$TileMapLayer.to_local(can.position)
 		can.rotation = CAN_STARTING_ROTATION+ (can.frame +can.timer/TIME_PER_FRAME) *(PI/3/MAX_CAN_FRAME)
-		can.timer +=delta
-		if can.timer > TIME_PER_FRAME:
+		
+		if can.timer >= TIME_PER_FRAME:
 			can.timer = 0
 			can.frame +=1
 		if tile_name == "dry_farmland":
-			#var pos = $TileMapLayer.local_to_map($TileMapLayer.get_local_mouse_position())
-			$TileMapLayer.set_cell(pos,0,atlas_decoded["farmland"],0)
-		if $TileMapLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
-			var scene = $TileMapLayer2.get_cell_scene(pos)
+			can.timer += TIME_PER_FRAME
+			#var tip_pos = $TileMapLayer.local_to_map($TileMapLayer.get_local_mouse_position())
+			$TileMapLayer.set_cell(tip_pos,0,atlas_decoded["farmland"],0)
+		if $TileMapLayer2.get_cell_source_id(tip_pos) !=-1:#2nd layer cell not empty
+			can.timer += TIME_PER_FRAME
+			var scene = $TileMapLayer2.get_cell_scene(tip_pos)
 			if scene and scene.BUILDING_TYPE == "fire":
-				$TileMapLayer2.set_cell(pos,-1)
+				$TileMapLayer2.set_cell(tip_pos,-1)
 	
 	
 func get_mouse_tile_name():

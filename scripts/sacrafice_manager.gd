@@ -31,7 +31,8 @@ func next_round():
 
 func update_timer_text():
 	$TimeText.text = str(ceil($Timer.time_left))
-func update_requirements():
+	
+func update_requirements():#update for new round
 	requirements = {"carrot":2}
 	
 	#setup filled_requirements
@@ -40,7 +41,7 @@ func update_requirements():
 		filled_requirements[key] = 0
 	update_sacrafice_text()
 	
-func update_sacrafice_text():
+func update_sacrafice_text():#whenever the numbers change
 	$SacraficeText.text = ""
 	for key in requirements:
 		$SacraficeText.add_image(load("res://art/items/carrot.png"))
