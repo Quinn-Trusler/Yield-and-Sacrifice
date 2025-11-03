@@ -4,24 +4,26 @@ extends Node2D
 #Removing a scene stays in memory but does not keep updating
 
 
-var round = 0
+var round_num = 0
 
 var requirements = {}
 var filled_requirements = {}
 var requirements_met = false
 var round_time = 20
+var ITEM_DEF = null
 
 func _ready():
+	ITEM_DEF = get_parent().ITEM_DEF
 	$Timer.wait_time = round_time
 	start()
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_timer_text()
 	
 func start():
-	round = 0
+	round_num = 0
 	update_requirements()
 func next_round():
-	round +=1
+	round_num +=1
 	if requirements_met:
 		requirements_met = false
 		reward()
@@ -31,9 +33,14 @@ func next_round():
 
 func update_timer_text():
 	$TimeText.text = str(ceil($Timer.time_left))
-	
+func get_round_requirements():
+	if round_num <= -1:
+		return {"carrot":2}
+	elif round_num <=5:
+		return {"potatoe":2,"carrot":3}
 func update_requirements():#update for new round
-	requirements = {"carrot":2}
+	requirements = get_round_requirements()
+	print("round num",round_num)
 	
 	#setup filled_requirements
 	filled_requirements = {}
@@ -44,7 +51,7 @@ func update_requirements():#update for new round
 func update_sacrafice_text():#whenever the numbers change
 	$SacraficeText.text = ""
 	for key in requirements:
-		$SacraficeText.add_image(load("res://art/items/carrot.png"))
+		$SacraficeText.add_image(load(ITEM_DEF[key]["img_name"]))
 		$SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
 		
 func sacrafice(sacrafice_name):

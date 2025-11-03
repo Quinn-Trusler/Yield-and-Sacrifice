@@ -25,7 +25,7 @@ func initialize(n,item_def):
 	#set_sprite_frames(value)
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
 		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
 			$PickUp.play()

@@ -51,8 +51,11 @@ func _ready():
 	create_draggable_item("watering_can",Vector2(50,10))
 	create_draggable_item("carrot",Vector2(-50,-30))
 	create_draggable_item("potatoe",Vector2(-70,-30))
-	
-	
+	create_draggable_item("potatoe",Vector2(-70,-30))
+	create_draggable_item("potatoe",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
 	
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -68,7 +71,7 @@ func _process(delta: float) -> void:
 		if item_being_dragged.item_name == "watering_can":
 			process_watering_can(delta)
 			#watring can has a timer to empty to another state
-func process_watering_can(delta):
+func process_watering_can(_delta):
 	var can = item_being_dragged
 	var MAX_CAN_FRAME = 8#add this stuff to the item soon
 	var TIME_PER_FRAME = 0.2
