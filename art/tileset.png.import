@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c354jn5pj532k"
-path="res://.godot/imported/carrot.png-e83a1f51141125ff1ccdedee98c679ec.ctex"
+uid="uid://ckf24wggwbdv1"
+path="res://.godot/imported/tileset.png-9a7aa93aa20d6fc1a677061e224b6b5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/items/carrot.png"
-dest_files=["res://.godot/imported/carrot.png-e83a1f51141125ff1ccdedee98c679ec.ctex"]
+source_file="res://art/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-9a7aa93aa20d6fc1a677061e224b6b5b.ctex"]
 
 [params]
 
