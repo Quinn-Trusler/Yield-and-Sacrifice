@@ -8,7 +8,7 @@ var MAPSIZE = [-13,5,4,-4]
 
 var RNG = RandomNumberGenerator.new()
 
-var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(2,1),"farmland":Vector2(2,2),"burnt tile":Vector2(8,2)}
+var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
 var CROP_FRAMES_FOLDER = "res://scenes/sprite_frames/"
 var ITEMS_FOLDER = "res://art/items/"
@@ -19,8 +19,8 @@ var UNBURNABLE_TILES = ["burnt land","water","lava"]
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)}
 }
-var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","is_animated":false,"place_on":["farmland"]},
-"potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe.png","is_animated":false,"place_on":["farmland"]},
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","is_animated":false,"place_on":["dry_farmland"]},
+"potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe.png","is_animated":false,"place_on":["dry_farmland"]},
 "watering_can":{"display_name":"Watering Can","img_name":ITEM_FRAMES_FOLDER + "watering_can.tres","is_animated":true,"place_on":[]}
 }
 
@@ -120,7 +120,7 @@ func get_tile_name2(pos):
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
 	return "null"
-func get_tile_name22(pos):
+func get_tile_name_from_coordinates(pos):
 	var data = $TileMapLayer2.get_cell_tile_data(pos)
 	if data != null: 
 		return data.get_custom_data_by_layer_id(0)
@@ -175,11 +175,12 @@ func click_tile():
 				if scene.harvest_on_click:
 					var resources = scene.harvest()#a list of resources or False
 					if resources:
-						$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
+						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 						for i in range(len(resources)):
 							create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
-			
+			if scene.BUILDING_TYPE == "fire":
+				$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 		
 func punish():
 	$GodChoiceManager.display_punishments()
@@ -187,11 +188,16 @@ func reward():
 	$GodChoiceManager.display_rewards()
 func get_last_crop():
 	return CROP_DEF[last_crop]
-	
+#func retile_cardinal(pos):
+	#var tile_data =  get_tile_name_from_coordinates([pos.x+1,pos.y])
+	#print(tile_data)
+		#$TileMapLayer.set_cells_terrain_connect([pos],0,0)	
 func spread_fire(pos):
 	
 	$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 	$TileMapLayer.set_cell(pos,0,atlas_decoded["burnt tile"],0)#set under to burnt
+	
+	
 	var o_pos = Vector2(pos.x,pos.y)
 	for i in range(2):
 		pos.x += RNG.randi_range(-1,1)
@@ -199,6 +205,7 @@ func spread_fire(pos):
 		var tile_name = get_tile_name2(pos)
 		if not (tile_name in UNBURNABLE_TILES) :
 			$TileMapLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+			
 		pos = Vector2(o_pos.x,o_pos.y)
 	
 	

@@ -7,7 +7,7 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
 "Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
-"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["farmland"],"amt": 3}
+"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["dry_farmland"],"amt": 3}
 }
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
