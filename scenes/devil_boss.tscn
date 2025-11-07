@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c28rlhfpewft1"]
+
+[ext_resource type="Script" uid="uid://6wb3ldwodh7d" path="res://devil_boss.gd" id="1_ll8et"]
+[ext_resource type="Texture2D" uid="uid://b5t5q24r8a1m7" path="res://art/devil_boss.png" id="2_do0kv"]
+
+[node name="devil_boss" type="Node2D"]
+position = Vector2(40, -40)
+script = ExtResource("1_ll8et")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_do0kv")
+
+[node name="MouthHitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouthHitbox"]
+polygon = PackedVector2Array(-17, 3, -12, 17, -4, 23, 5, 23, 12, 17, 17, 3, 14, 2, 5, 11, -5, 10, -15, 2)
+
+[connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
+[connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]

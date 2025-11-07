@@ -1,6 +1,7 @@
 extends Node2D
 
 var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
+var DEVIL_BOSS_SCENE = preload("res://scenes/devil_boss.tscn")
 var draggable_items = []
 var dragging_item = false
 var item_being_dragged
@@ -34,6 +35,7 @@ var ANIMAL_DEF
 
 
 var last_crop = "null"
+var mouse_on_mouth = false
 
 #var stage_growth_duration = 2
 #var total_stages = 4
@@ -56,6 +58,10 @@ func _ready():
 	create_draggable_item("carrot",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
+	var temp = DEVIL_BOSS_SCENE.instantiate()
+	add_child(temp)
+	temp.attempt_eat_item.connect(_attempt_eat_item)
+	
 	
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -142,7 +148,7 @@ func drop_item(item):
 	if item.item_name == "watering_can":
 		item.rotation = 0
 	
-	if tile_name == "lava":
+	if tile_name == "lava" or mouse_on_mouth:
 		$SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
 	#if item.item_name == "carrot":
@@ -208,4 +214,6 @@ func spread_fire(pos):
 			
 		pos = Vector2(o_pos.x,o_pos.y)
 	
+func _attempt_eat_item(on_mouth : bool):
+	mouse_on_mouth = on_mouth
 	

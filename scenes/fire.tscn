@@ -1,23 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnsn8ya4gxv2l"]
+[gd_scene load_steps=8 format=3 uid="uid://bnsn8ya4gxv2l"]
 
 [ext_resource type="Script" uid="uid://cbjla5kvt5cqe" path="res://fire.gd" id="1_52nqi"]
 [ext_resource type="Texture2D" uid="uid://b4ndfnfray3o3" path="res://art/fire.png" id="1_xqmqg"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqmqg"]
+atlas = ExtResource("1_xqmqg")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5mbl"]
 atlas = ExtResource("1_xqmqg")
-region = Rect2(0, 0, 16, 21)
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rach5"]
 atlas = ExtResource("1_xqmqg")
-region = Rect2(16, 0, 16, 21)
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_txieb"]
 atlas = ExtResource("1_xqmqg")
-region = Rect2(32, 0, 16, 21)
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4l61p"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqmqg")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g5mbl")
 }, {
@@ -33,7 +40,6 @@ animations = [{
 }]
 
 [node name="fire" type="AnimatedSprite2D"]
-position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_4l61p")
 frame_progress = 0.720416
 script = ExtResource("1_52nqi")
