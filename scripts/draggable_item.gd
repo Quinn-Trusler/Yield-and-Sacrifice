@@ -36,10 +36,12 @@ func drop():
 	dragging = false
 	$Drop.play()
 	get_parent().drop_item(self)
+	print("drop item")
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
 		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
+			#print("pick up")
 			pick_up()
 	elif not Input.is_action_pressed("mouse_down") and dragging:
 		drop()
@@ -49,8 +51,10 @@ func _process(_delta: float) -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
+	print("mouse is in")
 	mouse_in_area = true
 
 
 func _on_area_2d_mouse_exited() -> void:
+	print("mouse is out")
 	mouse_in_area = false

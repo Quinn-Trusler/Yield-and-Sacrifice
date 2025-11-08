@@ -24,10 +24,11 @@ var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on
 }
 var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot.png","is_animated":false,"points":3,"place_on":["dry_farmland"]},
 "potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe.png","is_animated":false,"points":2,"place_on":["dry_farmland"]},
+"fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish.png","is_animated":false,"points":4,"place_on":[]},
 "watering_can":{"display_name":"Watering Can","img_name":ITEM_FRAMES_FOLDER + "watering_can.tres","points":100,"is_animated":true,"place_on":[]}
 }
 
-var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["potatoe"],"items_to_start_timer":0,"input_items":[],"total_stages":1,"time_per_stage":0,"destroy_on_harvest":true, "frames": CROP_FRAMES_FOLDER + "potatoe.tres"}}
+var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":[],"total_stages":1,"time_per_stage":0,"destroy_on_harvest":true, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres"}}
 
 var ANIMAL_DEF
 #var RESOURCES = []
@@ -70,7 +71,7 @@ func _ready():
 	
 	#create building
 	last_building = "fishing_spot"
-	$TileMapLayer2.set_cell_scene(Vector2(-2,0),2,Vector2.ZERO,BUILDING_SCENE_ID)#plant carrot crop
+	$TileMapLayer2.set_cell_scene(Vector2(2,-2),2,Vector2.ZERO,BUILDING_SCENE_ID)#plant carrot crop
 	
 	
 func create_draggable_item(item_name,pos):
@@ -146,7 +147,7 @@ func pickup_item(item):
 	dragging_item = true
 	item_being_dragged = item
 	
-		
+#called by the item itself
 func drop_item(item):
 	dragging_item = false
 	item_being_dragged = false
@@ -207,10 +208,17 @@ func click_tile():
 				$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 		
 func punish():
-	dragging_item = false
+	
+	if item_being_dragged:
+		dragging_item = false
+		item_being_dragged.drop()
+		item_being_dragged = false
 	$GodChoiceManager.display_punishments()
 func reward():
-	dragging_item = false
+	if item_being_dragged:
+		dragging_item = false
+		item_being_dragged.drop()
+		item_being_dragged = false
 	$GodChoiceManager.display_rewards()
 func get_last_crop():
 	return CROP_DEF[last_crop]
@@ -220,19 +228,31 @@ func get_last_building():
 	#var tile_data =  get_tile_name_from_coordinates([pos.x+1,pos.y])
 	#print(tile_data)
 		#$TileMapLayer.set_cells_terrain_connect([pos],0,0)	
+		
+
+func pos_in_bounds(pos: Vector2, bounds: Array):
+	#Inclusive of bouns
+	if not (pos.x >= bounds[0] and pos.x <= bounds[2]):
+		return false
+	if not (pos.y >= bounds[1] and pos.y <= bounds[3]):
+		return false
+	return true
 func spread_fire(pos):
 	
 	$TileMapLayer2.set_cell_scene(pos,-1)#delete cell
 	$TileMapLayer.set_cell(pos,0,atlas_decoded["burnt tile"],0)#set under to burnt
 	
+	var FIRE_RANGE = [-15, -7, 9, 7]
 	
 	var o_pos = Vector2(pos.x,pos.y)
 	for i in range(2):
 		pos.x += RNG.randi_range(-1,1)
 		pos.y += RNG.randi_range(-1,1)
-		var tile_name = get_tile_name2(pos)
-		if not (tile_name in UNBURNABLE_TILES) :
-			$TileMapLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+		if pos_in_bounds(pos, FIRE_RANGE):
+			var tile_name = get_tile_name2(pos)
+			print("Tile Name", tile_name)
+			if not (tile_name in UNBURNABLE_TILES) :
+				$TileMapLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 			
 		pos = Vector2(o_pos.x,o_pos.y)
 	

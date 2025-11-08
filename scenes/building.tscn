@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://c8u70175fscnd" path="res://scenes/building.gd" id="1_n8bkc"]
 
 [node name="building" type="AnimatedSprite2D"]
+animation = &"0"
 script = ExtResource("1_n8bkc")

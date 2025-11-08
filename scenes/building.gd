@@ -31,13 +31,13 @@ func initialize(def):
 	TIME_PER_STAGE = def["time_per_stage"]
 	DESTROY_ON_HARVEST = def["destroy_on_harvest"]
 	sprite_frames = load(def["frames"])
-	play("deafault")
+	update_stage()
 #barel
 #empty -> gets full then produces
 #Fish net
 #when click to empty
 func _process(delta: float) -> void:
-	if num_items_inputed>=ITEMS_TO_START_TIMER:
+	if TIME_PER_STAGE != 0 and num_items_inputed>=ITEMS_TO_START_TIMER:
 		timer += delta
 	if timer > TIME_PER_STAGE:
 		go_up_a_stage()
@@ -47,10 +47,12 @@ func go_up_a_stage():#go up a stage
 	timer = 0
 	update_stage()
 	
+	
 func update_stage():
+	play(str(stage))
 	if stage >= TOTAL_STAGES-1:
 		ready_to_collect = true
-	frame = stage
+		
 func place_item(item_name):
 	if item_name in INPUT_ITEMS:
 		if num_items_inputed < ITEMS_TO_START_TIMER:
