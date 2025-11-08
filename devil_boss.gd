@@ -7,11 +7,15 @@ signal attempt_eat_item(mouse_on_mouth)
 func _ready() -> void:
 	pass # Replace with function body.
 
+var delta_total = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	delta_total += delta
+	animate_devil()
+	
+func animate_devil():
+	rotation = 20*(PI/180)*sin(delta_total)
 
 func _on_mouth_hitbox_mouse_entered() -> void:
 	#want to send signal up and say to eat item

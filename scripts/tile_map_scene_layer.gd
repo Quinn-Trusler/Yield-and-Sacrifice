@@ -16,6 +16,8 @@ func _register_child(child):
 	child.set_meta("tile_coords", coords)
 	if child.BUILDING_TYPE == "crop":
 		child.initialize(get_parent().get_last_crop())
+	elif child.BUILDING_TYPE == "building":
+		child.initialize(get_parent().get_last_building())
 		
 #func _unregister_child(child):	
 	#print("unregister child: ",child.get_meta("tile_coords"))

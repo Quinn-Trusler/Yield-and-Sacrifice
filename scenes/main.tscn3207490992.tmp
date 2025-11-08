@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=12 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_tipki"]
-[ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://yhiddagrcyrk" path="res://scripts/sacrafice_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://c2gpwja10wik1" path="res://scripts/tile_map_scene_layer.gd" id="5_tipki"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_tefeu"]
@@ -144,7 +143,6 @@ texture = ExtResource("2_tipki")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jyhfs"]
 scenes/1/scene = ExtResource("3_sugp2")
 scenes/2/scene = ExtResource("4_tipki")
-scenes/3/scene = ExtResource("5_85g3d")
 
 [sub_resource type="TileSet" id="TileSet_o5qli"]
 terrain_set_0/mode = 0

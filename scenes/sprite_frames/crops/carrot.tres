@@ -1,21 +1,21 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://de7sugb8eywio"]
 
-[ext_resource type="Texture2D" uid="uid://3ntf285hbnhc" path="res://art/crops/carrot_crop.png" id="1_2nxso"]
+[ext_resource type="Texture2D" uid="uid://3ntf285hbnhc" path="res://art/crops/carrot_crop.png" id="1_bx1ab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pfmy0"]
-atlas = ExtResource("1_2nxso")
+atlas = ExtResource("1_bx1ab")
 region = Rect2(0, 0, 17, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2dbbp"]
-atlas = ExtResource("1_2nxso")
+atlas = ExtResource("1_bx1ab")
 region = Rect2(17, 0, 17, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_221fb"]
-atlas = ExtResource("1_2nxso")
+atlas = ExtResource("1_bx1ab")
 region = Rect2(34, 0, 17, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_248e2"]
-atlas = ExtResource("1_2nxso")
+atlas = ExtResource("1_bx1ab")
 region = Rect2(51, 0, 17, 18)
 
 [resource]

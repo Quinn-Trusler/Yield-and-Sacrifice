@@ -23,23 +23,29 @@ func initialize(n,item_def):
 		sprite_frames.add_frame("default",load(item_def["img_name"]))
 	#play("default")
 	#set_sprite_frames(value)
+func go_to_mouse_pos():
+	position = get_global_mouse_position()
+	if item_name == "watering_can":
+		position -= get_tip_pos() - get_global_mouse_position()
 	
+func pick_up():
+	$PickUp.play()
+	dragging = true
+	get_parent().pickup_item(self)
+func drop():
+	dragging = false
+	$Drop.play()
+	get_parent().drop_item(self)
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
 		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
-			$PickUp.play()
-			dragging = true
-			get_parent().pickup_item(self)
+			pick_up()
 	elif not Input.is_action_pressed("mouse_down") and dragging:
-		dragging = false
-		$Drop.play()
-		get_parent().drop_item(self)
+		drop()
 		
 	if dragging:
-		position = get_global_mouse_position()
-		if item_name == "watering_can":
-			position -= get_tip_pos() - get_global_mouse_position()
+		go_to_mouse_pos()
 
 
 func _on_area_2d_mouse_entered() -> void:

@@ -11,6 +11,7 @@ var filled_requirements = {}
 var requirements_met = false
 var round_time = 20
 var ITEM_DEF = null
+var RNG = RandomNumberGenerator.new()
 
 func _ready():
 	ITEM_DEF = get_parent().ITEM_DEF
@@ -37,8 +38,11 @@ func get_round_requirements():
 	if round_num <= -1:
 		return {"carrot":2}
 	elif round_num <=5:
-		return {"potatoe":2,"carrot":3}
-func update_requirements():#update for new round
+		var num_potatoes = RNG.randi_range(2,3)
+		return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
+		
+#update the sacrafice requirments to the new ones based on round
+func update_requirements():
 	requirements = get_round_requirements()
 	print("round num",round_num)
 	
@@ -48,16 +52,17 @@ func update_requirements():#update for new round
 		filled_requirements[key] = 0
 	update_sacrafice_text()
 	
-func update_sacrafice_text():#whenever the numbers change
+#Updates the sacrafice text and images to match what they actualy are
+func update_sacrafice_text():
 	$SacraficeText.text = ""
 	for key in requirements:
 		$SacraficeText.add_image(load(ITEM_DEF[key]["img_name"]))
 		$SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
 		
-func sacrafice(sacrafice_name):
-	if sacrafice_name in requirements:
-		if filled_requirements[sacrafice_name] < requirements[sacrafice_name]:
-			filled_requirements[sacrafice_name] +=1 
+func sacrafice(sacraficed_item_name):
+	if sacraficed_item_name in requirements:
+		if filled_requirements[sacraficed_item_name] < requirements[sacraficed_item_name]:
+			filled_requirements[sacraficed_item_name] +=1 
 			update_sacrafice_text()
 			check_requirements_met()
 		else:
@@ -65,6 +70,7 @@ func sacrafice(sacrafice_name):
 	else:
 		print("wasted sacrafice")
 
+#Check if the all the requirments to please the boss have been met
 func check_requirements_met():
 	requirements_met = true
 	for key in requirements:

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b5t5q24r8a1m7" path="res://art/devil_boss.png" id="2_do0kv"]
 
 [node name="devil_boss" type="Node2D"]
-position = Vector2(40, -40)
+position = Vector2(0, -10)
 script = ExtResource("1_ll8et")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -12,8 +12,12 @@ texture = ExtResource("2_do0kv")
 
 [node name="MouthHitbox" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouthHitbox"]
+[node name="Mouth" type="CollisionPolygon2D" parent="MouthHitbox"]
+visible = false
 polygon = PackedVector2Array(-17, 3, -12, 17, -4, 23, 5, 23, 12, 17, 17, 3, 14, 2, 5, 11, -5, 10, -15, 2)
+
+[node name="Body" type="CollisionPolygon2D" parent="MouthHitbox"]
+polygon = PackedVector2Array(-13, -16, 0, -20, 14, -15, 19, -5, 18, 9, 12, 23, 5, 31, -3, 32, -11, 24, -19, 4, -19, -6)
 
 [connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]
