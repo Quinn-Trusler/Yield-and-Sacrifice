@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://284n533bqlq8"]
 
-[ext_resource type="Script" uid="uid://cngroc4l3rkj6" path="res://crop.gd" id="1_pl0dt"]
+[ext_resource type="Script" uid="uid://cngroc4l3rkj6" path="res://scripts/crop.gd" id="1_pl0dt"]
 
 [node name="Crop" type="AnimatedSprite2D"]
 script = ExtResource("1_pl0dt")

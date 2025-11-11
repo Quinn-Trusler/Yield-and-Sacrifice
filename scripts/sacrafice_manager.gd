@@ -10,11 +10,9 @@ var requirements = {}
 var filled_requirements = {}
 var requirements_met = false
 var round_time = 20
-var ITEM_DEF = null
 var RNG = RandomNumberGenerator.new()
 
 func _ready():
-	ITEM_DEF = get_parent().ITEM_DEF
 	$Timer.wait_time = round_time
 	start()
 func _process(_delta: float) -> void:
@@ -44,7 +42,6 @@ func get_round_requirements():
 #update the sacrafice requirments to the new ones based on round
 func update_requirements():
 	requirements = get_round_requirements()
-	print("round num",round_num)
 	
 	#setup filled_requirements
 	filled_requirements = {}
@@ -56,7 +53,7 @@ func update_requirements():
 func update_sacrafice_text():
 	$SacraficeText.text = ""
 	for key in requirements:
-		$SacraficeText.add_image(load(ITEM_DEF[key]["img_name"]))
+		$SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]))
 		$SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
 		
 func sacrafice(sacraficed_item_name):

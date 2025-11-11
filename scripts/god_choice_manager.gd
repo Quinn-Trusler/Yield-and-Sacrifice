@@ -13,6 +13,9 @@ var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
 
 var choice_instances = []
+@onready var ItemManager = get_node("/root/Main/ItemManager")
+@onready var TileLayer = get_node("/root/Main/TileMapLayer")
+@onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 
 func chose_punishments():
 	#punishments off what the player curently  has
@@ -44,7 +47,7 @@ func delete_choice_instances():
 		c.queue_free()
 	choice_instances = []
 func get_tile_name(pos):
-	var data = get_parent().get_node("TileMapLayer").get_cell_tile_data(pos)
+	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
 func god_choice_chosen(choice_name):
@@ -55,12 +58,12 @@ func god_choice_chosen(choice_name):
 	
 	if choice["type"] == TYPES.Item:
 		get_tree().paused = false
-		get_parent().create_draggable_item(choice["reward"],Vector2.ZERO)
+		ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
 		
 		
 	elif choice["type"] == TYPES.Destroy_Land:#burns land
 		get_tree().paused = false
-		var map_size = get_parent().MAPSIZE
+		var map_size = GLOBALCONSTS.MAPSIZE
 		var count = 0
 		var tries = 0
 		var TRY_MAX = 1000
@@ -71,8 +74,8 @@ func god_choice_chosen(choice_name):
 			if tries> TRY_MAX:
 				count +=1
 			if tile_name in choice["reward"]:
-				get_parent().get_node("TileMapLayer2").set_cell_scene(pos,-1)#delete cell
-				get_parent().get_node("TileMapLayer2").set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+				TileLayer2.set_cell_scene(pos,-1)#delete cell
+				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 				#get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell
 				count+=1
 					

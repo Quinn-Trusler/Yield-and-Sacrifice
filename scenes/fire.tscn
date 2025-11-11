@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnsn8ya4gxv2l"]
 
-[ext_resource type="Script" uid="uid://cbjla5kvt5cqe" path="res://fire.gd" id="1_52nqi"]
+[ext_resource type="Script" uid="uid://cbjla5kvt5cqe" path="res://scripts/fire.gd" id="1_52nqi"]
 [ext_resource type="Texture2D" uid="uid://b4ndfnfray3o3" path="res://art/buildings/fire.png" id="1_xqmqg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqmqg"]

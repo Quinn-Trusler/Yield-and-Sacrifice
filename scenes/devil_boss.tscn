@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c28rlhfpewft1"]
 
-[ext_resource type="Script" uid="uid://6wb3ldwodh7d" path="res://devil_boss.gd" id="1_ll8et"]
+[ext_resource type="Script" uid="uid://6wb3ldwodh7d" path="res://scripts/devil_boss.gd" id="1_ll8et"]
 [ext_resource type="Texture2D" uid="uid://b5t5q24r8a1m7" path="res://art/devil_boss.png" id="2_do0kv"]
 
 [node name="devil_boss" type="Node2D"]
