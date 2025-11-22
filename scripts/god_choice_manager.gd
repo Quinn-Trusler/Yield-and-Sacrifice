@@ -46,7 +46,7 @@ func delete_choice_instances():
 	for c in choice_instances:
 		c.queue_free()
 	choice_instances = []
-func get_tile_name(pos):
+func get_tile_name_from_coordinates(pos):
 	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
@@ -69,7 +69,7 @@ func god_choice_chosen(choice_name):
 		var TRY_MAX = 1000
 		while count < choice["amt"]:
 			var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
-			var tile_name = get_tile_name(pos)
+			var tile_name = get_tile_name_from_coordinates(pos)
 			tries +=1
 			if tries> TRY_MAX:
 				count +=1

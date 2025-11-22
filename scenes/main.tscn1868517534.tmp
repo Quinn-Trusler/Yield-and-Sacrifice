@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=15 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -11,7 +11,6 @@
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://va03fhtpox38" path="res://scripts/god_choice_manager.gd" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
-[ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scenes/building_manager.gd" id="12_eb6dy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -248,8 +247,5 @@ alignment = 1
 
 [node name="ItemManager" type="Node2D" parent="."]
 script = ExtResource("10_choun")
-
-[node name="BuildingManager" type="Node2D" parent="."]
-script = ExtResource("12_eb6dy")
 
 [connection signal="timeout" from="SacraficeManager/Timer" to="SacraficeManager" method="_on_timer_timeout"]

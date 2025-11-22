@@ -18,6 +18,10 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
 @onready var SacraficeManager = get_node("/root/Main/SacraficeManager")
+@onready var TileMapManager = get_node("/root/Main/TileMapManager")
+@onready var BuildingManager = get_node("/root/Main/BuildingManager")
+
+
 
 func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
@@ -35,17 +39,7 @@ func _process(_delta: float) -> void:
 			#process_watering_can(delta)
 			#watring can has a timer to empty to another state
 
-func get_mouse_tile_name():
-	var mouse_cell = TileLayer.get_local_mouse_position()
-	return get_tile_name(mouse_cell)
-func get_tile_name(pos):
-	pos = TileLayer.local_to_map(pos)
-	return get_tile_name2(pos)
-func get_tile_name2(pos):
-	var data = TileLayer.get_cell_tile_data(pos)
-	if data != null:
-		return data.get_custom_data_by_layer_id(0)
-	return "null"
+
 
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -59,7 +53,7 @@ func process_watering_can(_delta):
 	var TIME_PER_FRAME = 0.2
 	var CAN_STARTING_ROTATION = PI/6
 	
-	var tile_name = get_mouse_tile_name()
+	var tile_name = TileMapManager.get_mouse_tile_name()
 	if tile_name == "water":
 		can.frame = 0 #starts full and last frame is empty
 		can.rotation = CAN_STARTING_ROTATION
@@ -69,7 +63,6 @@ func process_watering_can(_delta):
 	else:#work on emptying it
 		#can.position = can.
 		var pos = TileLayer.local_to_map(TileLayer.get_local_mouse_position())#get_tip_pos())
-		#tile_name = get_tile_name(pos)
 		
 		can.rotation = CAN_STARTING_ROTATION+ (can.frame +can.timer/TIME_PER_FRAME) *(PI/3/MAX_CAN_FRAME)
 		var tip_pos = pos#TileLayer.to_local(can.position)
@@ -102,7 +95,7 @@ func drop_item(item):
 	
 	var delete_item = false
 	var pos = TileLayer.to_local(item.position)
-	var tile_name = get_tile_name(pos)
+	var tile_name = TileMapManager.get_tile_name_from_global(pos)
 	pos = TileLayer.local_to_map(pos)
 	if item.item_name == "watering_can":
 		item.rotation = 0
@@ -117,7 +110,7 @@ func drop_item(item):
 
 			TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.CROP_SCENE_ID)#plants crop
 			#var scene = TileLayer2.get_cell_scene(pos)
-			get_parent().last_crop = item.item_name
+			BuildingManager.last_crop = item.item_name
 			
 		else:
 			print("Error: Cannot plant on already planted farmland")
