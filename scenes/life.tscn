@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxstt0c1w0oso"]
+
+[ext_resource type="Texture2D" uid="uid://c8xersx1a4mq5" path="res://art/ui/life off.png" id="1_vhvcv"]
+[ext_resource type="Texture2D" uid="uid://5kve1812h53s" path="res://art/ui/life on.png" id="2_jotl1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nva4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vhvcv")
+}],
+"loop": true,
+"name": &"life off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jotl1")
+}],
+"loop": true,
+"name": &"life on",
+"speed": 5.0
+}]
+
+[node name="life" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_nva4y")
+animation = &"life off"

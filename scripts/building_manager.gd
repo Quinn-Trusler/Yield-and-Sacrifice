@@ -3,7 +3,7 @@ extends Node2D
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
-@onready var TileMapMangager = get_node("/root/Main/TileMapMangager")
+@onready var TileMapMangager = get_node("/root/Main/TileMapManager")
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 var RNG = RandomNumberGenerator.new()
 

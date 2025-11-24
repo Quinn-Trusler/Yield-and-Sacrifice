@@ -28,4 +28,6 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":[],"total_stages":1,"time_per_stage":0,"destroy_on_harvest":true, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres"}}
 
-var ANIMAL_DEF
+var ANIMAL_DEF = null
+
+var MAX_LIVES = 3

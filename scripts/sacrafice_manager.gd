@@ -38,6 +38,7 @@ func get_round_requirements():
 	elif round_num <=5:
 		var num_potatoes = RNG.randi_range(2,3)
 		return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
+	return {"carrot":999}
 		
 #update the sacrafice requirments to the new ones based on round
 func update_requirements():

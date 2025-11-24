@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=20 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -11,7 +11,11 @@
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://va03fhtpox38" path="res://scripts/god_choice_manager.gd" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
-[ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scenes/building_manager.gd" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scripts/building_manager.gd" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://c4ikxs2xowcr0" path="res://scripts/lives.gd" id="13_trceg"]
+[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scenes/death_screen.gd" id="14_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -168,6 +172,7 @@ offset = Vector2(0, -30)
 zoom = Vector2(4, 4)
 
 [node name="TileMapManager" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_ya4ey")
 
 [node name="TileMapLayerBG" type="TileMapLayer" parent="."]
@@ -216,6 +221,12 @@ horizontal_alignment = 1
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Lives" type="CanvasLayer" parent="."]
+offset = Vector2(45, 30)
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 45, 30)
+script = ExtResource("13_trceg")
+
 [node name="GodChoiceManager" type="CanvasLayer" parent="."]
 process_mode = 3
 visible = false
@@ -252,4 +263,36 @@ script = ExtResource("10_choun")
 [node name="BuildingManager" type="Node2D" parent="."]
 script = ExtResource("12_eb6dy")
 
+[node name="DeathScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("14_a8y0u")
+
+[node name="Polygon2D" type="Polygon2D" parent="DeathScreen"]
+color = Color(0.68080366, 0.25614294, 0.3004499, 1)
+polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
+
+[node name="PlayAgain" type="TextureButton" parent="DeathScreen"]
+anchors_preset = -1
+anchor_right = 0.003
+anchor_bottom = 0.0050000004
+offset_left = 122.25
+offset_top = 62.75
+offset_right = 197.41
+offset_bottom = 70.4
+texture_normal = ExtResource("15_jbj1t")
+texture_hover = ExtResource("15_jbj1t")
+
+[node name="BackToMenu" type="TextureButton" parent="DeathScreen"]
+offset_left = 118.0
+offset_top = 117.5
+offset_right = 213.0
+offset_bottom = 128.25
+texture_normal = ExtResource("16_muem4")
+texture_hover = ExtResource("16_muem4")
+
 [connection signal="timeout" from="SacraficeManager/Timer" to="SacraficeManager" method="_on_timer_timeout"]
+[connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
+[connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]

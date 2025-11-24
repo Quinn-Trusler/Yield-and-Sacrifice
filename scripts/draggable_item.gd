@@ -20,8 +20,7 @@ func initialize(n,item_def):
 	else:
 		sprite_frames = SpriteFrames.new()
 		sprite_frames.add_frame("default",load(item_def["img_name"]))
-	#play("default")
-	#set_sprite_frames(value)
+
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
 	if item_name == "watering_can":

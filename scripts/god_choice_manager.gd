@@ -16,6 +16,7 @@ var choice_instances = []
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
+@onready var Lives = get_node("/root/Main/Lives")
 
 func chose_punishments():
 	#punishments off what the player curently  has
@@ -35,10 +36,12 @@ func load_godchoices(godchoice_list):
 		
 		
 func display_punishments():
+	Lives.lose_life()
 	$TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments())
 	
 func display_rewards():
+	Lives.set_max_lives()
 	$TitleText.text = REWARD_TEXT
 	load_godchoices(chose_rewards())
 

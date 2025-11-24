@@ -7,6 +7,7 @@ var RNG = RandomNumberGenerator.new()
 var mouse_on_mouth = false
 
 
+
 func _ready():
 	
 	#create boss
@@ -16,7 +17,7 @@ func _ready():
 	
 	#create building
 	$BuildingManager.last_building = "fishing_spot"
-	$TileMapLayer2.set_cell_scene(Vector2(2,-2),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant carrot crop
+	$TileMapLayer2.set_cell_scene(Vector2(2,-2),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant fishing spot
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
@@ -31,4 +32,5 @@ func reward():
 	
 func _attempt_eat_item(on_mouth : bool):
 	$ItemManager.mouse_on_mouth = on_mouth
+	
 	

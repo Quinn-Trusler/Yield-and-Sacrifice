@@ -37,3 +37,6 @@ func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2
 func get_cell_scene(coords: Vector2i) -> Node:
 	return scene_coords.get(coords, null)
 	
+func spread_fire(pos):
+	BuildingManager.spread_fire(pos)
+	
