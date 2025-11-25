@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpu6netsfebb4"]
+
+[ext_resource type="Script" uid="uid://c3bhop1of3kh6" path="res://level_selector.gd" id="1_aeu7d"]
+[ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="2_gkmvm"]
+
+[node name="LevelSelector" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_aeu7d")
+
+[node name="PlayGameButton" type="Button" parent="."]
+offset_left = 116.75
+offset_top = 127.0
+offset_right = 210.0
+offset_bottom = 137.25
+theme_override_fonts/font = ExtResource("2_gkmvm")
+theme_override_font_sizes/font_size = 8
+text = "Play Game"
+
+[node name="TitleText" type="Label" parent="."]
+offset_top = 38.0
+offset_right = 320.5
+offset_bottom = 55.25
+theme_override_fonts/font = ExtResource("2_gkmvm")
+theme_override_font_sizes/font_size = 16
+text = "Deadyly Worship"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="PlayGameButton" to="." method="_on_play_game_button_pressed"]

@@ -30,4 +30,4 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 
 var ANIMAL_DEF = null
 
-var MAX_LIVES = 3
+var MAX_LIVES = 1

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var menu_file_name = "res://scenes/level_selector.tcsn"
+@onready var menu_file_name = "res://scenes/level_selector.tscn"
 @onready var main_scene = "res://scenes/main.tscn"
 
 # Called when the node enters the scene tree for the first time.

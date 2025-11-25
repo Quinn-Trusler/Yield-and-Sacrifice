@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
 [ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scripts/building_manager.gd" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://c4ikxs2xowcr0" path="res://scripts/lives.gd" id="13_trceg"]
-[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scenes/death_screen.gd" id="14_a8y0u"]
+[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
 
