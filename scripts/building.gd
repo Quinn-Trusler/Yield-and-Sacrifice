@@ -63,6 +63,8 @@ func place_item(item_name):
 	else:
 		return false
 	
+func get_harvestable():
+	return ready_to_collect
 
 func harvest():
 	if ready_to_collect:

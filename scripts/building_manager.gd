@@ -17,6 +17,17 @@ func get_last_crop():
 	return GLOBALCONSTS.CROP_DEF[last_crop]
 func get_last_building():
 	return GLOBALCONSTS.BUILDING_DEF[last_building]
+	
+#uses tile position and not global position
+func get_building_interactable(pos):
+	if TileLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+		var scene = TileLayer2.get_cell_scene(pos)
+		if scene:
+			if scene.BUILDING_TYPE == "building" or scene.BUILDING_TYPE == "crop":
+				return scene.get_harvestable()
+			elif scene.BUILDING_TYPE == "fire":
+				return true
+	return false
 
 func click_tile():
 	#var tile_name = get_mouse_tile_name()

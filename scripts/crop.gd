@@ -43,16 +43,19 @@ func grow():
 		growth_complete = true
 	frame = stage
 	
+
 func pick():
 	if stage >= total_stages -1 - (pick_on_click-1) * pick_stage_setback:
 		stage -= pick_stage_setback
 		frame = stage
 	else:
 		return false
-	
+		
+func get_harvestable():
+	return (stage >= total_stages-1)
 	
 func harvest():
-	if stage >= total_stages-1:
+	if get_harvestable():
 		queue_free()
 		return resources
 	else:
