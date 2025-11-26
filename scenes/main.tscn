@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=26 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
 [ext_resource type="Script" uid="uid://c54jouui3gaa5" path="res://scripts/tile_map_manager.gd" id="2_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://depw4erw3wvwm" path="res://art/ui/tile selected.png" id="3_muem4"]
 [ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_85g3d"]
@@ -164,16 +165,48 @@ custom_data_layer_0/type = 4
 sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
+atlas = ExtResource("3_muem4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ld40"]
+atlas = ExtResource("3_muem4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqmmt"]
+atlas = ExtResource("3_muem4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc10j"]
+atlas = ExtResource("3_muem4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jscy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ld40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqmmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc10j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o5qli")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -30)
 zoom = Vector2(4, 4)
-
-[node name="TileMapManager" type="Node2D" parent="."]
-visible = false
-script = ExtResource("2_ya4ey")
 
 [node name="TileMapLayerBG" type="TileMapLayer" parent="."]
 position = Vector2(72, -59)
@@ -189,6 +222,14 @@ tile_set = SubResource("TileSet_o5qli")
 position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("5_tipki")
+
+[node name="TileMapManager" type="Node2D" parent="."]
+script = ExtResource("2_ya4ey")
+
+[node name="TileOutline" type="AnimatedSprite2D" parent="TileMapManager"]
+sprite_frames = SubResource("SpriteFrames_jscy8")
+frame_progress = 0.45605686
+centered = false
 
 [node name="SacraficeManager" type="Node2D" parent="."]
 script = ExtResource("5_tbgi4")

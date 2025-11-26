@@ -53,7 +53,7 @@ func spread_fire(pos):
 		pos.x += RNG.randi_range(-1,1)
 		pos.y += RNG.randi_range(-1,1)
 		if pos_in_bounds(pos, FIRE_RANGE):
-			var tile_name = TileMapMangager.get_tile_name_from_global(pos)
+			var tile_name = TileMapMangager.get_tile_name_from_coords(pos)
 			if not (tile_name in GLOBALCONSTS.UNBURNABLE_TILES) :
 				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
 			

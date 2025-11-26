@@ -33,7 +33,16 @@ func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-70,-30))
 
 func _process(_delta: float) -> void:
-	pass
+	#mouse on a building
+	if dragging_item:
+		if get_dragging_item_placeable():
+			TileMapManager.display_tile_outline(TileLayer.to_local(get_global_mouse_position()))
+		else:
+			TileMapManager.hide_tile_outline()
+	else:
+		TileMapManager.hide_tile_outline()
+	#else:
+		#TileMapManager.display_tile_outline(TileLayer.to_local(get_global_mouse_position()))
 	#if dragging_item:
 		#if item_being_dragged.item_name == "watering_can":
 			#process_watering_can(delta)
@@ -88,6 +97,11 @@ func pickup_item(item):
 func drop_item_ukn():
 	if item_being_dragged:
 		item_being_dragged.drop()
+		
+func get_dragging_item_placeable():
+	var pos = TileLayer.to_local(item_being_dragged.position)
+	var tile_name = TileMapManager.get_tile_name_from_global(pos)
+	return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
 #called by the item itself
 func drop_item(item):
 	dragging_item = false

@@ -6,7 +6,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$TileOutline.play("default")
 
 #gets tile name using global position
 func get_tile_name_from_global(pos):
@@ -27,3 +27,11 @@ func get_tile_name_from_coordinates(pos):
 func get_mouse_tile_name():
 	var mouse_cell = TileLayer.get_local_mouse_position()
 	return get_tile_name_from_coords(mouse_cell)
+func display_tile_outline(pos):#input a global position
+	pos = TileLayer.local_to_map(pos)
+	$TileOutline.visible = true
+	$TileOutline.position.x = pos.x*16 +TileLayer.position.x
+	$TileOutline.position.y = pos.y*16 +TileLayer.position.y
+	
+func hide_tile_outline():
+	$TileOutline.visible = false
