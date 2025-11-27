@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=26 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -12,10 +12,7 @@
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://va03fhtpox38" path="res://scripts/god_choice_manager.gd" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
-[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="10_dp3eg"]
-[ext_resource type="Texture2D" uid="uid://bff45gv5qxo58" path="res://art/ui/timer scroll.png" id="12_0ld40"]
 [ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scripts/building_manager.gd" id="12_eb6dy"]
-[ext_resource type="Texture2D" uid="uid://bpxhrff5aqg64" path="res://art/ui/stopwatch.png" id="13_gqmmt"]
 [ext_resource type="Script" uid="uid://c4ikxs2xowcr0" path="res://scripts/lives.gd" id="13_trceg"]
 [ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
@@ -245,6 +242,14 @@ autostart = true
 color = Color(0.16565639, 0.16565642, 0.16565639, 1)
 polygon = PackedVector2Array(-49, -83, 48, -83, 48, -56, -50, -56)
 
+[node name="TimeText" type="Label" parent="SacraficeManager"]
+offset_left = 3.0
+offset_top = -106.0
+offset_right = 43.0
+offset_bottom = -83.0
+theme_override_fonts/font = ExtResource("6_tefeu")
+theme_override_font_sizes/font_size = 8
+
 [node name="SacraficeText" type="RichTextLabel" parent="SacraficeManager"]
 offset_left = -160.0
 offset_top = -79.0
@@ -260,25 +265,6 @@ horizontal_alignment = 1
 [node name="SacraficeBar" type="TextureProgressBar" parent="SacraficeManager"]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="TimerGUI" type="Node2D" parent="SacraficeManager"]
-position = Vector2(0, -103)
-
-[node name="TimerBG" type="Sprite2D" parent="SacraficeManager/TimerGUI"]
-texture = ExtResource("12_0ld40")
-
-[node name="TimerSymbol" type="Sprite2D" parent="SacraficeManager/TimerGUI"]
-position = Vector2(-17, 0)
-texture = ExtResource("13_gqmmt")
-
-[node name="TimeText" type="Label" parent="SacraficeManager/TimerGUI"]
-offset_left = -10.0
-offset_top = -6.0
-offset_right = 24.0
-offset_bottom = 8.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("10_dp3eg")
-theme_override_font_sizes/font_size = 12
 
 [node name="Lives" type="CanvasLayer" parent="."]
 offset = Vector2(45, 30)

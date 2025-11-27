@@ -30,8 +30,16 @@ func next_round():
 		punish()
 	update_requirements()
 
+var TIMEDECIMALTHRESHOLD = 5
+var TIMEDECIMALS = 10
 func update_timer_text():
-	$TimeText.text = str(ceil($Timer.time_left))
+	var decimals = 1
+	if $Timer.time_left <= TIMEDECIMALTHRESHOLD:
+		$TimerGUI/TimeText.text = str(round($Timer.time_left*TIMEDECIMALS)/TIMEDECIMALS)
+	else:
+		$TimerGUI/TimeText.text = str(int(round($Timer.time_left)))
+		
+	
 func get_round_requirements():
 	if round_num <= -1:
 		return {"carrot":2}

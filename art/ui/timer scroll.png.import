@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmfrwxdp03bf3"
-path="res://.godot/imported/burn_land.png-787f6c1b5eccaed6e8d835cf5287c15a.ctex"
+uid="uid://bff45gv5qxo58"
+path="res://.godot/imported/timer scroll.png-2265c23aa63f67b8fb2810021e535594.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/burn_land.png"
-dest_files=["res://.godot/imported/burn_land.png-787f6c1b5eccaed6e8d835cf5287c15a.ctex"]
+source_file="res://art/ui/timer scroll.png"
+dest_files=["res://.godot/imported/timer scroll.png-2265c23aa63f67b8fb2810021e535594.ctex"]
 
 [params]
 
