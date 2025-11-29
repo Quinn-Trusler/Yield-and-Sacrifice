@@ -60,10 +60,10 @@ func update_requirements():
 	
 #Updates the sacrafice text and images to match what they actualy are
 func update_sacrafice_text():
-	$SacraficeText.text = ""
+	$SacraficeGUI/SacraficeText.text = ""
 	for key in requirements:
-		$SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]))
-		$SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
+		$SacraficeGUI/SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]))
+		$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
 		
 func sacrafice(sacraficed_item_name):
 	if sacraficed_item_name in requirements:
