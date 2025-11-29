@@ -219,7 +219,7 @@ tile_set = SubResource("TileSet_o5qli")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(72, -59)
-tile_map_data = PackedByteArray("AAD1/wIAAAADAAMAAAD7/wAAAAAFAAEAAAD7/wEAAAAFAAEAAAD8/wAAAAAFAAEAAAD8/wEAAAAFAAEAAAD9/wAAAAAFAAEAAAD9/wEAAAAFAAEAAAD+/wAAAAAFAAEAAAD+/wEAAAAFAAEAAAABAAMAAAAGAAEAAAACAAQAAAAHAAEAAAABAAIAAAAHAAEAAAACAAIAAAAHAAEAAAADAAEAAAAHAAEAAAAAAAMAAAAHAAEAAAAEAAMAAAAHAAIAAAABAP3/AAAHAAIAAAD4//3/AAAHAAIAAAD1/wUAAAAHAAIAAAD6/wYAAAAGAAIAAAD5//7/AAADAAMAAAAEAAAAAAADAAMAAAD///3/AAADAAMAAAD9/wYAAAAAAAMAAAD+/wYAAAACAAMAAAACAP//AAAOAAIAAAACAP7/AAAOAAIAAAADAP//AAAOAAIAAAADAP7/AAAOAAIAAAACAP3/AAAOAAIAAAA=")
+tile_map_data = PackedByteArray("AAD1/wIAAAAAAAMAAAD7/wAAAAAFAAEAAAD7/wEAAAAFAAEAAAD8/wAAAAAFAAEAAAD8/wEAAAAFAAEAAAD9/wAAAAAFAAEAAAD9/wEAAAAFAAEAAAD+/wAAAAAFAAEAAAD+/wEAAAAFAAEAAAABAAMAAAAGAAEAAAACAAQAAAAHAAEAAAABAAIAAAAHAAEAAAACAAIAAAAHAAEAAAADAAEAAAAHAAEAAAAAAAMAAAAHAAEAAAAEAAMAAAAHAAIAAAABAP3/AAAHAAIAAAD4//3/AAAHAAIAAAD1/wUAAAAHAAIAAAD6/wYAAAAGAAIAAAD5//7/AAAFAAEAAAAEAAAAAAAFAAEAAAD///3/AAAFAAEAAAD9/wYAAAAAAAMAAAD+/wYAAAABAAMAAAACAP//AAAOAAIAAAACAP7/AAAFAAEAAAADAP//AAAOAAIAAAADAP7/AAAOAAIAAAACAP3/AAAFAAEAAAACAAAAAAAOAAIAAAADAAAAAAAOAAIAAAD2/wIAAAABAAMAAAD3/wIAAAACAAMAAAD//wYAAAACAAMAAAA=")
 tile_set = SubResource("TileSet_o5qli")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
@@ -243,7 +243,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="TimerGUI" type="Node2D" parent="SacraficeManager"]
-position = Vector2(0, -103)
+position = Vector2(-128, -90)
 
 [node name="TimerBG" type="Sprite2D" parent="SacraficeManager/TimerGUI"]
 texture = ExtResource("12_0ld40")
@@ -262,7 +262,7 @@ theme_override_fonts/font = ExtResource("10_dp3eg")
 theme_override_font_sizes/font_size = 12
 
 [node name="SacraficeGUI" type="Node2D" parent="SacraficeManager"]
-position = Vector2(0, -67)
+position = Vector2(0, -107)
 
 [node name="SacraficeBg" type="Polygon2D" parent="SacraficeManager/SacraficeGUI"]
 visible = false
@@ -273,13 +273,14 @@ polygon = PackedVector2Array(-49, -83, 48, -83, 48, -56, -50, -56)
 texture = ExtResource("14_yc10j")
 
 [node name="SacraficeText" type="RichTextLabel" parent="SacraficeManager/SacraficeGUI"]
-offset_left = -49.0
-offset_top = -8.0
+offset_left = -50.0
+offset_top = -11.0
 offset_right = 50.0
 offset_bottom = 12.0
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("6_tefeu")
-theme_override_font_sizes/normal_font_size = 8
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("10_dp3eg")
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "Sacrafice"
 horizontal_alignment = 1

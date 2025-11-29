@@ -16,10 +16,10 @@ func get_tip_pos():
 func initialize(n,item_def):
 	item_name = n
 	if item_def["is_animated"]:
-		sprite_frames = load(item_def["img_name"])
+		sprite_frames = load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION)
 	else:
 		sprite_frames = SpriteFrames.new()
-		sprite_frames.add_frame("default",load(item_def["img_name"]))
+		sprite_frames.add_frame("default",load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()

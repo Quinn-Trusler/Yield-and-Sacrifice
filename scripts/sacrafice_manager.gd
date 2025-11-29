@@ -62,8 +62,10 @@ func update_requirements():
 func update_sacrafice_text():
 	$SacraficeGUI/SacraficeText.text = ""
 	for key in requirements:
-		$SacraficeGUI/SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]))
-		$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]) +"/"+ str(requirements[key]))
+		$SacraficeGUI/SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
+		$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]))
+		$SacraficeGUI/SacraficeText.add_image(load("res://art/ui/forward_slash.png"))
+		$SacraficeGUI/SacraficeText.add_text(str(requirements[key]))
 		
 func sacrafice(sacraficed_item_name):
 	if sacraficed_item_name in requirements:
