@@ -13,13 +13,13 @@
 [ext_resource type="Script" uid="uid://va03fhtpox38" path="res://scripts/god_choice_manager.gd" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="10_dp3eg"]
-[ext_resource type="Texture2D" uid="uid://bff45gv5qxo58" path="res://art/ui/timer scroll.png" id="12_0ld40"]
 [ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scripts/building_manager.gd" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://bpxhrff5aqg64" path="res://art/ui/stopwatch.png" id="13_gqmmt"]
 [ext_resource type="Script" uid="uid://c4ikxs2xowcr0" path="res://scripts/lives.gd" id="13_trceg"]
 [ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://c6ebs5nndaen6" path="res://art/ui/requests_scroll.png" id="14_yc10j"]
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
@@ -243,10 +243,10 @@ wait_time = 5.0
 autostart = true
 
 [node name="TimerGUI" type="Node2D" parent="SacraficeManager"]
-position = Vector2(-128, -90)
+position = Vector2(-131, -85)
 
 [node name="TimerBG" type="Sprite2D" parent="SacraficeManager/TimerGUI"]
-texture = ExtResource("12_0ld40")
+texture = ExtResource("15_jscy8")
 
 [node name="TimerSymbol" type="Sprite2D" parent="SacraficeManager/TimerGUI"]
 position = Vector2(-17, 0)
@@ -291,10 +291,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Lives" type="CanvasLayer" parent="."]
-offset = Vector2(45, 30)
+offset = Vector2(45, 50)
 scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 45, 30)
+transform = Transform2D(4, 0, 0, 4, 45, 50)
 script = ExtResource("13_trceg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Lives"]
+position = Vector2(18.25, -0.5)
+texture = ExtResource("15_jscy8")
 
 [node name="GodChoiceManager" type="CanvasLayer" parent="."]
 process_mode = 3

@@ -4,7 +4,7 @@ var life_scenes = []
 var LIFE_ON = "life on"
 var LIFE_OFF = "life off"
 var MAX_LIVES = GLOBALCONSTS.MAX_LIVES
-var LIFE_SPACING = 20
+var LIFE_SPACING = 15
 var lives_left = MAX_LIVES
 @onready var life_scene = load("res://scenes/life.tscn")
 @onready var DeathScreen = get_node("/root/Main/DeathScreen")
@@ -36,7 +36,7 @@ func set_max_lives():
 func set_lives():
 	#lower indexs are further left and the first to turn off
 	for i in range(len(life_scenes)):
-		if i < (MAX_LIVES-lives_left):
+		if i >= (lives_left):
 			life_scenes[i].play(LIFE_OFF)
 		else:
 			life_scenes[i].play(LIFE_ON)
