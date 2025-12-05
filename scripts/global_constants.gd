@@ -10,8 +10,8 @@ var ITEM_FRAMES_FOLDER = "res://scenes/sprite_frames/items/"
 
 
 #used by other scripts
-var MAPSIZE = [-13,5,4,-4]
-
+var MAPSIZE = [-14,5,5,-5]
+#[-15, -7, 9, 7]
 #definitions
 var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
