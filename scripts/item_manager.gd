@@ -31,6 +31,10 @@ func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
+	
+	create_draggable_item("voldka",Vector2(-30,-20))
+	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("pepper_juice",Vector2(-70,-40))
 
 func _process(_delta: float) -> void:
 	pass
@@ -123,6 +127,8 @@ func drop_item(item):
 		SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
 	#if item.item_name == "carrot":
+	
+		
 	if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 		if TileLayer2.get_cell_source_id(pos) ==-1:#empty cell
 			delete_item = true
@@ -134,6 +140,11 @@ func drop_item(item):
 		else:
 			print("Error: Cannot plant on already planted farmland")
 				
+	#Attempt to place item in building
+	if TileLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+		var scene = TileLayer2.get_cell_scene(pos)
+		if scene and scene.BUILDING_TYPE == "building":
+			delete_item = scene.place_item(item.item_name)
 				
 				
 	if delete_item:

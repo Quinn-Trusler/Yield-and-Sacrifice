@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://cess86w2ac2wv"]
+
+[ext_resource type="Texture2D" uid="uid://bwnrq8oetes6h" path="res://art/buildings/barrel.png" id="1_7jygl"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7jygl")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]

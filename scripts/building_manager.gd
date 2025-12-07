@@ -16,16 +16,13 @@ var fish_spawn_spots = []
 var WATER_TILE_NAME = "water"
 
 func _ready():
-	print("building func is ready!")
 	for x in range(GLOBALCONSTS.MAPSIZE[2]-GLOBALCONSTS.MAPSIZE[0]):
 		for y in range(GLOBALCONSTS.MAPSIZE[1]-GLOBALCONSTS.MAPSIZE[3]):
-			#print(x+GLOBALCONSTS.MAPSIZE[0],", ",y+GLOBALCONSTS.MAPSIZE[3])
 			var x2 = x+GLOBALCONSTS.MAPSIZE[0]
 			var y2 = y+GLOBALCONSTS.MAPSIZE[3]
 			var pos = Vector2(x2,y2)
 			if TileMapMangager.get_tile_name_from_coords(pos) == WATER_TILE_NAME:
 				fish_spawn_spots.append(pos)
-				print(pos)
 
 func get_last_crop():
 	return GLOBALCONSTS.CROP_DEF[last_crop]
@@ -97,7 +94,7 @@ func pos_in_bounds(pos: Vector2, bounds: Array):
 	return true
 
 func spawn_random_fish():
-	var i = RNG.randi_range(0,len(fish_spawn_spots))
+	var i = RNG.randi_range(0,len(fish_spawn_spots)-1)
 	#spawn fish at 
 	last_building = "fishing_spot"
 	TileLayer2.set_cell_scene(fish_spawn_spots[i],2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)

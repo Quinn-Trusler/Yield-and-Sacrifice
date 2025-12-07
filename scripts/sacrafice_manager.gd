@@ -33,7 +33,6 @@ func next_round():
 var TIMEDECIMALTHRESHOLD = 5
 var TIMEDECIMALS = 10
 func update_timer_text():
-	var decimals = 1
 	if $Timer.time_left <= TIMEDECIMALTHRESHOLD:
 		$TimerGUI/TimeText.text = str(round($Timer.time_left*TIMEDECIMALS)/TIMEDECIMALS)
 	else:

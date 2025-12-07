@@ -16,8 +16,9 @@ func _ready():
 	temp.attempt_eat_item.connect(_attempt_eat_item)
 	
 	#create building
-	$BuildingManager.last_building = "fishing_spot"
-	$TileMapLayer2.set_cell_scene(Vector2(2,-2),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant fishing spot
+	$BuildingManager.last_building = "barrel"
+	$TileMapLayer2.set_cell_scene(Vector2(-1,5),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant fishing spot
+	
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):

@@ -10,7 +10,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TileOutline.play("default")
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var tile_pos = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
 	if ItemManager.get_dragging_item_placeable() or BuildingManager.get_building_interactable(tile_pos):
 		display_tile_outline(tile_pos)

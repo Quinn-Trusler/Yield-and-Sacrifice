@@ -14,6 +14,7 @@ var TOTAL_STAGES = 1
 var TIME_PER_STAGE = 10
 
 var DESTROY_ON_HARVEST = false
+var STAGE_LOSS_ON_HARVEST = 0
 
 var stage = 0#stages are zero indexed
 var timer = 0
@@ -30,6 +31,7 @@ func initialize(def):
 	TOTAL_STAGES = def["total_stages"]
 	TIME_PER_STAGE = def["time_per_stage"]
 	DESTROY_ON_HARVEST = def["destroy_on_harvest"]
+	STAGE_LOSS_ON_HARVEST = def["stage_loss_on_harvest"]
 	sprite_frames = load(def["frames"])
 	update_stage()
 #barel
@@ -49,9 +51,12 @@ func go_up_a_stage():#go up a stage
 	
 	
 func update_stage():
-	play(str(stage))
+	if sprite_frames.has_animation(str(stage)):
+		play(str(stage))
 	if stage >= TOTAL_STAGES-1:
 		ready_to_collect = true
+	else:
+		ready_to_collect = false
 		
 func place_item(item_name):
 	if item_name in INPUT_ITEMS:
@@ -68,9 +73,15 @@ func get_harvestable():
 
 func harvest():
 	if ready_to_collect:
+		if STAGE_LOSS_ON_HARVEST:
+			print("setback by", STAGE_LOSS_ON_HARVEST)
+			stage -= STAGE_LOSS_ON_HARVEST
+			timer = 0
+			num_items_inputed = 0
+			update_stage()
 		return OUTPUT_ITEMS
 	else:
-		return false
+		return []
 
 
 #put items in building
