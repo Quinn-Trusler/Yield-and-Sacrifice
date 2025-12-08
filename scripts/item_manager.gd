@@ -61,38 +61,38 @@ func create_draggable_item(item_name,pos):
 	draggable_items.append(temp)
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
-func process_watering_can(_delta):
-	var can = item_being_dragged
-	var MAX_CAN_FRAME = 8#add this stuff to the item soon
-	var TIME_PER_FRAME = 0.2
-	var CAN_STARTING_ROTATION = PI/6
-	
-	var tile_name = TileMapManager.get_mouse_tile_name()
-	if tile_name == "water":
-		can.frame = 0 #starts full and last frame is empty
-		can.rotation = CAN_STARTING_ROTATION
-		can.timer = 0
-	elif can.frame == MAX_CAN_FRAME:
-		can.rotation = 0
-	else:#work on emptying it
-		#can.position = can.
-		var pos = TileLayer.local_to_map(TileLayer.get_local_mouse_position())#get_tip_pos())
-		
-		can.rotation = CAN_STARTING_ROTATION+ (can.frame +can.timer/TIME_PER_FRAME) *(PI/3/MAX_CAN_FRAME)
-		var tip_pos = pos#TileLayer.to_local(can.position)
-		
-		if can.timer >= TIME_PER_FRAME:
-			can.timer = 0
-			can.frame +=1
-		if tile_name == "dry_farmland":
-			can.timer += TIME_PER_FRAME
-			#var tip_pos = TileLayer.local_to_map(TileLayer.get_local_mouse_position())
-			TileLayer.set_cell(tip_pos,0,atlas_decoded["farmland"],0)
-		if TileLayer2.get_cell_source_id(tip_pos) !=-1:#2nd layer cell not empty
-			var scene = TileLayer2.get_cell_scene(tip_pos)
-			if scene and scene.BUILDING_TYPE == "fire":
-				can.timer += TIME_PER_FRAME
-				TileLayer2.set_cell_scene(tip_pos,-1)
+#func process_watering_can(_delta):
+	#var can = item_being_dragged
+	#var MAX_CAN_FRAME = 8#add this stuff to the item soon
+	#var TIME_PER_FRAME = 0.2
+	#var CAN_STARTING_ROTATION = PI/6
+	#
+	#var tile_name = TileMapManager.get_mouse_tile_name()
+	#if tile_name == "water":
+		#can.frame = 0 #starts full and last frame is empty
+		#can.rotation = CAN_STARTING_ROTATION
+		#can.timer = 0
+	#elif can.frame == MAX_CAN_FRAME:
+		#can.rotation = 0
+	#else:#work on emptying it
+		##can.position = can.
+		#var pos = TileLayer.local_to_map(TileLayer.get_local_mouse_position())#get_tip_pos())
+		#
+		#can.rotation = CAN_STARTING_ROTATION+ (can.frame +can.timer/TIME_PER_FRAME) *(PI/3/MAX_CAN_FRAME)
+		#var tip_pos = pos#TileLayer.to_local(can.position)
+		#
+		#if can.timer >= TIME_PER_FRAME:
+			#can.timer = 0
+			#can.frame +=1
+		#if tile_name == "dry_farmland":
+			#can.timer += TIME_PER_FRAME
+			##var tip_pos = TileLayer.local_to_map(TileLayer.get_local_mouse_position())
+			#TileLayer.set_cell(tip_pos,0,atlas_decoded["farmland"],0)
+		#if TileLayer2.get_cell_source_id(tip_pos) !=-1:#2nd layer cell not empty
+			#var scene = TileLayer2.get_cell_scene(tip_pos)
+			#if scene and scene.BUILDING_TYPE == "fire":
+				#can.timer += TIME_PER_FRAME
+				#TileLayer2.set_cell_scene(tip_pos,-1)
 
 
 func pickup_item(item):
@@ -107,7 +107,7 @@ func get_dragging_item_placeable():
 	if dragging_item:
 		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
 		var tile_name = TileMapManager.get_tile_name_from_coords(pos)
-		if TileLayer2.get_cell_source_id(pos) == -1:#empty cell
+		if TileLayer2.is_empty(pos):#empty cell
 			return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
 	return false
 			
@@ -130,7 +130,7 @@ func drop_item(item):
 	
 		
 	if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
-		if TileLayer2.get_cell_source_id(pos) ==-1:#empty cell
+		if TileLayer2.is_empty(pos):#empty cell
 			delete_item = true
 
 			TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.CROP_SCENE_ID)#plants crop
@@ -141,7 +141,7 @@ func drop_item(item):
 			print("Error: Cannot plant on already planted farmland")
 				
 	#Attempt to place item in building
-	if TileLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+	if not TileLayer2.is_empty(pos):#2nd layer cell not empty
 		var scene = TileLayer2.get_cell_scene(pos)
 		if scene and scene.BUILDING_TYPE == "building":
 			delete_item = scene.place_item(item.item_name)

@@ -31,7 +31,7 @@ func get_last_building():
 	
 #uses tile position and not global position
 func get_building_interactable(pos):
-	if TileLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+	if not TileLayer2.is_empty(pos):#2nd layer cell not empty
 		var scene = TileLayer2.get_cell_scene(pos)
 		if scene:
 			if scene.BUILDING_TYPE == "building" or scene.BUILDING_TYPE == "crop":
@@ -45,7 +45,7 @@ func click_tile():
 	var pos = TileLayer.get_local_mouse_position()
 	pos = TileLayer.local_to_map(pos)
 	
-	if TileLayer2.get_cell_source_id(pos) !=-1:#2nd layer cell not empty
+	if not TileLayer2.is_empty(pos):#2nd layer cell not empty
 		var scene = TileLayer2.get_cell_scene(pos)
 		if scene:
 			if scene.BUILDING_TYPE == "building":

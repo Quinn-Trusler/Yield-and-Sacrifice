@@ -32,6 +32,8 @@ func initialize(def):
 	TIME_PER_STAGE = def["time_per_stage"]
 	DESTROY_ON_HARVEST = def["destroy_on_harvest"]
 	STAGE_LOSS_ON_HARVEST = def["stage_loss_on_harvest"]
+	offset.x = def["offset"][0]
+	offset.y = def["offset"][1]
 	sprite_frames = load(def["frames"])
 	update_stage()
 #barel
