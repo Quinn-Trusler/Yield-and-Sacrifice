@@ -14,6 +14,7 @@ var TOTAL_STAGES = 1
 var TIME_PER_STAGE = 10
 
 var DESTROY_ON_HARVEST = false
+var STAGE_TO_HARVEST = 0
 var STAGE_LOSS_ON_HARVEST = 0
 
 var stage = 0#stages are zero indexed
@@ -31,6 +32,7 @@ func initialize(def):
 	TOTAL_STAGES = def["total_stages"]
 	TIME_PER_STAGE = def["time_per_stage"]
 	DESTROY_ON_HARVEST = def["destroy_on_harvest"]
+	STAGE_TO_HARVEST = def["stage_to_harvest"]
 	STAGE_LOSS_ON_HARVEST = def["stage_loss_on_harvest"]
 	offset.x = def["offset"][0]
 	offset.y = def["offset"][1]
@@ -41,7 +43,7 @@ func initialize(def):
 #Fish net
 #when click to empty
 func _process(delta: float) -> void:
-	if TIME_PER_STAGE != 0 and num_items_inputed>=ITEMS_TO_START_TIMER:
+	if TIME_PER_STAGE != 0 and num_items_inputed>=ITEMS_TO_START_TIMER and stage < TOTAL_STAGES:
 		timer += delta
 	if timer > TIME_PER_STAGE:
 		go_up_a_stage()
@@ -55,7 +57,7 @@ func go_up_a_stage():#go up a stage
 func update_stage():
 	if sprite_frames.has_animation(str(stage)):
 		play(str(stage))
-	if stage >= TOTAL_STAGES-1:
+	if stage >= STAGE_TO_HARVEST:
 		ready_to_collect = true
 	else:
 		ready_to_collect = false

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpsnij44e04il"]
 
 [ext_resource type="Script" uid="uid://c8u70175fscnd" path="res://scripts/building.gd" id="1_n8bkc"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n8bkc"]
+[ext_resource type="SpriteFrames" uid="uid://g5vv8ggpr4xn" path="res://scenes/sprite_frames/buildings/mushroom_patch.tres" id="1_uvy8r"]
 
 [node name="building" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_n8bkc")
+sprite_frames = ExtResource("1_uvy8r")
+animation = &"0"
 script = ExtResource("1_n8bkc")

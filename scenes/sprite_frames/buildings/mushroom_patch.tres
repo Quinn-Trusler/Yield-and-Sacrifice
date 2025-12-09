@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://g5vv8ggpr4xn"]
+
+[ext_resource type="Texture2D" uid="uid://wsmx0m10axpp" path="res://art/buildings/mushroom_crop.png" id="1_o2esd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejq8p"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rla3o"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm2ef"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5uvq"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejq8p")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rla3o")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm2ef")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5uvq")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]

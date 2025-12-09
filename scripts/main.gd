@@ -16,7 +16,7 @@ func _ready():
 	temp.attempt_eat_item.connect(_attempt_eat_item)
 	
 	#create building
-	$BuildingManager.last_building = "barrel"
+	$BuildingManager.last_building = "mushroom_patch"
 	$TileMapLayer2.set_cell_scene(Vector2(-1,3),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant fishing spot
 	
 	
