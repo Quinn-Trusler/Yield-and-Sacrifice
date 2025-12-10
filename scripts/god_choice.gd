@@ -5,7 +5,7 @@ var choice_name
 
 func initialize(c_name,choice):
 	choice_name = c_name
-	$TextureButton.texture_normal = load(choice["img"])
+	$Sprite2D.texture = load(choice["img"])
 	$Name.text = c_name
 	create_description(c_name,choice)
 #var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
@@ -35,8 +35,8 @@ func _on_texture_button_pressed() -> void:
 
 
 
-func _on_texture_button_mouse_entered() -> void:
-	$Description.visible = true
-
-func _on_texture_button_mouse_exited() -> void:
-	$Description.visible = false
+#func _on_texture_button_mouse_entered() -> void:
+	#$Description.visible = true
+#
+#func _on_texture_button_mouse_exited() -> void:
+	#$Description.visible = false

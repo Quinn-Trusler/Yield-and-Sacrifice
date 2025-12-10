@@ -1,13 +1,13 @@
 extends CanvasLayer
 
 enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_Decrease}
-var REWARD_TEXT = "You Sacraficed enough.\n Chose a reward."
-var PUNISH_TEXT = "You did not sacrafice enough!\n Chose a punishment!"
+var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
+var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
 "Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
-"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["dry_farmland"],"amt": 3}
+"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"reward": ["dry_farmland"],"amt": 3}
 }
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")

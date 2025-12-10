@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsgo3g82nilvu"]
+[gd_scene load_steps=6 format=3 uid="uid://bsgo3g82nilvu"]
 
 [ext_resource type="Script" uid="uid://b1gjtnncn37w0" path="res://scripts/god_choice.gd" id="1_7ipnc"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="2_2mrim"]
+[ext_resource type="Texture2D" uid="uid://8prxwyhj7xfq" path="res://art/ui/choose_button.png" id="2_24g0r"]
+[ext_resource type="Texture2D" uid="uid://bj8diovk5575g" path="res://art/ui/choose_button_hover.png" id="3_vr7tv"]
+[ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="5_vr7tv"]
 
 [node name="GodChoice" type="Control"]
 custom_minimum_size = Vector2(32, 32)
@@ -9,30 +12,48 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_7ipnc")
 
+[node name="BG2" type="Polygon2D" parent="."]
+offset = Vector2(-1, -1)
+polygon = PackedVector2Array(-45, -30, 47, -30, 47, 85, -45, 85)
+
+[node name="BG" type="Polygon2D" parent="."]
+color = Color(0.0015883509, 0, 0.09266608, 1)
+polygon = PackedVector2Array(-45, -30, 45, -30, 45, 83, -45, 83)
+
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -25.0
+offset_top = 60.0
+offset_right = 25.0
+offset_bottom = 76.0
+texture_normal = ExtResource("2_24g0r")
+texture_hover = ExtResource("3_vr7tv")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
-offset_left = -20.0
+offset_left = -150.0
 offset_top = -20.0
-offset_right = 20.0
+offset_right = 151.0
 offset_bottom = 3.0
 theme_override_fonts/font = ExtResource("2_2mrim")
 theme_override_font_sizes/font_size = 8
+text = "name"
+horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="."]
 layout_mode = 0
 offset_left = -33.0
-offset_top = 30.0
+offset_top = 45.0
 offset_right = 103.0
-offset_bottom = 254.0
+offset_bottom = 269.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("2_2mrim")
 theme_override_font_sizes/font_size = 8
 autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 19)
+texture = ExtResource("5_vr7tv")
 
 [connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
 [connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
