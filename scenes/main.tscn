@@ -460,12 +460,11 @@ text = "blah blah blah
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager"]
-offset_left = 11.0
-offset_top = 65.0
-offset_right = 307.0
-offset_bottom = 118.0
+offset_top = 60.0
+offset_right = 320.0
+offset_bottom = 110.0
 size_flags_horizontal = 3
-theme_override_constants/separation = 50
+theme_override_constants/separation = 70
 alignment = 1
 
 [node name="ItemManager" type="Node2D" parent="."]

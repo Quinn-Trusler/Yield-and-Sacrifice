@@ -6,6 +6,7 @@ var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
+"Potatoe":{"img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"reward": "potatoe","amt" : 1},
 "Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
 "Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"reward": ["dry_farmland"],"amt": 3}
 }
@@ -24,7 +25,7 @@ func chose_punishments():
 	
 func chose_rewards():
 	#rewards off of what the player curently has
-	return ["Carrot", "Farmland"]
+	return ["Carrot", "Farmland", "Potatoe"]
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsgo3g82nilvu"]
+[gd_scene load_steps=8 format=3 uid="uid://bsgo3g82nilvu"]
 
 [ext_resource type="Script" uid="uid://b1gjtnncn37w0" path="res://scripts/god_choice.gd" id="1_7ipnc"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="2_2mrim"]
-[ext_resource type="Texture2D" uid="uid://8prxwyhj7xfq" path="res://art/ui/choose_button.png" id="2_24g0r"]
-[ext_resource type="Texture2D" uid="uid://bj8diovk5575g" path="res://art/ui/choose_button_hover.png" id="3_vr7tv"]
+[ext_resource type="Texture2D" uid="uid://co8lcad2rgbw5" path="res://art/ui/choice_bg2.png" id="2_rxmxf"]
+[ext_resource type="Texture2D" uid="uid://6f7ji8w56mtm" path="res://art/ui/choose_button_purple_dark.png" id="3_eerbp"]
+[ext_resource type="Texture2D" uid="uid://bt6ky6vgm3fd8" path="res://art/ui/choose_button_purple.png" id="3_rxmxf"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="5_rxmxf"]
 [ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="5_vr7tv"]
 
 [node name="GodChoice" type="Control"]
@@ -12,11 +14,17 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_7ipnc")
 
+[node name="BG3" type="Sprite2D" parent="."]
+position = Vector2(0, 14)
+texture = ExtResource("2_rxmxf")
+
 [node name="BG2" type="Polygon2D" parent="."]
+visible = false
 offset = Vector2(-1, -1)
 polygon = PackedVector2Array(-45, -30, 47, -30, 47, 85, -45, 85)
 
 [node name="BG" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.0015883509, 0, 0.09266608, 1)
 polygon = PackedVector2Array(-45, -30, 45, -30, 45, 83, -45, 83)
 
@@ -26,17 +34,17 @@ offset_left = -25.0
 offset_top = 60.0
 offset_right = 25.0
 offset_bottom = 76.0
-texture_normal = ExtResource("2_24g0r")
-texture_hover = ExtResource("3_vr7tv")
+texture_normal = ExtResource("3_eerbp")
+texture_hover = ExtResource("3_rxmxf")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
 offset_left = -150.0
-offset_top = -20.0
+offset_top = -25.0
 offset_right = 151.0
-offset_bottom = 3.0
-theme_override_fonts/font = ExtResource("2_2mrim")
-theme_override_font_sizes/font_size = 8
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("5_rxmxf")
+theme_override_font_sizes/font_size = 12
 text = "name"
 horizontal_alignment = 1
 
@@ -49,6 +57,7 @@ offset_bottom = 269.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("2_2mrim")
 theme_override_font_sizes/font_size = 8
+text = "Yada Yada Yada"
 autowrap_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
