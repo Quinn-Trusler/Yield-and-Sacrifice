@@ -5,6 +5,7 @@ class_name SceneTileMapLayer
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 	
 var scene_coords: Dictionary[Vector2i, Node] = {}
+var building_names_temp: Dictionary[Vector2i, String] = {}
 	
 func _enter_tree():
 	child_entered_tree.connect(_register_child)
@@ -16,10 +17,12 @@ func _register_child(child):
 	scene_coords[coords] = child
 	child.set_meta("all_coords", [coords])
 	child.set_meta("tile_coords", coords)
+	var vectored_coords = Vector2i(coords[0], coords[1])
 	if child.BUILDING_TYPE == "crop":
-		child.initialize(BuildingManager.get_last_crop())
+		child.initialize(GLOBALCONSTS.CROP_DEF[building_names_temp[vectored_coords]])
+		building_names_temp.erase(vectored_coords)
 	elif child.BUILDING_TYPE == "building":
-		var building_def = BuildingManager.get_last_building()
+		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
 		child.initialize(building_def)
 		var temp_meta = [coords]
 		if "extra_tiles" in building_def:
@@ -29,7 +32,7 @@ func _register_child(child):
 				temp_meta.append(new_pos)
 				scene_coords[new_pos] = child
 		child.set_meta("all_coords", temp_meta)
-				
+		building_names_temp.erase(vectored_coords)
 		
 #func _unregister_child(child):	
 	#print("unregister child: ",child.get_meta("tile_coords"))
@@ -43,7 +46,13 @@ func remove_cell_scene(coords):
 			set_cell(pos, -1)
 			scene_coords.erase(pos)
 			print("deleted pos", pos)
+func plant_crop(coords: Vector2i, building_name: String):
+	building_names_temp[coords] = building_name
+	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.CROP_SCENE_ID)#plants crop
 
+func place_building(coords: Vector2i, building_name: String):
+	building_names_temp[coords] = building_name
+	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)
 	
 func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
 	remove_cell_scene(coords)#Remove old

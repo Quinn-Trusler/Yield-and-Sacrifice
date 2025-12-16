@@ -377,7 +377,7 @@ centered = false
 script = ExtResource("5_tbgi4")
 
 [node name="Timer" type="Timer" parent="SacraficeManager"]
-wait_time = 5.0
+wait_time = 7.0
 autostart = true
 
 [node name="TimerGUI" type="Node2D" parent="SacraficeManager"]
@@ -446,7 +446,9 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("7_o6xl0")
 
 [node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager"]
-color = Color(0, 0, 0, 1)
+position = Vector2(-80.039505, -43.84252)
+scale = Vector2(0.31590164, 0.31496063)
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 polygon = PackedVector2Array(-52, -47, 1302, -64, 1408, 751, -117, 825)
 
 [node name="TitleText" type="Label" parent="GodChoiceManager"]
@@ -464,7 +466,7 @@ offset_top = 60.0
 offset_right = 320.0
 offset_bottom = 110.0
 size_flags_horizontal = 3
-theme_override_constants/separation = 70
+theme_override_constants/separation = 100
 alignment = 1
 
 [node name="ItemManager" type="Node2D" parent="."]

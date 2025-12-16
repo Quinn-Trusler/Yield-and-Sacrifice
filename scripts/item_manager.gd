@@ -132,10 +132,8 @@ func drop_item(item):
 	if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 		if TileLayer2.is_empty(pos):#empty cell
 			delete_item = true
-
-			TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.CROP_SCENE_ID)#plants crop
-			#var scene = TileLayer2.get_cell_scene(pos)
-			BuildingManager.last_crop = item.item_name
+			
+			TileLayer2.plant_crop(pos,item.item_name)
 			
 		else:
 			print("Error: Cannot plant on already planted farmland")

@@ -14,11 +14,11 @@ func _ready():
 	var temp = DEVIL_BOSS_SCENE.instantiate()
 	add_child(temp)
 	temp.attempt_eat_item.connect(_attempt_eat_item)
-	
+
 	#create building
-	$BuildingManager.last_building = "mushroom_patch"
-	$TileMapLayer2.set_cell_scene(Vector2(-1,3),2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)#plant fishing spot
-	
+	$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
+	$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
+	$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):

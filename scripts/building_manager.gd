@@ -7,9 +7,6 @@ extends Node2D
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 var RNG = RandomNumberGenerator.new()
 
-var last_crop = "null"
-var last_building = "null"
-
 var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
 var fish_spawn_spots = []
@@ -23,11 +20,6 @@ func _ready():
 			var pos = Vector2(x2,y2)
 			if TileMapMangager.get_tile_name_from_coords(pos) == WATER_TILE_NAME:
 				fish_spawn_spots.append(pos)
-
-func get_last_crop():
-	return GLOBALCONSTS.CROP_DEF[last_crop]
-func get_last_building():
-	return GLOBALCONSTS.BUILDING_DEF[last_building]
 	
 #uses tile position and not global position
 func get_building_interactable(pos):
@@ -96,8 +88,7 @@ func pos_in_bounds(pos: Vector2, bounds: Array):
 func spawn_random_fish():
 	var i = RNG.randi_range(0,len(fish_spawn_spots)-1)
 	#spawn fish at 
-	last_building = "fishing_spot"
-	TileLayer2.set_cell_scene(fish_spawn_spots[i],2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)
+	TileLayer2.place_building(fish_spawn_spots[i], "fishing_spot")
 
 func _on_fish_timer_timeout() -> void:
 	spawn_random_fish()

@@ -9,24 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="5_vr7tv"]
 
 [node name="GodChoice" type="Control"]
-custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 44.0
+offset_bottom = 59.0
 script = ExtResource("1_7ipnc")
 
 [node name="BG3" type="Sprite2D" parent="."]
 position = Vector2(0, 14)
 texture = ExtResource("2_rxmxf")
-
-[node name="BG2" type="Polygon2D" parent="."]
-visible = false
-offset = Vector2(-1, -1)
-polygon = PackedVector2Array(-45, -30, 47, -30, 47, 85, -45, 85)
-
-[node name="BG" type="Polygon2D" parent="."]
-visible = false
-color = Color(0.0015883509, 0, 0.09266608, 1)
-polygon = PackedVector2Array(-45, -30, 45, -30, 45, 83, -45, 83)
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -39,9 +30,9 @@ texture_hover = ExtResource("3_rxmxf")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
-offset_left = -150.0
+offset_left = -44.0
 offset_top = -25.0
-offset_right = 151.0
+offset_right = 44.0
 offset_bottom = -2.0
 theme_override_fonts/font = ExtResource("5_rxmxf")
 theme_override_font_sizes/font_size = 12
@@ -64,6 +55,4 @@ autowrap_mode = 2
 position = Vector2(0, 19)
 texture = ExtResource("5_vr7tv")
 
-[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
