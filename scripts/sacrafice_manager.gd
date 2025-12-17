@@ -11,6 +11,7 @@ var filled_requirements = {}
 var requirements_met = false
 var round_time = 20
 var RNG = RandomNumberGenerator.new()
+var allowed_sacrafices = ["carrot"]
 
 func _ready():
 	$Timer.wait_time = round_time
@@ -28,7 +29,7 @@ func next_round():
 		reward()
 	else:
 		punish()
-	update_requirements()
+	
 
 var TIMEDECIMALTHRESHOLD = 5
 var TIMEDECIMALS = 10
@@ -38,14 +39,34 @@ func update_timer_text():
 	else:
 		$TimerGUI/TimeText.text = str(int(round($Timer.time_left)))
 		
+func add_allowed_sacrafice(item_name):
+	if not(item_name in allowed_sacrafices):
+		allowed_sacrafices.append(item_name)
 	
+
 func get_round_requirements():
-	if round_num <= -1:
-		return {"carrot":2}
-	elif round_num <=5:
-		var num_potatoes = RNG.randi_range(2,3)
-		return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
-	return {"carrot":999}
+	#determine items total 
+	#detrmine ask for 1,2 or 3 items
+	var items_total = round_num + 1
+	var item_groups = 3
+	if items_total <= 2:
+		item_groups = 1
+	elif items_total <= 5:
+		item_groups = 2
+	
+	var temp_requirements = {}
+	for i in range(item_groups):
+		var num = RNG.randi_range(0,len(allowed_sacrafices)-1)
+		var num_items = round(items_total/(item_groups-i))
+		items_total -= num_items
+		temp_requirements[allowed_sacrafices[num]] = num_items
+	return temp_requirements
+	#if round_num <= -1:
+		#return {"carrot":2}
+	#elif round_num <=5:
+		#var num_potatoes = RNG.randi_range(2,3)
+		#return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
+	#return {"carrot":999}
 		
 #update the sacrafice requirments to the new ones based on round
 func update_requirements():

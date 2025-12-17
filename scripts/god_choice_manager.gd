@@ -1,31 +1,44 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_Decrease}
+enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_}
 var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
-var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
-"Potatoe":{"img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"reward": "potatoe","amt" : 1},
-"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
-"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"reward": ["dry_farmland"],"amt": 3}
+var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":"carrot","reward": "carrot","amt" : 1},
+"Potatoe":{"img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":"potatoe","reward": "potatoe","amt" : 1},
+"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
+"Mushroom Patch":{"img": "res://art/godchoice/mushroom.png","text":"default","item unlock":"mushroom","type": TYPES.Placement,"reward": "mushroom patch"},
+"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
+#less than 1, less than 2, less than 3
+var rewards = {3:["Potatoe","Mushroom Patch"],5:["Carrot","Farmland"]}
+
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
+
+
 
 var choice_instances = []
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var Lives = get_node("/root/Main/Lives")
+@onready var SacraficeManager = get_node("/root/Main/SacraficeManager") 
+
+var round_num = 0
+	
 
 func chose_punishments():
 	#punishments off what the player curently  has
 	return ["Burn Land"]
 	
 func chose_rewards():
+	for key in rewards:
+		if round_num <= key:
+			return rewards[key]
 	#rewards off of what the player curently has
-	return ["Carrot", "Farmland", "Potatoe"]
+	#return ["Carrot", "Farmland", "Potatoe"]
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
@@ -37,11 +50,13 @@ func load_godchoices(godchoice_list):
 		
 		
 func display_punishments():
+	round_num +=1
 	Lives.lose_life()
 	$TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments())
 	
 func display_rewards():
+	round_num +=1
 	Lives.set_max_lives()
 	$TitleText.text = REWARD_TEXT
 	load_godchoices(chose_rewards())
@@ -60,9 +75,12 @@ func god_choice_chosen(choice_name):
 	
 	var choice = choices[choice_name]
 	
+	if choice["item unlock"]:
+		SacraficeManager.add_allowed_sacrafice(choice["item unlock"])
 	if choice["type"] == TYPES.Item:
 		get_tree().paused = false
 		ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
+		
 		
 		
 	elif choice["type"] == TYPES.Destroy_Land:#burns land
@@ -83,7 +101,7 @@ func god_choice_chosen(choice_name):
 				#get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell
 				count+=1
 					
-				
+	SacraficeManager.update_requirements()
 				
 				
 			
