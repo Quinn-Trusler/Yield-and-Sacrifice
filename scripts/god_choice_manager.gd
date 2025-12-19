@@ -8,11 +8,13 @@ var RNG = RandomNumberGenerator.new()
 var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":"carrot","reward": "carrot","amt" : 1},
 "Potatoe":{"img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":"potatoe","reward": "potatoe","amt" : 1},
 "Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
-"Mushroom Patch":{"img": "res://art/godchoice/mushroom.png","text":"default","item unlock":"mushroom","type": TYPES.Placement,"reward": "mushroom_patch"},
+"Mushroom Patch":{"img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":"mushroom","type": TYPES.Placement,"reward": "mushroom_patch"},
+"Barrel":{"img": "res://art/godchoice/barrel.png","text":"Used to make voldka","item unlock":"voldka","type": TYPES.Placement,"reward": "barrel"},
+"Let There Be Fish":{"img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":"fish","type": TYPES.Activate_Fish,"reward": "fish activation"},
 "Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["Potatoe","Mushroom Patch"],5:["Carrot","Farmland"]}
+var rewards = {3:["Barrel","Mushroom Patch","Let There Be Fish"],5:["Carrot","Farmland"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")

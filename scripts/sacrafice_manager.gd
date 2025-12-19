@@ -54,6 +54,7 @@ func get_round_requirements():
 	elif items_total <= 5:
 		item_groups = 2
 	
+	print(allowed_sacrafices)
 	var temp_requirements = {}
 	for i in range(item_groups):
 		var num = RNG.randi_range(0,len(allowed_sacrafices)-1)
