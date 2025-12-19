@@ -11,6 +11,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 
 var fish_spawn_spots = []
 var WATER_TILE_NAME = "water"
+var fish_spawning_active : bool = false
 
 func _ready():
 	for x in range(GLOBALCONSTS.MAPSIZE[2]-GLOBALCONSTS.MAPSIZE[0]):
@@ -91,4 +92,5 @@ func spawn_random_fish():
 	TileLayer2.place_building(fish_spawn_spots[i], "fishing_spot")
 
 func _on_fish_timer_timeout() -> void:
-	spawn_random_fish()
+	if fish_spawning_active:
+		spawn_random_fish()
