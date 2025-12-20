@@ -5,20 +5,20 @@ var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
-var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":"carrot","reward": "carrot","amt" : 1},
-"Potatoe":{"img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":"potatoe","reward": "potatoe","amt" : 1},
-"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
-"Mushroom Patch":{"img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":"mushroom","type": TYPES.Placement,"reward": "mushroom_patch"},
-"Barrel":{"img": "res://art/godchoice/barrel.png","text":"Used to make voldka","item unlock":"voldka","type": TYPES.Placement,"reward": "barrel"},
-"Let There Be Fish":{"img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":"fish","type": TYPES.Activate_Fish,"reward": "fish activation"},
-"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
+var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":"carrot","reward": "carrot","amt" : 1},
+"potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":"potatoe","reward": "potatoe","amt" : 1},
+"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
+"mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":"mushroom","type": TYPES.Placement,"reward": "mushroom_patch"},
+"barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to make voldka","item unlock":"voldka","type": TYPES.Placement,"reward": "barrel"},
+"activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":"fish","type": TYPES.Activate_Fish,"reward": "fish activation"},
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["Barrel","Mushroom Patch","Let There Be Fish"],5:["Carrot","Farmland"]}
+var rewards = {3:["barrel","mushroom patch","activate fish"],5:["carrot","farmland"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
-var placemnet_locations = {"Mushroom Patch":[[-1,3],[0,3]], "Barrel": [[-3,3]]}
+var placemnet_locations = {"mushroom patch":[[-1,3],[0,3]], "barrel": [[-3,3]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -38,7 +38,7 @@ var round_num = 0
 
 func chose_punishments():
 	#punishments off what the player curently  has
-	return ["Burn Land"]
+	return ["burn land"]
 	
 func chose_rewards():
 	for key in rewards:

@@ -6,7 +6,7 @@ var choice_name
 func initialize(c_name,choice):
 	choice_name = c_name
 	$Sprite2D.texture = load(choice["img"])
-	$Name.text = c_name
+	$Name.text = choice["title"]
 	create_description(c_name,choice)
 #var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
 #"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},

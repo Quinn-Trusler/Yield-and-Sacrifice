@@ -452,9 +452,9 @@ color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 polygon = PackedVector2Array(-52, -47, 1302, -64, 1408, 751, -117, 825)
 
 [node name="TitleText" type="Label" parent="GodChoiceManager"]
-offset_top = 1.0
+offset_top = 10.0
 offset_right = 320.0
-offset_bottom = 24.0
+offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("6_tefeu")
 theme_override_font_sizes/font_size = 8
 text = "blah blah blah
@@ -462,9 +462,9 @@ text = "blah blah blah
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager"]
-offset_top = 60.0
+offset_top = 70.0
 offset_right = 320.0
-offset_bottom = 110.0
+offset_bottom = 120.0
 size_flags_horizontal = 3
 theme_override_constants/separation = 100
 alignment = 1

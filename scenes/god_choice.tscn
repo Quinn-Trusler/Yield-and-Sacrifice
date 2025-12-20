@@ -38,13 +38,14 @@ theme_override_fonts/font = ExtResource("5_rxmxf")
 theme_override_font_sizes/font_size = 12
 text = "name"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Description" type="Label" parent="."]
 layout_mode = 0
 offset_left = -33.0
-offset_top = 45.0
+offset_top = 38.0
 offset_right = 103.0
-offset_bottom = 269.0
+offset_bottom = 262.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("2_2mrim")
 theme_override_font_sizes/font_size = 8
@@ -52,7 +53,7 @@ text = "Yada Yada Yada"
 autowrap_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 19)
+position = Vector2(0, 15)
 texture = ExtResource("5_vr7tv")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
