@@ -10,8 +10,11 @@ var RNG = RandomNumberGenerator.new()
 var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
 var fish_spawn_spots = []
+var gift_spawn_spots = [Vector2(0,0), Vector2(0,1), Vector2(-3,0)]
 var WATER_TILE_NAME = "water"
 var fish_spawning_active : bool = false
+
+var gift_items = []
 
 func _ready():
 	for x in range(GLOBALCONSTS.MAPSIZE[2]-GLOBALCONSTS.MAPSIZE[0]):
@@ -32,6 +35,19 @@ func get_building_interactable(pos):
 			elif scene.BUILDING_TYPE == "fire":
 				return true
 	return false
+
+
+#Only one gift can be created per frame
+func create_gift(item,num):
+	var items = []
+	for i in range(num):
+		items.append(item)
+	gift_items = items
+	
+	var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
+	TileLayer2.place_building(gift_spawn_spots[i], "god_gift")
+func get_gift_items():
+	return gift_items
 
 func click_tile():
 	#var tile_name = get_mouse_tile_name()

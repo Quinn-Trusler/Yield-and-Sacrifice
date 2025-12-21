@@ -7,7 +7,7 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"reward": "carrot","amt" : 1},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"reward": "potatoe","amt" : 1},
-"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Evrey round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"reward": 5,"amt" : 1},
+"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"reward": 5,"amt" : 1},
 "-5 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds shorter","type": TYPES.Time_,"item unlock":[],"reward": -5,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"reward": "sugarcane","amt" : 1},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
@@ -108,7 +108,8 @@ func god_choice_chosen(choice_name):
 		
 	#Manage variety of choice types
 	if choice["type"] == TYPES.Item:
-		ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
+		BuildingManager.create_gift(choice["reward"], choice["amt"])
+		#ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
 	
 	elif choice["type"] == TYPES.Time_:
 		SacraficeManager.modify_round_time(choice["reward"])

@@ -24,6 +24,8 @@ func _register_child(child):
 	elif child.BUILDING_TYPE == "building":
 		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
 		child.initialize(building_def)
+		if child.BUILDING_DISPLAY_NAME == "Gift":
+			child.OUTPUT_ITEMS = BuildingManager.get_gift_items()
 		var temp_meta = [coords]
 		if "extra_tiles" in building_def:
 			var extra_tiles = building_def["extra_tiles"]
