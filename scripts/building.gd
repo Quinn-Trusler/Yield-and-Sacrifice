@@ -22,6 +22,7 @@ var timer = 0
 var num_items_inputed = 0
 
 var ready_to_collect = false
+var item_inputed = null
 
 func initialize(def):
 	#BUILDING_NAME = building_name
@@ -65,6 +66,7 @@ func update_stage():
 func place_item(item_name):
 	if item_name in INPUT_ITEMS:
 		if num_items_inputed < ITEMS_TO_START_TIMER:
+			item_inputed = item_name
 			num_items_inputed += 1
 			return true
 		else:
@@ -83,7 +85,11 @@ func harvest():
 			timer = 0
 			num_items_inputed = 0
 			update_stage()
-		return OUTPUT_ITEMS
+			
+		if item_inputed:
+			return [INPUT_ITEMS[item_inputed]]
+		else:
+			return OUTPUT_ITEMS
 	else:
 		return []
 

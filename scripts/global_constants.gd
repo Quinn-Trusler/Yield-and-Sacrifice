@@ -33,9 +33,9 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 }
 var IMG_EXTENSION = ".png"
 
-var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":[],"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0]},
-	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":["potatoe"],"total_stages":1,"stage_to_harvest":1,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": []},
-	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":[],"total_stages":3,"stage_to_harvest":1,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": []}
+var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0]},
+	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":{"potatoe" : "voldka", "sugarcane":"rum"},"total_stages":1,"stage_to_harvest":1,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": []},
+	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": []}
 }
 
 var ANIMAL_DEF = null
