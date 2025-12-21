@@ -7,15 +7,15 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"reward": "carrot","amt" : 1},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"reward": "potatoe","amt" : 1},
-"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane", "rum"],"reward": "sugarcane","amt" : 1},
+"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"reward": "sugarcane","amt" : 1},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"type": TYPES.Placement,"reward": "mushroom_patch"},
-"barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["voldka"],"type": TYPES.Placement,"reward": "barrel"},
+"barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["voldka", "rum"],"type": TYPES.Placement,"reward": "barrel"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["barrel","sugarcane","activate fish"],5:["mushroom patch", "barrel"]}
+var rewards = {3:["potatoe","activate fish","sugarcane"],5:["mushroom patch", "barrel"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
@@ -35,6 +35,7 @@ var choice_instances = []
 @onready var SacraficeManager = get_node("/root/Main/SacraficeManager") 
 
 var round_num = 0
+var rewards_collected = 0
 	
 
 func chose_punishments():
@@ -43,7 +44,7 @@ func chose_punishments():
 	
 func chose_rewards():
 	for key in rewards:
-		if round_num <= key:
+		if rewards_collected <= key:
 			return rewards[key]
 	#rewards off of what the player curently has
 	#return ["Carrot", "Farmland", "Potatoe"]
@@ -65,6 +66,7 @@ func display_punishments():
 	
 func display_rewards():
 	round_num +=1
+	rewards_collected += 1
 	Lives.set_max_lives()
 	$TitleText.text = REWARD_TEXT
 	load_godchoices(chose_rewards())
@@ -77,10 +79,17 @@ func get_tile_name_from_coordinates(pos):
 	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
+		
+func strike_reward_from_rewards(reward_name):
+	for key in rewards:
+		if rewards_collected <= key:
+			rewards[key].erase(reward_name)
+	
 func god_choice_chosen(choice_name):
 	visible = false
 	delete_choice_instances()
 	$ClickButton.play()
+	strike_reward_from_rewards(choice_name)
 	
 	var choice = choices[choice_name]
 	
