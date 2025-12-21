@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://flwbjsnolg3c"]
+
+[ext_resource type="Script" uid="uid://crdn7sypcalde" path="res://scenes/animated_item.gd" id="1_b151y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b151y"]
+
+[node name="animated_item" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_b151y")
+script = ExtResource("1_b151y")
+vel_range = Array[Vector2]([Vector2(-10, 10), Vector2(-90, -110)])
+accel = Vector2(0, 250)

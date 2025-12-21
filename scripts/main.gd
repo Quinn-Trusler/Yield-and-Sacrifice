@@ -7,7 +7,6 @@ var RNG = RandomNumberGenerator.new()
 var mouse_on_mouth = false
 
 
-
 func _ready():
 	
 	#create boss

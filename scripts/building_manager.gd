@@ -43,16 +43,17 @@ func click_tile():
 		if scene:
 			if scene.BUILDING_TYPE == "building":
 				var resources = scene.harvest()
-				output_resources(resources)
+				ItemManager.output_resources(resources)
 				if scene.DESTROY_ON_HARVEST:
 					TileLayer2.set_cell_scene(pos,-1)#delete cell
 			if scene.BUILDING_TYPE == "crop":
 				if scene.harvest_on_click:
 					var resources = scene.harvest()#a list of resources or False
 					if resources:
+						print("harvest resources")
 						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
-						output_resources(resources)
+						ItemManager.output_resources(resources)
 			if scene.BUILDING_TYPE == "fire":
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
 				
@@ -73,9 +74,9 @@ func spread_fire(pos):
 				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
 			
 		pos = Vector2(o_pos.x,o_pos.y)
-func output_resources(resources):
-	for i in range(len(resources)):
-		ItemManager.create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
+#func output_resources(resources):
+	#for i in range(len(resources)):
+		#ItemManager.create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
 
 #finds if position is within bounds of array [x,y,x2,y2] inclusive
 func pos_in_bounds(pos: Vector2, bounds: Array):

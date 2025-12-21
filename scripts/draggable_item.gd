@@ -1,6 +1,5 @@
 extends AnimatedSprite2D
-
-
+#one option it to make a temporary animated item that switchs to a dragable item when finished
 
 #var types = 
 
@@ -9,9 +8,6 @@ var mouse_in_area = false
 var dragging = false
 
 var timer = 0
-
-func get_tip_pos():
-	return $Tip.global_position
 
 func initialize(n,item_def):
 	item_name = n
@@ -23,8 +19,6 @@ func initialize(n,item_def):
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
-	if item_name == "watering_can":
-		position -= get_tip_pos() - get_global_mouse_position()
 	
 func pick_up():
 	$PickUp.play()

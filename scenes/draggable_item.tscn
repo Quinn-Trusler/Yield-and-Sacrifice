@@ -18,8 +18,5 @@ polygon = PackedVector2Array(-10, 11, 5, 5, 11, -5, 7, -11, 1, -10, -11, 7)
 
 [node name="Drop" type="AudioStreamPlayer" parent="."]
 
-[node name="Tip" type="Node2D" parent="."]
-position = Vector2(11, -4)
-
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
