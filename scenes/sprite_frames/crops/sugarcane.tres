@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://m6j4bf6vm10w"]
+
+[ext_resource type="Texture2D" uid="uid://b4ut7u6jdennc" path="res://art/crops/sugarcane_crop.png" id="1_gayfw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfmy0"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dbbp"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_221fb"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_248e2"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4c3k"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr3fb"]
+atlas = ExtResource("1_gayfw")
+region = Rect2(80, 0, 16, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfmy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dbbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_221fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_248e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4c3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr3fb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
