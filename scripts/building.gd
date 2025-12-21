@@ -68,6 +68,7 @@ func place_item(item_name):
 		if num_items_inputed < ITEMS_TO_START_TIMER:
 			item_inputed = item_name
 			num_items_inputed += 1
+			go_up_a_stage()
 			return true
 		else:
 			return false

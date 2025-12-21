@@ -21,7 +21,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 
-var TESTING_ITEMS = false
+var TESTING_ITEMS = true
 
 
 func _ready() -> void:

@@ -15,7 +15,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["potatoe","activate fish","sugarcane"],5:["mushroom patch", "barrel"]}
+var rewards = {3:["potatoe","barrel","sugarcane"],5:["mushroom patch", "barrel"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")

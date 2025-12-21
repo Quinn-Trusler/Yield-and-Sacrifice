@@ -50,7 +50,6 @@ func click_tile():
 				if scene.harvest_on_click:
 					var resources = scene.harvest()#a list of resources or False
 					if resources:
-						print("harvest resources")
 						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
 						ItemManager.output_resources(resources)
