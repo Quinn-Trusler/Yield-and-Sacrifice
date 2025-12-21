@@ -57,6 +57,7 @@ func create_animated_item(item_name, pos):
 func pickup_item(item):
 	dragging_item = true
 	item_being_dragged = item
+	$PickUp.play()
 	
 func drop_item_ukn():
 	if item_being_dragged:
@@ -83,36 +84,39 @@ func drop_item(item):
 	var pos = TileLayer.to_local(item.position)
 	var tile_name = TileMapManager.get_tile_name_from_local(pos)
 	pos = TileLayer.local_to_map(pos)
-	if item.item_name == "watering_can":
-		item.rotation = 0
 	
-	if tile_name == "lava" or mouse_on_mouth:
+	
+	
+	if mouse_on_mouth:
 		SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
-	#if item.item_name == "carrot":
+		$EatItem.play()
 	
-		
-	if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
+	#Attempt place crop
+	elif tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 		if TileLayer2.is_empty(pos):#empty cell
 			delete_item = true
-			
 			TileLayer2.plant_crop(pos,item.item_name)
-			
+			$DropInBuilding.play()
 		else:
 			print("Error: Cannot plant on already planted farmland")
 				
 	#Attempt to place item in building
-	if not TileLayer2.is_empty(pos):#2nd layer cell not empty
+	elif not TileLayer2.is_empty(pos):#2nd layer cell not empty
 		var scene = TileLayer2.get_cell_scene(pos)
 		if scene and scene.BUILDING_TYPE == "building":
 			delete_item = scene.place_item(item.item_name)
-				
+			$DropInBuilding.play()
+	#Item drop normaly
+	else:
+		$PutDown.play()
 				
 	if delete_item:
 		draggable_items.erase(item)
 		item.queue_free()
 		
 func output_resources(resources):
-	print("output resources")
+	if resources:
+		$item_pop.play()
 	for i in range(len(resources)):
 		create_animated_item(resources[i],get_global_mouse_position())

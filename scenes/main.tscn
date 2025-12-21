@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=36 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -21,6 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
+[ext_resource type="AudioStream" uid="uid://cjalawduvlllu" path="res://audio/UI/click button.wav" id="17_vxglm"]
+[ext_resource type="AudioStream" uid="uid://bo2jkhcfx1wcp" path="res://audio/game/item_pop.wav" id="18_jscy8"]
+[ext_resource type="AudioStream" uid="uid://df6iv3mok8jea" path="res://audio/game/pick up.wav" id="19_y6deb"]
+[ext_resource type="AudioStream" uid="uid://cby1kb116pxk6" path="res://audio/game/put down.wav" id="20_og1vs"]
+[ext_resource type="AudioStream" uid="uid://d137q5740kqhh" path="res://audio/game/drop on building.wav" id="21_og1vs"]
+[ext_resource type="AudioStream" uid="uid://bh0rsvdgpkp3a" path="res://audio/game/eat_item.wav" id="22_2wyq8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -469,8 +475,27 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 100
 alignment = 1
 
+[node name="ClickButton" type="AudioStreamPlayer" parent="GodChoiceManager"]
+stream = ExtResource("17_vxglm")
+volume_db = 5.0
+
 [node name="ItemManager" type="Node2D" parent="."]
 script = ExtResource("10_choun")
+
+[node name="item_pop" type="AudioStreamPlayer" parent="ItemManager"]
+stream = ExtResource("18_jscy8")
+
+[node name="PickUp" type="AudioStreamPlayer" parent="ItemManager"]
+stream = ExtResource("19_y6deb")
+
+[node name="PutDown" type="AudioStreamPlayer" parent="ItemManager"]
+stream = ExtResource("20_og1vs")
+
+[node name="DropInBuilding" type="AudioStreamPlayer" parent="ItemManager"]
+stream = ExtResource("21_og1vs")
+
+[node name="EatItem" type="AudioStreamPlayer" parent="ItemManager"]
+stream = ExtResource("22_2wyq8")
 
 [node name="BuildingManager" type="Node2D" parent="."]
 script = ExtResource("12_eb6dy")

@@ -80,6 +80,7 @@ func get_tile_name_from_coordinates(pos):
 func god_choice_chosen(choice_name):
 	visible = false
 	delete_choice_instances()
+	$ClickButton.play()
 	
 	var choice = choices[choice_name]
 	
