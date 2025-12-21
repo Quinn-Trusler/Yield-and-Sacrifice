@@ -7,6 +7,8 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"reward": "carrot","amt" : 1},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"reward": "potatoe","amt" : 1},
+"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Evrey round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"reward": 5,"amt" : 1},
+"-5 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds shorter","type": TYPES.Time_,"item unlock":[],"reward": -5,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"reward": "sugarcane","amt" : 1},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"reward": "farmland"},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"type": TYPES.Placement,"reward": "mushroom_patch"},
@@ -15,7 +17,8 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["potatoe","barrel","sugarcane"],5:["mushroom patch", "barrel"]}
+var rewards = {3:["potatoe","barrel","+5 seconds"],5:["mushroom patch", "barrel"]}
+var punishments = {3:["burn land","-5 seconds"],5:["burn land"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
@@ -36,11 +39,14 @@ var choice_instances = []
 
 var round_num = 0
 var rewards_collected = 0
+var punishments_collected = 0
 	
 
 func chose_punishments():
 	#punishments off what the player curently  has
-	return ["burn land"]
+	for key in punishments:
+		if punishments_collected <= key:
+			return punishments[key]
 	
 func chose_rewards():
 	for key in rewards:
@@ -60,6 +66,7 @@ func load_godchoices(godchoice_list):
 		
 func display_punishments():
 	round_num +=1
+	punishments_collected += 1
 	Lives.lose_life()
 	$TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments())
@@ -102,7 +109,9 @@ func god_choice_chosen(choice_name):
 	#Manage variety of choice types
 	if choice["type"] == TYPES.Item:
 		ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
-		
+	
+	elif choice["type"] == TYPES.Time_:
+		SacraficeManager.modify_round_time(choice["reward"])
 		
 	elif choice["type"] == TYPES.Destroy_Land:#burns land
 		var map_size = GLOBALCONSTS.MAPSIZE

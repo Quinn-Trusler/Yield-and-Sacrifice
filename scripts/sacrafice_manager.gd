@@ -29,7 +29,11 @@ func next_round():
 		reward()
 	else:
 		punish()
-	
+
+func modify_round_time(change_time):
+	round_time += change_time
+	$Timer.wait_time = round_time
+	$Timer.start()
 
 var TIMEDECIMALTHRESHOLD = 5
 var TIMEDECIMALS = 10
