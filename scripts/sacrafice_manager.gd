@@ -13,6 +13,10 @@ var round_time = 20
 var RNG = RandomNumberGenerator.new()
 var allowed_sacrafices = ["carrot"]
 
+var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
+var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
+
+
 func _ready():
 	$Timer.wait_time = round_time
 	start()
@@ -88,9 +92,12 @@ func update_sacrafice_text():
 	$SacraficeGUI/SacraficeText.text = ""
 	for key in requirements:
 		$SacraficeGUI/SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
-		$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]))
-		$SacraficeGUI/SacraficeText.add_image(load("res://art/ui/forward_slash.png"))
-		$SacraficeGUI/SacraficeText.add_text(str(requirements[key]))
+		if filled_requirements[key] >= requirements[key]:
+			$SacraficeGUI/SacraficeText.add_image(CHECKMARK_IMG)
+		else:
+			$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]))
+			$SacraficeGUI/SacraficeText.add_image(FORWARD_SLASH_IMG)
+			$SacraficeGUI/SacraficeText.add_text(str(requirements[key]))
 		
 func sacrafice(sacraficed_item_name):
 	if sacraficed_item_name in requirements:
