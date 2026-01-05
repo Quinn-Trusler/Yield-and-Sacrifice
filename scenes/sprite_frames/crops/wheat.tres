@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://d4alk0huvsj0c"]
+
+[ext_resource type="Texture2D" uid="uid://tr074imjja1l" path="res://art/crops/wheat_crop.png" id="1_n0hb5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q85hr"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y4bi"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nh218"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtaff"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il7p4"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hco6d"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0yf2"]
+atlas = ExtResource("1_n0hb5")
+region = Rect2(96, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q85hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y4bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nh218")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtaff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il7p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hco6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0yf2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

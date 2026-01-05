@@ -512,7 +512,7 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("14_a8y0u")
 
 [node name="Polygon2D" type="Polygon2D" parent="DeathScreen"]
-color = Color(0.68080366, 0.25614294, 0.3004499, 1)
+color = Color(0.87959766, 0.5890536, 0.36864072, 1)
 polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
 
 [node name="PlayAgain" type="TextureButton" parent="DeathScreen"]
@@ -533,6 +533,15 @@ offset_right = 213.0
 offset_bottom = 128.25
 texture_normal = ExtResource("16_muem4")
 texture_hover = ExtResource("16_muem4")
+
+[node name="All Lives Lost" type="Label" parent="DeathScreen"]
+offset_top = 31.5
+offset_right = 320.0
+offset_bottom = 45.25
+theme_override_fonts/font = ExtResource("10_dp3eg")
+theme_override_font_sizes/font_size = 12
+text = "All Lives Lost"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="SacraficeManager/Timer" to="SacraficeManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]

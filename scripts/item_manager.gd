@@ -21,12 +21,13 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 
-var TESTING_ITEMS = true
+var TESTING_ITEMS = false
+
 
 
 func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
-	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("wheat",Vector2(-70,-30))
 	if TESTING_ITEMS:
 		create_draggable_item("sugarcane",Vector2(-40,-30))
 		

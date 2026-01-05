@@ -24,6 +24,9 @@ var num_items_inputed = 0
 var ready_to_collect = false
 var item_inputed = null
 
+
+var delta_total = 0
+
 func initialize(def):
 	#BUILDING_NAME = building_name
 	BUILDING_DISPLAY_NAME = def["display_name"]
@@ -48,6 +51,9 @@ func _process(delta: float) -> void:
 		timer += delta
 	if timer > TIME_PER_STAGE:
 		go_up_a_stage()
+	if BUILDING_DISPLAY_NAME == "Gift":
+		delta_total += delta
+		rotation = PI/180* 20*sin(delta_total*2)
 	
 func go_up_a_stage():#go up a stage
 	stage +=1 
