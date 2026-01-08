@@ -1,14 +1,77 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://qeot74v4rmwj"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://qeot74v4rmwj"]
 
 [ext_resource type="Texture2D" uid="uid://cvhitm1i61l3r" path="res://art/buildings/mill.png" id="1_tmm01"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmm01"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(19, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw8iu"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(19, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6dka"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(38, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sby5"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(57, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjgbj"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(76, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imndl"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(95, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r7nr"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(114, 0, 19, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfa5j"]
+atlas = ExtResource("1_tmm01")
+region = Rect2(0, 0, 19, 21)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_tmm01")
+"texture": SubResource("AtlasTexture_tmm01")
 }],
 "loop": true,
 "name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw8iu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6dka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sby5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjgbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imndl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r7nr")
+}],
+"loop": true,
+"name": &"1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfa5j")
+}],
+"loop": true,
+"name": &"2",
 "speed": 5.0
 }]
