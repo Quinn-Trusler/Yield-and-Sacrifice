@@ -28,6 +28,7 @@ var TESTING_ITEMS = false
 func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
 	create_draggable_item("wheat",Vector2(-70,-30))
+	create_draggable_item("flour",Vector2(-60,-20))
 	if TESTING_ITEMS:
 		create_draggable_item("sugarcane",Vector2(-40,-30))
 		

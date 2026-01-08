@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://dduvejmx3lkso"]
+
+[ext_resource type="Texture2D" uid="uid://bspg0sroggv3a" path="res://art/buildings/oven.png" id="1_hgtnn"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hgtnn")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
