@@ -87,7 +87,6 @@ func get_harvestable():
 func harvest():
 	if ready_to_collect:
 		if STAGE_LOSS_ON_HARVEST:
-			print("setback by", STAGE_LOSS_ON_HARVEST)
 			stage -= STAGE_LOSS_ON_HARVEST
 			timer = 0
 			num_items_inputed = 0

@@ -54,7 +54,6 @@ func create_animated_item(item_name, pos):
 	animated_items.append(temp)
 	temp.initialize(pos.y - 16,item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
-	print("animated item created")
 
 func pickup_item(item):
 	dragging_item = true
@@ -76,7 +75,6 @@ func get_dragging_item_placeable():
 func delete_animated_item(item):
 	animated_items.erase(item)
 	item.queue_free()
-	print("animated item deleted")
 #called by the item itself
 func drop_item(item):
 	dragging_item = false
