@@ -27,6 +27,10 @@ var item_inputed = null
 
 var delta_total = 0
 
+var arrow_pos_y = -10
+var arrow_amplitude = 2
+var arrow_freq = 0.5
+
 func initialize(def):
 	#BUILDING_NAME = building_name
 	BUILDING_DISPLAY_NAME = def["display_name"]
@@ -42,6 +46,7 @@ func initialize(def):
 	offset.y = def["offset"][1]
 	sprite_frames = load(def["frames"])
 	update_stage()
+	arrow_pos_y = -10
 #barel
 #empty -> gets full then produces
 #Fish net
@@ -51,8 +56,10 @@ func _process(delta: float) -> void:
 		timer += delta
 	if timer > TIME_PER_STAGE:
 		go_up_a_stage()
+	delta_total += delta
+
+	$Arrow.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_total)
 	if BUILDING_DISPLAY_NAME == "Gift":
-		delta_total += delta
 		rotation = PI/180* 20*sin(delta_total*2)
 	
 func go_up_a_stage():#go up a stage
@@ -98,6 +105,20 @@ func harvest():
 			return OUTPUT_ITEMS
 	else:
 		return []
+func connectItemSignals(ItemManager):
+	ItemManager.item_picked_up.connect(_item_picked_up)
+	ItemManager.item_dropped.connect(_item_dropped)
+#Recieve signal that says what item is being held/not held
+func _item_picked_up(item_name):
+	if item_name in INPUT_ITEMS and num_items_inputed < ITEMS_TO_START_TIMER:
+		$Arrow.visible = true
+	else:
+		$Arrow.visible = false
+func _item_dropped():
+	$Arrow.visible = false
+
+
+
 
 
 #put items in building

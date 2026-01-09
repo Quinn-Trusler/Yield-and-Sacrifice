@@ -21,11 +21,16 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 
+signal item_picked_up(item_name)
+signal item_dropped()
+
 var TESTING_ITEMS = false
 
 
 
 func _ready() -> void:
+	
+	
 	create_draggable_item("carrot",Vector2(-50,-30))
 	create_draggable_item("wheat",Vector2(-70,-30))
 	create_draggable_item("flour",Vector2(-60,-20))
@@ -58,6 +63,7 @@ func create_animated_item(item_name, pos):
 func pickup_item(item):
 	dragging_item = true
 	item_being_dragged = item
+	item_picked_up.emit(item.item_name)
 	$PickUp.play()
 	
 func drop_item_ukn():
@@ -84,7 +90,7 @@ func drop_item(item):
 	var pos = TileLayer.to_local(item.position)
 	var tile_name = TileMapManager.get_tile_name_from_local(pos)
 	pos = TileLayer.local_to_map(pos)
-	
+	item_dropped.emit()
 	
 	
 	if mouse_on_mouth:

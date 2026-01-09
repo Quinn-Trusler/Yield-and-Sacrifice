@@ -3,6 +3,7 @@ extends TileMapLayer
 #used code from https://www.reddit.com/r/godot/comments/10ql0ch/godot_4_does_tilemap_have_a_way_to_retrieve_the/
 class_name SceneTileMapLayer
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
+@onready var ItemManager = get_node("/root/Main/ItemManager")
 	
 var scene_coords: Dictionary[Vector2i, Node] = {}
 var building_names_temp: Dictionary[Vector2i, String] = {}
@@ -22,6 +23,9 @@ func _register_child(child):
 		child.initialize(GLOBALCONSTS.CROP_DEF[building_names_temp[vectored_coords]])
 		building_names_temp.erase(vectored_coords)
 	elif child.BUILDING_TYPE == "building":
+		child.connectItemSignals(ItemManager)
+		
+		
 		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
 		child.initialize(building_def)
 		if child.BUILDING_DISPLAY_NAME == "Gift":
