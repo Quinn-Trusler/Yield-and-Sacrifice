@@ -20,12 +20,13 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": ["dry_farmland"],"amt": 3}
 }
 #less than 1, less than 2, less than 3
-var rewards = {3:["oven","mill","wheat"],20:["mushroom patch", "barrel","+5 seconds"]}
+#var rewards = {3:["oven","mill","wheat"],20:["mushroom patch", "barrel","+5 seconds"]}
+var rewards = {3:["potatoe","activate fish","wheat", "carrot", "+5 seconds"],6:["mushroom patch", "barrel","+5 seconds"],7:["mill", "oven","barrel"],20:["mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
-var placemnet_locations = {"mushroom patch":[[-1,3],[0,3]], "barrel": [[-3,3]], "mill": [[-2,3]], "oven": [[-2,2]]}
+var placemnet_locations = {"mushroom patch":[[-1,3],[0,3],[1,3]], "barrel": [[-3,3],[-3,2]], "mill": [[-2,3],[-2,2]], "oven": [[-2,2]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -65,7 +66,10 @@ func chose_rewards():
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
-	for choice in godchoice_list:
+	var copy = godchoice_list.duplicate()
+	copy.shuffle()
+	var new_godchoice_list = copy.slice(0, 3)
+	for choice in new_godchoice_list:
 		var temp = GodChoice_Scene.instantiate()
 		temp.initialize(choice,choices[choice])
 		choice_instances.append(temp)

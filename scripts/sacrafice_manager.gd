@@ -18,7 +18,10 @@ var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
 
 
 func _ready():
-	$Timer.wait_time = round_time
+	if GLOBALCONSTS.ROUND_TIME_OVERRIDE:
+		$Timer.wait_time = GLOBALCONSTS.ROUND_TIME_OVERRIDE
+	else:
+		$Timer.wait_time = round_time
 	start()
 func _process(_delta: float) -> void:
 	update_timer_text()
@@ -28,7 +31,7 @@ func start():
 	update_requirements()
 func next_round():
 	round_num +=1
-	if requirements_met:
+	if requirements_met or GLOBALCONSTS.ALWAYS_REWARD and not GLOBALCONSTS.ALWAYS_PUNISH:
 		requirements_met = false
 		reward()
 	else:
@@ -36,7 +39,10 @@ func next_round():
 
 func modify_round_time(change_time):
 	round_time += change_time
-	$Timer.wait_time = round_time
+	if GLOBALCONSTS.ROUND_TIME_OVERRIDE:
+		$Timer.wait_time = GLOBALCONSTS.ROUND_TIME_OVERRIDE
+	else:
+		$Timer.wait_time = round_time
 	$Timer.start()
 
 var TIMEDECIMALTHRESHOLD = 5

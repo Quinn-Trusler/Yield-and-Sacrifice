@@ -2,6 +2,11 @@ extends Node
 #At the time of making this it seems like a global script is the best move
 #Not sure if it's correct but multiple scripts need these definitions
 
+#Testing and cheats
+var ALWAYS_REWARD = true
+var ALWAYS_PUNISH = false
+var ROUND_TIME_OVERRIDE = 2
+
 #Used only within this script
 var CROP_FRAMES_FOLDER = "res://scenes/sprite_frames/crops/"
 var BUILDINGS_FRAMES_FOLDER = "res://scenes/sprite_frames/buildings/"
@@ -17,9 +22,9 @@ var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var UNBURNABLE_TILES = ["burnt land","water","lava"]
-var CROP_DEF = {"carrot":{"stage_growth_duration":0,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
+var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)},
-"wheat":{"stage_growth_duration":1.5,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
+"wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
 "sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)}
 }
 var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":3,"place_on":["dry_farmland"]},
@@ -28,8 +33,8 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 "sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":3,"place_on":["dry_farmland"]},
 "fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":4,"place_on":[]},
 "sugar":{"display_name":"Sugar","img_name":ITEMS_FOLDER + "sugar","is_animated":false,"points":4,"place_on":[]},
-"flour":{"display_name":"Flour","img_name":ITEMS_FOLDER + "flour","is_animated":false,"points":4,"place_on":[]},
-"bread":{"display_name":"Bread","img_name":ITEMS_FOLDER + "bread","is_animated":false,"points":4,"place_on":[]},
+"flour":{"display_name":"Flour","img_name":ITEMS_FOLDER + "flour","is_animated":false,"points":6,"place_on":[]},
+"bread":{"display_name":"Bread","img_name":ITEMS_FOLDER + "bread","is_animated":false,"points":8,"place_on":[]},
 "mushroom":{"display_name":"Mushroom","img_name":ITEMS_FOLDER + "mushroom","is_animated":false,"points":4,"place_on":[]},
 "voldka":{"display_name":"Voldka","img_name":ITEMS_FOLDER + "voldka","is_animated":false,"points":4,"place_on":[]},
 "rum":{"display_name":"Rum","img_name":ITEMS_FOLDER + "rum","is_animated":false,"points":4,"place_on":[]},
@@ -39,9 +44,9 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 var IMG_EXTENSION = ".png"
 
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0]},
-"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3]},
+	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3]},
 	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":{"potatoe" : "voldka", "sugarcane":"rum"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": []},
-	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": []},
+	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": []},
 	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-2.5], "extra_tiles": []},
 	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": []}
 }

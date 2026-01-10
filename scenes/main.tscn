@@ -383,7 +383,6 @@ centered = false
 script = ExtResource("5_tbgi4")
 
 [node name="Timer" type="Timer" parent="SacraficeManager"]
-wait_time = 7.0
 autostart = true
 
 [node name="TimerGUI" type="Node2D" parent="SacraficeManager"]

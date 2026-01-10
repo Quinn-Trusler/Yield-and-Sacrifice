@@ -15,8 +15,8 @@ func _ready():
 	temp.attempt_eat_item.connect(_attempt_eat_item)
 
 	#create building
-	$TileMapLayer2.place_building(Vector2(-3,4),"oven")
-	$TileMapLayer2.place_building(Vector2(-1,3),"mill")
+	#$TileMapLayer2.place_building(Vector2(-3,4),"oven")
+	#$TileMapLayer2.place_building(Vector2(-1,3),"mill")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
 	
 func _process(_delta: float) -> void:
