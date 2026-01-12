@@ -5,23 +5,23 @@ var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
-var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 1},
-"potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 1},
+var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
+"potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "reward": 5,"amt" : 1},
 "-5 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -5,"amt" : 1},
-"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 2},
+"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland"},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"reward": "barrel"},
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Set 0-3 Farmland on fire","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": ["dry_farmland"],"amt": 3}
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Sets up to 3 grass tiles on fire","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
 }
 #less than 1, less than 2, less than 3
 #var rewards = {3:["oven","mill","wheat"],20:["mushroom patch", "barrel","+5 seconds"]}
-var rewards = {3:["potatoe","activate fish","wheat", "carrot", "+5 seconds"],6:["mushroom patch", "barrel","+5 seconds"],7:["mill", "oven","barrel"],20:["mushroom patch","mushroom patch","mill"]}
+var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
@@ -63,6 +63,7 @@ func chose_rewards():
 			return rewards[key]
 	#rewards off of what the player curently has
 	#return ["Carrot", "Farmland", "Potatoe"]
+#select 3 random choices
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
@@ -103,6 +104,8 @@ func strike_reward_from_rewards(reward_name):
 	for key in rewards:
 		if rewards_collected <= key:
 			rewards[key].erase(reward_name)
+			break#As to not wipe out the rest of rewards
+		
 	
 #Unlock literal means to take the items unlocked as themselves instead of just a key
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
@@ -149,7 +152,7 @@ func god_choice_chosen(choice_name):
 		SacraficeManager.modify_round_time(choice["reward"])
 		
 	elif choice["type"] == TYPES.Destroy_Land:#burns land
-		var map_size = GLOBALCONSTS.MAPSIZE
+		var map_size = GLOBALCONSTS.FIRE_SPAWN_ZONE
 		var count = 0
 		var tries = 0
 		var TRY_MAX = 1000
@@ -159,7 +162,12 @@ func god_choice_chosen(choice_name):
 			tries +=1
 			if tries> TRY_MAX:
 				count +=1
-			if tile_name in choice["reward"]:
+			print(tile_name)
+			if choice["reward"][0] == null:
+				TileLayer2.set_cell_scene(pos,-1)#delete cell
+				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+				count+=1
+			elif tile_name in choice["reward"]:
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
 				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 				#get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell

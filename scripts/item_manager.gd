@@ -24,17 +24,15 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 signal item_picked_up(item_name)
 signal item_dropped()
 
-var TESTING_ITEMS = false
-
 
 
 func _ready() -> void:
 	
 	
 	create_draggable_item("carrot",Vector2(-50,-30))
-	create_draggable_item("wheat",Vector2(-70,-30))
-	create_draggable_item("flour",Vector2(-60,-20))
-	if TESTING_ITEMS:
+	if GLOBALCONSTS.TESTING_ITEMS:
+		create_draggable_item("wheat",Vector2(-70,-30))
+		create_draggable_item("flour",Vector2(-60,-20))
 		create_draggable_item("sugarcane",Vector2(-40,-30))
 		
 		create_draggable_item("potatoe",Vector2(-70,-30))
