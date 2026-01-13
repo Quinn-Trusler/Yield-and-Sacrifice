@@ -69,6 +69,7 @@ func click_tile():
 						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
 						ItemManager.output_resources(resources)
+						ItemManager.crop_uprooted(resources[0])
 			if scene.BUILDING_TYPE == "fire":
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
 				

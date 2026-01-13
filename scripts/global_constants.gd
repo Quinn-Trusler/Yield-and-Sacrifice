@@ -5,7 +5,7 @@ extends Node
 #Testing and cheats
 var ALWAYS_REWARD = false
 var ALWAYS_PUNISH = false
-var TESTING_ITEMS = false
+var TESTING_ITEMS = true
 var ROUND_TIME_OVERRIDE = null
 
 

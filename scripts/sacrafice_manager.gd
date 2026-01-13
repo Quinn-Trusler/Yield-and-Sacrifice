@@ -22,6 +22,7 @@ func _ready():
 		$Timer.wait_time = GLOBALCONSTS.ROUND_TIME_OVERRIDE
 	else:
 		$Timer.wait_time = round_time
+	$Timer.start()
 	start()
 func _process(_delta: float) -> void:
 	update_timer_text()

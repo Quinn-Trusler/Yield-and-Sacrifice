@@ -8,6 +8,7 @@ var animated_items = []
 var dragging_item = false
 var item_is_last:bool = false
 var item_being_dragged
+var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0}
 
 var mouse_on_mouth = false
 
@@ -25,25 +26,24 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 signal item_picked_up(item_name)
 signal item_dropped()
 
-
+func spawn_testing_items():
+	#create_draggable_item("wheat",Vector2(-70,-30))
+	#create_draggable_item("flour",Vector2(-60,-20))
+	#create_draggable_item("sugarcane",Vector2(-40,-30))
+	#
+	#create_draggable_item("potatoe",Vector2(-70,-30))
+	#create_draggable_item("potatoe",Vector2(-70,-30))
+	#create_draggable_item("potatoe",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
+	#
+	#create_draggable_item("voldka",Vector2(-30,-20))
+	#create_draggable_item("rum",Vector2(-50,-40))
+	#create_draggable_item("pepper_juice",Vector2(-70,-40))
 
 func _ready() -> void:
-	
-	
 	create_draggable_item("carrot",Vector2(-50,-30))
 	if GLOBALCONSTS.TESTING_ITEMS:
-		create_draggable_item("wheat",Vector2(-70,-30))
-		create_draggable_item("flour",Vector2(-60,-20))
-		create_draggable_item("sugarcane",Vector2(-40,-30))
-		
-		create_draggable_item("potatoe",Vector2(-70,-30))
-		create_draggable_item("potatoe",Vector2(-70,-30))
-		create_draggable_item("potatoe",Vector2(-70,-30))
-		create_draggable_item("carrot",Vector2(-70,-30))
-		
-		create_draggable_item("voldka",Vector2(-30,-20))
-		create_draggable_item("rum",Vector2(-50,-40))
-		create_draggable_item("pepper_juice",Vector2(-70,-40))
+		spawn_testing_items()
 
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -89,6 +89,8 @@ func get_dragging_item_placeable():
 func delete_animated_item(item):
 	animated_items.erase(item)
 	item.queue_free()
+func crop_uprooted(item_name):
+	crops_planted[item_name] -=1
 #called by the item itself
 func drop_item(item):
 	dragging_item = false
@@ -101,7 +103,7 @@ func drop_item(item):
 	item_dropped.emit()
 	
 	
-	if mouse_on_mouth and not item_is_last:
+	if mouse_on_mouth and not (item_is_last and crops_planted[item.item_name] == 0):
 		SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
 		$EatItem.play()
@@ -111,6 +113,7 @@ func drop_item(item):
 		if TileLayer2.is_empty(pos):#empty cell
 			delete_item = true
 			TileLayer2.plant_crop(pos,item.item_name)
+			crops_planted[item.item_name] +=1
 			$DropInBuilding.play()
 		else:
 			print("Error: Cannot plant on already planted farmland")
