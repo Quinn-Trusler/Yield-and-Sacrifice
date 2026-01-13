@@ -6,6 +6,7 @@ var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
 var draggable_items = []
 var animated_items = []
 var dragging_item = false
+var item_is_last:bool = false
 var item_being_dragged
 
 var mouse_on_mouth = false
@@ -57,10 +58,19 @@ func create_animated_item(item_name, pos):
 	animated_items.append(temp)
 	temp.initialize(pos.y - 16,item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
+func set_item_is_last(item):
+	if GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] != []:#Item is crop
+		var count = 0
+		for draggable_item in draggable_items:
+			if draggable_item.item_name == item.item_name:
+				count +=1
+		if count == 1:#just self
+			item_is_last = true
 
 func pickup_item(item):
 	dragging_item = true
 	item_being_dragged = item
+	set_item_is_last(item)	
 	item_picked_up.emit(item.item_name)
 	$PickUp.play()
 	
@@ -91,7 +101,7 @@ func drop_item(item):
 	item_dropped.emit()
 	
 	
-	if mouse_on_mouth:
+	if mouse_on_mouth and not item_is_last:
 		SacraficeManager.sacrafice(item.item_name)
 		delete_item = true
 		$EatItem.play()
@@ -114,7 +124,9 @@ func drop_item(item):
 	#Item drop normaly
 	else:
 		$PutDown.play()
-				
+	
+	item_is_last = false
+	
 	if delete_item:
 		draggable_items.erase(item)
 		item.queue_free()
