@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=38 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -21,13 +21,14 @@
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
+[ext_resource type="Script" uid="uid://ci5a8xw4i84w" path="res://scripts/dialog_box.gd" id="16_yq6so"]
 [ext_resource type="AudioStream" uid="uid://cjalawduvlllu" path="res://audio/UI/click button.wav" id="17_vxglm"]
 [ext_resource type="AudioStream" uid="uid://bo2jkhcfx1wcp" path="res://audio/game/item_pop.wav" id="18_jscy8"]
 [ext_resource type="AudioStream" uid="uid://df6iv3mok8jea" path="res://audio/game/pick up.wav" id="19_y6deb"]
 [ext_resource type="AudioStream" uid="uid://cby1kb116pxk6" path="res://audio/game/put down.wav" id="20_og1vs"]
 [ext_resource type="AudioStream" uid="uid://d137q5740kqhh" path="res://audio/game/drop on building.wav" id="21_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bh0rsvdgpkp3a" path="res://audio/game/eat_item.wav" id="22_2wyq8"]
-[ext_resource type="Script" uid="uid://ci5a8xw4i84w" path="res://scenes/dialog_manager.gd" id="28_2f3dj"]
+[ext_resource type="Script" uid="uid://d4lalvy2n8ynm" path="res://scenes/dialog_manager.gd" id="28_2f3dj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -448,28 +449,29 @@ texture = ExtResource("15_jscy8")
 [node name="DialogManager" type="CanvasLayer" parent="."]
 script = ExtResource("28_2f3dj")
 
-[node name="Control" type="Control" parent="DialogManager"]
+[node name="DialogBox" type="Control" parent="DialogManager"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 509.0
 offset_top = 161.0
 offset_right = 549.0
 offset_bottom = 201.0
+script = ExtResource("16_yq6so")
 
-[node name="BorderRect" type="ColorRect" parent="DialogManager/Control"]
+[node name="BorderRect" type="ColorRect" parent="DialogManager/DialogBox"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(4, 4)
 color = Color(0, 0, 0, 1)
 
-[node name="InnerRect" type="ColorRect" parent="DialogManager/Control"]
+[node name="InnerRect" type="ColorRect" parent="DialogManager/DialogBox"]
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 10.0
 scale = Vector2(4, 4)
 
-[node name="Dialog" type="Label" parent="DialogManager/Control"]
+[node name="Dialog" type="Label" parent="DialogManager/DialogBox"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
@@ -479,6 +481,8 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_tefeu")
 theme_override_font_sizes/font_size = 8
+
+[node name="Timer" type="Timer" parent="DialogManager"]
 
 [node name="GodChoiceManager" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -580,6 +584,7 @@ text = "All Lives Lost"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="SacraficeManager/Timer" to="SacraficeManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="DialogManager/Timer" to="DialogManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://flwbjsnolg3c"]
 
-[ext_resource type="Script" uid="uid://crdn7sypcalde" path="res://scenes/animated_item.gd" id="1_b151y"]
+[ext_resource type="Script" uid="uid://crdn7sypcalde" path="res://scripts/animated_item.gd" id="1_b151y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b151y"]
 
