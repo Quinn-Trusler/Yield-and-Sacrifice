@@ -447,10 +447,9 @@ script = ExtResource("13_trceg")
 position = Vector2(18.25, -0.5)
 texture = ExtResource("15_jscy8")
 
-[node name="TutorialManager" type="Node" parent="." node_paths=PackedStringArray("DialogManager", "SacraficeTimer")]
+[node name="TutorialManager" type="Node" parent="." node_paths=PackedStringArray("DialogManager")]
 script = ExtResource("15_fv21b")
 DialogManager = NodePath("../DialogManager")
-SacraficeTimer = NodePath("../SacraficeManager/Timer")
 
 [node name="DialogManager" type="CanvasLayer" parent="."]
 script = ExtResource("28_2f3dj")
@@ -525,9 +524,8 @@ alignment = 1
 stream = ExtResource("17_vxglm")
 volume_db = 5.0
 
-[node name="ItemManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager")]
+[node name="ItemManager" type="Node2D" parent="."]
 script = ExtResource("10_choun")
-TutorialManager = NodePath("../TutorialManager")
 
 [node name="item_pop" type="AudioStreamPlayer" parent="ItemManager"]
 stream = ExtResource("18_jscy8")

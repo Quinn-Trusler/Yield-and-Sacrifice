@@ -2,17 +2,25 @@ extends CanvasLayer
 #something else in the program may want give text to the dialog manager
 
 #Time < 0 will be infinite
-var dialogs : Array[Array] = [["12345678919",1],["yadayad",-1]] #[dialog text, seconds]
+var dialogs = [["12345678919",1],["yadayad",-1]] #[dialog text, seconds]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	dialog_next()
+	#dialog_next()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
-
+#Deletes all dialogs and hides dialog box
+func clear_dialog():
+	dialogs = []
+	$DialogBox.visible = false
+	$Timer.stop()
+func set_dialogs(ds):
+	dialogs = ds
+	dialog_next() 
 #Sets dialog text and timer based on dialogs array
 func dialog_next() -> void:
 	if len(dialogs) > 0:

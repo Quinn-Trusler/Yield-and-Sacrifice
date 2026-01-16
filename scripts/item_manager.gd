@@ -16,6 +16,10 @@ var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
+#Tutorial
+@export var TutorialManager : Node
+var first_item_planted : bool = false
+
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
@@ -115,6 +119,9 @@ func drop_item(item):
 			TileLayer2.plant_crop(pos,item.item_name)
 			crops_planted[item.item_name] +=1
 			$DropInBuilding.play()
+			if not first_item_planted:
+				first_item_planted = true
+				TutorialManager.next(true, false, true)
 		else:
 			print("Error: Cannot plant on already planted farmland")
 				
