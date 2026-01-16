@@ -25,7 +25,6 @@ func lose_life():
 	set_lives()
 func game_over():
 	#go back to menu or something
-	
 	DeathScreen.visible = true
 	get_tree().paused = true
 	

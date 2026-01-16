@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene load_steps=37 format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://cby1kb116pxk6" path="res://audio/game/put down.wav" id="20_og1vs"]
 [ext_resource type="AudioStream" uid="uid://d137q5740kqhh" path="res://audio/game/drop on building.wav" id="21_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bh0rsvdgpkp3a" path="res://audio/game/eat_item.wav" id="22_2wyq8"]
+[ext_resource type="Script" uid="uid://ci5a8xw4i84w" path="res://scenes/dialog_manager.gd" id="28_2f3dj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -443,6 +444,41 @@ script = ExtResource("13_trceg")
 [node name="Sprite2D" type="Sprite2D" parent="Lives"]
 position = Vector2(18.25, -0.5)
 texture = ExtResource("15_jscy8")
+
+[node name="DialogManager" type="CanvasLayer" parent="."]
+script = ExtResource("28_2f3dj")
+
+[node name="Control" type="Control" parent="DialogManager"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 509.0
+offset_top = 161.0
+offset_right = 549.0
+offset_bottom = 201.0
+
+[node name="BorderRect" type="ColorRect" parent="DialogManager/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+color = Color(0, 0, 0, 1)
+
+[node name="InnerRect" type="ColorRect" parent="DialogManager/Control"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 10.0
+scale = Vector2(4, 4)
+
+[node name="Dialog" type="Label" parent="DialogManager/Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 42.0
+offset_bottom = 25.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_tefeu")
+theme_override_font_sizes/font_size = 8
 
 [node name="GodChoiceManager" type="CanvasLayer" parent="."]
 process_mode = 3
