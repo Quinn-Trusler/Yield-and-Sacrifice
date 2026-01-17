@@ -14,6 +14,10 @@ var gift_spawn_spots = [Vector2(0,0), Vector2(0,1), Vector2(-3,0)]
 var WATER_TILE_NAME = "water"
 var fish_spawning_active : bool = false
 
+#Tutorial
+@export var TutorialManager: Node
+var first_crop_harvested = false
+
 var gift_items = []
 
 func _ready():
@@ -66,6 +70,9 @@ func click_tile():
 				if scene.harvest_on_click:
 					var resources = scene.harvest()#a list of resources or False
 					if resources:
+						if not first_crop_harvested:
+							first_crop_harvested = true
+							TutorialManager.next(true, true, false)
 						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
 						ItemManager.output_resources(resources)

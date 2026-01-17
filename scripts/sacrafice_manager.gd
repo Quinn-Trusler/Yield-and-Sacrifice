@@ -16,6 +16,9 @@ var allowed_sacrafices = ["carrot"]
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
 
+#Tutorial
+var first_sacrafice_made: bool = false
+@export var TutorialManager: Node
 
 func _ready():
 	if GLOBALCONSTS.ROUND_TIME_OVERRIDE:
@@ -108,6 +111,9 @@ func update_sacrafice_text():
 func sacrafice(sacraficed_item_name):
 	if sacraficed_item_name in requirements:
 		if filled_requirements[sacraficed_item_name] < requirements[sacraficed_item_name]:
+			if not first_sacrafice_made:
+				first_sacrafice_made = true
+				TutorialManager.next(true, false, false)
 			filled_requirements[sacraficed_item_name] +=1 
 			update_sacrafice_text()
 			check_requirements_met()

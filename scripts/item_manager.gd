@@ -121,7 +121,7 @@ func drop_item(item):
 			$DropInBuilding.play()
 			if not first_item_planted:
 				first_item_planted = true
-				TutorialManager.next(true, false, true)
+				TutorialManager.next(true, true, false)
 		else:
 			print("Error: Cannot plant on already planted farmland")
 				

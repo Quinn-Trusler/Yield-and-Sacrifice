@@ -6,7 +6,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	DialogManager.set_dialogs([["Plant the carrot", -1], ["Harvest the carrot", -1], ["Feed it to me", -1]])
+	DialogManager.set_dialogs([["Drag the carrot onto the farmland and drop.", -1], ["When the carrots are done growing, click to harvest.", -1], ["Drag a carrot onto my mouth and drop", -1], ["Round requirments satisfied!",3], ["A new round will start when the timer hits zero.", 7]])
 	next(false, true, false)
 #detect when certain things are done so that the game timer can be stoped/started and so dialog manager can be stopped and started
 
