@@ -18,8 +18,21 @@ var stage = 0
 var timer = 0
 var growth_complete = false
 
+#Harvest animation
+var AMPLITUDE = 1
+var PERIOD = 0.5
+var ANIMATION_REST_TIME = 0.75
+
+var animation_rest_timer = 0
+var original_pos_y
+var delta_total = 0
+
+
 func initialize(crop_def):
-	stage_growth_duration = crop_def["stage_growth_duration"]
+	if GLOBALCONSTS.CROP_GROWTH_TIME_OVERRIDE:
+		stage_growth_duration = GLOBALCONSTS.CROP_GROWTH_TIME_OVERRIDE
+	else:
+		stage_growth_duration = crop_def["stage_growth_duration"]
 	total_stages = crop_def["total_stages"]
 	
 	harvest_on_click = crop_def["harvest_on_click"]
@@ -29,11 +42,30 @@ func initialize(crop_def):
 	offset = crop_def["offset"]
 	sprite_frames = load(crop_def["frames"])
 	
+func animate(delta):
+	if animation_rest_timer > ANIMATION_REST_TIME:
+		delta_total += delta 
+		var offset_y =  -AMPLITUDE * sin((delta_total)*2*PI/PERIOD)
+		if offset_y <= 0:
+			position.y = original_pos_y + offset_y
+		else:
+			position.y = original_pos_y
+		if delta_total >= PERIOD/2.0:#we only care to go half a period
+			animation_rest_timer = 0
+			delta_total = 0
+			position.y = original_pos_y
+	else:
+		animation_rest_timer += delta
 
 func _process(delta: float) -> void:
 	timer += delta
 	if timer> stage_growth_duration and not growth_complete:
 		grow()
+	if growth_complete:
+		animate(delta)
+		
+		
+		#right half of sin wave every second
 	
 	
 func grow():
@@ -41,6 +73,7 @@ func grow():
 	timer = 0
 	if stage >= total_stages-1:
 		growth_complete = true
+		original_pos_y = position.y
 	frame = stage
 	
 

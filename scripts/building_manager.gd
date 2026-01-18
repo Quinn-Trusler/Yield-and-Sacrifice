@@ -21,6 +21,7 @@ var first_crop_harvested = false
 var gift_items = []
 
 func _ready():
+	
 	for x in range(GLOBALCONSTS.MAPSIZE[2]-GLOBALCONSTS.MAPSIZE[0]):
 		for y in range(GLOBALCONSTS.MAPSIZE[1]-GLOBALCONSTS.MAPSIZE[3]):
 			var x2 = x+GLOBALCONSTS.MAPSIZE[0]
