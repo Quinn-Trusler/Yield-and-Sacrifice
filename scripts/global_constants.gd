@@ -3,11 +3,11 @@ extends Node
 #Not sure if it's correct but multiple scripts need these definitions
 
 #Testing and cheats
-var ALWAYS_REWARD = false
+var ALWAYS_REWARD = true
 var ALWAYS_PUNISH = false
 var TESTING_ITEMS = false
-var ROUND_TIME_OVERRIDE = null
-var CROP_GROWTH_TIME_OVERRIDE = null
+var ROUND_TIME_OVERRIDE = 1
+var CROP_GROWTH_TIME_OVERRIDE = 0.2
 
 
 

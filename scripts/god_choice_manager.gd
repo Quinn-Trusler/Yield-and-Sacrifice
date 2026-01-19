@@ -23,6 +23,11 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 #var rewards = {3:["oven","mill","wheat"],20:["mushroom patch", "barrel","+5 seconds"]}
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
+var chained_rewards = [ChainedReward.new(["potatoe","barrel"], 0),
+ChainedReward.new(["activate fish","wheat","mill"], 1),
+ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
+ChainedReward.new(["carrot","carrot","carrot"], 1)]
+
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
@@ -61,10 +66,31 @@ func chose_rewards():
 	for key in rewards:
 		if rewards_collected <= key:
 			return rewards[key]
+#func chose_chained_rewards():
+	#var reward_list = []
+	#var chain_numbers = []
+	#var chain_number = 0
+	#for chain in chained_rewards:
+		#chain_numbers.append(chain_number)
+		#reward_list.append(chain.get_reward())
+		#chain_number += 1
+	#return [chain_number, reward_list]
 	#rewards off of what the player curently has
 	#return ["Carrot", "Farmland", "Potatoe"]
 #select 3 random choices
 func load_godchoices(godchoice_list):
+	get_tree().paused = true
+	visible = true
+	print(godchoice_list)
+	var copy = godchoice_list.duplicate()
+	copy.shuffle()
+	var new_godchoice_list = copy.slice(0, 3)
+	for choice in new_godchoice_list:
+		var temp = GodChoice_Scene.instantiate()
+		temp.initialize(choice,choices[choice])
+		choice_instances.append(temp)
+		$HBoxContainer.add_child(temp)
+func load_chained_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
 	var copy = godchoice_list.duplicate()
@@ -72,7 +98,7 @@ func load_godchoices(godchoice_list):
 	var new_godchoice_list = copy.slice(0, 3)
 	for choice in new_godchoice_list:
 		var temp = GodChoice_Scene.instantiate()
-		temp.initialize(choice,choices[choice])
+		temp.initialize(choice.get_reward(),choices[choice.get_reward()],choice.get_id())
 		choice_instances.append(temp)
 		$HBoxContainer.add_child(temp)
 		
@@ -89,7 +115,7 @@ func display_rewards():
 	rewards_collected += 1
 	Lives.set_max_lives()
 	$TitleText.text = REWARD_TEXT
-	load_godchoices(chose_rewards())
+	load_chained_godchoices(chained_rewards)
 
 func delete_choice_instances():
 	for c in choice_instances:
@@ -105,7 +131,9 @@ func strike_reward_from_rewards(reward_name):
 		if rewards_collected <= key:
 			rewards[key].erase(reward_name)
 			break#As to not wipe out the rest of rewards
-		
+func strike_id_from_chain_rewards(id : int):
+	if id != -1:
+		chained_rewards[id].reward_chosen()
 	
 #Unlock literal means to take the items unlocked as themselves instead of just a key
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
@@ -130,11 +158,12 @@ func unlock_sacrafices(items_unlocked, unlock_literal):
 		for unlock in new_unlocks:
 			SacraficeManager.add_allowed_sacrafice(unlock)
 	
-func god_choice_chosen(choice_name):
+func god_choice_chosen(choice_name, id : int):
 	visible = false
 	delete_choice_instances()
 	$ClickButton.play()
 	strike_reward_from_rewards(choice_name)
+	strike_id_from_chain_rewards(id)
 	
 	var choice = choices[choice_name]
 	
