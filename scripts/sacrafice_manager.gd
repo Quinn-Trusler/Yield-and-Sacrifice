@@ -21,8 +21,8 @@ var first_sacrafice_made: bool = false
 @export var TutorialManager: Node
 
 func _ready():
-	if GLOBALCONSTS.ROUND_TIME_OVERRIDE:
-		$Timer.wait_time = GLOBALCONSTS.ROUND_TIME_OVERRIDE
+	if Cheats.ROUND_TIME_OVERRIDE:
+		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
 		$Timer.wait_time = round_time
 	$Timer.start()
@@ -35,7 +35,7 @@ func start():
 	update_requirements()
 func next_round():
 	round_num +=1
-	if requirements_met or GLOBALCONSTS.ALWAYS_REWARD and not GLOBALCONSTS.ALWAYS_PUNISH:
+	if (requirements_met or Cheats.ALWAYS_REWARD) and not Cheats.ALWAYS_PUNISH:
 		requirements_met = false
 		reward()
 	else:

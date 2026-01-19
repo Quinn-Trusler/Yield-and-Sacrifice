@@ -29,8 +29,8 @@ var delta_total = 0
 
 
 func initialize(crop_def):
-	if GLOBALCONSTS.CROP_GROWTH_TIME_OVERRIDE:
-		stage_growth_duration = GLOBALCONSTS.CROP_GROWTH_TIME_OVERRIDE
+	if Cheats.CROP_GROWTH_TIME_OVERRIDE:
+		stage_growth_duration = Cheats.CROP_GROWTH_TIME_OVERRIDE
 	else:
 		stage_growth_duration = crop_def["stage_growth_duration"]
 	total_stages = crop_def["total_stages"]

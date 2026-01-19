@@ -46,7 +46,7 @@ func spawn_testing_items():
 
 func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
-	if GLOBALCONSTS.TESTING_ITEMS:
+	if Cheats.TESTING_ITEMS:
 		spawn_testing_items()
 
 func create_draggable_item(item_name,pos):

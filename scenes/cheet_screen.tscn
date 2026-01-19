@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dai1cil5auac7"]
+
+[ext_resource type="Script" uid="uid://dyupj7eksh732" path="res://scenes/cheet_screen.gd" id="1_extuy"]
+
+[node name="Cheet_Screen" type="Node2D"]
+script = ExtResource("1_extuy")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+offset_top = 306.0
+offset_right = 1281.0
+offset_bottom = 446.0
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBox/VBox"]
+layout_mode = 2
+text = "Cheat Selecter
+"
+
+[node name="AlwaysReward" type="CheckButton" parent="HBox/VBox"]
+layout_mode = 2
+text = "Always Reward"
+
+[node name="AlwaysPunish" type="CheckButton" parent="HBox/VBox"]
+layout_mode = 2
+text = "Always Punish"
+
+[node name="TestingItems" type="CheckButton" parent="HBox/VBox"]
+layout_mode = 2
+text = "TestingItems
+"
+
+[node name="RoundTime" type="HBoxContainer" parent="HBox/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBox/VBox/RoundTime"]
+layout_mode = 2
+text = "Round Time: "
+
+[node name="Input" type="LineEdit" parent="HBox/VBox/RoundTime"]
+layout_mode = 2
+
+[node name="CropGrowthTime" type="HBoxContainer" parent="HBox/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBox/VBox/CropGrowthTime"]
+layout_mode = 2
+text = "Crop Growth Time:"
+
+[node name="Input" type="LineEdit" parent="HBox/VBox/CropGrowthTime"]
+layout_mode = 2
+
+[node name="PlayGame" type="Button" parent="HBox/VBox"]
+layout_mode = 2
+text = "Play Game
+"
+
+[connection signal="pressed" from="HBox/VBox/AlwaysReward" to="." method="_on_always_reward_pressed"]
+[connection signal="toggled" from="HBox/VBox/AlwaysReward" to="." method="_on_always_reward_toggled"]
+[connection signal="toggled" from="HBox/VBox/AlwaysPunish" to="." method="_on_always_punish_toggled"]
+[connection signal="toggled" from="HBox/VBox/TestingItems" to="." method="_on_testing_items_toggled"]
+[connection signal="text_changed" from="HBox/VBox/RoundTime/Input" to="." method="_on_round_time_text_changed"]
+[connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_input_text_changed"]
+[connection signal="pressed" from="HBox/VBox/PlayGame" to="." method="_on_play_game_pressed"]
