@@ -43,8 +43,8 @@ func next_round():
 
 func modify_round_time(change_time):
 	round_time += change_time
-	if GLOBALCONSTS.ROUND_TIME_OVERRIDE:
-		$Timer.wait_time = GLOBALCONSTS.ROUND_TIME_OVERRIDE
+	if Cheats.ROUND_TIME_OVERRIDE:
+		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
 		$Timer.wait_time = round_time
 	$Timer.start()

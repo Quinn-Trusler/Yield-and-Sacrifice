@@ -17,21 +17,19 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Sets up to 3 grass tiles on fire","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Sets up to 3 grass tiles on fire. Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
 }
-#less than 1, less than 2, less than 3
-#var rewards = {3:["oven","mill","wheat"],20:["mushroom patch", "barrel","+5 seconds"]}
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
-var chained_rewards = [ChainedReward.new(["potatoe","barrel"], 0),
-ChainedReward.new(["activate fish","wheat","mill"], 1),
-ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
-ChainedReward.new(["carrot","carrot","carrot"], 1)]
+var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel"], 0),
+ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven"], 1)]
+#ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
+#ChainedReward.new(["carrot","carrot","carrot"], 1)]
 
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
-var placemnet_locations = {"mushroom patch":[[-1,3],[0,3],[1,3]], "barrel": [[-3,3],[-3,2]], "mill": [[-2,3],[-2,2]], "oven": [[-2,2]]}
+var placemnet_locations = {"mushroom patch":[[-1,3],[0,3],[1,3]], "barrel": [[-3,3],[-3,2]], "mill": [[-2,3],[-2,2]], "oven": [[-2,4],[-3,4]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -66,18 +64,6 @@ func chose_rewards():
 	for key in rewards:
 		if rewards_collected <= key:
 			return rewards[key]
-#func chose_chained_rewards():
-	#var reward_list = []
-	#var chain_numbers = []
-	#var chain_number = 0
-	#for chain in chained_rewards:
-		#chain_numbers.append(chain_number)
-		#reward_list.append(chain.get_reward())
-		#chain_number += 1
-	#return [chain_number, reward_list]
-	#rewards off of what the player curently has
-	#return ["Carrot", "Farmland", "Potatoe"]
-#select 3 random choices
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
