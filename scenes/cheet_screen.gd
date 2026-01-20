@@ -13,6 +13,7 @@ func set_values():
 	$HBox/VBox/TestingItems.button_pressed = Cheats.TESTING_ITEMS
 	$HBox/VBox/RoundTime/Input.text = str(Cheats.ROUND_TIME_OVERRIDE)
 	$HBox/VBox/CropGrowthTime/Input.text = str(Cheats.CROP_GROWTH_TIME_OVERRIDE)
+	$HBox/VBox/BuildingStageTime/Input.text = str(Cheats.BUILDING_STAGE_TIME_OVERRIDE)
 
 func play_game():
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
@@ -49,7 +50,9 @@ func convert_text_to_float(text : String):
 
 func _on_round_time_text_changed(new_text: String) -> void:
 	Cheats.ROUND_TIME_OVERRIDE = convert_text_to_int(new_text)
-
-func _on_input_text_changed(new_text: String) -> void:
+	
+func _on_crop_growth_time_changed(new_text: String) -> void:
 	Cheats.CROP_GROWTH_TIME_OVERRIDE = convert_text_to_float(new_text)
-	print(Cheats.CROP_GROWTH_TIME_OVERRIDE)
+
+func _on_building_stage_time_changed(new_text: String) -> void:
+	Cheats.BUILDING_STAGE_TIME_OVERRIDE = convert_text_to_float(new_text)
