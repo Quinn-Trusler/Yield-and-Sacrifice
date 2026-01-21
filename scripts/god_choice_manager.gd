@@ -21,15 +21,19 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
-var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel"], 0),
-ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven"], 1)]
+var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
+ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven"], 1),
+ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
 #ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
 #ChainedReward.new(["carrot","carrot","carrot"], 1)]
 
 #$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
-var placemnet_locations = {"mushroom patch":[[-1,3],[0,3],[1,3]], "barrel": [[-3,3],[-3,2]], "mill": [[-2,3],[-2,2]], "oven": [[-2,4],[-3,4]]}
+var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-13,4],[-13,5],[-13,5],[-13,6],[-12,3],[-12,4],[-12,5],[-12,6]],
+"barrel": [[0,1],[1,1],[2,1]],
+"mill": [[-3,5],[-2,5],[-1,5]],
+"oven": [[-2,2],[-1,2],[0,2]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
