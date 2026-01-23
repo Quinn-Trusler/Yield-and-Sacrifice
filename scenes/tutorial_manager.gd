@@ -2,11 +2,11 @@ extends Node
 
 
 @export var DialogManager : CanvasLayer
-@export var SacraficeTimer : Timer
+@export var SacrificeTimer : Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	DialogManager.set_dialogs([["Drag the carrot onto the farmland and drop.", -1], ["When the carrots are done growing, click to harvest.", -1], ["Drag a carrot onto my mouth and drop", -1], ["Round requirments satisfied!",3], ["A new round will start when the timer hits zero.", 7]])
+	DialogManager.set_dialogs([["Drag the carrot onto the farmland and drop.", -1], ["When the carrots are done growing, click to harvest.", -1], ["Drag a carrot onto the sunflower and drop", -1], ["Round requirments satisfied!",3], ["A new round will start when the timer hits zero.", 7], ["In the meantime stash up on carrots", 7]])
 	next(false, true, false)
 #detect when certain things are done so that the game timer can be stoped/started and so dialog manager can be stopped and started
 
@@ -21,10 +21,10 @@ func next(next_dialog : bool, paused : bool, hide_dialog : bool):
 	DialogManager.visible = !hide_dialog
 
 func pause_time():
-	SacraficeTimer.set_paused(true)
+	SacrificeTimer.set_paused(true)
 
 func unpause_time():
-	SacraficeTimer.set_paused(false)
+	SacrificeTimer.set_paused(false)
 
 
 

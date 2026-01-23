@@ -59,3 +59,6 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 var ANIMAL_DEF = null
 
 var MAX_LIVES = 3
+
+var LAST_CROP_ITEM_DIALOG = ["Hey! You need to plant that to grow more!",5]
+var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]

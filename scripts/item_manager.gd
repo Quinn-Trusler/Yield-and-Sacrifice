@@ -18,12 +18,13 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 
 #Tutorial
 @export var TutorialManager : Node
+@export var DialogManager: CanvasLayer
 var first_item_planted : bool = false
 
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
-@onready var SacraficeManager = get_node("/root/Main/SacraficeManager")
+@onready var SacrificeManager = get_node("/root/Main/SacrificeManager")
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 
@@ -107,10 +108,13 @@ func drop_item(item):
 	item_dropped.emit()
 	
 	
-	if mouse_on_mouth and not (item_is_last and crops_planted[item.item_name] == 0):
-		SacraficeManager.sacrafice(item.item_name)
-		delete_item = true
-		$EatItem.play()
+	if mouse_on_mouth:
+		if not (item_is_last and crops_planted[item.item_name] == 0):
+			SacrificeManager.sacrifice(item.item_name)
+			delete_item = true
+			$EatItem.play()
+		else:
+			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
 	
 	#Attempt place crop
 	elif tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:

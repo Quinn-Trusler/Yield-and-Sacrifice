@@ -12,7 +12,10 @@ func _init(c : Array[String], i : int) -> void:
 	id = i
 	
 func get_reward():
-	return chain[ind]
+	if ind < len(chain):#Invalid index, aka end of chain
+		return chain[ind]
+	else:
+		return null
 func reward_chosen():
 	ind += 1
 func get_id():

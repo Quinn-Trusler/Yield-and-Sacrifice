@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dsiisn1uciawx"]
+
+[node name="WinScreen" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1333.0
+offset_bottom = 731.0
+color = Color(0.55640966, 0.9999998, 0.5241661, 1)
+
+[node name="YouWinText" type="Label" parent="."]
+offset_right = 1283.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "YOU WIN!!!!"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 557.0
+offset_top = 351.0
+offset_right = 862.0
+offset_bottom = 392.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "If you can't tell this screen is temporary"

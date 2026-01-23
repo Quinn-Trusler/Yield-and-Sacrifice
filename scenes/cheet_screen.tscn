@@ -72,7 +72,7 @@ text = "Play Game
 [connection signal="toggled" from="HBox/VBox/AlwaysPunish" to="." method="_on_always_punish_toggled"]
 [connection signal="toggled" from="HBox/VBox/TestingItems" to="." method="_on_testing_items_toggled"]
 [connection signal="text_changed" from="HBox/VBox/RoundTime/Input" to="." method="_on_round_time_text_changed"]
-[connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_crop_growth_time_changed"]
 [connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_input_text_changed"]
+[connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_crop_growth_time_changed"]
 [connection signal="text_changed" from="HBox/VBox/BuildingStageTime/Input" to="." method="_on_building_stage_time_changed"]
 [connection signal="pressed" from="HBox/VBox/PlayGame" to="." method="_on_play_game_pressed"]

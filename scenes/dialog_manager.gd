@@ -21,6 +21,10 @@ func clear_dialog():
 func set_dialogs(ds):
 	dialogs = ds
 	dialog_next() 
+func override_current_dialog(dialog : Array) -> void:
+	dialogs.insert(0, dialog)
+	dialog_next()
+	
 #Sets dialog text and timer based on dialogs array
 func dialog_next() -> void:
 	if len(dialogs) > 0:

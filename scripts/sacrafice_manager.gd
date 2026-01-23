@@ -11,14 +11,15 @@ var filled_requirements = {}
 var requirements_met = false
 var round_time = 20
 var RNG = RandomNumberGenerator.new()
-var allowed_sacrafices = ["carrot"]
+var allowed_sacrifices = ["carrot"]
 
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
 
 #Tutorial
-var first_sacrafice_made: bool = false
+var first_sacrifice_made: bool = false
 @export var TutorialManager: Node
+@export var DialogManager: CanvasLayer
 
 func _ready():
 	if Cheats.ROUND_TIME_OVERRIDE:
@@ -57,9 +58,9 @@ func update_timer_text():
 	else:
 		$TimerGUI/TimeText.text = str(int(round($Timer.time_left)))
 		
-func add_allowed_sacrafice(item_name):
-	if not(item_name in allowed_sacrafices):
-		allowed_sacrafices.append(item_name)
+func add_allowed_sacrifice(item_name):
+	if not(item_name in allowed_sacrifices):
+		allowed_sacrifices.append(item_name)
 	
 
 func get_round_requirements():
@@ -74,10 +75,10 @@ func get_round_requirements():
 	
 	var temp_requirements = {}
 	for i in range(item_groups):
-		var num = RNG.randi_range(0,len(allowed_sacrafices)-1)
+		var num = RNG.randi_range(0,len(allowed_sacrifices)-1)
 		var num_items = round(items_total/(item_groups-i))
 		items_total -= num_items
-		temp_requirements[allowed_sacrafices[num]] = num_items
+		temp_requirements[allowed_sacrifices[num]] = num_items
 	return temp_requirements
 	#if round_num <= -1:
 		#return {"carrot":2}
@@ -86,7 +87,7 @@ func get_round_requirements():
 		#return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
 	#return {"carrot":999}
 		
-#update the sacrafice requirments to the new ones based on round
+#update the sacrifice requirments to the new ones based on round
 func update_requirements():
 	requirements = get_round_requirements()
 	
@@ -94,33 +95,33 @@ func update_requirements():
 	filled_requirements = {}
 	for key in requirements:
 		filled_requirements[key] = 0
-	update_sacrafice_text()
+	update_sacrifice_text()
 	
-#Updates the sacrafice text and images to match what they actualy are
-func update_sacrafice_text():
-	$SacraficeGUI/SacraficeText.text = ""
+#Updates the sacrifice text and images to match what they actualy are
+func update_sacrifice_text():
+	$SacrificeGUI/SacrificeText.text = ""
 	for key in requirements:
-		$SacraficeGUI/SacraficeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
+		$SacrificeGUI/SacrificeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
 		if filled_requirements[key] >= requirements[key]:
-			$SacraficeGUI/SacraficeText.add_image(CHECKMARK_IMG)
+			$SacrificeGUI/SacrificeText.add_image(CHECKMARK_IMG)
 		else:
-			$SacraficeGUI/SacraficeText.add_text(str(filled_requirements[key]))
-			$SacraficeGUI/SacraficeText.add_image(FORWARD_SLASH_IMG)
-			$SacraficeGUI/SacraficeText.add_text(str(requirements[key]))
+			$SacrificeGUI/SacrificeText.add_text(str(filled_requirements[key]))
+			$SacrificeGUI/SacrificeText.add_image(FORWARD_SLASH_IMG)
+			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
 		
-func sacrafice(sacraficed_item_name):
-	if sacraficed_item_name in requirements:
-		if filled_requirements[sacraficed_item_name] < requirements[sacraficed_item_name]:
-			if not first_sacrafice_made:
-				first_sacrafice_made = true
+func sacrifice(sacrificed_item_name):
+	if sacrificed_item_name in requirements:
+		if filled_requirements[sacrificed_item_name] < requirements[sacrificed_item_name]:
+			if not first_sacrifice_made:
+				first_sacrifice_made = true
 				TutorialManager.next(true, false, false)
-			filled_requirements[sacraficed_item_name] +=1 
-			update_sacrafice_text()
+			filled_requirements[sacrificed_item_name] +=1 
+			update_sacrifice_text()
 			check_requirements_met()
 		else:
-			print("wasted sacrafice")
+			DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 	else:
-		print("wasted sacrafice")
+		DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 
 #Check if the all the requirments to please the boss have been met
 func check_requirements_met():

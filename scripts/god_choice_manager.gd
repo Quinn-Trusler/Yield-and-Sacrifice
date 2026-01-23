@@ -17,13 +17,13 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Sets up to 3 grass tiles on fire. Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
 var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
-ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven"], 1),
-ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
+ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
+#ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
 #ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
 #ChainedReward.new(["carrot","carrot","carrot"], 1)]
 
@@ -51,7 +51,7 @@ var choice_instances = []
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var Lives = get_node("/root/Main/Lives")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
-@onready var SacraficeManager = get_node("/root/Main/SacraficeManager") 
+@onready var SacrificeManager = get_node("/root/Main/SacrificeManager") 
 
 var round_num = 0
 var rewards_collected = 0
@@ -86,11 +86,16 @@ func load_chained_godchoices(godchoice_list):
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
+	var makeshift_game_end = true
 	for choice in new_godchoice_list:
-		var temp = GodChoice_Scene.instantiate()
-		temp.initialize(choice.get_reward(),choices[choice.get_reward()],choice.get_id())
-		choice_instances.append(temp)
-		$HBoxContainer.add_child(temp)
+		if  choice.get_reward():# Not last in the chain
+			var temp = GodChoice_Scene.instantiate()
+			temp.initialize(choice.get_reward(),choices[choice.get_reward()],choice.get_id())
+			choice_instances.append(temp)
+			$HBoxContainer.add_child(temp)
+			makeshift_game_end = false
+	if makeshift_game_end:
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 		
 		
 func display_punishments():
@@ -127,7 +132,7 @@ func strike_id_from_chain_rewards(id : int):
 	
 #Unlock literal means to take the items unlocked as themselves instead of just a key
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
-func unlock_sacrafices(items_unlocked, unlock_literal):
+func unlock_sacrifices(items_unlocked, unlock_literal):
 	if items_unlocked:
 		var new_unlocks = []
 		
@@ -146,7 +151,7 @@ func unlock_sacrafices(items_unlocked, unlock_literal):
 							print(unlock + " due to unlock map`")
 
 		for unlock in new_unlocks:
-			SacraficeManager.add_allowed_sacrafice(unlock)
+			SacrificeManager.add_allowed_sacrifice(unlock)
 	
 func god_choice_chosen(choice_name, id : int):
 	visible = false
@@ -158,7 +163,7 @@ func god_choice_chosen(choice_name, id : int):
 	var choice = choices[choice_name]
 	
 	
-	unlock_sacrafices(choice["item unlock"], choice["unlock literal"])
+	unlock_sacrifices(choice["item unlock"], choice["unlock literal"])
 	
 	get_tree().paused = false
 		
@@ -168,7 +173,7 @@ func god_choice_chosen(choice_name, id : int):
 		#ItemManager.create_draggable_item(choice["reward"],Vector2.ZERO)
 	
 	elif choice["type"] == TYPES.Time_:
-		SacraficeManager.modify_round_time(choice["reward"])
+		SacrificeManager.modify_round_time(choice["reward"])
 		
 	elif choice["type"] == TYPES.Destroy_Land:#burns land
 		var map_size = GLOBALCONSTS.FIRE_SPAWN_ZONE
@@ -202,7 +207,7 @@ func god_choice_chosen(choice_name, id : int):
 		BuildingManager.fish_spawning_active = true
 		
 					
-	SacraficeManager.update_requirements()
+	SacrificeManager.update_requirements()
 				
 				
 			
