@@ -5,7 +5,6 @@ var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
 var draggable_items = []
 var animated_items = []
-var dragging_item = false
 var item_is_last:bool = false
 var item_being_dragged
 var item_in_focus = null
@@ -33,7 +32,7 @@ var first_item_planted : bool = false
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 
-signal item_picked_up(item_name)
+signal item_picked_up(item_name, last_item)
 signal item_dropped()
 
 func spawn_testing_items():
@@ -67,12 +66,12 @@ func _process(_delta: float) -> void:
 		
 func remove_from_focus_list(item_obj) -> void:
 	focus_items.erase(item_obj)
-	if item_in_focus == item_obj and not dragging_item:
+	if item_in_focus == item_obj and not item_being_dragged:
 		refocus()
 		
 func add_to_focus_list(item_obj):
 	focus_items.append(item_obj)
-	if not dragging_item:
+	if not item_being_dragged:
 		refocus()
 
 func refocus():
@@ -117,10 +116,9 @@ func set_item_is_last(item):
 func pickup_item(item):
 	item_in_focus = null
 	self.move_child(item, get_child_count() - 1)
-	dragging_item = true
 	item_being_dragged = item
 	set_item_is_last(item)
-	item_picked_up.emit(item.item_name)
+	item_picked_up.emit(item.item_name, is_last_item(item))
 	$PickUp.play()
 	print("pick up item ", item_being_dragged.item_name)
 	
@@ -130,7 +128,7 @@ func drop_item_ukn():
 		drop_item(item_being_dragged)
 		
 func get_dragging_item_placeable():
-	if dragging_item:
+	if item_being_dragged:
 		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
 		var tile_name = TileMapManager.get_tile_name_from_coords(pos)
 		if TileLayer2.is_empty(pos):#empty cell
@@ -142,10 +140,12 @@ func delete_animated_item(item):
 	item.queue_free()
 func crop_uprooted(item_name):
 	crops_planted[item_name] -=1
+	
+func is_last_item(item):
+	return (item_is_last and crops_planted[item.item_name] == 0)
 #called by the item itself
 func drop_item(item):
-	dragging_item = false
-	item_being_dragged = false
+	item_being_dragged = null
 	remove_from_focus_list(item)
 	refocus()
 	
@@ -154,7 +154,6 @@ func drop_item(item):
 	var tile_name = TileMapManager.get_tile_name_from_local(pos)
 	pos = TileLayer.local_to_map(pos)
 	item_dropped.emit()
-	
 	
 	if mouse_on_mouth:
 		if not (item_is_last and crops_planted[item.item_name] == 0):
@@ -180,9 +179,11 @@ func drop_item(item):
 	#Attempt to place item in building
 	elif not TileLayer2.is_empty(pos):#2nd layer cell not empty
 		var scene = TileLayer2.get_cell_scene(pos)
-		if scene and scene.BUILDING_TYPE == "building":
+		if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item):
 			delete_item = scene.place_item(item.item_name)
 			$DropInBuilding.play()
+		else:
+			$PutDown.play()
 	#Item drop normaly
 	else:
 		$PutDown.play()

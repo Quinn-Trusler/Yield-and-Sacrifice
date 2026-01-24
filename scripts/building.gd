@@ -89,6 +89,7 @@ func _process(delta: float) -> void:
 	delta_gift += delta
 
 	$Arrow.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
+	$ArrowRed.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
 	if BUILDING_DISPLAY_NAME == "Gift":
 		rotation = PI/180* 20*sin(delta_gift*2)
 	
@@ -139,13 +140,18 @@ func connectItemSignals(ItemManager):
 	ItemManager.item_picked_up.connect(_item_picked_up)
 	ItemManager.item_dropped.connect(_item_dropped)
 #Recieve signal that says what item is being held/not held
-func _item_picked_up(item_name):
+func _item_picked_up(item_name, last_item):
 	if item_name in INPUT_ITEMS and num_items_inputed < ITEMS_TO_START_TIMER:
-		$Arrow.visible = true
+		if last_item:
+			$ArrowRed.visible = true
+		else:
+			$Arrow.visible = true
 	else:
 		$Arrow.visible = false
+		$ArrowRed.visible = false
 func _item_dropped():
 	$Arrow.visible = false
+	$ArrowRed.visible = false
 
 
 

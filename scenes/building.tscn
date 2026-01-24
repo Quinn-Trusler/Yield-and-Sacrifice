@@ -13,3 +13,9 @@ script = ExtResource("1_n8bkc")
 visible = false
 texture = ExtResource("3_ejq8p")
 offset = Vector2(0, -10)
+
+[node name="ArrowRed" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("3_ejq8p")
+offset = Vector2(0, -10)
