@@ -146,7 +146,6 @@ func is_last_item(item):
 #called by the item itself
 func drop_item(item):
 	item_being_dragged = null
-	remove_from_focus_list(item)
 	refocus()
 	
 	var delete_item = false
@@ -191,6 +190,7 @@ func drop_item(item):
 	item_is_last = false
 	
 	if delete_item:
+		remove_from_focus_list(item)
 		draggable_items.erase(item)
 		item.queue_free()
 		
