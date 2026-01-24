@@ -8,7 +8,11 @@ var animated_items = []
 var dragging_item = false
 var item_is_last:bool = false
 var item_being_dragged
+var item_in_focus = null
+var focus_items = []
 var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0}
+
+
 
 var mouse_on_mouth = false
 
@@ -20,6 +24,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 @export var TutorialManager : Node
 @export var DialogManager: CanvasLayer
 var first_item_planted : bool = false
+
 
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
@@ -49,6 +54,41 @@ func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
 	if Cheats.TESTING_ITEMS:
 		spawn_testing_items()
+func _process(_delta: float) -> void:
+	if item_being_dragged:
+		item_being_dragged.go_to_mouse_pos()
+	if Input.is_action_just_pressed("mouse_down"):
+		if item_in_focus:
+			item_in_focus.pick_up()
+			pickup_item(item_in_focus)
+	elif not Input.is_action_pressed("mouse_down") and item_being_dragged:
+		item_being_dragged.drop()
+		drop_item(item_being_dragged)
+		
+func remove_from_focus_list(item_obj) -> void:
+	focus_items.erase(item_obj)
+	if item_in_focus == item_obj and not dragging_item:
+		refocus()
+		
+func add_to_focus_list(item_obj):
+	focus_items.append(item_obj)
+	if not dragging_item:
+		refocus()
+
+func refocus():
+	var largest_layer = 0
+	var ind = 0  
+	if len(focus_items):
+		#Search through array for biggest layer
+		for i in range(len(focus_items)):
+			if focus_items[i].get_index() > largest_layer:
+				largest_layer = focus_items[i].get_index()
+				ind = i
+		item_in_focus = focus_items[ind]
+		item_in_focus.focus()
+	else:
+		item_in_focus = null
+		
 
 func create_draggable_item(item_name,pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
@@ -63,6 +103,8 @@ func create_animated_item(item_name, pos):
 	animated_items.append(temp)
 	temp.initialize(pos.y - 16,item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
+	
+# If the item must be replanted it sets item_is_last var to true
 func set_item_is_last(item):
 	if GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] != []:#Item is crop
 		var count = 0
@@ -73,15 +115,19 @@ func set_item_is_last(item):
 			item_is_last = true
 
 func pickup_item(item):
+	item_in_focus = null
+	self.move_child(item, get_child_count() - 1)
 	dragging_item = true
 	item_being_dragged = item
-	set_item_is_last(item)	
+	set_item_is_last(item)
 	item_picked_up.emit(item.item_name)
 	$PickUp.play()
+	print("pick up item ", item_being_dragged.item_name)
 	
 func drop_item_ukn():
 	if item_being_dragged:
 		item_being_dragged.drop()
+		drop_item(item_being_dragged)
 		
 func get_dragging_item_placeable():
 	if dragging_item:
@@ -100,6 +146,8 @@ func crop_uprooted(item_name):
 func drop_item(item):
 	dragging_item = false
 	item_being_dragged = false
+	remove_from_focus_list(item)
+	refocus()
 	
 	var delete_item = false
 	var pos = TileLayer.to_local(item.position)

@@ -1,6 +1,6 @@
 extends Node
 
-var DISPLAY_CHEATS = false
+var DISPLAY_CHEATS = true
 #Testing and cheats
 var ALWAYS_REWARD = false
 var ALWAYS_PUNISH = false

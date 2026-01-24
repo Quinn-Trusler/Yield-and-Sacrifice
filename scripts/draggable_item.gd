@@ -1,12 +1,7 @@
 extends AnimatedSprite2D
-#one option it to make a temporary animated item that switchs to a dragable item when finished
-
-#var types = 
 
 var item_name;
-var mouse_in_area = false
-var dragging = false
-
+var in_focus = false
 var timer = 0
 
 func initialize(n,item_def):
@@ -22,27 +17,19 @@ func go_to_mouse_pos():
 	
 func pick_up():
 	$PickUp.play()
-	dragging = true
-	get_parent().pickup_item(self)
-func drop():
-	dragging = false
-	$Drop.play()
-	get_parent().drop_item(self)
+
+func focus():
+	pass
+func stop_focus():
+	pass
 	
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("mouse_down"):
-		if mouse_in_area and dragging == false and get_parent().dragging_item == false:
-			pick_up()
-	elif not Input.is_action_pressed("mouse_down") and dragging:
-		drop()
-		
-	if dragging:
-		go_to_mouse_pos()
+func drop():
+	$Drop.play()
 
-
+	
 func _on_area_2d_mouse_entered() -> void:
-	mouse_in_area = true
-
+	get_parent().add_to_focus_list(self)
 
 func _on_area_2d_mouse_exited() -> void:
-	mouse_in_area = false
+	get_parent().remove_from_focus_list(self)
+	
