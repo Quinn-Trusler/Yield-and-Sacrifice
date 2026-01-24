@@ -11,6 +11,7 @@ func initialize(n,item_def):
 	else:
 		sprite_frames = SpriteFrames.new()
 		sprite_frames.add_frame("default",load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
+		sprite_frames.add_frame("default",load(item_def["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
@@ -19,9 +20,10 @@ func pick_up():
 	$PickUp.play()
 
 func focus():
-	pass
+	frame = 1
+
 func stop_focus():
-	pass
+	frame = 0
 	
 func drop():
 	$Drop.play()

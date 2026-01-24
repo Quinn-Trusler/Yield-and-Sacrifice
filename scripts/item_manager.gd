@@ -66,8 +66,10 @@ func _process(_delta: float) -> void:
 		
 func remove_from_focus_list(item_obj) -> void:
 	focus_items.erase(item_obj)
-	if item_in_focus == item_obj and not item_being_dragged:
-		refocus()
+	if item_in_focus == item_obj:
+		item_in_focus.stop_focus()
+		if not item_being_dragged:
+			refocus()
 		
 func add_to_focus_list(item_obj):
 	focus_items.append(item_obj)
@@ -75,6 +77,7 @@ func add_to_focus_list(item_obj):
 		refocus()
 
 func refocus():
+	print("refocus")
 	var largest_layer = 0
 	var ind = 0  
 	if len(focus_items):
@@ -83,6 +86,8 @@ func refocus():
 			if focus_items[i].get_index() > largest_layer:
 				largest_layer = focus_items[i].get_index()
 				ind = i
+		if item_in_focus:
+			item_in_focus.stop_focus()
 		item_in_focus = focus_items[ind]
 		item_in_focus.focus()
 	else:
