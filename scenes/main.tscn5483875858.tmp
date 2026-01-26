@@ -552,9 +552,9 @@ stream = ExtResource("21_og1vs")
 [node name="EatItem" type="AudioStreamPlayer" parent="ItemManager"]
 stream = ExtResource("22_2wyq8")
 
-[node name="BundleField" type="Area2D" parent="ItemManager"]
+[node name="Area2D" type="Area2D" parent="ItemManager"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/BundleField"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/Area2D"]
 shape = SubResource("CircleShape2D_fv21b")
 
 [node name="BuildingManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager")]
@@ -606,8 +606,6 @@ horizontal_alignment = 1
 
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="DialogManager/Timer" to="DialogManager" method="_on_timer_timeout"]
-[connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
-[connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]

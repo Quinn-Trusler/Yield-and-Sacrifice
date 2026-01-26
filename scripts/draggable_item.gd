@@ -1,7 +1,9 @@
 extends AnimatedSprite2D
 
+class_name DraggableItem
+
 var item_name;
-var timer = 0
+var IS_BUNDLE = false
 
 func initialize(n,item_def):
 	item_name = n
@@ -14,7 +16,7 @@ func initialize(n,item_def):
 
 	#print_polygon()
 	if item_name in GLOBALCONSTS.ITEM_POLYGONS:
-		$Area2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
+		$DraggableItemArea2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
 	else:
 		print("Warning: No colision polygon for " + item_name)
 	
@@ -29,7 +31,7 @@ func snap05(num : float) -> String:
 	return str(roundi(num*2) / 2.0)
 #Used to generate polygon strings used in global consts
 func print_polygon():
-	var poly = $Area2D/CollisionPolygon2D.polygon
+	var poly = $DraggableItemArea2D/CollisionPolygon2D.polygon
 	var string = "["
 	for i in range(len(poly)):
 		var point = poly[i]
@@ -53,7 +55,6 @@ func stop_focus():
 	
 func drop():
 	$Drop.play()
-
 	
 func _on_area_2d_mouse_entered() -> void:
 	get_parent().add_to_focus_list(self)

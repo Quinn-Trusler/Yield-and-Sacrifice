@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb7cwj27hm4y3"]
+
+[ext_resource type="Texture2D" uid="uid://c354jn5pj532k" path="res://art/items/carrot.png" id="1_05qsx"]
+[ext_resource type="Script" uid="uid://ba13q2ksy8jer" path="res://scenes/bundled_item.gd" id="2_05qsx"]
+[ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_jdq6b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c446u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_05qsx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BundledItem" type="AnimatedSprite2D"]
+z_index = 3
+sprite_frames = SubResource("SpriteFrames_c446u")
+script = ExtResource("2_05qsx")
+
+[node name="BundleItemArea2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BundleItemArea2D"]
+position = Vector2(0.00840287, -0.06722698)
+polygon = PackedVector2Array(2.365384, 4.905912, -7.52291, 10.112417, -10.463744, 10.024193, -10.551637, 7.1448627, -0.41453654, -3.5558906, -1.4909544, -5.7087283, 1.3750811, -9.733377, 8.663798, -8.894615, 10.549754, -5.514128, 9.504107, -1.1997503, 3.5195131, 0.38535747)
+
+[node name="PickUp" type="AudioStreamPlayer" parent="."]
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]
+
+[node name="NumItems" type="Label" parent="."]
+offset_right = 8.0
+offset_bottom = 8.380318
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jdq6b")
+theme_override_font_sizes/font_size = 8
+text = "1"
+
+[connection signal="mouse_entered" from="BundleItemArea2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="BundleItemArea2D" to="." method="_on_area_2d_mouse_exited"]
