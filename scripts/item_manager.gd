@@ -37,16 +37,18 @@ signal item_dropped()
 
 func spawn_testing_items():
 	create_draggable_item("wheat",Vector2(-70,-30))
-	#create_draggable_item("flour",Vector2(-60,-20))
+	create_draggable_item("flour",Vector2(-60,-20))
+	create_draggable_item("bread",Vector2(-60,-20))
 	create_draggable_item("sugarcane",Vector2(-40,-30))
+	create_draggable_item("sugar",Vector2(-40,-30))
 	#
-	#create_draggable_item("potatoe",Vector2(-70,-30))
-	#create_draggable_item("potatoe",Vector2(-70,-30))
+	create_draggable_item("mushroom",Vector2(-75,-30))
+	create_draggable_item("fish",Vector2(-70,-30))
 	create_draggable_item("potatoe",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
 	#
-	#create_draggable_item("voldka",Vector2(-30,-20))
-	#create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("voldka",Vector2(-30,-20))
+	create_draggable_item("rum",Vector2(-50,-40))
 	#create_draggable_item("pepper_juice",Vector2(-70,-40))
 
 func _ready() -> void:
@@ -77,7 +79,6 @@ func add_to_focus_list(item_obj):
 		refocus()
 
 func refocus():
-	print("refocus")
 	var largest_layer = 0
 	var ind = 0  
 	if len(focus_items):
@@ -125,7 +126,6 @@ func pickup_item(item):
 	set_item_is_last(item)
 	item_picked_up.emit(item.item_name, is_last_item(item))
 	$PickUp.play()
-	print("pick up item ", item_being_dragged.item_name)
 	
 func drop_item_ukn():
 	if item_being_dragged:

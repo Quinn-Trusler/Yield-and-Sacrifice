@@ -1,7 +1,6 @@
 extends AnimatedSprite2D
 
 var item_name;
-var in_focus = false
 var timer = 0
 
 func initialize(n,item_def):
@@ -12,6 +11,33 @@ func initialize(n,item_def):
 		sprite_frames = SpriteFrames.new()
 		sprite_frames.add_frame("default",load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
 		sprite_frames.add_frame("default",load(item_def["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
+
+	#print_polygon()
+	if item_name in GLOBALCONSTS.ITEM_POLYGONS:
+		$Area2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
+	else:
+		print("Warning: No colision polygon for " + item_name)
+	
+func convert_polygon(poly):
+	var new_poly = []
+	for point in poly:
+		new_poly.append(Vector2(point[0], point[1]))
+	return new_poly
+
+#Snap value to nearest 0.5 or 0
+func snap05(num : float) -> String:
+	return str(roundi(num*2) / 2.0)
+#Used to generate polygon strings used in global consts
+func print_polygon():
+	var poly = $Area2D/CollisionPolygon2D.polygon
+	var string = "["
+	for i in range(len(poly)):
+		var point = poly[i]
+		string += "["+snap05(point[0]) + ", " + snap05(point[1]) + "]"
+		if i < len(poly) -1:
+			string += ", "
+	string += "]"
+	print(string)
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
