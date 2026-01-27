@@ -85,7 +85,7 @@ func _process(_delta: float) -> void:
 				harvest_from_bundle()
 			else:
 				form_bundle()
-			#If bundle, remove item from bundle
+
 		else:#Normal Click
 			item_in_focus.pick_up()
 			pickup_item(item_in_focus)
@@ -103,9 +103,6 @@ func harvest_from_bundle():
 	else:
 		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
 		item_in_focus.decrease_num()
-		
-	
-	
 	
 func form_bundle():
 	var valid_items = []
@@ -190,7 +187,8 @@ func pickup_item(item):
 	self.move_child(item, get_child_count() - 1)
 	item_being_dragged = item
 	set_item_is_last(item)
-	item_picked_up.emit(item.item_name, is_last_item(item))
+	if not item.IS_BUNDLE:
+		item_picked_up.emit(item.item_name, is_last_item(item))
 	$PickUp.play()
 	
 func drop_item_ukn():
@@ -199,7 +197,7 @@ func drop_item_ukn():
 		drop_item(item_being_dragged)
 		
 func get_dragging_item_placeable():
-	if item_being_dragged:
+	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
 		var tile_name = TileMapManager.get_tile_name_from_coords(pos)
 		if TileLayer2.is_empty(pos):#empty cell
@@ -225,36 +223,39 @@ func drop_item(item):
 	pos = TileLayer.local_to_map(pos)
 	item_dropped.emit()
 	
-	if mouse_on_mouth:
-		if not (item_is_last and crops_planted[item.item_name] == 0):
-			SacrificeManager.sacrifice(item.item_name)
-			delete_item = true
-			$EatItem.play()
-		else:
-			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
-	
-	#Attempt place crop
-	elif tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
-		if TileLayer2.is_empty(pos):#empty cell
-			delete_item = true
-			TileLayer2.plant_crop(pos,item.item_name)
-			crops_planted[item.item_name] +=1
-			$DropInBuilding.play()
-			if not first_item_planted:
-				first_item_planted = true
-				TutorialManager.next(true, true, false)
-		else:
-			print("Error: Cannot plant on already planted farmland")
-				
-	#Attempt to place item in building
-	elif not TileLayer2.is_empty(pos):#2nd layer cell not empty
-		var scene = TileLayer2.get_cell_scene(pos)
-		if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item):
-			delete_item = scene.place_item(item.item_name)
-			$DropInBuilding.play()
+	if not item.IS_BUNDLE:
+		if mouse_on_mouth:
+			if not (item_is_last and crops_planted[item.item_name] == 0):
+				SacrificeManager.sacrifice(item.item_name)
+				delete_item = true
+				$EatItem.play()
+			else:
+				DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
+		
+		#Attempt place crop
+		elif tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
+			if TileLayer2.is_empty(pos):#empty cell
+				delete_item = true
+				TileLayer2.plant_crop(pos,item.item_name)
+				crops_planted[item.item_name] +=1
+				$DropInBuilding.play()
+				if not first_item_planted:
+					first_item_planted = true
+					TutorialManager.next(true, true, false)
+			else:
+				print("Error: Cannot plant on already planted farmland")
+					
+		#Attempt to place item in building
+		elif not TileLayer2.is_empty(pos):#2nd layer cell not empty
+			var scene = TileLayer2.get_cell_scene(pos)
+			if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item):
+				delete_item = scene.place_item(item.item_name)
+				$DropInBuilding.play()
+			else:
+				$PutDown.play()
 		else:
 			$PutDown.play()
-	#Item drop normaly
+		#Item drop normaly
 	else:
 		$PutDown.play()
 	
