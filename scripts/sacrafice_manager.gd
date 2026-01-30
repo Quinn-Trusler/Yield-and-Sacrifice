@@ -70,33 +70,38 @@ func add_allowed_sacrifice(item_name):
 	if not(item_name in allowed_sacrifices):
 		allowed_sacrifices.append(item_name)
 	
-
-func get_round_requirements():
-	#determine items total 
-	#detrmine ask for 1,2 or 3 items
-	var items_total = round_num + 1
-	var item_groups = 3
-	if items_total <= 2:
-		item_groups = 1
-	elif items_total <= 5:
-		item_groups = 2
-	
-	var temp_requirements = {}
-	for i in range(item_groups):
+# Will get item not already in requirments list
+func get_random_sacrafice_item():
+	while true:
 		var num = RNG.randi_range(0,len(allowed_sacrifices)-1)
-		var num_items = round(items_total/(item_groups-i))
-		items_total -= num_items
-		temp_requirements[allowed_sacrifices[num]] = num_items
-	return temp_requirements
+		var item_name = allowed_sacrifices[num]
+		if !(item_name in requirements):
+			return item_name
+
+func set_new_requirements():
+	var points_remaining = (round_num + 1) * 10
+	var num_groups = 3
+	if round_num <= 1:
+		num_groups = 1
+	elif round_num <= 4:
+		num_groups = 2
+	
+	requirements = {}
+	filled_requirements = {}
+	for i in range(num_groups):
+		var item_name = get_random_sacrafice_item()
+		var points = points_remaining/(num_groups-i)
+		var num_items = floor(points/GLOBALCONSTS.ITEM_DEF[item_name]["points"])
+		if num_items < 1:
+			num_items = 1
+		points_remaining -= num_items * GLOBALCONSTS.ITEM_DEF[item_name]["points"]
+		
+		requirements[item_name] = num_items
+		filled_requirements[item_name] = 0
 		
 #update the sacrifice requirments to the new ones based on round
 func update_requirements():
-	requirements = get_round_requirements()
-	
-	#setup filled_requirements
-	filled_requirements = {}
-	for key in requirements:
-		filled_requirements[key] = 0
+	set_new_requirements()
 	update_sacrifice_text()
 	
 #Updates the sacrifice text and images to match what they actualy are

@@ -32,18 +32,18 @@ var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on
 "wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
 "sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)}
 }
-var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":3,"place_on":["dry_farmland"]},
-"potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe","is_animated":false,"points":2,"place_on":["dry_farmland"]},
-"wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":2,"place_on":["dry_farmland"]},
-"sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":3,"place_on":["dry_farmland"]},
-"fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":4,"place_on":[]},
-"sugar":{"display_name":"Sugar","img_name":ITEMS_FOLDER + "sugar","is_animated":false,"points":4,"place_on":[]},
-"flour":{"display_name":"Flour","img_name":ITEMS_FOLDER + "flour","is_animated":false,"points":6,"place_on":[]},
-"bread":{"display_name":"Bread","img_name":ITEMS_FOLDER + "bread","is_animated":false,"points":8,"place_on":[]},
-"mushroom":{"display_name":"Mushroom","img_name":ITEMS_FOLDER + "mushroom","is_animated":false,"points":4,"place_on":[]},
-"voldka":{"display_name":"Voldka","img_name":ITEMS_FOLDER + "voldka","is_animated":false,"points":4,"place_on":[]},
-"rum":{"display_name":"Rum","img_name":ITEMS_FOLDER + "rum","is_animated":false,"points":4,"place_on":[]},
-"pepper_juice":{"display_name":"Pepper Juice","img_name":ITEMS_FOLDER + "pepper_juice","is_animated":false,"points":4,"place_on":[]},
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":10,"place_on":["dry_farmland"]},
+"potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe","is_animated":false,"points":10,"place_on":["dry_farmland"]},
+"wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":10,"place_on":["dry_farmland"]},
+"sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["dry_farmland"]},
+"fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":10,"place_on":[]},
+"sugar":{"display_name":"Sugar","img_name":ITEMS_FOLDER + "sugar","is_animated":false,"points":20,"place_on":[]},
+"flour":{"display_name":"Flour","img_name":ITEMS_FOLDER + "flour","is_animated":false,"points":20,"place_on":[]},
+"bread":{"display_name":"Bread","img_name":ITEMS_FOLDER + "bread","is_animated":false,"points":30,"place_on":[]},
+"mushroom":{"display_name":"Mushroom","img_name":ITEMS_FOLDER + "mushroom","is_animated":false,"points":8,"place_on":[]},
+"voldka":{"display_name":"Voldka","img_name":ITEMS_FOLDER + "voldka","is_animated":false,"points":20,"place_on":[]},
+"rum":{"display_name":"Rum","img_name":ITEMS_FOLDER + "rum","is_animated":false,"points":20,"place_on":[]},
+"pepper_juice":{"display_name":"Pepper Juice","img_name":ITEMS_FOLDER + "pepper_juice","is_animated":false,"points":20,"place_on":[]},
 "watering_can":{"display_name":"Watering Can","img_name":ITEM_FRAMES_FOLDER + "watering_can.tres","points":100,"is_animated":true,"place_on":[]}
 }
 var IMG_EXTENSION = ".png"
