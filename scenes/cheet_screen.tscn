@@ -29,7 +29,12 @@ text = "Always Punish"
 
 [node name="TestingItems" type="CheckButton" parent="HBox/VBox"]
 layout_mode = 2
-text = "TestingItems
+text = "Testing Items
+"
+
+[node name="SkipTutorial" type="CheckButton" parent="HBox/VBox"]
+layout_mode = 2
+text = "Skip Tutorial
 "
 
 [node name="RoundTime" type="HBoxContainer" parent="HBox/VBox"]
@@ -71,8 +76,9 @@ text = "Play Game
 [connection signal="toggled" from="HBox/VBox/AlwaysReward" to="." method="_on_always_reward_toggled"]
 [connection signal="toggled" from="HBox/VBox/AlwaysPunish" to="." method="_on_always_punish_toggled"]
 [connection signal="toggled" from="HBox/VBox/TestingItems" to="." method="_on_testing_items_toggled"]
+[connection signal="toggled" from="HBox/VBox/SkipTutorial" to="." method="_on_skip_tutorial_toggled"]
 [connection signal="text_changed" from="HBox/VBox/RoundTime/Input" to="." method="_on_round_time_text_changed"]
-[connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_input_text_changed"]
 [connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_crop_growth_time_changed"]
+[connection signal="text_changed" from="HBox/VBox/CropGrowthTime/Input" to="." method="_on_input_text_changed"]
 [connection signal="text_changed" from="HBox/VBox/BuildingStageTime/Input" to="." method="_on_building_stage_time_changed"]
 [connection signal="pressed" from="HBox/VBox/PlayGame" to="." method="_on_play_game_pressed"]

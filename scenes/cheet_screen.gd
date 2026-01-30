@@ -11,6 +11,7 @@ func set_values():
 	$HBox/VBox/AlwaysReward.button_pressed = Cheats.ALWAYS_REWARD
 	$HBox/VBox/AlwaysPunish.button_pressed = Cheats.ALWAYS_PUNISH
 	$HBox/VBox/TestingItems.button_pressed = Cheats.TESTING_ITEMS
+	$HBox/VBox/SkipTutorial.button_pressed = !Cheats.USE_TUTORIAL
 	$HBox/VBox/RoundTime/Input.text = str(Cheats.ROUND_TIME_OVERRIDE)
 	$HBox/VBox/CropGrowthTime/Input.text = str(Cheats.CROP_GROWTH_TIME_OVERRIDE)
 	$HBox/VBox/BuildingStageTime/Input.text = str(Cheats.BUILDING_STAGE_TIME_OVERRIDE)
@@ -31,6 +32,9 @@ func _on_always_punish_toggled(toggled_on: bool) -> void:
 
 func _on_testing_items_toggled(toggled_on: bool) -> void:
 	Cheats.TESTING_ITEMS = toggled_on
+	
+func _on_skip_tutorial_toggled(toggled_on: bool) -> void:
+	Cheats.USE_TUTORIAL = !toggled_on
 
 #---Text input converters---
 

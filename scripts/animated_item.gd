@@ -7,12 +7,14 @@ var RNG = RandomNumberGenerator.new()
 var vel : Vector2
 var item_name : String
 var end_y
+var vel_factor
 
 func set_vel():
-	vel = Vector2(RNG.randf_range(vel_range[0].x, vel_range[0].y), RNG.randf_range(vel_range[1].x, vel_range[1].y))
-func initialize(y, n : String,item_def : Dictionary ):
+	vel = vel_factor * Vector2(RNG.randf_range(vel_range[0].x, vel_range[0].y), RNG.randf_range(vel_range[1].x, vel_range[1].y))
+func initialize(y, v,n : String,item_def : Dictionary ):
 	item_name = n
 	end_y = y
+	vel_factor = v
 	set_vel()
 	if item_def["is_animated"]:
 		sprite_frames = load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION)

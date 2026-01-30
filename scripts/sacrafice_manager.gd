@@ -9,7 +9,7 @@ var round_num = 0
 var requirements = {}
 var filled_requirements = {}
 var requirements_met = false
-var round_time = 20
+var round_time = 0
 var RNG = RandomNumberGenerator.new()
 var allowed_sacrifices = ["carrot"]
 
