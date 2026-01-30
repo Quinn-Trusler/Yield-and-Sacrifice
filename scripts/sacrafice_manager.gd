@@ -9,7 +9,7 @@ var round_num = 0
 var requirements = {}
 var filled_requirements = {}
 var requirements_met = false
-var round_time = 0
+var round_time = 20
 var RNG = RandomNumberGenerator.new()
 var allowed_sacrifices = ["carrot"]
 
@@ -85,6 +85,8 @@ func set_new_requirements():
 		num_groups = 1
 	elif round_num <= 4:
 		num_groups = 2
+	if num_groups > len(allowed_sacrifices):
+		num_groups = len(allowed_sacrifices)
 	
 	requirements = {}
 	filled_requirements = {}
