@@ -15,13 +15,21 @@ var allowed_sacrifices = ["carrot"]
 
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
+var DEVIL_BOSS_SCENE = preload("res://scenes/devil_boss.tscn")
+var devil_boss : Node2D
+
+var mouse_on_mouth = false
 
 #Tutorial
 var first_sacrifice_made: bool = false
 @export var TutorialManager: Node
 @export var DialogManager: CanvasLayer
+@export var ItemManager: Node2D
 
 func _ready():
+	devil_boss = DEVIL_BOSS_SCENE.instantiate()
+	add_child(devil_boss)
+	devil_boss.attempt_eat_item.connect(_attempt_eat_item)
 	if Cheats.ROUND_TIME_OVERRIDE:
 		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
@@ -80,12 +88,6 @@ func get_round_requirements():
 		items_total -= num_items
 		temp_requirements[allowed_sacrifices[num]] = num_items
 	return temp_requirements
-	#if round_num <= -1:
-		#return {"carrot":2}
-	#elif round_num <=5:
-		#var num_potatoes = RNG.randi_range(2,3)
-		#return {"potatoe":num_potatoes,"carrot":5-num_potatoes}
-	#return {"carrot":999}
 		
 #update the sacrifice requirments to the new ones based on round
 func update_requirements():
@@ -118,6 +120,8 @@ func sacrifice(sacrificed_item_name):
 			filled_requirements[sacrificed_item_name] +=1 
 			update_sacrifice_text()
 			check_requirements_met()
+			if requirements_met:
+				devil_boss.set_full()
 		else:
 			DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 	else:
@@ -133,8 +137,11 @@ func check_requirements_met():
 	
 func _on_timer_timeout() -> void:
 	next_round()
+	devil_boss.set_full()
 	$Timer.start()
 func reward():
 	get_parent().reward()
 func punish():
 	get_parent().punish()
+func _attempt_eat_item(on_mouth : bool):
+	ItemManager.mouse_on_mouth = on_mouth

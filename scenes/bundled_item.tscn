@@ -30,6 +30,31 @@ polygon = PackedVector2Array(2.365384, 4.905912, -7.52291, 10.112417, -10.463744
 
 [node name="Drop" type="AudioStreamPlayer" parent="."]
 
+[node name="Sprite2Ds" type="Node2D" parent="."]
+visible = false
+
+[node name="1" type="Sprite2D" parent="Sprite2Ds"]
+texture = ExtResource("1_05qsx")
+
+[node name="2" type="Sprite2D" parent="Sprite2Ds"]
+position = Vector2(0, 5)
+rotation = 0.122173056
+texture = ExtResource("1_05qsx")
+
+[node name="3" type="Sprite2D" parent="Sprite2Ds"]
+rotation = -0.122173056
+texture = ExtResource("1_05qsx")
+
+[node name="4" type="Sprite2D" parent="Sprite2Ds"]
+rotation = 0.2617994
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_05qsx")
+
+[node name="5" type="Sprite2D" parent="Sprite2Ds"]
+rotation = -0.2617994
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_05qsx")
+
 [node name="NumItems" type="Label" parent="."]
 offset_right = 8.0
 offset_bottom = 8.380318

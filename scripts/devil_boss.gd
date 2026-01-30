@@ -24,3 +24,10 @@ func _on_mouth_hitbox_mouse_entered() -> void:
 
 func _on_mouth_hitbox_mouse_exited() -> void:
 	emit_signal("attempt_eat_item", false)
+	
+func set_full():
+	$HungrySprite.visible = false
+	$FullSprite.visible = true
+func set_hungry():
+	$HungrySprite.visible = true
+	$FullSprite.visible = false

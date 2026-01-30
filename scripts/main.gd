@@ -1,18 +1,14 @@
 extends Node2D
 
-var DEVIL_BOSS_SCENE = preload("res://scenes/devil_boss.tscn")
+
 
 var RNG = RandomNumberGenerator.new()
-
-var mouse_on_mouth = false
 
 
 func _ready():
 	
 	#create boss
-	var temp = DEVIL_BOSS_SCENE.instantiate()
-	add_child(temp)
-	temp.attempt_eat_item.connect(_attempt_eat_item)
+	pass
 
 	#create building
 	#$TileMapLayer2.place_building(Vector2(-3,4),"oven")
@@ -31,7 +27,6 @@ func reward():
 	$ItemManager.drop_item_ukn()
 	$GodChoiceManager.display_rewards()
 	
-func _attempt_eat_item(on_mouth : bool):
-	$ItemManager.mouse_on_mouth = on_mouth
+
 	
 	

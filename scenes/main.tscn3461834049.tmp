@@ -385,11 +385,10 @@ sprite_frames = SubResource("SpriteFrames_jscy8")
 frame_progress = 0.45605686
 centered = false
 
-[node name="SacrificeManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager")]
+[node name="SacrificeManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager", "DialogManager")]
 script = ExtResource("5_tbgi4")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
-ItemManager = NodePath("../ItemManager")
 
 [node name="Timer" type="Timer" parent="SacrificeManager"]
 autostart = true
