@@ -246,17 +246,20 @@ func drop_item(item):
 	pos = TileLayer.local_to_map(pos)
 	item_dropped.emit()
 	
-	if not item.IS_BUNDLE:
-		if mouse_on_mouth:
-			if not (item_is_last and crops_planted[item.item_name] == 0):
+	
+	if mouse_on_mouth:
+		if not (item_is_last and crops_planted[item.item_name] == 0):
+			if item.IS_BUNDLE:
+				SacrificeManager.sacrifice(item.item_name, item.num_items) 
+			else:		
 				SacrificeManager.sacrifice(item.item_name)
-				delete_item = true
-				$EatItem.play()
-			else:
-				DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
-		
+			delete_item = true
+			$EatItem.play()
+		else:
+			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
+	elif not item.IS_BUNDLE:
 		#Attempt place crop
-		elif tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
+		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 			if TileLayer2.is_empty(pos):#empty cell
 				delete_item = true
 				TileLayer2.plant_crop(pos,item.item_name)

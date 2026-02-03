@@ -118,13 +118,13 @@ func update_sacrifice_text():
 			$SacrificeGUI/SacrificeText.add_image(FORWARD_SLASH_IMG)
 			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
 		
-func sacrifice(sacrificed_item_name):
+func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
 	if sacrificed_item_name in requirements:
 		if filled_requirements[sacrificed_item_name] < requirements[sacrificed_item_name]:
 			if not first_sacrifice_made:
 				first_sacrifice_made = true
 				TutorialManager.next(true, false, false)
-			filled_requirements[sacrificed_item_name] +=1 
+			filled_requirements[sacrificed_item_name] += num_items
 			update_sacrifice_text()
 			check_requirements_met()
 			if requirements_met:
