@@ -144,7 +144,7 @@ func check_requirements_met():
 	
 func _on_timer_timeout() -> void:
 	next_round()
-	devil_boss.set_full()
+	devil_boss.set_hungry()
 	$Timer.start()
 func reward():
 	get_parent().reward()
