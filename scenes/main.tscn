@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://uvtnj7q44wpk"]
+[gd_scene format=4 uid="uid://uvtnj7q44wpk"]
 
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
@@ -22,14 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
-[ext_resource type="Script" uid="uid://ci5a8xw4i84w" path="res://scripts/dialog_box.gd" id="16_yq6so"]
 [ext_resource type="AudioStream" uid="uid://cjalawduvlllu" path="res://audio/UI/click button.wav" id="17_vxglm"]
+[ext_resource type="PackedScene" uid="uid://cn2vqi5iut3jl" path="res://scenes/dialog_manager.tscn" id="17_yq6so"]
 [ext_resource type="AudioStream" uid="uid://bo2jkhcfx1wcp" path="res://audio/game/item_pop.wav" id="18_jscy8"]
 [ext_resource type="AudioStream" uid="uid://df6iv3mok8jea" path="res://audio/game/pick up.wav" id="19_y6deb"]
 [ext_resource type="AudioStream" uid="uid://cby1kb116pxk6" path="res://audio/game/put down.wav" id="20_og1vs"]
 [ext_resource type="AudioStream" uid="uid://d137q5740kqhh" path="res://audio/game/drop on building.wav" id="21_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bh0rsvdgpkp3a" path="res://audio/game/eat_item.wav" id="22_2wyq8"]
-[ext_resource type="Script" uid="uid://d4lalvy2n8ynm" path="res://scenes/dialog_manager.gd" id="28_2f3dj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -355,56 +354,56 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fv21b"]
 radius = 18.0
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1004566761]
 script = ExtResource("1_o5qli")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1226002873]
 offset = Vector2(0, -30)
 zoom = Vector2(4, 4)
 
-[node name="TileMapLayerBG" type="TileMapLayer" parent="."]
+[node name="TileMapLayerBG" type="TileMapLayer" parent="." unique_id=321540679]
 position = Vector2(72, -59)
 tile_map_data = PackedByteArray("AADy//z/AAAFAAEAAADy//3/AAAFAAEAAADy//7/AAAFAAEAAADy////AAAFAAEAAADy/wAAAAAFAAEAAADy/wEAAAAFAAEAAADy/wIAAAAFAAEAAADy/wMAAAAFAAEAAADy/wQAAAAFAAEAAADy/wUAAAAFAAEAAADy/wYAAAAFAAEAAADy/wcAAAAFAAEAAADz//z/AAAFAAEAAADz//3/AAAFAAEAAADz//7/AAAFAAEAAADz////AAAFAAEAAADz/wAAAAAFAAEAAADz/wEAAAAFAAEAAADz/wIAAAAFAAEAAADz/wMAAAAFAAEAAADz/wQAAAAFAAEAAADz/wUAAAAFAAEAAADz/wYAAAAFAAEAAADz/wcAAAAFAAEAAAD0//z/AAAFAAEAAAD0//3/AAAFAAEAAAD0//7/AAAFAAEAAAD0////AAAFAAEAAAD0/wAAAAAFAAEAAAD0/wEAAAAFAAEAAAD0/wIAAAAFAAEAAAD0/wMAAAAFAAEAAAD0/wQAAAAFAAEAAAD0/wUAAAAFAAEAAAD0/wYAAAAFAAEAAAD0/wcAAAAFAAEAAAD1//z/AAAFAAEAAAD1//3/AAAFAAEAAAD1//7/AAAFAAEAAAD1////AAAFAAEAAAD1/wAAAAAFAAEAAAD1/wEAAAAFAAEAAAD1/wIAAAAFAAEAAAD1/wMAAAAFAAEAAAD1/wQAAAAFAAEAAAD1/wUAAAAFAAEAAAD1/wYAAAAFAAEAAAD1/wcAAAAFAAEAAAD2//z/AAAFAAEAAAD2//3/AAAFAAEAAAD2//7/AAAFAAEAAAD2////AAAFAAEAAAD2/wAAAAAFAAEAAAD2/wEAAAAFAAEAAAD2/wMAAAAFAAEAAAD2/wUAAAAFAAEAAAD2/wYAAAAFAAEAAAD2/wcAAAAFAAEAAAD3//z/AAAFAAEAAAD3//3/AAAFAAEAAAD3//7/AAAFAAEAAAD3////AAAFAAEAAAD3/wAAAAAFAAEAAAD3/wEAAAAFAAEAAAD3/wMAAAAFAAEAAAD3/wUAAAAFAAEAAAD3/wYAAAAFAAEAAAD3/wcAAAAFAAEAAAD4//z/AAAFAAEAAAD4//3/AAAFAAEAAAD4//7/AAAFAAEAAAD4////AAAFAAEAAAD4/wAAAAAFAAEAAAD4/wEAAAAFAAEAAAD4/wIAAAAFAAEAAAD4/wMAAAAFAAEAAAD4/wUAAAAFAAEAAAD4/wYAAAAFAAEAAAD4/wcAAAAFAAEAAAD5//z/AAAFAAEAAAD5//3/AAAFAAEAAAD5//7/AAAFAAEAAAD5////AAAFAAEAAAD5/wAAAAAFAAEAAAD5/wEAAAAFAAEAAAD5/wIAAAAFAAEAAAD5/wMAAAAFAAEAAAD5/wQAAAAFAAEAAAD5/wYAAAAFAAEAAAD5/wcAAAAFAAEAAAD6//z/AAAFAAEAAAD6//3/AAAFAAEAAAD6//7/AAAFAAEAAAD6////AAAFAAEAAAD6/wAAAAAFAAEAAAD6/wEAAAAFAAEAAAD6/wIAAAAFAAEAAAD6/wMAAAAFAAEAAAD6/wQAAAAFAAEAAAD6/wUAAAAFAAEAAAD6/wYAAAAFAAEAAAD6/wcAAAAFAAEAAAD7//z/AAAFAAEAAAD7//3/AAAFAAEAAAD7//7/AAAFAAEAAAD7/wAAAAAFAAEAAAD7/wEAAAAFAAEAAAD7/wIAAAAFAAEAAAD7/wMAAAAFAAEAAAD7/wQAAAAFAAEAAAD7/wUAAAAFAAEAAAD7/wYAAAAFAAEAAAD7/wcAAAAFAAEAAAD8//z/AAAFAAEAAAD8//3/AAAFAAEAAAD8//7/AAAFAAEAAAD8/wAAAAAFAAEAAAD8/wEAAAAFAAEAAAD8/wIAAAAFAAEAAAD8/wMAAAAFAAEAAAD8/wQAAAAFAAEAAAD8/wUAAAAFAAEAAAD8/wYAAAAFAAEAAAD8/wcAAAAFAAEAAAD9//z/AAAFAAEAAAD9//3/AAAFAAEAAAD9//7/AAAFAAEAAAD9/wEAAAAFAAEAAAD9/wIAAAAFAAEAAAD9/wMAAAAFAAEAAAD9/wQAAAAFAAEAAAD9/wUAAAAFAAEAAAD9/wYAAAAFAAEAAAD9/wcAAAAFAAEAAAD+//z/AAAFAAEAAAD+//3/AAAFAAEAAAD+//7/AAAFAAEAAAD+////AAAFAAEAAAD+/wAAAAAFAAEAAAD+/wEAAAAFAAEAAAD+/wIAAAAFAAEAAAD+/wMAAAAFAAEAAAD+/wQAAAAFAAEAAAD+/wUAAAAFAAEAAAD+/wYAAAAFAAEAAAD+/wcAAAAFAAEAAAD///z/AAAFAAEAAAD///3/AAAFAAEAAAD///7/AAAFAAEAAAD/////AAAFAAEAAAD//wAAAAAFAAEAAAD//wEAAAAFAAEAAAD//wIAAAAFAAEAAAD//wMAAAAFAAEAAAD//wQAAAAFAAEAAAD//wUAAAAFAAEAAAD//wYAAAAFAAEAAAD//wcAAAAFAAEAAAAAAPz/AAAFAAEAAAAAAP3/AAAFAAEAAAAAAP7/AAAFAAEAAAAAAP//AAAFAAEAAAAAAAAAAAAFAAEAAAAAAAEAAAAFAAEAAAAAAAIAAAAFAAEAAAAAAAMAAAAFAAEAAAAAAAQAAAAFAAEAAAAAAAUAAAAFAAEAAAAAAAYAAAAFAAEAAAAAAAcAAAAFAAEAAAABAPz/AAAFAAEAAAABAP3/AAAFAAEAAAABAP7/AAAFAAEAAAABAP//AAAFAAEAAAABAAAAAAAFAAEAAAABAAEAAAAFAAEAAAABAAIAAAAFAAEAAAABAAMAAAAFAAEAAAABAAQAAAAFAAEAAAABAAUAAAAFAAEAAAABAAYAAAAFAAEAAAABAAcAAAAFAAEAAAACAPz/AAAFAAEAAAACAP3/AAAFAAEAAAACAP7/AAAFAAEAAAACAP//AAAFAAEAAAACAAAAAAAFAAEAAAACAAEAAAAFAAEAAAACAAIAAAAFAAEAAAACAAMAAAAFAAEAAAACAAQAAAAFAAEAAAACAAUAAAAFAAEAAAACAAYAAAAFAAEAAAACAAcAAAAFAAEAAAADAPz/AAAFAAEAAAADAP3/AAAFAAEAAAADAP7/AAAFAAEAAAADAP//AAAFAAEAAAADAAAAAAAFAAEAAAADAAEAAAAFAAEAAAADAAIAAAAFAAEAAAADAAMAAAAFAAEAAAADAAQAAAAFAAEAAAADAAUAAAAFAAEAAAADAAYAAAAFAAEAAAADAAcAAAAFAAEAAADx//z/AAAFAAEAAADx//3/AAAFAAEAAADx//7/AAAFAAEAAADx////AAAFAAEAAADx/wAAAAAFAAEAAADx/wEAAAAFAAEAAADx/wIAAAAFAAEAAADx/wMAAAAFAAEAAADx/wQAAAAFAAEAAADx/wUAAAAFAAEAAADx/wYAAAAFAAEAAADx/wcAAAAFAAEAAAAEAPz/AAAFAAEAAAAEAP3/AAAFAAEAAAAEAP7/AAAFAAEAAAAEAP//AAAFAAEAAAAEAAAAAAAFAAEAAAAEAAEAAAAFAAEAAAAEAAIAAAAFAAEAAAAEAAMAAAAFAAEAAAAEAAQAAAAFAAEAAAAEAAUAAAAFAAEAAAAEAAYAAAAFAAEAAAAEAAcAAAAFAAEAAAAFAPz/AAAFAAEAAAAFAP3/AAAFAAEAAAAFAP7/AAAFAAEAAAAFAP//AAAFAAEAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAEAAAAFAAMAAAAFAAEAAAAFAAQAAAAFAAEAAAAFAAUAAAAFAAEAAAAFAAYAAAAFAAEAAAAFAAcAAAAFAAEAAAD9////AAAFAAEAAAD8////AAAFAAEAAAD7////AAAFAAEAAAD9/wAAAAAFAAEAAAD2/wQAAAAFAAEAAAD3/wQAAAAFAAEAAAD4/wQAAAAFAAEAAAD5/wUAAAAFAAEAAAD2/wIAAAAFAAEAAAD3/wIAAAAFAAEAAAA=")
 tile_set = SubResource("TileSet_o5qli")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1649178319]
 position = Vector2(72, -59)
 tile_map_data = PackedByteArray("AAD1/wIAAAADAAMAAAABAAMAAAAGAAEAAAABAAIAAAAHAAEAAAACAAIAAAAHAAEAAAAAAAMAAAAHAAEAAAD1/wUAAAAHAAIAAAD6/wYAAAAGAAIAAAD3/wIAAAADAAMAAAD+/wYAAAAHAAIAAAAAAAUAAAAHAAIAAAD6////AAAHAAEAAAD7/wAAAAAHAAEAAAD8//7/AAAHAAEAAAD7////AAAGAAEAAAD3//7/AAAHAAIAAAD1/wAAAAAHAAIAAAAAAP7/AAAAAAUAAAAAAP//AAAAAAcAAAABAP//AAABAAcAAAABAP7/AAABAAUAAAACAP7/AAACAAUAAAACAP//AAACAAcAAAADAAMAAAADAAUAAAADAAQAAAADAAYAAAADAAUAAAADAAcAAAA=")
 tile_set = SubResource("TileSet_o5qli")
 
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1286760783]
 position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("5_tipki")
 
-[node name="TileMapManager" type="Node2D" parent="."]
+[node name="TileMapManager" type="Node2D" parent="." unique_id=1683331704]
 script = ExtResource("2_ya4ey")
 
-[node name="TileOutline" type="AnimatedSprite2D" parent="TileMapManager"]
+[node name="TileOutline" type="AnimatedSprite2D" parent="TileMapManager" unique_id=1103397236]
 sprite_frames = SubResource("SpriteFrames_jscy8")
 frame_progress = 0.45605686
 centered = false
 
-[node name="SacrificeManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager")]
+[node name="SacrificeManager" type="Node2D" parent="." unique_id=1921713198 node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager")]
 script = ExtResource("5_tbgi4")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
 ItemManager = NodePath("../ItemManager")
 
-[node name="Timer" type="Timer" parent="SacrificeManager"]
+[node name="Timer" type="Timer" parent="SacrificeManager" unique_id=1253906982]
 autostart = true
 
-[node name="TimerGUI" type="Node2D" parent="SacrificeManager"]
+[node name="TimerGUI" type="Node2D" parent="SacrificeManager" unique_id=910710815]
 position = Vector2(-131, -85)
 
-[node name="TimerBG" type="Sprite2D" parent="SacrificeManager/TimerGUI"]
+[node name="TimerBG" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=2128667031]
 texture = ExtResource("15_jscy8")
 
-[node name="TimerSymbol" type="Sprite2D" parent="SacrificeManager/TimerGUI"]
+[node name="TimerSymbol" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=1831956212]
 position = Vector2(-17, 0)
 texture = ExtResource("13_gqmmt")
 
-[node name="TimeText" type="Label" parent="SacrificeManager/TimerGUI"]
+[node name="TimeText" type="Label" parent="SacrificeManager/TimerGUI" unique_id=380928192]
 offset_left = -10.0
 offset_top = -6.0
 offset_right = 24.0
@@ -413,18 +412,18 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_dp3eg")
 theme_override_font_sizes/font_size = 12
 
-[node name="SacrificeGUI" type="Node2D" parent="SacrificeManager"]
+[node name="SacrificeGUI" type="Node2D" parent="SacrificeManager" unique_id=654801594]
 position = Vector2(0, -107)
 
-[node name="SacrificeBg" type="Polygon2D" parent="SacrificeManager/SacrificeGUI"]
+[node name="SacrificeBg" type="Polygon2D" parent="SacrificeManager/SacrificeGUI" unique_id=567244064]
 visible = false
 color = Color(0.16565639, 0.16565642, 0.16565639, 1)
 polygon = PackedVector2Array(-49, -83, 48, -83, 48, -56, -50, -56)
 
-[node name="SacrificeBG2" type="Sprite2D" parent="SacrificeManager/SacrificeGUI"]
+[node name="SacrificeBG2" type="Sprite2D" parent="SacrificeManager/SacrificeGUI" unique_id=745133524]
 texture = ExtResource("14_yc10j")
 
-[node name="SacrificeText" type="RichTextLabel" parent="SacrificeManager/SacrificeGUI"]
+[node name="SacrificeText" type="RichTextLabel" parent="SacrificeManager/SacrificeGUI" unique_id=784471640]
 offset_left = -87.0
 offset_top = -11.0
 offset_right = 87.0
@@ -437,81 +436,42 @@ bbcode_enabled = true
 text = "Sacrafice"
 horizontal_alignment = 1
 
-[node name="SacrificeBar" type="TextureProgressBar" parent="SacrificeManager/SacrificeGUI"]
+[node name="SacrificeBar" type="TextureProgressBar" parent="SacrificeManager/SacrificeGUI" unique_id=1220429030]
 visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Lives" type="CanvasLayer" parent="."]
+[node name="Lives" type="CanvasLayer" parent="." unique_id=543988375]
 offset = Vector2(45, 50)
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 45, 50)
 script = ExtResource("13_trceg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Lives"]
+[node name="Sprite2D" type="Sprite2D" parent="Lives" unique_id=596144807]
 position = Vector2(18.25, -0.5)
 texture = ExtResource("15_jscy8")
 
-[node name="TutorialManager" type="Node" parent="." node_paths=PackedStringArray("DialogManager", "SacrificeTimer")]
+[node name="TutorialManager" type="Node" parent="." unique_id=342083716 node_paths=PackedStringArray("DialogManager", "SacrificeTimer")]
 script = ExtResource("15_fv21b")
 DialogManager = NodePath("../DialogManager")
 SacrificeTimer = NodePath("../SacrificeManager/Timer")
 
-[node name="DialogManager" type="CanvasLayer" parent="."]
-layer = 0
-visible = false
-script = ExtResource("28_2f3dj")
+[node name="DialogManager" parent="." unique_id=1930162164 instance=ExtResource("17_yq6so")]
 
-[node name="DialogBox" type="Control" parent="DialogManager"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 423.0
-offset_top = 161.0
-offset_right = 567.0
-offset_bottom = 201.0
-script = ExtResource("16_yq6so")
-
-[node name="BorderRect" type="ColorRect" parent="DialogManager/DialogBox"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(4, 4)
-color = Color(0, 0, 0, 1)
-
-[node name="InnerRect" type="ColorRect" parent="DialogManager/DialogBox"]
-layout_mode = 0
-offset_right = 106.5
-offset_bottom = 18.0
-scale = Vector2(4, 4)
-
-[node name="Dialog" type="Label" parent="DialogManager/DialogBox"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 212.5
-offset_bottom = 25.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_tefeu")
-theme_override_font_sizes/font_size = 8
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="DialogManager"]
-
-[node name="GodChoiceManager" type="CanvasLayer" parent="."]
+[node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198]
 process_mode = 3
 visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("7_o6xl0")
 
-[node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager"]
+[node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager" unique_id=1704588727]
 position = Vector2(-80.039505, -43.84252)
 scale = Vector2(0.31590164, 0.31496063)
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 polygon = PackedVector2Array(-52, -47, 1302, -64, 1408, 751, -117, 825)
 
-[node name="TitleText" type="Label" parent="GodChoiceManager"]
+[node name="TitleText" type="Label" parent="GodChoiceManager" unique_id=345626464]
 offset_top = 10.0
 offset_right = 320.0
 offset_bottom = 33.0
@@ -521,7 +481,7 @@ text = "blah blah blah
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager" unique_id=333087834]
 offset_top = 70.0
 offset_right = 320.0
 offset_bottom = 120.0
@@ -529,56 +489,56 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="ClickButton" type="AudioStreamPlayer" parent="GodChoiceManager"]
+[node name="ClickButton" type="AudioStreamPlayer" parent="GodChoiceManager" unique_id=1296709624]
 stream = ExtResource("17_vxglm")
 volume_db = 5.0
 
-[node name="ItemManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager", "DialogManager")]
+[node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager")]
 z_index = 3
 script = ExtResource("10_choun")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
 
-[node name="item_pop" type="AudioStreamPlayer" parent="ItemManager"]
+[node name="item_pop" type="AudioStreamPlayer" parent="ItemManager" unique_id=58524719]
 stream = ExtResource("18_jscy8")
 
-[node name="PickUp" type="AudioStreamPlayer" parent="ItemManager"]
+[node name="PickUp" type="AudioStreamPlayer" parent="ItemManager" unique_id=961531223]
 stream = ExtResource("19_y6deb")
 
-[node name="PutDown" type="AudioStreamPlayer" parent="ItemManager"]
+[node name="PutDown" type="AudioStreamPlayer" parent="ItemManager" unique_id=1185516843]
 stream = ExtResource("20_og1vs")
 
-[node name="DropInBuilding" type="AudioStreamPlayer" parent="ItemManager"]
+[node name="DropInBuilding" type="AudioStreamPlayer" parent="ItemManager" unique_id=55390835]
 stream = ExtResource("21_og1vs")
 
-[node name="EatItem" type="AudioStreamPlayer" parent="ItemManager"]
+[node name="EatItem" type="AudioStreamPlayer" parent="ItemManager" unique_id=886923991]
 stream = ExtResource("22_2wyq8")
 
-[node name="BundleField" type="Area2D" parent="ItemManager"]
+[node name="BundleField" type="Area2D" parent="ItemManager" unique_id=1744631502]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/BundleField"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/BundleField" unique_id=830481283]
 shape = SubResource("CircleShape2D_fv21b")
 
-[node name="BuildingManager" type="Node2D" parent="." node_paths=PackedStringArray("TutorialManager")]
+[node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TutorialManager")]
 script = ExtResource("12_eb6dy")
 TutorialManager = NodePath("../TutorialManager")
 
-[node name="FishTimer" type="Timer" parent="BuildingManager"]
+[node name="FishTimer" type="Timer" parent="BuildingManager" unique_id=158535035]
 wait_time = 6.0
 autostart = true
 
-[node name="DeathScreen" type="CanvasLayer" parent="."]
+[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1350873332]
 process_mode = 3
 visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("14_a8y0u")
 
-[node name="Polygon2D" type="Polygon2D" parent="DeathScreen"]
+[node name="Polygon2D" type="Polygon2D" parent="DeathScreen" unique_id=854887507]
 color = Color(0.87959766, 0.5890536, 0.36864072, 1)
 polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
 
-[node name="PlayAgain" type="TextureButton" parent="DeathScreen"]
+[node name="PlayAgain" type="TextureButton" parent="DeathScreen" unique_id=1526225169]
 anchors_preset = -1
 anchor_right = 0.003
 anchor_bottom = 0.0050000004
@@ -589,7 +549,7 @@ offset_bottom = 70.4
 texture_normal = ExtResource("15_jbj1t")
 texture_hover = ExtResource("15_jbj1t")
 
-[node name="BackToMenu" type="TextureButton" parent="DeathScreen"]
+[node name="BackToMenu" type="TextureButton" parent="DeathScreen" unique_id=2078703589]
 offset_left = 118.0
 offset_top = 117.5
 offset_right = 213.0
@@ -597,7 +557,7 @@ offset_bottom = 128.25
 texture_normal = ExtResource("16_muem4")
 texture_hover = ExtResource("16_muem4")
 
-[node name="All Lives Lost" type="Label" parent="DeathScreen"]
+[node name="All Lives Lost" type="Label" parent="DeathScreen" unique_id=2133744565]
 offset_top = 31.5
 offset_right = 320.0
 offset_bottom = 45.25
@@ -607,7 +567,6 @@ text = "All Lives Lost"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
-[connection signal="timeout" from="DialogManager/Timer" to="DialogManager" method="_on_timer_timeout"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]

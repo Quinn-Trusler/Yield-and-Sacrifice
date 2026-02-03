@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://qeot74v4rmwj"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://qeot74v4rmwj"]
 
 [ext_resource type="Texture2D" uid="uid://cvhitm1i61l3r" path="res://art/buildings/mill.png" id="1_tmm01"]
 

@@ -79,21 +79,38 @@ func _process(_delta: float) -> void:
 		if not Input.is_action_pressed("mouse_down"):
 			item_being_dragged.drop()
 			drop_item(item_being_dragged)
-	elif Input.is_action_just_pressed("mouse_down") and item_in_focus:
-		if Input.is_action_pressed("form_bundle"):
-			if item_in_focus.IS_BUNDLE == true:
-				harvest_from_bundle()
-			else:
-				form_bundle()
-
-		else:#Normal Click
+	else:
+		if Input.is_action_just_pressed("right_click") and item_in_focus:
+			#if Input.is_action_pressed("form_bundle"):
+				if item_in_focus.IS_BUNDLE == true:
+					#harvest_from_bundle()
+					grab_from_bundle()
+				else:
+					form_bundle()
+		if Input.is_action_just_pressed("mouse_down") and item_in_focus:#Normal Click
 			item_in_focus.pick_up()
 			pickup_item(item_in_focus)
+			
 func erase_item(item):
 	remove_from_focus_list(item)
 	draggable_items.erase(item)
 	item.queue_free()
 
+#drage items from bundle
+func grab_from_bundle():
+	var temp
+	print("do the grubby hands")
+	if item_in_focus.get_num() == 2:#time to get deleted
+		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
+		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
+		erase_item(item_in_focus)# delete bundled item
+	else:
+		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
+		item_in_focus.decrease_num()
+	temp.pick_up()
+	pickup_item(temp)
+
+#Pop items out of bundle
 #In this case the bundle is the item in focus
 func harvest_from_bundle():
 	if item_in_focus.get_num() == 2:#time to get deleted
@@ -118,8 +135,11 @@ func form_bundle():
 			erase_item(valid_items[num_deleted])
 			num_deleted += 1
 	
-		create_bundled_item(item_in_focus.item_name, get_global_mouse_position(), num_deleted + 1)
+		var bundled_item = create_bundled_item(item_in_focus.item_name, get_global_mouse_position(), num_deleted + 1)
 		erase_item(item_in_focus)
+		bundled_item.pick_up()
+		pickup_item(bundled_item)
+		
 	
 		
 func remove_from_focus_list(item_obj) -> void:
@@ -157,6 +177,7 @@ func create_draggable_item(item_name,pos):
 	draggable_items.append(temp)
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
+	return temp
 func create_bundled_item(item_name: String, pos: Vector2, num : int):
 	var temp = BUNDLED_ITEM.instantiate()
 	add_child(temp)
@@ -164,6 +185,7 @@ func create_bundled_item(item_name: String, pos: Vector2, num : int):
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.set_num(num)
 	temp.position = pos
+	return temp
 
 func create_animated_item(item_name, pos):
 	var temp = ANIMATED_ITEM.instantiate()
