@@ -43,6 +43,7 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 "mushroom":{"display_name":"Mushroom","img_name":ITEMS_FOLDER + "mushroom","is_animated":false,"points":8,"place_on":[]},
 "voldka":{"display_name":"Voldka","img_name":ITEMS_FOLDER + "voldka","is_animated":false,"points":20,"place_on":[]},
 "rum":{"display_name":"Rum","img_name":ITEMS_FOLDER + "rum","is_animated":false,"points":20,"place_on":[]},
+"gold":{"display_name":"Gold","img_name":ITEMS_FOLDER + "gold","is_animated":false,"points":20,"place_on":[]},
 "pepper_juice":{"display_name":"Pepper Juice","img_name":ITEMS_FOLDER + "pepper_juice","is_animated":false,"points":20,"place_on":[]},
 "watering_can":{"display_name":"Watering Can","img_name":ITEM_FRAMES_FOLDER + "watering_can.tres","points":100,"is_animated":true,"place_on":[]}
 }

@@ -52,11 +52,21 @@ var choice_instances = []
 @onready var Lives = get_node("/root/Main/Lives")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 @onready var SacrificeManager = get_node("/root/Main/SacrificeManager") 
+@export var GOLD: Node2D
 
 var round_num = 0
 var rewards_collected = 0
 var punishments_collected = 0
+var gold = 0
 	
+func _ready():
+	GOLD.update_gold_num(gold)
+func get_gold():
+	return gold
+	
+func increase_gold(amt):
+	gold += amt
+	GOLD.update_gold_num(gold)
 
 func chose_punishments():
 	#punishments off what the player curently  has

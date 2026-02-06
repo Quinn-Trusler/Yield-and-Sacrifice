@@ -23,6 +23,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 #Tutorial
 @export var TutorialManager : Node
 @export var DialogManager: Node2D
+@export var GodChoiceManager: CanvasLayer
 var first_item_planted : bool = false
 
 
@@ -66,12 +67,25 @@ func spawn_testing_items():
 	#
 	create_draggable_item("voldka",Vector2(-30,-20))
 	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	create_draggable_item("gold",Vector2(-60,-40))
+	
 	#create_draggable_item("pepper_juice",Vector2(-70,-40))
 
 func _ready() -> void:
 	create_draggable_item("carrot",Vector2(-50,-30))
 	if Cheats.TESTING_ITEMS:
 		spawn_testing_items()
+
+func consume_gold():
+	erase_item(item_in_focus)
+	refocus()
+	GodChoiceManager.increase_gold(1)
 func _process(_delta: float) -> void:
 	$BundleField.position = get_global_mouse_position()
 	if item_being_dragged:
@@ -82,14 +96,19 @@ func _process(_delta: float) -> void:
 	else:
 		if Input.is_action_just_pressed("right_click") and item_in_focus:
 			#if Input.is_action_pressed("form_bundle"):
+			if item_in_focus.item_name == "gold":
+				consume_gold()
+			else:
 				if item_in_focus.IS_BUNDLE == true:
-					#harvest_from_bundle()
 					grab_from_bundle()
 				else:
 					form_bundle()
-		if Input.is_action_just_pressed("mouse_down") and item_in_focus:#Normal Click
-			item_in_focus.pick_up()
-			pickup_item(item_in_focus)
+		elif Input.is_action_just_pressed("mouse_down") and item_in_focus:#Normal Click
+			if item_in_focus.item_name == "gold":
+				consume_gold()
+			else:
+				item_in_focus.pick_up()
+				pickup_item(item_in_focus)
 			
 func erase_item(item):
 	remove_from_focus_list(item)
@@ -160,7 +179,7 @@ func refocus():
 	if len(focus_items):
 		#Search through array for biggest layer
 		for i in range(len(focus_items)):
-			if focus_items[i].get_index() > largest_layer:
+			#if focus_items[i].get_index() > largest_layer:
 				largest_layer = focus_items[i].get_index()
 				ind = i
 		if item_in_focus:

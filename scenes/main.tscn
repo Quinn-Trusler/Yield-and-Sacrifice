@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://d1v40dijb78ie" path="res://scenes/tutorial_manager.gd" id="15_fv21b"]
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
+[ext_resource type="Script" uid="uid://bfesuyaqtmo5r" path="res://scenes/gold.gd" id="16_fv21b"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
 [ext_resource type="AudioStream" uid="uid://cjalawduvlllu" path="res://audio/UI/click button.wav" id="17_vxglm"]
 [ext_resource type="PackedScene" uid="uid://cn2vqi5iut3jl" path="res://scenes/dialog_manager.tscn" id="17_yq6so"]
@@ -449,6 +450,23 @@ script = ExtResource("13_trceg")
 position = Vector2(18.25, -0.5)
 texture = ExtResource("15_jscy8")
 
+[node name="Gold" type="Node2D" parent="." unique_id=482196792]
+position = Vector2(-149, -107)
+script = ExtResource("16_fv21b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gold" unique_id=507619477]
+position = Vector2(17.25, 44.5)
+texture = ExtResource("15_jscy8")
+
+[node name="GoldText" type="RichTextLabel" parent="Gold" unique_id=693687358]
+offset_left = -5.0
+offset_top = 35.0
+offset_right = 29.0
+offset_bottom = 56.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("10_dp3eg")
+theme_override_font_sizes/normal_font_size = 12
+
 [node name="TutorialManager" type="Node" parent="." unique_id=342083716 node_paths=PackedStringArray("DialogManager", "SacrificeTimer")]
 script = ExtResource("15_fv21b")
 DialogManager = NodePath("../DialogManager")
@@ -458,12 +476,13 @@ SacrificeTimer = NodePath("../SacrificeManager/Timer")
 visible = false
 position = Vector2(0, -72)
 
-[node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198]
+[node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198 node_paths=PackedStringArray("GOLD")]
 process_mode = 3
 visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("7_o6xl0")
+GOLD = NodePath("../Gold")
 
 [node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager" unique_id=1704588727]
 position = Vector2(-80.039505, -43.84252)
@@ -493,11 +512,12 @@ alignment = 1
 stream = ExtResource("17_vxglm")
 volume_db = 5.0
 
-[node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager")]
+[node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager", "GodChoiceManager")]
 z_index = 3
 script = ExtResource("10_choun")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
+GodChoiceManager = NodePath("../GodChoiceManager")
 
 [node name="item_pop" type="AudioStreamPlayer" parent="ItemManager" unique_id=58524719]
 stream = ExtResource("18_jscy8")
