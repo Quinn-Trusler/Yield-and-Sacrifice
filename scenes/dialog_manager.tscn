@@ -1,48 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cn2vqi5iut3jl"]
+[gd_scene format=3 uid="uid://cn2vqi5iut3jl"]
 
 [ext_resource type="Script" uid="uid://d4lalvy2n8ynm" path="res://scenes/dialog_manager.gd" id="1_m88cy"]
 [ext_resource type="Script" uid="uid://ci5a8xw4i84w" path="res://scripts/dialog_box.gd" id="2_ig1yv"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_chucw"]
 
-[node name="DialogManager" type="CanvasLayer"]
-layer = 0
-visible = false
+[node name="DialogManager" type="Node2D" unique_id=1283161385]
 script = ExtResource("1_m88cy")
 
-[node name="DialogBox" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 423.0
-offset_top = 161.0
-offset_right = 567.0
-offset_bottom = 201.0
+[node name="DialogBox" type="Node2D" parent="." unique_id=776497850]
 script = ExtResource("2_ig1yv")
 
-[node name="BorderRect" type="ColorRect" parent="DialogBox"]
-layout_mode = 0
+[node name="BorderRect" type="ColorRect" parent="DialogBox" unique_id=1502853560]
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(4, 4)
 color = Color(0, 0, 0, 1)
 
-[node name="InnerRect" type="ColorRect" parent="DialogBox"]
-layout_mode = 0
-offset_right = 106.5
-offset_bottom = 18.0
-scale = Vector2(4, 4)
+[node name="InnerRect" type="ColorRect" parent="DialogBox" unique_id=1611513636]
+offset_left = -71.0
+offset_top = -15.0
+offset_right = 71.0
+offset_bottom = 11.0
 
-[node name="Dialog" type="Label" parent="DialogBox"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 212.5
-offset_bottom = 25.0
-scale = Vector2(2, 2)
+[node name="Dialog" type="Label" parent="DialogBox" unique_id=748374603]
+offset_left = -68.0
+offset_top = -12.0
+offset_right = 206.0
+offset_bottom = 30.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_chucw")
 theme_override_font_sizes/font_size = 8
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=36735306]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

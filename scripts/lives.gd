@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 var life_scenes = []
 var LIFE_ON = "life on"

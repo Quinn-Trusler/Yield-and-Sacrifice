@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 #something else in the program may want give text to the dialog manager
 
 #Time < 0 will be infinite

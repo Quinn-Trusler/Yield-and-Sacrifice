@@ -23,7 +23,7 @@ var mouse_on_mouth = false
 #Tutorial
 var first_sacrifice_made: bool = false
 @export var TutorialManager: Node
-@export var DialogManager: CanvasLayer
+@export var DialogManager: Node2D
 @export var ItemManager: Node2D
 
 func _ready():

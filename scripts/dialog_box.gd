@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 var border_size : int = 1
 var dialog : String = ""
@@ -22,7 +22,7 @@ func set_colour(border : Color,inner_rect : Color,text : Color) -> void:
 	pass
 
 func set_border_rect() -> void:
-	$BorderRect.position = $InnerRect.position - Vector2(border_size,border_size)*4 
+	$BorderRect.position = $InnerRect.position - Vector2(border_size,border_size)
 	$BorderRect.size = $InnerRect.size + Vector2(2*border_size, 2*border_size)
 	#print($Control/BorderRect.position, $Control/InnerRect.position)
 	#print($Control/BorderRect.size, $Control/InnerRect.size)

@@ -22,7 +22,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 
 #Tutorial
 @export var TutorialManager : Node
-@export var DialogManager: CanvasLayer
+@export var DialogManager: Node2D
 var first_item_planted : bool = false
 
 
