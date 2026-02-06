@@ -9,7 +9,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "reward": 5,"amt" : 1},
-"-5 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -5,"amt" : 1},
+"-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland"},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
@@ -17,10 +17,10 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": [null],"amt": 3}
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 20}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
-var punishments = {3:["burn land","-5 seconds"],20:["burn land"]}
+var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
 var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
 ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
 #ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
@@ -180,17 +180,18 @@ func god_choice_chosen(choice_name, id : int):
 		var count = 0
 		var tries = 0
 		var TRY_MAX = 1000
+		print("attempt to destroy land")
 		while count < choice["amt"]:
 			var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
 			var tile_name = get_tile_name_from_coordinates(pos)
 			tries +=1
 			if tries> TRY_MAX:
 				count +=1
-			print(tile_name)
-			if choice["reward"][0] == null:
-				TileLayer2.set_cell_scene(pos,-1)#delete cell
-				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
-				count+=1
+			if choice["reward"] == null:
+				if tile_name == null:
+					TileLayer2.set_cell_scene(pos,-1)#delete cell
+					TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+					count+=1
 			elif tile_name in choice["reward"]:
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
 				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)

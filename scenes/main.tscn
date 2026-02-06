@@ -455,6 +455,7 @@ DialogManager = NodePath("../DialogManager")
 SacrificeTimer = NodePath("../SacrificeManager/Timer")
 
 [node name="DialogManager" parent="." unique_id=1930162164 instance=ExtResource("17_yq6so")]
+visible = false
 position = Vector2(0, -72)
 
 [node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198]
