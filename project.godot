@@ -23,7 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GLOBALCONSTS="*res://scripts/global_constants.gd"
-Cheats="*res://cheats.gd"
+Cheats="*res://scripts/cheats.gd"
 
 [display]
 

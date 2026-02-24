@@ -63,10 +63,12 @@ var rewards_collected = 0
 var punishments_collected = 0
 var shops_seen = 0
 var shop_items_bought = 0
-var num_gold = 5
+var num_gold = 0
 var choice_type : CHOICE_TYPES
 	
 func _ready():
+	if Cheats.GOLD_OVERRIDE:
+		num_gold = Cheats.GOLD_OVERRIDE
 	GOLD.update_gold_num(num_gold)
 func get_gold():
 	return num_gold
