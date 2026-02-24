@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://xloox806hg68"]
+
+[ext_resource type="Script" uid="uid://dlx63v5ek8hek" path="res://scenes/shop_choice.gd" id="1_ffg54"]
+[ext_resource type="Texture2D" uid="uid://co8lcad2rgbw5" path="res://art/ui/choice_bg2.png" id="2_cn62g"]
+[ext_resource type="Texture2D" uid="uid://bqiqhruh084vl" path="res://art/ui/big_button_purple_dark.png" id="3_ffg54"]
+[ext_resource type="Texture2D" uid="uid://c4wccljcyim6r" path="res://art/ui/big_button_purple.png" id="4_cn62g"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="5_wjmx2"]
+[ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_kqscn"]
+[ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="7_d7fti"]
+[ext_resource type="Texture2D" uid="uid://3v8s7aem37xn" path="res://art/items/gold.png" id="8_cn62g"]
+
+[node name="ShopChoice" type="Control" unique_id=741941276]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 44.0
+offset_bottom = 59.0
+script = ExtResource("1_ffg54")
+
+[node name="BG3" type="Sprite2D" parent="." unique_id=157445685]
+position = Vector2(0, 14)
+texture = ExtResource("2_cn62g")
+
+[node name="BuyButton" type="TextureButton" parent="." unique_id=1156492122]
+layout_mode = 0
+offset_left = -25.0
+offset_top = 60.0
+offset_right = 25.0
+offset_bottom = 76.0
+texture_normal = ExtResource("3_ffg54")
+texture_hover = ExtResource("4_cn62g")
+
+[node name="Name" type="Label" parent="." unique_id=1940176617]
+layout_mode = 0
+offset_left = -44.0
+offset_top = -25.0
+offset_right = 44.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("5_wjmx2")
+theme_override_font_sizes/font_size = 12
+text = "name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="." unique_id=269328613]
+layout_mode = 0
+offset_left = -33.0
+offset_top = 38.0
+offset_right = 103.0
+offset_bottom = 262.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("6_kqscn")
+theme_override_font_sizes/font_size = 8
+text = "Yada Yada Yada"
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1582462990]
+position = Vector2(0, 15)
+texture = ExtResource("7_d7fti")
+
+[node name="Cost" type="Label" parent="." unique_id=695890922]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 65.0
+offset_right = 22.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("5_wjmx2")
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="GoldImg" type="Sprite2D" parent="." unique_id=1390084761]
+position = Vector2(-16, 70)
+texture = ExtResource("8_cn62g")
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_texture_button_pressed"]
