@@ -65,6 +65,7 @@ var shops_seen = 0
 var shop_items_bought = 0
 var num_gold = 0
 var choice_type : CHOICE_TYPES
+var completion_gold = GLOBALCONSTS.ROUND_COMPLETION_GOLD
 	
 func _ready():
 	if Cheats.GOLD_OVERRIDE:
@@ -76,6 +77,8 @@ func get_gold():
 func increase_gold(amt):
 	num_gold += amt
 	GOLD.update_gold_num(num_gold)
+
+# Load Display ----------------------------------------------------------------------
 
 func chose_punishments():
 	for key in punishments:
@@ -90,6 +93,7 @@ func chose_rewards():
 	for key in rewards:
 		if rewards_collected <= key:
 			return rewards[key]
+
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
@@ -142,6 +146,7 @@ func display_punishments():
 	choice_type = CHOICE_TYPES.Punishment
 	
 func display_rewards():
+	increase_gold(completion_gold)
 	round_num +=1
 	rewards_collected += 1
 	Lives.set_max_lives()
@@ -151,13 +156,20 @@ func display_rewards():
 
 func display_shop():
 	$TitleText.text = SHOP_TEXT
+	$SkipButton.visible = true
+	$GoldCount.visible = true
+	$GoldCount.update_gold_num(num_gold)
 	load_shopchoices(chose_shop_items())
 	choice_type = CHOICE_TYPES.Shop
+
+
+# Choice Chosen /  Close display ----------------------------------------------------------------------
 
 func delete_choice_instances():
 	for c in choice_instances:
 		c.queue_free()
 	choice_instances = []
+	
 func get_tile_name_from_coordinates(pos):
 	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
@@ -194,8 +206,6 @@ func unlock_sacrifices(items_unlocked, unlock_literal):
 
 		for unlock in new_unlocks:
 			SacrificeManager.add_allowed_sacrifice(unlock)
-			
-
 	
 # Runs after a punishment or reward is chosen
 func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
@@ -267,5 +277,13 @@ func destroy_land(choice : Dictionary) -> void:
 			count+=1
 				
 				
-			
+# Skip shop screen
+func _on_skip_button_pressed() -> void:
+	visible = false
+	$SkipButton.visible = false
+	$GoldCount.visible = false
+	delete_choice_instances()
+	$ClickButton.play()
+	get_tree().paused = false
+	SacrificeManager.update_requirements()
 	

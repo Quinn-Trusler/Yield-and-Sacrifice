@@ -29,9 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://df6iv3mok8jea" path="res://audio/game/pick up.wav" id="19_y6deb"]
 [ext_resource type="AudioStream" uid="uid://cby1kb116pxk6" path="res://audio/game/put down.wav" id="20_og1vs"]
 [ext_resource type="AudioStream" uid="uid://d137q5740kqhh" path="res://audio/game/drop on building.wav" id="21_og1vs"]
-[ext_resource type="Texture2D" uid="uid://u6nir5o6dasl" path="res://art/ui/skip_button.png" id="21_qkpxi"]
 [ext_resource type="AudioStream" uid="uid://bh0rsvdgpkp3a" path="res://audio/game/eat_item.wav" id="22_2wyq8"]
-[ext_resource type="Texture2D" uid="uid://bgr1wrie0ddb4" path="res://art/ui/skip_button_dark.png" id="22_5q0nq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -514,36 +512,6 @@ alignment = 1
 stream = ExtResource("17_vxglm")
 volume_db = 5.0
 
-[node name="SkipButton" type="TextureButton" parent="GodChoiceManager" unique_id=1596730009]
-visible = false
-offset_left = 140.0
-offset_top = 161.75
-offset_right = 180.0
-offset_bottom = 177.75
-pivot_offset = Vector2(20, 8)
-texture_normal = ExtResource("22_5q0nq")
-texture_hover = ExtResource("21_qkpxi")
-
-[node name="GoldCount" type="Node2D" parent="GodChoiceManager" unique_id=509738890]
-visible = false
-position = Vector2(5.75, 18.75)
-script = ExtResource("16_fv21b")
-
-[node name="Sprite2D" type="Sprite2D" parent="GodChoiceManager/GoldCount" unique_id=1754966755]
-visible = false
-position = Vector2(17.25, 44.5)
-texture = ExtResource("15_jscy8")
-
-[node name="GoldText" type="RichTextLabel" parent="GodChoiceManager/GoldCount" unique_id=1631080900]
-offset_left = -5.25
-offset_top = -10.25
-offset_right = 42.75
-offset_bottom = 10.75
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("10_dp3eg")
-theme_override_font_sizes/normal_font_size = 12
-text = "Gold"
-
 [node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager", "GodChoiceManager")]
 z_index = 3
 script = ExtResource("10_choun")
@@ -619,7 +587,6 @@ text = "All Lives Lost"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
-[connection signal="pressed" from="GodChoiceManager/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]

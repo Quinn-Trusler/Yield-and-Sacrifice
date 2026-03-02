@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d37y14x3gctjs"]
+
+[ext_resource type="Script" uid="uid://dm6igcn21bxis" path="res://scenes/gold_gained_popup.gd" id="1_tc01i"]
+[ext_resource type="Texture2D" uid="uid://3v8s7aem37xn" path="res://art/items/gold.png" id="2_gg8sc"]
+
+[node name="GoldGainedPopup" type="CanvasLayer" unique_id=1948110217]
+script = ExtResource("1_tc01i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=364663842]
+offset_right = 489.0
+offset_bottom = 337.0
+color = Color(0, 0, 0, 1)
+
+[node name="Gold IMG" type="Sprite2D" parent="ColorRect" unique_id=394212883]
+position = Vector2(217, 142)
+texture = ExtResource("2_gg8sc")
+
+[node name="StandardGold" type="Label" parent="." unique_id=1858811227]
+offset_left = 185.0
+offset_top = 206.0
+offset_right = 296.0
+offset_bottom = 255.0
+text = "Standard Gold
+"
+
+[node name="TimeBonus" type="Label" parent="." unique_id=1042017302]
+offset_left = 192.0
+offset_top = 76.0
+offset_right = 283.0
+offset_bottom = 99.0
+text = "Time Bonus"
+
+[node name="Gold IMG" type="Sprite2D" parent="." unique_id=1276880312]
+position = Vector2(212, 250)
+texture = ExtResource("2_gg8sc")
+
+[node name="TimeBonusAmt" type="Label" parent="." unique_id=518799661]
+offset_left = 236.0
+offset_top = 128.0
+offset_right = 276.0
+offset_bottom = 151.0
+text = "5"
+
+[node name="StandardGoldAmt" type="Label" parent="." unique_id=241334194]
+offset_left = 236.0
+offset_top = 241.0
+offset_right = 276.0
+offset_bottom = 264.0
+text = "10"

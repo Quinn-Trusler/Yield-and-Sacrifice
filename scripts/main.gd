@@ -4,10 +4,7 @@ extends Node2D
 
 var RNG = RandomNumberGenerator.new()
 
-
 func _ready():
-	
-	#create boss
 	pass
 
 	#create building
@@ -26,7 +23,7 @@ func punish():
 func reward():
 	$ItemManager.drop_item_ukn()
 	$GodChoiceManager.display_rewards()
-	
+
 
 	
 	

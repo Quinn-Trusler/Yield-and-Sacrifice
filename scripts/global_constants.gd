@@ -65,6 +65,7 @@ var MAX_BUNDLE_ITEMS = 5
 var LAST_CROP_ITEM_DIALOG = ["Hey! You need to plant that to grow more!",5]
 var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]
 
+var ROUND_COMPLETION_GOLD = 3
 
 var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 7.0], [-0.5, -3.5], [-1.5, -5.5], [1.5, -9.5], [8.5, -9.0], [10.5, -5.5], [9.5, -1.0], [3.5, 0.5]],
 "potatoe": [[0.0, 5.0], [4.5, 5.5], [7.5, 2.5], [7.5, -0.5], [1.5, -5.5], [-5.5, -5.5], [-7.5, -4.0], [-7.5, 0.5], [-4.5, 3.5]],
