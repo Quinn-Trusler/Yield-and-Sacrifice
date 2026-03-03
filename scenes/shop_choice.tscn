@@ -4,8 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://co8lcad2rgbw5" path="res://art/ui/choice_bg2.png" id="2_cn62g"]
 [ext_resource type="Texture2D" uid="uid://bqiqhruh084vl" path="res://art/ui/big_button_purple_dark.png" id="3_ffg54"]
 [ext_resource type="Texture2D" uid="uid://c4wccljcyim6r" path="res://art/ui/big_button_purple.png" id="4_cn62g"]
+[ext_resource type="Texture2D" uid="uid://bwpsti8l1l63x" path="res://art/ui/big_button_red.png" id="5_kqscn"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="5_wjmx2"]
+[ext_resource type="Texture2D" uid="uid://bsxirkkqpvy0s" path="res://art/ui/big_button_red_pressed.png" id="6_d7fti"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_kqscn"]
+[ext_resource type="Texture2D" uid="uid://ddjfu8hdfqyn" path="res://art/ui/big_button_red_hover.png" id="7_4ahki"]
 [ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="7_d7fti"]
 [ext_resource type="Texture2D" uid="uid://3v8s7aem37xn" path="res://art/items/gold.png" id="8_cn62g"]
 
@@ -28,6 +31,17 @@ offset_right = 25.0
 offset_bottom = 76.0
 texture_normal = ExtResource("3_ffg54")
 texture_hover = ExtResource("4_cn62g")
+
+[node name="TooExpensiveButton" type="TextureButton" parent="." unique_id=1334035196]
+visible = false
+layout_mode = 0
+offset_left = -25.0
+offset_top = 60.0
+offset_right = 25.0
+offset_bottom = 76.0
+texture_normal = ExtResource("5_kqscn")
+texture_pressed = ExtResource("6_d7fti")
+texture_hover = ExtResource("7_4ahki")
 
 [node name="Name" type="Label" parent="." unique_id=1940176617]
 layout_mode = 0
@@ -72,3 +86,6 @@ position = Vector2(-16, 70)
 texture = ExtResource("8_cn62g")
 
 [connection signal="pressed" from="BuyButton" to="." method="_on_texture_button_pressed"]
+[connection signal="button_down" from="TooExpensiveButton" to="." method="_on_too_expensive_button_button_down"]
+[connection signal="button_up" from="TooExpensiveButton" to="." method="_on_too_expensive_button_button_up"]
+[connection signal="pressed" from="TooExpensiveButton" to="." method="_on_too_expensive_pressed"]

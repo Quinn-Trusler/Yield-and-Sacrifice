@@ -6,6 +6,8 @@ var chain_id : int
 var gold_owned : int
 var cost : int
 
+var BUTTON_DOWN_OFFSET = 1
+
 func initialize(c_name,choice, gold_num, chain_i : int = -1):
 	choice_name = c_name
 	$Sprite2D.texture = load(choice["img"])
@@ -15,11 +17,9 @@ func initialize(c_name,choice, gold_num, chain_i : int = -1):
 	gold_owned = gold_num
 	create_description(c_name,choice)
 	chain_id = chain_i
-#var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
-#"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
-#"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["farmland"],"amt": 3}
-#}
-	
+	if cost > gold_owned:
+		$BuyButton.visible = false
+		$TooExpensiveButton.visible = true
 	
 func create_description(c_name,choice):
 	if choice["text"] == "default":
@@ -38,15 +38,16 @@ func create_description(c_name,choice):
 		$Description.text = choice["text"]
 
 func _on_texture_button_pressed() -> void:
-	if cost <= gold_owned:
-		get_parent().get_parent().god_choice_chosen(choice_name, chain_id, cost)
-	else:
-		print(choice_name + " To expensive")
+	get_parent().get_parent().god_choice_chosen(choice_name, chain_id, cost)
 
+func _on_too_expensive_pressed() -> void:
+	print(choice_name + " To expensive")
 
+func _on_too_expensive_button_button_down() -> void:
+	$Cost.position.y += BUTTON_DOWN_OFFSET
+	$GoldImg.position.y += BUTTON_DOWN_OFFSET
 
-#func _on_texture_button_mouse_entered() -> void:
-	#$Description.visible = true
-#
-#func _on_texture_button_mouse_exited() -> void:
-	#$Description.visible = false
+func _on_too_expensive_button_button_up() -> void:
+	$Cost.position.y -= BUTTON_DOWN_OFFSET
+	$GoldImg.position.y -= BUTTON_DOWN_OFFSET
+	
