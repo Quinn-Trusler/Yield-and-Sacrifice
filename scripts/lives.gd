@@ -17,7 +17,11 @@ func _ready() -> void:
 		add_child(temp)
 		
 	set_lives()
-	
+
+
+func gain_life():
+	lives_left +=1
+	set_lives()
 func lose_life():
 	lives_left -= 1
 	if lives_left <= 0:
@@ -31,6 +35,8 @@ func game_over():
 func set_max_lives():
 	lives_left = MAX_LIVES
 	set_lives()
+func is_at_max():
+	return (lives_left == MAX_LIVES)
 
 func set_lives():
 	#lower indexs are further left and the first to turn off

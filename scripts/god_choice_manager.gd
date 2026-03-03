@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish}
+enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
@@ -19,11 +19,12 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 20}
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 20},
+"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 12,"amt": 1}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
-var shop_items = {3: ["+5 seconds", "barrel"],20:["+5 seconds"]}
+var shop_items = {3: ["+5 seconds", "gain life"],20:["+5 seconds"]}
 var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
 ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
 #ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
@@ -114,10 +115,11 @@ func load_shopchoices(shopchoice_list) -> void:
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
 	for choice in new_godchoice_list:
-		var temp = ShopChoice_Scene.instantiate()
-		temp.initialize(choice, choices[choice], num_gold)
-		choice_instances.append(temp)
-		$HBoxContainer.add_child(temp)
+		if not (choices[choice]["type"] == TYPES.Life and Lives.is_at_max()):
+			var temp = ShopChoice_Scene.instantiate()
+			temp.initialize(choice, choices[choice], num_gold)
+			choice_instances.append(temp)
+			$HBoxContainer.add_child(temp)
 		
 func load_chained_godchoices(godchoice_list):
 	get_tree().paused = true
@@ -239,6 +241,14 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		
 	elif choice["type"] == TYPES.Activate_Fish:
 		BuildingManager.fish_spawning_active = true
+		
+	elif choice["type"] == TYPES.Life:
+		if choice["amt"] == 1: 
+			Lives.gain_life()
+		elif choice["amt"] == -1:
+			Lives.lose_life()
+		else:
+			print("ERROR: Only implemented 1 life gian/loss")
 		
 					
 	SacrificeManager.update_requirements()
