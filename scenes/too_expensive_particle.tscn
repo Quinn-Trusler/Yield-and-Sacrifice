@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dqi05om56nsip"]
+
+[ext_resource type="Texture2D" uid="uid://vytk5eu7bk5l" path="res://art/ui/too_expensive_particle.png" id="1_rh6gl"]
+[ext_resource type="Script" uid="uid://b27cx5d16sdax" path="res://scenes/too_expensive_particle.gd" id="2_86ie3"]
+
+[sub_resource type="Gradient" id="Gradient_kqscn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.4745098)
+
+[node name="TooExpensiveParticle" type="CPUParticles2D" unique_id=1501546231]
+emitting = false
+amount = 1
+texture = ExtResource("1_rh6gl")
+one_shot = true
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+color_ramp = SubResource("Gradient_kqscn")
+script = ExtResource("2_86ie3")

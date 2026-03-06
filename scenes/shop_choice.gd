@@ -7,6 +7,7 @@ var gold_owned : int
 var cost : int
 
 var BUTTON_DOWN_OFFSET = 1
+var tooExpensiveParticle_scene = preload("res://scenes/too_expensive_particle.tscn")
 
 func initialize(c_name,choice, gold_num, chain_i : int = -1):
 	choice_name = c_name
@@ -46,6 +47,12 @@ func _on_too_expensive_pressed() -> void:
 func _on_too_expensive_button_button_down() -> void:
 	$Cost.position.y += BUTTON_DOWN_OFFSET
 	$GoldImg.position.y += BUTTON_DOWN_OFFSET
+	var temp = tooExpensiveParticle_scene.instantiate()
+	get_parent().add_child(temp)
+	temp.position = get_parent().get_local_mouse_position()
+	temp.emitting = true
+	
+	
 
 func _on_too_expensive_button_button_up() -> void:
 	$Cost.position.y -= BUTTON_DOWN_OFFSET
