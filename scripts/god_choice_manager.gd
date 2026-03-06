@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life}
+enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
@@ -13,18 +13,18 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 5, "reward": 5,"amt" : 1},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
-"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland"},
+"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Place_Farmland,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 5, "amt" : 1},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
-"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 20},
+"burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 12,"amt": 1}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
-var shop_items = {3: ["+5 seconds", "gain life"],20:["+5 seconds"]}
+var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
 var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
 ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
 #ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
@@ -37,7 +37,8 @@ ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","ov
 var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-13,4],[-13,5],[-13,5],[-13,6],[-12,3],[-12,4],[-12,5],[-12,6]],
 "barrel": [[0,1],[1,1],[2,1]],
 "mill": [[-3,5],[-2,5],[-1,5]],
-"oven": [[-2,2],[-1,2],[0,2]]}
+"oven": [[-2,2],[-1,2],[0,2]],
+"farmland": [[-2,2]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -181,7 +182,14 @@ func strike_reward_from_rewards(reward_name):
 	for key in rewards:
 		if rewards_collected <= key:
 			rewards[key].erase(reward_name)
-			break#As to not wipe out the rest of rewards
+			break# As to not wipe out the rest of rewards
+			
+func strike_shop_items_from_shop(item_name):
+	for key in shop_items:
+		if shops_seen <= key:
+			shop_items[key].erase(item_name)
+			break# As to not wipe out the rest of rewards
+	
 func strike_id_from_chain_rewards(id : int):
 	if id != -1:
 		chained_rewards[id].reward_chosen()
@@ -214,7 +222,9 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	visible = false
 	delete_choice_instances()
 	$ClickButton.play()
+	# Warning: If choice_name exists in both, then they will both be removed.
 	strike_reward_from_rewards(choice_name)
+	strike_shop_items_from_shop(choice_name)
 	strike_id_from_chain_rewards(id)
 	increase_gold(-cost)
 	
@@ -239,6 +249,9 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	elif choice["type"] == TYPES.Placement:
 		place_building(choice_name)
 		
+	elif choice["type"] == TYPES.Place_Farmland:
+		place_farmland(choice_name)
+		
 	elif choice["type"] == TYPES.Activate_Fish:
 		BuildingManager.fish_spawning_active = true
 		
@@ -248,7 +261,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		elif choice["amt"] == -1:
 			Lives.lose_life()
 		else:
-			print("ERROR: Only implemented 1 life gian/loss")
+			print("ERROR: Only implemented 1 life gain/loss")
 		
 					
 	SacrificeManager.update_requirements()
@@ -261,7 +274,13 @@ func place_building(choice_name : String):
 	TileLayer2.place_building(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
 	placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
 		
-
+func place_farmland(choice_name : String):
+	var locations = placemnet_locations[choice_name]
+	var pos = locations[RNG.randi_range(0, len(locations)-1)]
+	TileLayer.set_cell(Vector2i(pos[0],pos[1]), 0, Vector2i(3, 3))
+#(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
+	placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
+	
 # Used by god choice chosen
 func destroy_land(choice : Dictionary) -> void:
 	var map_size = GLOBALCONSTS.FIRE_SPAWN_ZONE

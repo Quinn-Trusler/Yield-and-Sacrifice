@@ -42,7 +42,8 @@ func _on_texture_button_pressed() -> void:
 	get_parent().get_parent().god_choice_chosen(choice_name, chain_id, cost)
 
 func _on_too_expensive_pressed() -> void:
-	print(choice_name + " To expensive")
+	#print(choice_name + " To expensive")
+	pass
 
 func _on_too_expensive_button_button_down() -> void:
 	$Cost.position.y += BUTTON_DOWN_OFFSET
