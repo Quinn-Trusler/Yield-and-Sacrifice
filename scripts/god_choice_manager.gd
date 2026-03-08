@@ -25,6 +25,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
+var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
 var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
 ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
 #ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
@@ -38,7 +39,7 @@ var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-1
 "barrel": [[0,1],[1,1],[2,1]],
 "mill": [[-3,5],[-2,5],[-1,5]],
 "oven": [[-2,2],[-1,2],[0,2]],
-"farmland": [[-2,2]]}
+"farmland": [[-2,1], [-11,4], [-10,5], [-8, 5]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -99,15 +100,13 @@ func chose_rewards():
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
 	visible = true
-	print(godchoice_list)
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
 	for choice in new_godchoice_list:
 		var temp = GodChoice_Scene.instantiate()
 		temp.initialize(choice,choices[choice])
-		choice_instances.append(temp)
-		$HBoxContainer.add_child(temp)
+		add_choice_to_hbox(temp)
 
 func load_shopchoices(shopchoice_list) -> void:
 	get_tree().paused = true
@@ -119,10 +118,13 @@ func load_shopchoices(shopchoice_list) -> void:
 		if not (choices[choice]["type"] == TYPES.Life and Lives.is_at_max()):
 			var temp = ShopChoice_Scene.instantiate()
 			temp.initialize(choice, choices[choice], num_gold)
-			choice_instances.append(temp)
-			$HBoxContainer.add_child(temp)
-		
-func load_chained_godchoices(godchoice_list):
+			add_choice_to_hbox(temp)
+
+func add_choice_to_hbox(choice):
+	choice_instances.append(choice)
+	$HBoxContainer.add_child(choice)
+
+func load_chained_godchoices(godchoice_list, is_shop : bool = false):
 	get_tree().paused = true
 	visible = true
 	var copy = godchoice_list.duplicate()
@@ -130,11 +132,18 @@ func load_chained_godchoices(godchoice_list):
 	var new_godchoice_list = copy.slice(0, 3)
 	var makeshift_game_end = true
 	for choice in new_godchoice_list:
-		if  choice.get_reward():# Not last in the chain
-			var temp = GodChoice_Scene.instantiate()
-			temp.initialize(choice.get_reward(),choices[choice.get_reward()],choice.get_id())
-			choice_instances.append(temp)
-			$HBoxContainer.add_child(temp)
+		var choice_name = choice.get_reward()
+		if choice_name:# Not last in the chain
+			var temp
+			if is_shop:
+				if not (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
+					temp = ShopChoice_Scene.instantiate()
+					temp.initialize(choice_name,choices[choice_name],num_gold,choice.get_id())
+					add_choice_to_hbox(temp)
+			else:
+				temp = GodChoice_Scene.instantiate()
+				temp.initialize(choice_name,choices[choice_name],choice.get_id())
+				add_choice_to_hbox(temp)
 			makeshift_game_end = false
 	if makeshift_game_end:
 		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
@@ -162,7 +171,8 @@ func display_shop():
 	$SkipButton.visible = true
 	$GoldCount.visible = true
 	$GoldCount.update_gold_num(num_gold)
-	load_shopchoices(chose_shop_items())
+	#load_shopchoices(chose_shop_items())
+	load_chained_godchoices(chained_shop_items, true)
 	choice_type = CHOICE_TYPES.Shop
 
 
@@ -190,9 +200,9 @@ func strike_shop_items_from_shop(item_name):
 			shop_items[key].erase(item_name)
 			break# As to not wipe out the rest of rewards
 	
-func strike_id_from_chain_rewards(id : int):
+func strike_id_from_chain(chain_array : Array,id : int):
 	if id != -1:
-		chained_rewards[id].reward_chosen()
+		chain_array[id].reward_chosen()
 	
 #Unlock literal means to take the items unlocked as themselves instead of just a key
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
@@ -223,9 +233,13 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	delete_choice_instances()
 	$ClickButton.play()
 	# Warning: If choice_name exists in both, then they will both be removed.
-	strike_reward_from_rewards(choice_name)
-	strike_shop_items_from_shop(choice_name)
-	strike_id_from_chain_rewards(id)
+	if choice_type == CHOICE_TYPES.Reward:
+		strike_reward_from_rewards(choice_name)
+		strike_id_from_chain(chained_rewards, id)
+	elif choice_type == CHOICE_TYPES.Shop:
+		strike_shop_items_from_shop(choice_name)
+		strike_id_from_chain(chained_shop_items, id)
+	
 	increase_gold(-cost)
 	
 	

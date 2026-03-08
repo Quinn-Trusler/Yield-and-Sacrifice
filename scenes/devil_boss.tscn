@@ -124,6 +124,7 @@ script = ExtResource("1_ll8et")
 
 [node name="HungrySprite" type="Sprite2D" parent="." unique_id=1185256748]
 material = SubResource("ShaderMaterial_7kdxx")
+use_parent_material = true
 texture = ExtResource("2_do0kv")
 
 [node name="MouthHitbox" type="Area2D" parent="." unique_id=1827500982]
