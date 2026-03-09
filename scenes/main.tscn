@@ -462,9 +462,9 @@ texture = ExtResource("15_jscy8")
 
 [node name="GoldText" type="RichTextLabel" parent="Gold" unique_id=693687358]
 offset_left = -5.0
-offset_top = 35.0
+offset_top = 37.0
 offset_right = 43.0
-offset_bottom = 56.0
+offset_bottom = 58.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("10_dp3eg")
 theme_override_font_sizes/normal_font_size = 12

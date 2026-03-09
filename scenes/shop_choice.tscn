@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_kqscn"]
 [ext_resource type="Texture2D" uid="uid://ddjfu8hdfqyn" path="res://art/ui/big_button_red_hover.png" id="7_4ahki"]
 [ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="7_d7fti"]
-[ext_resource type="Texture2D" uid="uid://3v8s7aem37xn" path="res://art/items/gold.png" id="8_cn62g"]
+[ext_resource type="Texture2D" uid="uid://c4we8di7dul1l" path="res://art/items/coin.png" id="11_wjmx2"]
 
 [node name="ShopChoice" type="Control" unique_id=741941276]
 layout_mode = 3
@@ -83,7 +83,7 @@ text = "1"
 
 [node name="GoldImg" type="Sprite2D" parent="." unique_id=1390084761]
 position = Vector2(-16, 70)
-texture = ExtResource("8_cn62g")
+texture = ExtResource("11_wjmx2")
 
 [connection signal="pressed" from="BuyButton" to="." method="_on_texture_button_pressed"]
 [connection signal="button_down" from="TooExpensiveButton" to="." method="_on_too_expensive_button_button_down"]
