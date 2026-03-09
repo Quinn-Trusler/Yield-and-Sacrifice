@@ -50,6 +50,7 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 var IMG_EXTENSION = ".png"
 
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
+	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":false},
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
 	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":{"potatoe" : "voldka", "sugarcane":"rum"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true},
 	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
@@ -65,7 +66,7 @@ var MAX_BUNDLE_ITEMS = 5
 var LAST_CROP_ITEM_DIALOG = ["Hey! You need to plant that to grow more!",5]
 var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]
 
-var ROUND_COMPLETION_GOLD = 3
+var ROUND_COMPLETION_GOLD = 0
 
 var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 7.0], [-0.5, -3.5], [-1.5, -5.5], [1.5, -9.5], [8.5, -9.0], [10.5, -5.5], [9.5, -1.0], [3.5, 0.5]],
 "potatoe": [[0.0, 5.0], [4.5, 5.5], [7.5, 2.5], [7.5, -0.5], [1.5, -5.5], [-5.5, -5.5], [-7.5, -4.0], [-7.5, 0.5], [-4.5, 3.5]],

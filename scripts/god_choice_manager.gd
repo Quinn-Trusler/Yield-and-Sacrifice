@@ -18,6 +18,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
+"well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This wishing well works in reverse.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 12,"amt": 1}
@@ -26,7 +27,7 @@ var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],
 var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
 var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
-var chained_rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
+var chained_rewards = [ChainedReward.new(["well","potatoe","barrel","mushroom patch","+5 seconds", "barrel","barrel"], 0),
 ChainedReward.new(["activate fish","wheat","mill","+5 seconds","oven","mill","oven","+5 seconds"], 1)]
 #ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
 #ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
@@ -39,7 +40,8 @@ var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-1
 "barrel": [[0,1],[1,1],[2,1]],
 "mill": [[-3,5],[-2,5],[-1,5]],
 "oven": [[-2,2],[-1,2],[0,2]],
-"farmland": [[-2,1], [-11,4], [-10,5], [-8, 5]]}
+"farmland": [[-2,1], [-11,4], [-10,5], [-8, 5]],
+"well": [[0,0]]}
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")

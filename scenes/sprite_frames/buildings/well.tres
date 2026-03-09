@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://p3gqypc4888k"]
+
+[ext_resource type="Texture2D" uid="uid://sbm7qw330qta" path="res://art/buildings/well.png" id="1_hflpi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rla3o"]
+atlas = ExtResource("1_hflpi")
+region = Rect2(0, 0, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm2ef"]
+atlas = ExtResource("1_hflpi")
+region = Rect2(16, 0, 16, 17)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rla3o")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm2ef")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}]
