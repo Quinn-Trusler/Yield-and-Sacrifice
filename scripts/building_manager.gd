@@ -14,6 +14,8 @@ var gift_spawn_spots = [Vector2(0,0), Vector2(0,1), Vector2(-3,0)]
 var WATER_TILE_NAME = "water"
 var fish_spawning_active : bool = false
 
+var invalid_spawn_spots : Array = []
+
 #Tutorial
 @export var TutorialManager: Node
 var first_crop_harvested = false
@@ -29,7 +31,8 @@ func _ready():
 			var pos = Vector2(x2,y2)
 			if TileMapMangager.get_tile_name_from_coords(pos) == WATER_TILE_NAME:
 				fish_spawn_spots.append(pos)
-	
+	TileLayer.place_farmland(Vector2i(-11,2))
+	TileLayer.place_farmland(Vector2i(-9,2))
 #uses tile position and not global position
 func get_building_interactable(pos):
 	if not TileLayer2.is_empty(pos):#2nd layer cell not empty

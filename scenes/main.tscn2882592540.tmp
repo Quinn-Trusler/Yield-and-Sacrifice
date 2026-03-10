@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://yhiddagrcyrk" path="res://scripts/sacrafice_manager.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://c2gpwja10wik1" path="res://scripts/tile_map_scene_layer.gd" id="5_tipki"]
-[ext_resource type="Script" uid="uid://bb4dnse2iphs5" path="res://scenes/tile_map_layer.gd" id="6_5q0nq"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://va03fhtpox38" path="res://scripts/god_choice_manager.gd" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://cgikngang0img" path="res://scripts/item_manager.gd" id="10_choun"]
@@ -372,9 +371,8 @@ tile_set = SubResource("TileSet_o5qli")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1649178319]
 position = Vector2(72, -59)
-tile_map_data = PackedByteArray("AAABAAMAAAAGAAEAAAABAAIAAAAHAAEAAAACAAIAAAAHAAEAAAAAAAMAAAAHAAEAAAD1/wUAAAAHAAIAAAD6/wYAAAAGAAIAAAD+/wYAAAAHAAIAAAAAAAUAAAAHAAIAAAD6////AAAHAAEAAAD7/wAAAAAHAAEAAAD8//7/AAAHAAEAAAD7////AAAGAAEAAAD3//7/AAAHAAIAAAD1/wAAAAAHAAIAAAAAAP7/AAAAAAUAAAAAAP//AAAAAAcAAAABAP//AAABAAcAAAABAP7/AAABAAUAAAACAP7/AAACAAUAAAACAP//AAACAAcAAAADAAMAAAADAAUAAAADAAQAAAADAAYAAAADAAUAAAADAAcAAAA=")
+tile_map_data = PackedByteArray("AAD1/wIAAAADAAMAAAABAAMAAAAGAAEAAAABAAIAAAAHAAEAAAACAAIAAAAHAAEAAAAAAAMAAAAHAAEAAAD1/wUAAAAHAAIAAAD6/wYAAAAGAAIAAAD3/wIAAAADAAMAAAD+/wYAAAAHAAIAAAAAAAUAAAAHAAIAAAD6////AAAHAAEAAAD7/wAAAAAHAAEAAAD8//7/AAAHAAEAAAD7////AAAGAAEAAAD3//7/AAAHAAIAAAD1/wAAAAAHAAIAAAAAAP7/AAAAAAUAAAAAAP//AAAAAAcAAAABAP//AAABAAcAAAABAP7/AAABAAUAAAACAP7/AAACAAUAAAACAP//AAACAAcAAAADAAMAAAADAAUAAAADAAQAAAADAAYAAAADAAUAAAADAAcAAAA=")
 tile_set = SubResource("TileSet_o5qli")
-script = ExtResource("6_5q0nq")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1286760783]
 position = Vector2(72, -59)

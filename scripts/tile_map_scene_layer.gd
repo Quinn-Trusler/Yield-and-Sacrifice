@@ -57,7 +57,8 @@ func plant_crop(coords: Vector2i, building_name: String):
 func place_building(coords: Vector2i, building_name: String):
 	building_names_temp[coords] = building_name
 	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)
-	
+
+
 func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
 	remove_cell_scene(coords)#Remove old
 	if source_id != -1:#If setting a valid tile

@@ -26,6 +26,7 @@ var FIRE_SPAWN_ZONE = [-11,5,3,-2]
 var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
+var FARMLAND_ID : Vector2i = Vector2i(3, 3)
 var UNBURNABLE_TILES = ["burnt land","water","lava"]
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)},
@@ -50,7 +51,7 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 var IMG_EXTENSION = ".png"
 
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
-	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":false},
+	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":true},
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
 	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":{"potatoe" : "voldka", "sugarcane":"rum"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true},
 	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
