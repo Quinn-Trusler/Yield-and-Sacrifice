@@ -58,11 +58,15 @@ func place_building(coords: Vector2i, building_name: String):
 	building_names_temp[coords] = building_name
 	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)
 
+# Does not include tiles on layer1
+func is_empty_building_location(coords: Vector2i):
+	return !(coords in scene_coords)
 
 func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
 	remove_cell_scene(coords)#Remove old
 	if source_id != -1:#If setting a valid tile
 		set_cell(coords, source_id, atlas_coords, alternative_tile)
+		
 
 func is_empty(coords: Vector2i) -> bool:
 	return not (coords in scene_coords)

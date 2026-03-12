@@ -9,9 +9,12 @@ var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
-var fish_spawn_spots = []
+var fish_spawn_spots : Array[Vector2i] = []
+var ui_tiles : Array[Vector2i] = []
 var gift_spawn_spots = [Vector2(0,0), Vector2(0,1), Vector2(-3,0)]
 var WATER_TILE_NAME = "water"
+var UI_TILE_NAME = "UI"
+var TILE_CHECK_LIMIT = 1000
 var fish_spawning_active : bool = false
 
 var invalid_spawn_spots : Array = []
@@ -23,16 +26,24 @@ var first_crop_harvested = false
 var gift_items = []
 
 func _ready():
-	
-	for x in range(GLOBALCONSTS.MAPSIZE[2]-GLOBALCONSTS.MAPSIZE[0]):
-		for y in range(GLOBALCONSTS.MAPSIZE[1]-GLOBALCONSTS.MAPSIZE[3]):
-			var x2 = x+GLOBALCONSTS.MAPSIZE[0]
-			var y2 = y+GLOBALCONSTS.MAPSIZE[3]
-			var pos = Vector2(x2,y2)
-			if TileMapMangager.get_tile_name_from_coords(pos) == WATER_TILE_NAME:
-				fish_spawn_spots.append(pos)
+	update_location_lists()
 	TileLayer.place_farmland(Vector2i(-11,2))
 	TileLayer.place_farmland(Vector2i(-9,2))
+	
+# Grabs data from layer 2 and fills fish spawn spots and ui tiles list
+func update_location_lists():
+	for x in range(GLOBALCONSTS.MAPSIZE[0], GLOBALCONSTS.MAPSIZE[2] + 1):
+		for y in range(GLOBALCONSTS.MAPSIZE[1],GLOBALCONSTS.MAPSIZE[3] + 1):
+			var pos = Vector2i(x,y)
+			var tile_name = TileMapMangager.get_tile_name_from_coords(pos)
+			if  tile_name == WATER_TILE_NAME:
+				fish_spawn_spots.append(pos)
+			elif tile_name == UI_TILE_NAME:
+				ui_tiles.append(pos)
+func is_valid_building_location(pos: Vector2i):
+	if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
+		return true
+	return false
 #uses tile position and not global position
 func get_building_interactable(pos):
 	if not TileLayer2.is_empty(pos):#2nd layer cell not empty
@@ -52,8 +63,9 @@ func create_gift(item,num):
 		items.append(item)
 	gift_items = items
 	
-	var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
-	TileLayer2.place_building(gift_spawn_spots[i], "god_gift")
+	#var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
+	var pos = get_random_valid_pos()
+	TileLayer2.place_building(pos, "god_gift")
 func get_gift_items():
 	return gift_items
 
@@ -95,7 +107,7 @@ func spread_fire(pos):
 	for i in range(2):
 		pos.x += RNG.randi_range(-1,1)
 		pos.y += RNG.randi_range(-1,1)
-		if pos_in_bounds(pos, FIRE_RANGE):
+		if is_pos_in_bounds(pos, FIRE_RANGE):
 			var tile_name = TileMapMangager.get_tile_name_from_coords(pos)
 			if not (tile_name in GLOBALCONSTS.UNBURNABLE_TILES) :
 				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
@@ -106,15 +118,29 @@ func spread_fire(pos):
 		#ItemManager.create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
 
 #finds if position is within bounds of array [x,y,x2,y2] inclusive
-func pos_in_bounds(pos: Vector2, bounds: Array):
+func is_pos_in_bounds(pos: Vector2, bounds: Array):
 	#Inclusive of bouns
 	if not (pos.x >= bounds[0] and pos.x <= bounds[2]):
 		return false
 	if not (pos.y >= bounds[1] and pos.y <= bounds[3]):
 		return false
 	return true
+# Gets random pos within map size
+func get_random_pos() -> Vector2i:
+	return Vector2i(RNG.randi_range(GLOBALCONSTS.MAPSIZE[0],GLOBALCONSTS.MAPSIZE[2]), RNG.randi_range(GLOBALCONSTS.MAPSIZE[1],GLOBALCONSTS.MAPSIZE[3]))
+	
+func get_random_valid_pos() -> Vector2i:
+	var num_tiles_checked = 0
+	while num_tiles_checked < TILE_CHECK_LIMIT:
+		var pos = get_random_pos()
+		num_tiles_checked += 1
+		if is_valid_building_location(pos):
+			return pos
+	push_error("TILE_CHECK_LIMIT PASSED. Tried loop " + str(TILE_CHECK_LIMIT) + " times")
+	return Vector2i(999,999)
 
 func spawn_random_fish():
+	assert(len(fish_spawn_spots), "Attempting to spawn fish with no spawn spots")
 	var i = RNG.randi_range(0,len(fish_spawn_spots)-1)
 	#spawn fish at 
 	TileLayer2.place_building(fish_spawn_spots[i], "fishing_spot")

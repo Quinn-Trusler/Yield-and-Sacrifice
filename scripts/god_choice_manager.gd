@@ -10,10 +10,8 @@ var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
-"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 10, "reward": 5,"amt" : 1},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
-"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Place_Farmland,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 9, "amt" : 1},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
@@ -22,6 +20,8 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
+"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Place_Farmland,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 9, "amt" : 1},
+"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 10, "reward": 5,"amt" : 1},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 6,"amt": 1}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}

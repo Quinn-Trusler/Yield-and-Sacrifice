@@ -19,8 +19,9 @@ var ITEM_FRAMES_FOLDER = "res://scenes/sprite_frames/items/"
 
 
 #used by other scripts
-var MAPSIZE = [-14,5,5,-5]
-var FIRE_SPAWN_ZONE = [-11,5,3,-2]
+var MAPSIZE = [-14,-3,3,6]
+var FIRE_SPAWN_ZONE = [-14,3,3,6]
+var UI_TILES : Array[Vector2i] = [Vector2i()]
 #[-15, -7, 9, 7]
 #definitions
 var CROP_SCENE_ID = 1
