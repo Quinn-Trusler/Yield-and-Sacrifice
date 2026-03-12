@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life}
+enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Chose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Chose a punishment!"
@@ -21,10 +21,11 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This wishing well works in reverse.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
+"lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 6,"amt": 1}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
-var punishments = {3:["burn land","-2 seconds"],20:["burn land"]}
+var punishments = {3:["lose all gold","burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
 var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
 var chained_rewards = [ChainedReward.new(["well","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
@@ -270,7 +271,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		
 	elif choice["type"] == TYPES.Activate_Fish:
 		BuildingManager.fish_spawning_active = true
-		
+	elif choice["type"] == TYPES.Lose_All_Gold:
+		increase_gold(-num_gold)
 	elif choice["type"] == TYPES.Life:
 		if choice["amt"] == 1: 
 			Lives.gain_life()
