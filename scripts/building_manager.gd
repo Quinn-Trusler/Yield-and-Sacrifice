@@ -104,8 +104,10 @@ func finish_burn(pos) -> void:
 	
 func is_valid_spread_position(pos):
 	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
-		return not (TileMapMangager.get_tile_name_from_coords(pos) in GLOBALCONSTS.UNBURNABLE_TILES)
-	return true
+		if not TileMapMangager.get_tile_name_from_coords(pos) in GLOBALCONSTS.UNBURNABLE_TILES:
+			if TileLayer2.get_cell_scene(pos) == null or TileLayer2.get_cell_scene(pos).BUILDING_TYPE != "fire":
+				return true
+	return false
 	
 func spread_fire(pos) -> void:
 	# Find all valid spread positions
