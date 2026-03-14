@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsgo3g82nilvu"]
+[gd_scene format=3 uid="uid://bsgo3g82nilvu"]
 
 [ext_resource type="Script" uid="uid://b1gjtnncn37w0" path="res://scripts/god_choice.gd" id="1_7ipnc"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="2_2mrim"]
@@ -8,18 +8,18 @@
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="5_rxmxf"]
 [ext_resource type="Texture2D" uid="uid://dmfrwxdp03bf3" path="res://art/godchoice/burn_land.png" id="5_vr7tv"]
 
-[node name="GodChoice" type="Control"]
+[node name="GodChoice" type="Control" unique_id=152090437]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 44.0
 offset_bottom = 59.0
 script = ExtResource("1_7ipnc")
 
-[node name="BG3" type="Sprite2D" parent="."]
+[node name="BG3" type="Sprite2D" parent="." unique_id=1616885844]
 position = Vector2(0, 14)
 texture = ExtResource("2_rxmxf")
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="TextureButton" type="TextureButton" parent="." unique_id=740581256]
 layout_mode = 0
 offset_left = -25.0
 offset_top = 60.0
@@ -28,7 +28,7 @@ offset_bottom = 76.0
 texture_normal = ExtResource("3_eerbp")
 texture_hover = ExtResource("3_rxmxf")
 
-[node name="Name" type="Label" parent="."]
+[node name="Name" type="Label" parent="." unique_id=1181052053]
 layout_mode = 0
 offset_left = -44.0
 offset_top = -25.0
@@ -40,7 +40,7 @@ text = "name"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Description" type="Label" parent="."]
+[node name="Description" type="Label" parent="." unique_id=1602482606]
 layout_mode = 0
 offset_left = -33.0
 offset_top = 38.0
@@ -52,7 +52,7 @@ theme_override_font_sizes/font_size = 8
 text = "Yada Yada Yada"
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1599851936]
 position = Vector2(0, 15)
 texture = ExtResource("5_vr7tv")
 

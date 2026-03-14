@@ -11,10 +11,11 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 
 var fish_spawn_spots : Array[Vector2i] = []
 var ui_tiles : Array[Vector2i] = []
-var gift_spawn_spots = [Vector2(0,0), Vector2(0,1), Vector2(-3,0)]
-var WATER_TILE_NAME = "water"
-var UI_TILE_NAME = "UI"
-var TILE_CHECK_LIMIT = 1000
+var WATER_TILE_NAME : String = "water"
+var UI_TILE_NAME : String = "UI"
+var TILE_CHECK_LIMIT : int = 1000
+var ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),Vector2i(0,1), Vector2i(-1,0)]
+
 var fish_spawning_active : bool = false
 
 var invalid_spawn_spots : Array = []
@@ -95,28 +96,30 @@ func click_tile():
 						ItemManager.crop_uprooted(resources[0])
 			if scene.BUILDING_TYPE == "fire":
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
-				
-func spread_fire(pos):
-	
+
+# Burns tile bellow and extinguishes fire
+func finish_burn(pos) -> void:
 	TileLayer2.set_cell_scene(pos,-1)#delete cell
 	TileLayer.set_cell(pos,0,atlas_decoded["burnt tile"],0)#set under to burnt
 	
-	var FIRE_RANGE = [-15, -7, 9, 7]
+func is_valid_spread_position(pos):
+	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
+		return not (TileMapMangager.get_tile_name_from_coords(pos) in GLOBALCONSTS.UNBURNABLE_TILES)
+	return true
 	
-	var o_pos = Vector2(pos.x,pos.y)
-	for i in range(2):
-		pos.x += RNG.randi_range(-1,1)
-		pos.y += RNG.randi_range(-1,1)
-		if is_pos_in_bounds(pos, FIRE_RANGE):
-			var tile_name = TileMapMangager.get_tile_name_from_coords(pos)
-			if not (tile_name in GLOBALCONSTS.UNBURNABLE_TILES) :
-				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
-			
-		pos = Vector2(o_pos.x,o_pos.y)
-#func output_resources(resources):
-	#for i in range(len(resources)):
-		#ItemManager.create_draggable_item(resources[i],get_global_mouse_position()+ Vector2(RNG.randi_range(-7,7),RNG.randi_range(-7,7)))
-
+func spread_fire(pos) -> void:
+	# Find all valid spread positions
+	var valid_spread_pos : Array[Vector2i] = []
+	for adj_pos in ADJACENT_POSITIONS:
+		var spread_pos : Vector2i = pos + adj_pos
+		if (is_valid_spread_position(spread_pos)):
+			valid_spread_pos.append(spread_pos)
+	
+	# Spread to 2 adjacent positions if possible
+	for i in range(min(2,len(valid_spread_pos))):
+		var spread_pos : Vector2i = valid_spread_pos[RNG.randi_range(0, len(valid_spread_pos)-1)]
+		TileLayer2.set_cell_scene(spread_pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
+		valid_spread_pos.erase(spread_pos)
 #finds if position is within bounds of array [x,y,x2,y2] inclusive
 func is_pos_in_bounds(pos: Vector2, bounds: Array):
 	#Inclusive of bouns

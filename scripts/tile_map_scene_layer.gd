@@ -74,6 +74,9 @@ func is_empty(coords: Vector2i) -> bool:
 func get_cell_scene(coords: Vector2i) -> Node:
 	return scene_coords.get(coords, null)
 	
-func spread_fire(pos):
+func spread_fire(pos) -> void:
 	BuildingManager.spread_fire(pos)
+
+func finish_burn(pos) -> void:
+	BuildingManager.finish_burn(pos)
 	
