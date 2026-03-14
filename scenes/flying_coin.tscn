@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c4n76ou061l58"]
+
+[ext_resource type="Script" uid="uid://dftwyo81eaqgo" path="res://flying_coin.gd" id="1_dcvv7"]
+[ext_resource type="Texture2D" uid="uid://biututdqy1dd1" path="res://art/effects/coin_shrink.png" id="1_pubpu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pwqat"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pubpu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FlyingCoin" type="AnimatedSprite2D" unique_id=931243651]
+sprite_frames = SubResource("SpriteFrames_pwqat")
+script = ExtResource("1_dcvv7")

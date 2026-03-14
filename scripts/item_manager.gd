@@ -4,6 +4,7 @@ extends Node2D
 var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var BUNDLED_ITEM = preload("res://scenes/bundled_item.tscn")
 var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
+var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var draggable_items = []
 var animated_items = []
 var item_is_last:bool = false
@@ -83,9 +84,17 @@ func _ready() -> void:
 		spawn_testing_items()
 
 func consume_gold():
+	# Create flying gold particle
+	var temp = FLYING_COIN_SCENE.instantiate()
+	add_child(temp)
+	temp.set_pos(item_in_focus.position)
+	
+	# Delete gold item
 	erase_item(item_in_focus)
 	refocus()
 	GodChoiceManager.increase_gold(1)
+	
+	
 func _process(_delta: float) -> void:
 	$BundleField.position = get_global_mouse_position()
 	if item_being_dragged:
