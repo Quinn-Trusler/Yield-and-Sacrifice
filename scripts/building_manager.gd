@@ -17,6 +17,7 @@ var BURNT_TILE_NAME : String = "burnt land"
 var TILE_CHECK_LIMIT : int = 1000
 var SIDES_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),Vector2i(0,1), Vector2i(-1,0)]
 var NINE_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(-1,-1),Vector2i(-1,0),Vector2i(-1,1),Vector2i(0,-1),Vector2i(0,1),Vector2i(1,-1),Vector2i(1,0),Vector2i(1,1)]
+var FIRE_SPREAD_WEIGHTS : Array[float] = [0,1,2,0,0] # 0,1,2,3,4 spread respectivly
 
 var fish_spawning_active : bool = false
 
@@ -138,8 +139,9 @@ func spread_fire(pos) -> void:
 		if (is_valid_spread_position(spread_pos)):
 			valid_spread_pos.append(spread_pos)
 	
-	# Spread to 2 adjacent positions if possible
-	for i in range(min(2,len(valid_spread_pos))):
+	var spread_num : int = [0,1,2,3,4][RNG.rand_weighted(FIRE_SPREAD_WEIGHTS)]
+	# Spread to spread_num adjacent positions if possible
+	for i in range(min(spread_num,len(valid_spread_pos))):
 		var spread_pos : Vector2i = valid_spread_pos[RNG.randi_range(0, len(valid_spread_pos)-1)]
 		TileLayer2.set_cell_scene(spread_pos,2,Vector2.ZERO,GLOBALCONSTS.FIRE_SCENE_ID)
 		valid_spread_pos.erase(spread_pos)
