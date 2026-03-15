@@ -25,7 +25,6 @@ func _register_child(child):
 	elif child.BUILDING_TYPE == "building":
 		child.connectItemSignals(ItemManager)
 		
-		
 		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
 		child.initialize(building_def)
 		if child.BUILDING_DISPLAY_NAME == "Gift":

@@ -7,14 +7,16 @@ extends Node2D
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 var RNG = RandomNumberGenerator.new()
 
-var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
+var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(1,11)}
 
 var fish_spawn_spots : Array[Vector2i] = []
 var ui_tiles : Array[Vector2i] = []
 var WATER_TILE_NAME : String = "water"
 var UI_TILE_NAME : String = "UI"
+var BURNT_TILE_NAME : String = "burnt land"
 var TILE_CHECK_LIMIT : int = 1000
-var ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),Vector2i(0,1), Vector2i(-1,0)]
+var SIDES_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),Vector2i(0,1), Vector2i(-1,0)]
+var NINE_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(-1,-1),Vector2i(-1,0),Vector2i(-1,1),Vector2i(0,-1),Vector2i(0,1),Vector2i(1,-1),Vector2i(1,0),Vector2i(1,1)]
 
 var fish_spawning_active : bool = false
 
@@ -41,6 +43,16 @@ func update_location_lists():
 				fish_spawn_spots.append(pos)
 			elif tile_name == UI_TILE_NAME:
 				ui_tiles.append(pos)
+func get_all_burnt_tiles():
+	var burnt_tiles : Array[Vector2i] = []
+	for x in range(GLOBALCONSTS.FIRE_RANGE[0], GLOBALCONSTS.FIRE_RANGE[2] + 1):
+		for y in range(GLOBALCONSTS.FIRE_RANGE[1],GLOBALCONSTS.FIRE_RANGE[3] + 1):
+			var pos = Vector2i(x,y)
+			var tile_name = TileMapMangager.get_tile_name_from_coords(pos)
+			if tile_name == BURNT_TILE_NAME:
+				burnt_tiles.append(pos)
+	return burnt_tiles
+	
 func is_valid_building_location(pos: Vector2i):
 	if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
 		return true
@@ -96,11 +108,20 @@ func click_tile():
 						ItemManager.crop_uprooted(resources[0])
 			if scene.BUILDING_TYPE == "fire":
 				TileLayer2.set_cell_scene(pos,-1)#delete cell
+func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:
+	var positions : Array[Vector2i] = []
+	for adj_pos in NINE_ADJACENT_POSITIONS:
+		var temp_pos = pos + adj_pos 
+		if TileLayer.get_tile_name_from_coordinates(temp_pos) == BURNT_TILE_NAME:
+			positions.append(pos + adj_pos)
+	return positions
 
 # Burns tile bellow and extinguishes fire
 func finish_burn(pos) -> void:
 	TileLayer2.set_cell_scene(pos,-1)#delete cell
-	TileLayer.set_cell(pos,0,atlas_decoded["burnt tile"],0)#set under to burnt
+	var positions = get_nine_adjacent_positions(pos)
+	positions.append(pos)
+	TileLayer.set_cells_terrain_connect(positions, 0, 3)
 	
 func is_valid_spread_position(pos):
 	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
@@ -112,7 +133,7 @@ func is_valid_spread_position(pos):
 func spread_fire(pos) -> void:
 	# Find all valid spread positions
 	var valid_spread_pos : Array[Vector2i] = []
-	for adj_pos in ADJACENT_POSITIONS:
+	for adj_pos in SIDES_ADJACENT_POSITIONS:
 		var spread_pos : Vector2i = pos + adj_pos
 		if (is_valid_spread_position(spread_pos)):
 			valid_spread_pos.append(spread_pos)

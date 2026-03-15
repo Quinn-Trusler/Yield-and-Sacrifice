@@ -33,6 +33,7 @@ func get_tile_name_from_coordinates(pos):
 	if data != null: 
 		return data.get_custom_data_by_layer_id(0)
 	return "null"
+
 func get_mouse_tile_name():
 	var mouse_cell = TileLayer.get_local_mouse_position()
 	return get_tile_name_from_coords(mouse_cell)
