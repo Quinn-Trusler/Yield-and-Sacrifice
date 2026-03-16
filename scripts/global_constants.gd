@@ -29,6 +29,7 @@ var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var FARMLAND_ID : Vector2i = Vector2i(3, 3)
 var UNBURNABLE_TILES = ["burnt land","water","lava"]
+var INITIALLY_UNBURNABLE_TILES = ["dry_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)},
 "wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},

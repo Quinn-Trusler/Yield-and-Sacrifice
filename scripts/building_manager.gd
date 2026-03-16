@@ -142,10 +142,11 @@ func finish_burn(pos) -> void:
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):
-	if not TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.UNBURNABLE_TILES:
-		if not TileLayer2.get_cell_scene(pos):
-			if not EffectLayer.get_cell_scene(pos):
-				return true
+	if not (TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.UNBURNABLE_TILES):
+		if not TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.INITIALLY_UNBURNABLE_TILES:
+			if not TileLayer2.get_cell_scene(pos):
+				if not EffectLayer.get_cell_scene(pos):
+					return true
 	return false
 	
 func is_valid_spread_position(pos):
