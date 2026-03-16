@@ -59,6 +59,7 @@ var choice_instances = []
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
+@onready var EffectLayer = get_node("/root/Main/EffectLayer")
 @onready var Lives = get_node("/root/Main/Lives")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 @onready var SacrificeManager = get_node("/root/Main/SacrificeManager") 
@@ -186,7 +187,7 @@ func delete_choice_instances():
 		c.queue_free()
 	choice_instances = []
 	
-func get_tile_name_from_coordinates(pos):
+func get_tile_name_from_layer2(pos):
 	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
@@ -304,23 +305,22 @@ func destroy_land(choice : Dictionary) -> void:
 	var count = 0
 	var tries = 0
 	var TRY_MAX = 1000
-	print("attempt to destroy land")
 	while count < choice["amt"]:
 		var pos = Vector2(RNG.randi_range(map_size[0],map_size[2]),RNG.randi_range(map_size[1],map_size[3]))
-		var tile_name = get_tile_name_from_coordinates(pos)
 		tries +=1
-		if tries> TRY_MAX:
+		if tries>= TRY_MAX:
 			count +=1
+			print("Tried(and failed) to place fire " + str(tries) + " times")
 		if choice["reward"] == null:
-			if tile_name == null:
-				TileLayer2.set_cell_scene(pos,-1)#delete cell
-				TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+			if BuildingManager.is_valid_fire_placement(pos):
+				EffectLayer.set_cell_scene(pos,-1)#delete cell
+				EffectLayer.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 				count+=1
-		elif tile_name in choice["reward"]:
-			TileLayer2.set_cell_scene(pos,-1)#delete cell
-			TileLayer2.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
-			#get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell
-			count+=1
+		#elif tile_name in choice["reward"]:
+			#EffectLayer.set_cell_scene(pos,-1)#delete cell
+			#EffectLayer.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+			##get_parent().get_node("TileMapLayer").set_cell_scene(pos,0,BURNT_LAND,0)#burnt land cell
+			#count+=1
 				
 				
 # Skip shop screen

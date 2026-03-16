@@ -8,7 +8,7 @@ func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2
 	if source_id != -1:#If setting a valid tile
 		set_cell(coords, source_id, atlas_coords, alternative_tile)
 		
-func get_tile_name_from_coordinates(pos):
+func get_tile_name_from_layer2(pos):
 	var data = get_cell_tile_data(pos)
 	if data != null: 
 		return data.get_custom_data_by_layer_id(0)

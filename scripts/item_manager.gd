@@ -250,7 +250,7 @@ func drop_item_ukn():
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
-		var tile_name = TileMapManager.get_tile_name_from_coords(pos)
+		var tile_name = TileMapManager.get_tile_name_from_layer(pos)
 		if TileLayer2.is_empty(pos):#empty cell
 			return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
 	return false
