@@ -17,7 +17,7 @@ uniform float vignette      : hint_range(0.0, 1.00) = 0.38;
 
 // --- Scanlines / phosphor ---
 uniform float scanline_strength  : hint_range(0.0, 2.0) = 0;//0.95;
-uniform float scanline_density   : hint_range(0.5, 3.0) = 1.15;
+uniform float scanline_density   : hint_range(0, 3.0) = 1.15;
 uniform float interlace_strength : hint_range(0.0, 1.0) = 0.20;
 
 // Shadow mask (RGB triads)

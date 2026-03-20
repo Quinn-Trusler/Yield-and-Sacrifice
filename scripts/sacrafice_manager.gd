@@ -119,6 +119,7 @@ func update_sacrifice_text():
 			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
 		
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
+	devil_boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], num_items)
 	if sacrificed_item_name in requirements:
 		if filled_requirements[sacrificed_item_name] < requirements[sacrificed_item_name]:
 			if not first_sacrifice_made:

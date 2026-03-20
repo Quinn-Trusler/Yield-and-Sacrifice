@@ -68,6 +68,12 @@ func spawn_testing_items():
 	#
 	create_draggable_item("voldka",Vector2(-30,-20))
 	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("rum",Vector2(-50,-40))
+	create_draggable_item("rum",Vector2(-50,-40))
+	
 	create_draggable_item("gold",Vector2(-60,-40))
 	create_draggable_item("gold",Vector2(-60,-40))
 	create_draggable_item("gold",Vector2(-60,-40))
