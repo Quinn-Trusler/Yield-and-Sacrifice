@@ -156,9 +156,5 @@ polygon = PackedVector2Array(-17, 3, -12, 17, -4, 23, 5, 23, 12, 17, 17, 3, 14, 
 visible = false
 polygon = PackedVector2Array(-20, -16, -17, -21, -12, -23, -14, -14, -10, -15, -7, -16, 6, -16, 8, -15, 12, -13, 11, -22, 16, -21, 19, -18, 19, -12, 17, -9, 17, 7, 14, 15, 2, 24, -3, 24, -15, 15, -18, 7)
 
-[node name="FullSprite" type="Sprite2D" parent="." unique_id=1633462369]
-visible = false
-texture = ExtResource("3_ta6n1")
-
 [connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]
