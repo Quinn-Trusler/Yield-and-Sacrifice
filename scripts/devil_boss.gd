@@ -28,14 +28,15 @@ const MAX_LEVEL : int = 9999
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AnimatedSprite2D.play("hungry")
 	pass # Replace with function body.
 
 func update_alcohol_effect():
-	$HungrySprite.material.set_shader_parameter("saturation", clampf(1.1 - alcohol_level/500.0,0,2))
+	$AnimatedSprite2D.material.set_shader_parameter("saturation", clampf(1.1 - alcohol_level/500.0,0,2))
 
 func update_shroom_effect():
-	$HungrySprite.material.set_shader_parameter("chroma_offset_px", sqrt(shroom_level/100.0))
-	$HungrySprite.material.set_shader_parameter("wobble_px", 0.5 + shroom_level/500.0)
+	$AnimatedSprite2D.material.set_shader_parameter("chroma_offset_px", sqrt(shroom_level/100.0))
+	$AnimatedSprite2D.material.set_shader_parameter("wobble_px", 0.5 + shroom_level/500.0)
 
 func tick_alcohol(delta):
 	if alcohol_level:
@@ -84,8 +85,6 @@ func react_to(reaction_name : GLOBALCONSTS.REACTIONS, multiplier : int) -> void:
 		update_shroom_effect()
 
 func set_full() -> void:
-	$HungrySprite.visible = false
-	$FullSprite.visible = true
+	$AnimatedSprite2D.play("full")
 func set_hungry() -> void:
-	$HungrySprite.visible = true
-	$FullSprite.visible = false
+	$AnimatedSprite2D.play("hungry")

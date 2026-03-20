@@ -117,14 +117,34 @@ shader_parameter/roll_strength = 0.0
 shader_parameter/glow_strength = 0.0
 shader_parameter/glow_threshold = 0.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ta6n1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ta6n1")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_do0kv")
+}],
+"loop": true,
+"name": &"hungry",
+"speed": 5.0
+}]
+
 [node name="devil_boss" type="Node2D" unique_id=1423359932]
 material = SubResource("ShaderMaterial_ish2d")
 position = Vector2(0, -19)
 script = ExtResource("1_ll8et")
 
-[node name="HungrySprite" type="Sprite2D" parent="." unique_id=1185256748]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=491154054]
 material = SubResource("ShaderMaterial_7kdxx")
-texture = ExtResource("2_do0kv")
+sprite_frames = SubResource("SpriteFrames_ta6n1")
+animation = &"full"
 
 [node name="MouthHitbox" type="Area2D" parent="." unique_id=1827500982]
 
