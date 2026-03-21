@@ -71,7 +71,7 @@ func add_allowed_sacrifice(item_name):
 		allowed_sacrifices.append(item_name)
 	
 # Will get item not already in requirments list
-func get_random_sacrafice_item():
+func get_random_sacrifice_item():
 	while true:
 		var num = RNG.randi_range(0,len(allowed_sacrifices)-1)
 		var item_name = allowed_sacrifices[num]
@@ -91,7 +91,7 @@ func set_new_requirements():
 	requirements = {}
 	filled_requirements = {}
 	for i in range(num_groups):
-		var item_name = get_random_sacrafice_item()
+		var item_name = get_random_sacrifice_item()
 		var points = points_remaining/(num_groups-i)
 		var num_items = floor(points/GLOBALCONSTS.ITEM_DEF[item_name]["points"])
 		if num_items < 1:

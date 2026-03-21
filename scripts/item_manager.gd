@@ -194,7 +194,7 @@ func refocus():
 	if len(focus_items):
 		#Search through array for biggest layer
 		for i in range(len(focus_items)):
-			#if focus_items[i].get_index() > largest_layer:
+			if focus_items[i].get_index() > largest_layer:
 				largest_layer = focus_items[i].get_index()
 				ind = i
 		if item_in_focus:
