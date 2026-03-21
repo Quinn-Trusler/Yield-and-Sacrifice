@@ -20,6 +20,7 @@ var ITEM_FRAMES_FOLDER = "res://scenes/sprite_frames/items/"
 
 #used by other scripts
 var MAPSIZE = [-14,-3,4,6]
+var VISIBLE_MAPSIZE = [-15,-4,5,7]
 var FIRE_SPAWN_ZONE = [-14,-3,4,6]
 var FIRE_RANGE = [-15,-4,5,7] # Range in wich fire can grow in
 var UI_TILES : Array[Vector2i] = [Vector2i()]
@@ -30,6 +31,7 @@ var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var FARMLAND_ID : Vector2i = Vector2i(3, 3)
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
+var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water", "lava", "dry_farmland"]
 var UNBURNABLE_TILES = ["burnt land","water","lava"]
 var INITIALLY_UNBURNABLE_TILES = ["dry_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},

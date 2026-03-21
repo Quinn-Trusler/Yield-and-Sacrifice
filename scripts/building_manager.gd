@@ -54,11 +54,14 @@ func get_all_burnt_tiles():
 			if tile_name == BURNT_TILE_NAME:
 				burnt_tiles.append(pos)
 	return burnt_tiles
-	
-func is_valid_building_location(pos: Vector2i):
-	if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
-		return true
-	return false
+
+func is_valid_building_location(pos : Vector2i) -> bool:
+	return (TileLayer.is_valid_building_location(pos) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+
+#func is_valid_building_location(pos: Vector2i):
+	#if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
+		#return true
+	#return false
 #uses tile position and not global position
 func get_building_interactable(pos):
 	if not EffectLayer.is_empty(pos):
@@ -125,7 +128,7 @@ func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:
 	var positions : Array[Vector2i] = []
 	for adj_pos in NINE_ADJACENT_POSITIONS:
 		var temp_pos = pos + adj_pos 
-		if TileLayer.get_tile_name_from_layer2(temp_pos) == BURNT_TILE_NAME:
+		if TileLayer.get_tile_name_from_layer(temp_pos) == BURNT_TILE_NAME:
 			positions.append(pos + adj_pos)
 	return positions
 
@@ -136,9 +139,6 @@ func finish_burn(pos) -> void:
 	var positions = get_nine_adjacent_positions(pos)
 	positions.append(pos)
 	TileLayer.set_cells_terrain_connect(positions, 0, 3)
-
-#here is what I found on layer 2@AnimatedSprite2D@10:<AnimatedSprite2D#62159587166>
-#tile name null
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):
