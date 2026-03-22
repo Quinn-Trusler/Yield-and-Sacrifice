@@ -20,7 +20,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
-"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Place_Farmland,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 9, "amt" : 1},
+"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 9, "amt" : 1},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 10, "reward": 5,"amt" : 1},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 6,"amt": 1}
 }
@@ -34,9 +34,6 @@ ChainedReward.new(["activate fish","wheat","mill","oven","mill","oven"], 1)]
 #ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
 #ChainedReward.new(["carrot","carrot","carrot"], 1)]
 
-#$TileMapLayer2.place_building(Vector2(-3,3),"barrel")
-	#$TileMapLayer2.place_building(Vector2(-1,3),"mushroom_patch")
-	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
 var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-13,4],[-13,5],[-13,5],[-13,6],[-12,3],[-12,4],[-12,5],[-12,6]],
 "barrel": [[0,1],[1,1],[2,1]],
 "mill": [[-3,5],[-2,5],[-1,5]],
@@ -64,6 +61,7 @@ var choice_instances = []
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
 @onready var SacrificeManager = get_node("/root/Main/SacrificeManager") 
 @export var GOLD: Node2D
+@export var BuildingPlacementManager : Node2D
 
 var round_num = 0
 var rewards_collected = 0
@@ -267,9 +265,6 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	elif choice["type"] == TYPES.Placement:
 		place_building(choice_name)
 		
-	elif choice["type"] == TYPES.Place_Farmland:
-		place_farmland(choice_name)
-		
 	elif choice["type"] == TYPES.Activate_Fish:
 		BuildingManager.fish_spawning_active = true
 	elif choice["type"] == TYPES.Lose_All_Gold:
@@ -290,15 +285,10 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 func place_building(choice_name : String):
 	var locations = placemnet_locations[choice_name]
 	var pos = locations[RNG.randi_range(0, len(locations)-1)]
-	TileLayer2.place_building(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
-	placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
+	BuildingPlacementManager.toggle_on(choices[choice_name]["reward"])
+	#BuildingManager.place_building(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
+	#placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
 		
-func place_farmland(choice_name : String):
-	var locations = placemnet_locations[choice_name]
-	var pos = locations[RNG.randi_range(0, len(locations)-1)]
-	TileLayer.place_farmland(Vector2i(pos[0],pos[1]))
-	placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
-	
 # Used by god choice chosen
 func destroy_land(choice : Dictionary) -> void:
 	var map_size = GLOBALCONSTS.FIRE_SPAWN_ZONE

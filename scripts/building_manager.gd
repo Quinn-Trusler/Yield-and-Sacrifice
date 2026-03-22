@@ -88,7 +88,16 @@ func create_gift(item,num):
 	
 	#var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
 	var pos = get_random_valid_pos()
-	TileLayer2.place_building(pos, "god_gift")
+	place_building(pos, "god_gift")
+	
+func place_building(pos : Vector2i, name : String) -> void:
+	if name == "farmland":
+		TileLayer.place_farmland(pos)
+	else:
+		TileLayer2.place_building(pos, name)
+		
+	
+	
 func get_gift_items():
 	return gift_items
 
