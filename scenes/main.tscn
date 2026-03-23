@@ -1024,6 +1024,7 @@ text = "All Lives Lost"
 horizontal_alignment = 1
 
 [node name="BuildingPlacementManager" type="Node2D" parent="." unique_id=1622394179 node_paths=PackedStringArray("BuildingManager")]
+process_mode = 3
 script = ExtResource("34_dgi5k")
 BuildingManager = NodePath("../BuildingManager")
 

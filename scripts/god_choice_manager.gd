@@ -76,6 +76,9 @@ func _ready():
 	if Cheats.GOLD_OVERRIDE:
 		num_gold = Cheats.GOLD_OVERRIDE
 	GOLD.update_gold_num(num_gold)
+	
+	BuildingPlacementManager.build_finished.connect(build_finished)
+	
 func get_gold():
 	return num_gold
 	
@@ -249,8 +252,6 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	
 	
 	unlock_sacrifices(choice["item unlock"], choice["unlock literal"])
-	
-	get_tree().paused = false
 		
 	#Manage variety of choice types
 	if choice["type"] == TYPES.Item:
@@ -279,8 +280,12 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		
 					
 	SacrificeManager.update_requirements()
-	if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
-		display_shop()
+	
+	if choice["type"] != TYPES.Placement:
+		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
+			display_shop()
+		else:
+			get_tree().paused = false
 
 func place_building(choice_name : String):
 	var locations = placemnet_locations[choice_name]
@@ -288,7 +293,13 @@ func place_building(choice_name : String):
 	BuildingPlacementManager.toggle_on(choices[choice_name]["reward"])
 	#BuildingManager.place_building(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
 	#placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
-		
+
+func build_finished() -> void:
+	if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
+		display_shop()
+	else:
+		get_tree().paused = false
+
 # Used by god choice chosen
 func destroy_land(choice : Dictionary) -> void:
 	var map_size = GLOBALCONSTS.FIRE_SPAWN_ZONE

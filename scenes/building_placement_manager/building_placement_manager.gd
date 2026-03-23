@@ -7,6 +7,8 @@ var building_location : Vector2i
 var CONFIRMATION_POPUP_OFFSET : Vector2 = Vector2(0, -16)
 var confirmation_popup_hover : bool = false
 
+signal build_finished
+
 @export var BuildingManager : Node2D
 
 # Called when the node enters the scene tree for the first time.
@@ -63,5 +65,6 @@ func toggle_on(building_name : String) -> void:
 func toggle_off():
 	in_placing_phase = false
 	$ValidBuildingLayer.visible = false
+	build_finished.emit()
 	
 	
