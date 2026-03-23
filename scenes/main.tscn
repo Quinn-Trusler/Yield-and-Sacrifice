@@ -930,7 +930,6 @@ texture_normal = ExtResource("22_5q0nq")
 texture_hover = ExtResource("21_qkpxi")
 
 [node name="GoldCount" type="Node2D" parent="GodChoiceManager" unique_id=509738890]
-visible = false
 position = Vector2(5.75, 18.75)
 script = ExtResource("16_fv21b")
 

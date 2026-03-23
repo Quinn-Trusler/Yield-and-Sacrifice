@@ -161,6 +161,7 @@ func display_punishments():
 	$TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments())
 	choice_type = CHOICE_TYPES.Punishment
+	$GoldCount.update_gold_num(num_gold)
 	
 func display_rewards():
 	increase_gold(completion_gold)
@@ -170,11 +171,13 @@ func display_rewards():
 	$TitleText.text = REWARD_TEXT
 	load_chained_godchoices(chained_rewards)
 	choice_type = CHOICE_TYPES.Reward
+	$GoldCount.update_gold_num(num_gold)
 
 func display_shop():
 	$TitleText.text = SHOP_TEXT
 	$SkipButton.visible = true
 	$GoldCount.visible = true
+	print("num gold: ", num_gold)
 	$GoldCount.update_gold_num(num_gold)
 	#load_shopchoices(chose_shop_items())
 	load_chained_godchoices(chained_shop_items, true)
@@ -245,6 +248,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		strike_shop_items_from_shop(choice_name)
 		strike_id_from_chain(chained_shop_items, id)
 	
+	
+	print("Cost: ", cost)
 	increase_gold(-cost)
 	
 	
