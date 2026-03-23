@@ -1033,6 +1033,12 @@ tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("35_j8jky")
 building_manager = NodePath("../../BuildingManager")
 
+[node name="TileOutline" type="AnimatedSprite2D" parent="BuildingPlacementManager" unique_id=1303230866]
+visible = false
+sprite_frames = SubResource("SpriteFrames_jscy8")
+frame_progress = 0.45605686
+centered = false
+
 [node name="ConfirmationPopup" parent="BuildingPlacementManager" unique_id=1302086566 instance=ExtResource("37_fuf3a")]
 visible = false
 

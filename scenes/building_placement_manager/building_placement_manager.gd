@@ -17,6 +17,7 @@ func _ready() -> void:
 	$ConfirmationPopup.cancel.connect(cancel_phantom_building)
 	$ConfirmationPopup.updateHoverStatus.connect(_update_confirmation_popup_hover_status)
 	set_initial_visibility()
+	$TileOutline.play()
 
 # Safety measure 
 func set_initial_visibility() -> void:
@@ -26,12 +27,17 @@ func set_initial_visibility() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if in_placing_phase: 
-		if Input.is_action_just_pressed("mouse_down") and not confirmation_popup_hover:
-			var pos : Vector2i = $ValidBuildingLayer.local_to_map($ValidBuildingLayer.to_local(get_local_mouse_position()))#tile coordinates
-			if $ValidBuildingLayer.get_cell_source_id(pos) == -1: #Empty slot
+		var pos : Vector2i = $ValidBuildingLayer.local_to_map($ValidBuildingLayer.to_local(get_local_mouse_position()))#tile coordinates
+		if not confirmation_popup_hover and pos != building_location and $ValidBuildingLayer.get_cell_source_id(pos) == -1:
+			display_tile_outline(pos)
+			if Input.is_action_just_pressed("mouse_down"):#and not confirmation_popup_hover:
 				place_phantom_building(pos)
-			else:
-				print("You can't place here!")
+			#if $ValidBuildingLayer.get_cell_source_id(pos) == -1: #Empty slot
+				#place_phantom_building(pos)
+			#else:
+				#print("You can't place here!")
+		else:
+			$TileOutline.visible = false
 		
 func place_phantom_building(pos : Vector2i) -> void:
 	if phantom_building_placed and building_location != pos: # Remove the old phantom building
@@ -44,12 +50,16 @@ func place_phantom_building(pos : Vector2i) -> void:
 	
 func _update_confirmation_popup_hover_status(status : bool):
 	confirmation_popup_hover = status
+	#if in_placing_phase:
+		#$TileOutline.visible = !status # WIll cause problem if confimation triggers after it is hidden
+	
 	
 func confirm_placement() -> void:
 	phantom_building_placed = false
 	$ConfirmationPopup.visible = false
 	BuildingManager.place_building(building_location, building_to_place)
 	toggle_off()
+	
 		
 func cancel_phantom_building() -> void:
 	BuildingManager.remove_phantom_building(building_location)
@@ -60,11 +70,18 @@ func toggle_on(building_name : String) -> void:
 	$ValidBuildingLayer.display_invalid_tiles()
 	in_placing_phase = true
 	$ValidBuildingLayer.visible = true
+	$TileOutline.visible = true
 	building_to_place = building_name
 	
 func toggle_off():
 	in_placing_phase = false
 	$ValidBuildingLayer.visible = false
+	$TileOutline.visible = false
 	build_finished.emit()
 	
+	
+func display_tile_outline(pos) -> void:#input tile coords
+	$TileOutline.visible = true
+	$TileOutline.position.x = pos.x*16 +$ValidBuildingLayer.position.x
+	$TileOutline.position.y = pos.y*16 +$ValidBuildingLayer.position.y
 	

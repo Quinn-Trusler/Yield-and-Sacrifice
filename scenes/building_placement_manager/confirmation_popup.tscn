@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://j1ld1hx5cebg" path="res://art/ui/cancel_building_placement_button.png" id="3_wbdtk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wxd10"]
-size = Vector2(28, 13)
+size = Vector2(11, 11)
 
 [node name="ConfirmationPopup" type="Node2D" unique_id=1302086566]
 script = ExtResource("1_wxd10")
@@ -34,7 +34,11 @@ texture_normal = ExtResource("2_8tq2p")
 [node name="hoverDetector" type="Area2D" parent="." unique_id=1869732711]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hoverDetector" unique_id=1029395341]
-position = Vector2(0, 0.5)
+position = Vector2(-7.5, 0.5)
+shape = SubResource("RectangleShape2D_wxd10")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hoverDetector" unique_id=1051130344]
+position = Vector2(7.5, 0.5)
 shape = SubResource("RectangleShape2D_wxd10")
 
 [connection signal="mouse_entered" from="HBoxContainer" to="." method="_on_h_box_container_mouse_entered"]
