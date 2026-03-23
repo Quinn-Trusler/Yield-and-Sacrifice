@@ -49,6 +49,8 @@ func next_round():
 		reward()
 	else:
 		punish()
+	devil_boss.set_hungry()
+	$Timer.start()
 
 func modify_round_time(change_time):
 	round_time += change_time
@@ -145,8 +147,7 @@ func check_requirements_met():
 	
 func _on_timer_timeout() -> void:
 	next_round()
-	devil_boss.set_hungry()
-	$Timer.start()
+	
 func reward():
 	get_parent().reward()
 func punish():
