@@ -2,6 +2,7 @@ extends Node2D
 
 signal confirm
 signal cancel
+signal updateHoverStatus(status : bool)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,12 +13,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_confirm_pressed() -> void:
-	print("confirm")
 	confirm.emit()
 
-
 func _on_cancel_pressed() -> void:
-	print("cancel")
 	cancel.emit()
+
+func _on_hover_detector_mouse_entered() -> void:
+	updateHoverStatus.emit(true)
+
+func _on_hover_detector_mouse_exited() -> void:
+	updateHoverStatus.emit(false)
