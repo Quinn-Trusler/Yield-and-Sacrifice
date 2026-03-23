@@ -7,6 +7,7 @@ class_name SceneTileMapLayer
 	
 var scene_coords: Dictionary[Vector2i, Node] = {}
 var building_names_temp: Dictionary[Vector2i, String] = {}
+var next_building_phantom : bool = false
 	
 func _enter_tree():
 	child_entered_tree.connect(_register_child)
@@ -24,10 +25,11 @@ func _register_child(child):
 		building_names_temp.erase(vectored_coords)
 	elif child.BUILDING_TYPE == "building":
 		child.connectItemSignals(ItemManager)
-		
 		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
-		child.initialize(building_def)
-		if child.BUILDING_DISPLAY_NAME == "Gift":
+		child.initialize(building_def, next_building_phantom)
+		next_building_phantom = false
+			
+		if child.BUILDING_DISPLAY_NAME == "Gift": # Very bad idea to use DISPLAY_NAME for functionality
 			child.OUTPUT_ITEMS = BuildingManager.get_gift_items()
 		var temp_meta = [coords]
 		if "extra_tiles" in building_def:
@@ -49,13 +51,17 @@ func remove_cell_scene(coords):
 		for pos in scene.get_meta("all_coords"):
 			set_cell(pos, -1)
 			scene_coords.erase(pos)
-func plant_crop(coords: Vector2i, building_name: String):
+func plant_crop(coords: Vector2i, building_name: String) -> void:
 	building_names_temp[coords] = building_name
 	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.CROP_SCENE_ID)#plants crop
 
-func place_building(coords: Vector2i, building_name: String):
+func place_building(coords: Vector2i, building_name: String) -> void:
 	building_names_temp[coords] = building_name
 	set_cell_scene(coords,2,Vector2.ZERO,GLOBALCONSTS.BUILDING_SCENE_ID)
+	
+func place_phantom_building(coords: Vector2i, building_name: String) -> void:
+	next_building_phantom = true
+	place_building(coords, building_name)
 
 # Does not include tiles on layer1
 func is_empty_building_location(coords: Vector2i):

@@ -94,9 +94,17 @@ func place_building(pos : Vector2i, name : String) -> void:
 	if name == "farmland":
 		TileLayer.place_farmland(pos)
 	else:
-		TileLayer2.place_building(pos, name)
+		TileLayer2.place_building(pos, name) 
 		
-	
+func place_phantom_building(pos : Vector2i, name : String) -> void:
+	if name == "farmland":
+		TileLayer.place_phantom_farmland(pos)
+	else:
+		TileLayer2.place_phantom_building(pos, name)
+		
+func remove_phantom_building(pos: Vector2i):
+	TileLayer.set_cell(pos)
+	TileLayer2.remove_cell_scene(pos)
 	
 func get_gift_items():
 	return gift_items

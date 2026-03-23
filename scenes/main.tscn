@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://bgr1wrie0ddb4" path="res://art/ui/skip_button_dark.png" id="22_5q0nq"]
 [ext_resource type="Script" uid="uid://bo1ee6ne01h2q" path="res://scenes/building_placement_manager/building_placement_manager.gd" id="34_dgi5k"]
 [ext_resource type="Script" uid="uid://b6u24evboqwop" path="res://scenes/building_placement_manager/valid_building_layer.gd" id="35_j8jky"]
+[ext_resource type="PackedScene" uid="uid://djv5pyh8ircoi" path="res://scenes/building_placement_manager/confirmation_popup.tscn" id="37_fuf3a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -686,6 +687,7 @@ texture = ExtResource("2_tipki")
 7:15/0/terrains_peering_bit/top_left_corner = 3
 7:15/0/terrains_peering_bit/top_side = 3
 7:15/0/custom_data_0 = "burnt land"
+4:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]
 texture = ExtResource("3_kmb1v")
@@ -1030,6 +1032,9 @@ position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("35_j8jky")
 building_manager = NodePath("../../BuildingManager")
+
+[node name="ConfirmationPopup" parent="BuildingPlacementManager" unique_id=1302086566 instance=ExtResource("37_fuf3a")]
+visible = false
 
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
 [connection signal="pressed" from="GodChoiceManager/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]

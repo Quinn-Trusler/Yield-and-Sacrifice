@@ -41,7 +41,7 @@ var animation_rest_timer = 0
 var original_pos_y
 var delta_total = 0
 
-func initialize(def):
+func initialize(def : Dictionary, is_phantom : bool) -> void:
 	#BUILDING_NAME = building_name
 	BUILDING_DISPLAY_NAME = def["display_name"]
 	OUTPUT_ITEMS = def["output_items"]
@@ -59,6 +59,10 @@ func initialize(def):
 	offset.x = def["offset"][0]
 	offset.y = def["offset"][1]
 	sprite_frames = load(def["frames"])
+	if is_phantom:
+		modulate = GLOBALCONSTS.BUILDING_PHANTOM_MODULATION
+	
+	
 	update_stage()
 	arrow_pos_y = -10
 	original_pos_y = position.y

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://djv5pyh8ircoi"]
+
+[ext_resource type="Script" uid="uid://2o0anaa5tbgo" path="res://scenes/building_placement_manager/confirmation_popup.gd" id="1_wxd10"]
+[ext_resource type="Texture2D" uid="uid://do080bvxnmt1d" path="res://art/ui/confirm_building_placement_button.png" id="2_8tq2p"]
+[ext_resource type="Texture2D" uid="uid://j1ld1hx5cebg" path="res://art/ui/cancel_building_placement_button.png" id="3_wbdtk"]
+
+[node name="ConfirmationPopup" type="Node2D" unique_id=1302086566]
+script = ExtResource("1_wxd10")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1064546248]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -5.5
+offset_right = 13.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cancel" type="TextureButton" parent="HBoxContainer" unique_id=1166323887]
+layout_mode = 2
+texture_normal = ExtResource("3_wbdtk")
+
+[node name="Confirm" type="TextureButton" parent="HBoxContainer" unique_id=925742021]
+layout_mode = 2
+texture_normal = ExtResource("2_8tq2p")
+
+[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

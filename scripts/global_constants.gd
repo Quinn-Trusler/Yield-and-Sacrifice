@@ -2,14 +2,6 @@ extends Node
 #At the time of making this it seems like a global script is the best move
 #Not sure if it's correct but multiple scripts need these definitions
 
-#Testing and cheats
-#var ALWAYS_REWARD = true
-#var ALWAYS_PUNISH = false
-#var TESTING_ITEMS = false
-#var ROUND_TIME_OVERRIDE = 1
-#var CROP_GROWTH_TIME_OVERRIDE = 0.2
-
-
 
 #Used only within this script
 var CROP_FRAMES_FOLDER = "res://scenes/sprite_frames/crops/"
@@ -30,6 +22,7 @@ var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var FARMLAND_ID : Vector2i = Vector2i(3, 3)
+var PHANTOM_FARMLAND_ID : Vector2i = Vector2i(4,0)
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
 var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water", "lava", "dry_farmland"]
 var UNBURNABLE_TILES = ["burnt land","water","lava"]
@@ -72,6 +65,7 @@ var MAX_BUNDLE_ITEMS = 5
 
 var LAST_CROP_ITEM_DIALOG = ["Hey! You need to plant that to grow more!",5]
 var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]
+var BUILDING_PHANTOM_MODULATION : Color = Color(1,1,1,0.5)
 
 var ROUND_COMPLETION_GOLD = 0
 
