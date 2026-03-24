@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug"):
 		#print("Nothing bound to debug key(s)")
 		$BuildingManager.create_gift("wheat", 2)
-		#print("\n----------------------------------\n")
+		#print("\n---------------------------------\n")
 		$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
 		#$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
 	

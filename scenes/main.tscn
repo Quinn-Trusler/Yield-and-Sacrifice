@@ -775,6 +775,7 @@ tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("6_5q0nq")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1286760783]
+y_sort_enabled = true
 position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("5_tipki")
@@ -959,6 +960,7 @@ script = ExtResource("10_choun")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
 GodChoiceManager = NodePath("../GodChoiceManager")
+metadata/_edit_group_ = true
 
 [node name="item_pop" type="AudioStreamPlayer" parent="ItemManager" unique_id=58524719]
 stream = ExtResource("18_jscy8")
