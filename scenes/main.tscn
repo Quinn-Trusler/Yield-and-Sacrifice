@@ -1049,6 +1049,25 @@ centered = false
 [node name="ConfirmationPopup" parent="BuildingPlacementManager" unique_id=1302086566 instance=ExtResource("37_fuf3a")]
 visible = false
 
+[node name="BuildingNotice" type="Node2D" parent="BuildingPlacementManager" unique_id=788303220]
+position = Vector2(0, -107)
+
+[node name="SacrificeBG" type="Sprite2D" parent="BuildingPlacementManager/BuildingNotice" unique_id=941874426]
+texture = ExtResource("14_yc10j")
+
+[node name="SacrificeText" type="RichTextLabel" parent="BuildingPlacementManager/BuildingNotice" unique_id=1926000034]
+offset_left = -71.0
+offset_top = -10.0
+offset_right = 71.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_tefeu")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Place Building to Continue"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
 [connection signal="pressed" from="GodChoiceManager/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]

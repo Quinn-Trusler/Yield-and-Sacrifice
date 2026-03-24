@@ -7,6 +7,10 @@ var building_location : Vector2i
 var CONFIRMATION_POPUP_OFFSET : Vector2 = Vector2(0, -16)
 var confirmation_popup_hover : bool = false
 
+const BUILDING_NOTICE_PREFIX : String = "Place "
+const BUILDING_NOTICE_SUFFIX : String = " to continue"
+
+
 signal build_finished
 
 @export var BuildingManager : Node2D
@@ -23,6 +27,7 @@ func _ready() -> void:
 func set_initial_visibility() -> void:
 	$ValidBuildingLayer.visible = false
 	$ConfirmationPopup.visible = false
+	$BuildingNotice.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -66,14 +71,25 @@ func cancel_phantom_building() -> void:
 	$ConfirmationPopup.visible = false
 	phantom_building_placed = false
 	
+func update_building_notice():
+	$BuildingNotice/SacrificeText.clear()
+	if building_to_place == "farmland":
+		$BuildingNotice/SacrificeText.add_text(BUILDING_NOTICE_PREFIX + "Farmland" + BUILDING_NOTICE_SUFFIX)
+	else:
+		$BuildingNotice/SacrificeText.add_text(BUILDING_NOTICE_PREFIX + GLOBALCONSTS.BUILDING_DEF[building_to_place]["display_name"] + BUILDING_NOTICE_SUFFIX)
+		
+
 func toggle_on(building_name : String) -> void:
+	$BuildingNotice.visible = true
 	$ValidBuildingLayer.display_invalid_tiles()
 	in_placing_phase = true
 	$ValidBuildingLayer.visible = true
 	$TileOutline.visible = true
 	building_to_place = building_name
+	update_building_notice()
 	
 func toggle_off():
+	$BuildingNotice.visible = false
 	in_placing_phase = false
 	$ValidBuildingLayer.visible = false
 	$TileOutline.visible = false
