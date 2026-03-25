@@ -49,6 +49,10 @@ func spawn_testing_items():
 	create_draggable_item("bread",Vector2(-60,-20))
 	create_draggable_item("sugarcane",Vector2(-40,-30))
 	create_draggable_item("sugar",Vector2(-40,-30))
+	create_draggable_item("flour",Vector2(-60,-20))
+	create_draggable_item("bread",Vector2(-60,-20))
+	create_draggable_item("sugarcane",Vector2(-40,-30))
+	create_draggable_item("sugar",Vector2(-40,-30))
 	#
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("mushroom",Vector2(-75,-30))
@@ -65,7 +69,11 @@ func spawn_testing_items():
 	create_draggable_item("fish",Vector2(-70,-30))
 	create_draggable_item("potatoe",Vector2(-70,-30))
 	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
+	create_draggable_item("carrot",Vector2(-70,-30))
 	#
+	create_draggable_item("voldka",Vector2(-30,-20))
+	create_draggable_item("voldka",Vector2(-30,-20))
 	create_draggable_item("voldka",Vector2(-30,-20))
 	create_draggable_item("rum",Vector2(-50,-40))
 	create_draggable_item("rum",Vector2(-50,-40))

@@ -12,7 +12,10 @@ func initialize(n,item_def):
 		sprite_frames.add_frame("default",load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
 		sprite_frames.add_frame("default",load(item_def["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
 		#set_sprite_2ds(load(item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
-
+	if "num_offset" in item_def:
+		$NumItems.position = Vector2(item_def["num_offset"][0], item_def["num_offset"][1])
+	else:
+		print("Warning: No number offset for " + item_name)
 	#print_polygon()
 	if item_name in GLOBALCONSTS.ITEM_POLYGONS:
 		$BundleItemArea2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
