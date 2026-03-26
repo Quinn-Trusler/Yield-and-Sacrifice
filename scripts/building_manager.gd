@@ -1,11 +1,11 @@
 extends Node2D
 
-@onready var TileLayer = get_node("/root/Main/TileMapLayer")
-@onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
-@onready var EffectLayer = get_node("/root/Main/EffectLayer")
-@onready var TerrainLayer = get_node("/root/Main/TerrainLayer")
-@onready var TileMapManager = get_node("/root/Main/TileMapManager")
-@onready var ItemManager = get_node("/root/Main/ItemManager")
+@export var TileLayer : Node2D
+@export var TileLayer2 : Node2D
+@export var EffectLayer : Node2D
+@export var TerrainLayer : Node2D
+@export var TileMapManager : Node2D
+@export var ItemManager : Node2D
 var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(1,11)}

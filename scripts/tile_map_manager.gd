@@ -1,12 +1,12 @@
 extends Node2D
 
-@onready var TileLayer = get_node("/root/Main/TileMapLayer")
-@onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
-@onready var EffectLayer = get_node("/root/Main/EffectLayer")
-@onready var TerrainLayer = get_node("/root/Main/TerrainLayer")
+@export var TileLayer : TileMapLayer
+@export var TileLayer2 : TileMapLayer
+@export var EffectLayer : TileMapLayer
+@export var TerrainLayer : TileMapLayer
 
-@onready var BuildingManager = get_node("/root/Main/BuildingManager")
-@onready var ItemManager = get_node("/root/Main/ItemManager")
+@export var BuildingManager : Node2D
+@export var ItemManager : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

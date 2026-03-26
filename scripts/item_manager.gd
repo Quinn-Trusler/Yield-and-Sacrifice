@@ -28,12 +28,12 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 var first_item_planted : bool = false
 
 
-@onready var TileLayer = get_node("/root/Main/TileMapLayer")
-@onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
-@onready var TerrainLayer = get_node("/root/Main/TerrainLayer")
-@onready var SacrificeManager = get_node("/root/Main/SacrificeManager")
-@onready var TileMapManager = get_node("/root/Main/TileMapManager")
-@onready var BuildingManager = get_node("/root/Main/BuildingManager")
+@export var TileLayer : TileMapLayer
+@export var TileLayer2 : TileMapLayer
+@export var TerrainLayer : TileMapLayer
+@export var SacrificeManager : Node2D
+@export var TileMapManager : Node2D
+@export var BuildingManager = Node2D
 
 signal item_picked_up(item_name, last_item)
 signal item_dropped()

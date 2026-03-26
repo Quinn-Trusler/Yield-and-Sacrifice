@@ -2,8 +2,8 @@ extends TileMapLayer
 	
 #used code from https://www.reddit.com/r/godot/comments/10ql0ch/godot_4_does_tilemap_have_a_way_to_retrieve_the/
 class_name SceneTileMapLayer
-@onready var BuildingManager = get_node("/root/Main/BuildingManager")
-@onready var ItemManager = get_node("/root/Main/ItemManager")
+@export var BuildingManager : Node2D
+@export var ItemManager : Node2D
 	
 var scene_coords: Dictionary[Vector2i, Node] = {}
 var building_names_temp: Dictionary[Vector2i, String] = {}

@@ -775,23 +775,33 @@ tile_map_data = PackedByteArray("AADy//3/AAALAAEAAADz//3/AAALAAEAAAD0//3/AAALAAE
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("6_5q0nq")
 
-[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1286760783]
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1286760783 node_paths=PackedStringArray("BuildingManager", "ItemManager")]
 y_sort_enabled = true
 position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("5_tipki")
+BuildingManager = NodePath("../BuildingManager")
+ItemManager = NodePath("../ItemManager")
 
-[node name="EffectLayer" type="TileMapLayer" parent="." unique_id=274816425]
+[node name="EffectLayer" type="TileMapLayer" parent="." unique_id=274816425 node_paths=PackedStringArray("BuildingManager", "ItemManager")]
 position = Vector2(72, -59)
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("5_tipki")
+BuildingManager = NodePath("../BuildingManager")
+ItemManager = NodePath("../ItemManager")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1226002873]
 offset = Vector2(0, -30)
 zoom = Vector2(4, 4)
 
-[node name="TileMapManager" type="Node2D" parent="." unique_id=1683331704]
+[node name="TileMapManager" type="Node2D" parent="." unique_id=1683331704 node_paths=PackedStringArray("TileLayer", "TileLayer2", "EffectLayer", "TerrainLayer", "BuildingManager", "ItemManager")]
 script = ExtResource("2_ya4ey")
+TileLayer = NodePath("../TileMapLayer")
+TileLayer2 = NodePath("../TileMapLayer2")
+EffectLayer = NodePath("../EffectLayer")
+TerrainLayer = NodePath("../TerrainLayer")
+BuildingManager = NodePath("../BuildingManager")
+ItemManager = NodePath("../ItemManager")
 
 [node name="TileOutline" type="AnimatedSprite2D" parent="TileMapManager" unique_id=1103397236]
 sprite_frames = SubResource("SpriteFrames_jscy8")
@@ -889,12 +899,19 @@ SacrificeTimer = NodePath("../SacrificeManager/Timer")
 visible = false
 position = Vector2(0, -72)
 
-[node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198 node_paths=PackedStringArray("GOLD", "BuildingPlacementManager")]
+[node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198 node_paths=PackedStringArray("ItemManager", "TileLayer", "TileLayer2", "EffectLayer", "Lives", "BuildingManager", "SacrificeManager", "GOLD", "BuildingPlacementManager")]
 process_mode = 3
 visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("7_o6xl0")
+ItemManager = NodePath("../ItemManager")
+TileLayer = NodePath("../TileMapLayer")
+TileLayer2 = NodePath("../TileMapLayer2")
+EffectLayer = NodePath("../EffectLayer")
+Lives = NodePath("../Lives")
+BuildingManager = NodePath("../BuildingManager")
+SacrificeManager = NodePath("../SacrificeManager")
 GOLD = NodePath("../Gold")
 BuildingPlacementManager = NodePath("../BuildingPlacementManager")
 
@@ -955,13 +972,18 @@ theme_override_fonts/normal_font = ExtResource("10_dp3eg")
 theme_override_font_sizes/normal_font_size = 12
 text = "Gold"
 
-[node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager", "GodChoiceManager")]
+[node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager", "GodChoiceManager", "TileLayer", "TileLayer2", "TerrainLayer", "SacrificeManager", "TileMapManager", "BuildingManager")]
 z_index = 3
 script = ExtResource("10_choun")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
 GodChoiceManager = NodePath("../GodChoiceManager")
-metadata/_edit_group_ = true
+TileLayer = NodePath("../TileMapLayer")
+TileLayer2 = NodePath("../TileMapLayer2")
+TerrainLayer = NodePath("../TerrainLayer")
+SacrificeManager = NodePath("../SacrificeManager")
+TileMapManager = NodePath("../TileMapManager")
+BuildingManager = NodePath("../BuildingManager")
 
 [node name="item_pop" type="AudioStreamPlayer" parent="ItemManager" unique_id=58524719]
 stream = ExtResource("18_jscy8")
@@ -983,8 +1005,14 @@ stream = ExtResource("22_2wyq8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/BundleField" unique_id=830481283]
 shape = SubResource("CircleShape2D_fv21b")
 
-[node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TutorialManager")]
+[node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TileLayer", "TileLayer2", "EffectLayer", "TerrainLayer", "TileMapManager", "ItemManager", "TutorialManager")]
 script = ExtResource("12_eb6dy")
+TileLayer = NodePath("../TileMapLayer")
+TileLayer2 = NodePath("../TileMapLayer2")
+EffectLayer = NodePath("../EffectLayer")
+TerrainLayer = NodePath("../TerrainLayer")
+TileMapManager = NodePath("../TileMapManager")
+ItemManager = NodePath("../ItemManager")
 TutorialManager = NodePath("../TutorialManager")
 
 [node name="FishTimer" type="Timer" parent="BuildingManager" unique_id=158535035]

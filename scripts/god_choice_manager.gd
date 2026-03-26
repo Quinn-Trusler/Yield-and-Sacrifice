@@ -53,13 +53,13 @@ var unlock_map = [[["barrel", "sugarcane"],["rum"]],
 				[["mill", "oven", "wheat"],["bread"]]]
 
 var choice_instances = []
-@onready var ItemManager = get_node("/root/Main/ItemManager")
-@onready var TileLayer = get_node("/root/Main/TileMapLayer")
-@onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
-@onready var EffectLayer = get_node("/root/Main/EffectLayer")
-@onready var Lives = get_node("/root/Main/Lives")
-@onready var BuildingManager = get_node("/root/Main/BuildingManager")
-@onready var SacrificeManager = get_node("/root/Main/SacrificeManager") 
+@export var ItemManager : Node2D
+@export var TileLayer : TileMapLayer
+@export var TileLayer2 : TileMapLayer
+@export var EffectLayer = TileMapLayer
+@export var Lives = Node2D
+@export var BuildingManager : Node2D
+@export var SacrificeManager : Node2D
 @export var GOLD: Node2D
 @export var BuildingPlacementManager : Node2D
 
