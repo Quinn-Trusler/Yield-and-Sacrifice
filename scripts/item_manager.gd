@@ -30,7 +30,7 @@ var first_item_planted : bool = false
 
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
-@onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
+@onready var TerrainLayer = get_node("/root/Main/TerrainLayer")
 @onready var SacrificeManager = get_node("/root/Main/SacrificeManager")
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var BuildingManager = get_node("/root/Main/BuildingManager")
@@ -264,7 +264,7 @@ func drop_item_ukn():
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
-		var tile_name = TileMapManager.get_tile_name_from_layer(pos)
+		var tile_name = TileLayer.get_tile_name(pos)
 		if TileLayer2.is_empty(pos):#empty cell
 			return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
 	return false
@@ -284,7 +284,7 @@ func drop_item(item):
 	
 	var delete_item = false
 	var pos = TileLayer.to_local(item.position)
-	var tile_name = TileMapManager.get_tile_name_from_local(pos)
+	var tile_name = TileLayer.get_tile_name_from_local(pos)
 	pos = TileLayer.local_to_map(pos)
 	item_dropped.emit()
 	

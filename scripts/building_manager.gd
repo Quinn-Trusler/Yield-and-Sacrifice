@@ -3,7 +3,7 @@ extends Node2D
 @onready var TileLayer = get_node("/root/Main/TileMapLayer")
 @onready var TileLayer2 = get_node("/root/Main/TileMapLayer2")
 @onready var EffectLayer = get_node("/root/Main/EffectLayer")
-@onready var TileLayerBG = get_node("/root/Main/TileMapLayerBG")
+@onready var TerrainLayer = get_node("/root/Main/TerrainLayer")
 @onready var TileMapManager = get_node("/root/Main/TileMapManager")
 @onready var ItemManager = get_node("/root/Main/ItemManager")
 var RNG = RandomNumberGenerator.new()
@@ -40,17 +40,19 @@ func update_location_lists():
 	for x in range(GLOBALCONSTS.MAPSIZE[0], GLOBALCONSTS.MAPSIZE[2] + 1):
 		for y in range(GLOBALCONSTS.MAPSIZE[1],GLOBALCONSTS.MAPSIZE[3] + 1):
 			var pos = Vector2i(x,y)
-			var tile_name = TileMapManager.get_tile_name_from_layer(pos)
+			var tile_name = TileLayer.get_tile_name(pos)
+			var terrain_tile_name = TerrainLayer.get_tile_name(pos)
+			if terrain_tile_name == UI_TILE_NAME:
+				ui_tiles.append(pos)
 			if  tile_name == WATER_TILE_NAME:
 				fish_spawn_spots.append(pos)
-			elif tile_name == UI_TILE_NAME:
-				ui_tiles.append(pos)
+			
 func get_all_burnt_tiles():
 	var burnt_tiles : Array[Vector2i] = []
 	for x in range(GLOBALCONSTS.FIRE_RANGE[0], GLOBALCONSTS.FIRE_RANGE[2] + 1):
 		for y in range(GLOBALCONSTS.FIRE_RANGE[1],GLOBALCONSTS.FIRE_RANGE[3] + 1):
 			var pos = Vector2i(x,y)
-			var tile_name = TileMapManager.get_tile_name_from_layer(pos)
+			var tile_name = TileLayer.get_tile_name(pos)
 			if tile_name == BURNT_TILE_NAME:
 				burnt_tiles.append(pos)
 	return burnt_tiles
@@ -145,7 +147,7 @@ func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:
 	var positions : Array[Vector2i] = []
 	for adj_pos in NINE_ADJACENT_POSITIONS:
 		var temp_pos = pos + adj_pos 
-		if TileLayer.get_tile_name_from_layer(temp_pos) == BURNT_TILE_NAME:
+		if TileLayer.get_tile_name(temp_pos) == BURNT_TILE_NAME:
 			positions.append(pos + adj_pos)
 	return positions
 
@@ -159,8 +161,8 @@ func finish_burn(pos) -> void:
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):
-	if not (TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.UNBURNABLE_TILES):
-		if not TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.INITIALLY_UNBURNABLE_TILES:
+	if not (TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES):
+		if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.INITIALLY_UNBURNABLE_TILES:
 			if not TileLayer2.get_cell_scene(pos):
 				if not EffectLayer.get_cell_scene(pos):
 					return true
@@ -168,7 +170,7 @@ func is_valid_fire_placement(pos):
 	
 func is_valid_spread_position(pos):
 	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
-		if not TileMapManager.get_tile_name_from_layer(pos) in GLOBALCONSTS.UNBURNABLE_TILES:
+		if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES:
 			if EffectLayer.get_cell_scene(pos) == null or EffectLayer.get_cell_scene(pos).BUILDING_TYPE != "fire":
 				return true
 	return false

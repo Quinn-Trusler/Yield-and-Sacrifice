@@ -14,11 +14,15 @@ func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2
 		set_cell(coords, source_id, atlas_coords, alternative_tile)
 
 func is_valid_building_location(pos : Vector2i) -> bool:
-	var tile_name : String = get_tile_name_from_layer(pos)
+	var tile_name : String = get_tile_name(pos)
 	return !(no_building_placement_tiles.has(tile_name))
 
-func get_tile_name_from_layer(pos):
+func get_tile_name(pos):
 	var data = get_cell_tile_data(pos)
 	if data != null: 
 		return data.get_custom_data_by_layer_id(0)
 	return "null"
+#gets tile name using global position
+func get_tile_name_from_local(pos):
+	pos = local_to_map(pos)#tile coordinates
+	return get_tile_name(pos)

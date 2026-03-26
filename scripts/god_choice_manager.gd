@@ -191,7 +191,7 @@ func delete_choice_instances():
 		c.queue_free()
 	choice_instances = []
 	
-func get_tile_name_from_layer2(pos):
+func get_tile_name(pos):
 	var data = TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
