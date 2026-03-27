@@ -9,6 +9,7 @@ var confirmation_popup_hover : bool = false
 
 const BUILDING_NOTICE_PREFIX : String = "Place "
 const BUILDING_NOTICE_SUFFIX : String = " to continue"
+const INVALID_BUILDING_LOCATION : Vector2i = Vector2i(-99999,-99999) # Since there is no null for invalid building location
 
 
 signal build_finished
@@ -71,6 +72,7 @@ func cancel_phantom_building() -> void:
 	BuildingManager.remove_phantom_building(building_location)
 	$ConfirmationPopup.visible = false
 	phantom_building_placed = false
+	building_location = INVALID_BUILDING_LOCATION
 	
 func update_building_notice():
 	$BuildingNotice/SacrificeText.clear()
