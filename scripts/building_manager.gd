@@ -42,9 +42,9 @@ func update_location_lists():
 			var pos = Vector2i(x,y)
 			var tile_name = TileLayer.get_tile_name(pos)
 			var terrain_tile_name = TerrainLayer.get_tile_name(pos)
-			if terrain_tile_name == UI_TILE_NAME:
+			if tile_name == UI_TILE_NAME:
 				ui_tiles.append(pos)
-			if  tile_name == WATER_TILE_NAME:
+			elif  terrain_tile_name == WATER_TILE_NAME:
 				fish_spawn_spots.append(pos)
 			
 func get_all_burnt_tiles():
@@ -58,7 +58,7 @@ func get_all_burnt_tiles():
 	return burnt_tiles
 
 func is_valid_building_location(pos : Vector2i) -> bool:
-	return (TileLayer.is_valid_building_location(pos) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+	return (TileLayer.is_valid_building_location(pos)and TerrainLayer.is_valid_building_location(pos) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
 #func is_valid_building_location(pos: Vector2i):
 	#if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
@@ -161,7 +161,7 @@ func finish_burn(pos) -> void:
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):
-	if not (TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES):
+	if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES and not TerrainLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TERRAIN_TILES:
 		if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.INITIALLY_UNBURNABLE_TILES:
 			if not TileLayer2.get_cell_scene(pos):
 				if not EffectLayer.get_cell_scene(pos):
@@ -170,7 +170,7 @@ func is_valid_fire_placement(pos):
 	
 func is_valid_spread_position(pos):
 	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
-		if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES:
+		if not TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES and not TerrainLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TERRAIN_TILES:
 			if EffectLayer.get_cell_scene(pos) == null or EffectLayer.get_cell_scene(pos).BUILDING_TYPE != "fire":
 				return true
 	return false

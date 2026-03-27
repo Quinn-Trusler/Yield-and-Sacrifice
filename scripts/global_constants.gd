@@ -25,7 +25,8 @@ var FARMLAND_ID : Vector2i = Vector2i(3, 3)
 var PHANTOM_FARMLAND_ID : Vector2i = Vector2i(4,0)
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
 var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water", "lava", "dry_farmland"]
-var UNBURNABLE_TILES = ["burnt land","water","lava"]
+var UNBURNABLE_TILES = ["burnt land", "UI"]
+var UNBURNABLE_TERRAIN_TILES = ["water","lava"]
 var INITIALLY_UNBURNABLE_TILES = ["dry_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)},
