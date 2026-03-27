@@ -1058,11 +1058,12 @@ theme_override_font_sizes/font_size = 12
 text = "All Lives Lost"
 horizontal_alignment = 1
 
-[node name="BuildingPlacementManager" type="Node2D" parent="." unique_id=1622394179 node_paths=PackedStringArray("BuildingManager", "ItemManager")]
+[node name="BuildingPlacementManager" type="Node2D" parent="." unique_id=1622394179 node_paths=PackedStringArray("BuildingManager", "ItemManager", "TileMapManager")]
 process_mode = 3
 script = ExtResource("34_dgi5k")
 BuildingManager = NodePath("../BuildingManager")
 ItemManager = NodePath("../ItemManager")
+TileMapManager = NodePath("../TileMapManager")
 
 [node name="BuildingNotice" type="Node2D" parent="BuildingPlacementManager" unique_id=788303220]
 position = Vector2(0, -107)

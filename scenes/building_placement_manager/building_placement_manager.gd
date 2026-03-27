@@ -16,6 +16,7 @@ signal build_finished
 
 @export var BuildingManager : Node2D
 @export var ItemManager : Node2D
+@export var TileMapManager : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -91,6 +92,7 @@ func toggle_on(building_name : String) -> void:
 	building_to_place = building_name
 	update_building_notice()
 	ItemManager.dim()
+	TileMapManager.hide_tile_outline()
 	
 func toggle_off():
 	$BuildingNotice.visible = false
