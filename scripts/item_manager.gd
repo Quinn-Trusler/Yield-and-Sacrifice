@@ -97,6 +97,12 @@ func _ready() -> void:
 	if Cheats.TESTING_ITEMS:
 		spawn_testing_items()
 
+func dim() -> void:
+	modulate = GLOBALCONSTS.ITEM_DIM_COLOUR
+
+func undim() -> void:
+	modulate = Color.WHITE
+
 func consume_gold():
 	# Create flying gold particle
 	var temp = FLYING_COIN_SCENE.instantiate()

@@ -67,6 +67,7 @@ var MAX_BUNDLE_ITEMS = 5
 var LAST_CROP_ITEM_DIALOG = ["Hey! You need to plant that to grow more!",5]
 var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]
 var BUILDING_PHANTOM_MODULATION : Color = Color(1,1,1,0.5)
+var ITEM_DIM_COLOUR : Color = Color(1,1,1,0)
 
 var ROUND_COMPLETION_GOLD = 0
 
