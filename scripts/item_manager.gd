@@ -2,13 +2,14 @@ extends Node2D
 
 
 var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
-var BUNDLED_ITEM = preload("res://scenes/bundled_item.tscn")
+var BUNDLED_ITEM = DRAGGABLE_ITEM
 var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
 var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var draggable_items = []
 var animated_items = []
 var item_is_last:bool = false
 var item_being_dragged
+var absorbing_items : bool = false
 var item_in_focus = null
 var focus_items = []
 var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0}
@@ -119,12 +120,12 @@ func _process(_delta: float) -> void:
 	$BundleField.position = get_global_mouse_position()
 	if item_being_dragged:
 		item_being_dragged.go_to_mouse_pos()
-		if not Input.is_action_pressed("mouse_down"):
+		if not Input.is_action_pressed("mouse_down"): # Drop item being dragged
 			item_being_dragged.drop()
 			drop_item(item_being_dragged)
-	else:
-		if Input.is_action_just_pressed("right_click") and item_in_focus:
-			#if Input.is_action_pressed("form_bundle"):
+			
+	elif item_in_focus:
+		if Input.is_action_just_pressed("right_click"):
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
@@ -132,7 +133,7 @@ func _process(_delta: float) -> void:
 					grab_from_bundle()
 				else:
 					form_bundle()
-		elif Input.is_action_just_pressed("mouse_down") and item_in_focus:#Normal Click
+		elif Input.is_action_just_pressed("mouse_down"):# Normally Pick up item
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
@@ -169,26 +170,48 @@ func harvest_from_bundle():
 		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
 		item_in_focus.decrease_num()
 	
+	
+	
+
 func form_bundle():
 	var valid_items = []
 	for item in items_in_bundle_field:
 		if item != item_in_focus and item.item_name == item_in_focus.item_name:
 			valid_items.append(item)
 	var num_valid_items = len(valid_items)
-	print("Valid items: " + str(num_valid_items))
 	
-	if num_valid_items >= 1:#delete between 1 and 5 in
-		var num_deleted = 0
-		while num_deleted < GLOBALCONSTS.MAX_BUNDLE_ITEMS-1 and num_deleted < num_valid_items:
-			erase_item(valid_items[num_deleted])
-			num_deleted += 1
-	
-		var bundled_item = create_bundled_item(item_in_focus.item_name, get_global_mouse_position(), num_deleted + 1)
-		erase_item(item_in_focus)
-		bundled_item.pick_up()
-		pickup_item(bundled_item)
+	var num_to_gain = 0
+	if num_valid_items >= 1:
+		var num_items_deleted = 0
+		while num_items_deleted < num_valid_items:
+			if not valid_items[num_items_deleted].IS_BUNDLE or GLOBALCONSTS.CAN_BUNDLE_BUNDLES:
+				num_to_gain += valid_items[num_items_deleted].num_items
+				erase_item(valid_items[num_items_deleted])
+				num_items_deleted += 1
+
+		#var bundled_item = create_bundled_item(item_in_focus.item_name, get_global_mouse_position(), num_to_gain)
+		item_in_focus.increase_num(num_to_gain)
+	absorbing_items = true
+	item_in_focus.pick_up()
+	pickup_item(item_in_focus)
 		
-	
+		#erase_item(item_in_focus)
+		#bundled_item.pick_up()
+		#pickup_item(bundled_item)
+		
+func _on_bundle_field_area_entered(area: Area2D) -> void:
+	if area.name == "DraggableItemArea2D":
+		var item = area.get_parent()
+
+		if absorbing_items and item_being_dragged != item and item.item_name == item_being_dragged.item_name:
+			item_being_dragged.increase_num(item.num_items)
+			erase_item(item)
+		else:
+			items_in_bundle_field.append(item)
+
+func _on_bundle_field_area_exited(area: Area2D) -> void:
+	if area.name == "DraggableItemArea2D":
+		items_in_bundle_field.erase(area.get_parent())
 		
 func remove_from_focus_list(item_obj) -> void:
 	focus_items.erase(item_obj)
@@ -285,6 +308,7 @@ func is_last_item(item):
 	return (item_is_last and crops_planted[item.item_name] == 0)
 #called by the item itself
 func drop_item(item):
+	absorbing_items = false
 	item_being_dragged = null
 	refocus()
 	
@@ -345,13 +369,3 @@ func output_resources(resources):
 		$item_pop.play()
 	for i in range(len(resources)):
 		create_animated_item(resources[i],get_global_mouse_position())
-
-
-func _on_bundle_field_area_entered(area: Area2D) -> void:
-	#print("area entered", area.name)
-	if area.name == "DraggableItemArea2D":
-		items_in_bundle_field.append(area.get_parent())
-
-func _on_bundle_field_area_exited(area: Area2D) -> void:
-	if area.name == "DraggableItemArea2D":
-		items_in_bundle_field.erase(area.get_parent())

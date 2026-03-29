@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4we8di7dul1l" path="res://art/items/coin.png" id="1_a4jc7"]
 [ext_resource type="Script" uid="uid://yvfg2nfbt1md" path="res://scripts/draggable_item.gd" id="1_c446u"]
+[ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_55gtw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c446u"]
 animations = [{
@@ -28,6 +29,18 @@ polygon = PackedVector2Array(1.9921064, 6.9812436, -1.8819494, 7.1187844, -4.855
 [node name="PickUp" type="AudioStreamPlayer" parent="." unique_id=1112216627]
 
 [node name="Drop" type="AudioStreamPlayer" parent="." unique_id=602477572]
+
+[node name="NumItems" type="Label" parent="." unique_id=1006032167]
+anchors_preset = -1
+anchor_right = 0.022000002
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 12.846
+offset_bottom = 9.380318
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_55gtw")
+theme_override_font_sizes/font_size = 8
+text = "1"
 
 [connection signal="mouse_entered" from="DraggableItemArea2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="DraggableItemArea2D" to="." method="_on_area_2d_mouse_exited"]
