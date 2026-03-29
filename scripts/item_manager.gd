@@ -171,7 +171,6 @@ func erase_item(item):
 #drage items from bundle
 func grab_from_bundle():
 	var temp
-	print("do the grubby hands")
 	if item_in_focus.get_num() == 2:#time to get deleted
 		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
 		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
@@ -179,19 +178,24 @@ func grab_from_bundle():
 	else:
 		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
 		item_in_focus.decrease_num()
+	
+	if item_in_focus:
+		item_in_focus.stop_focus()
+	temp.focus()
+	item_in_focus = temp
 	temp.pick_up()
 	pickup_item(temp)
 
 #Pop items out of bundle
 #In this case the bundle is the item in focus
-func harvest_from_bundle():
-	if item_in_focus.get_num() == 2:#time to get deleted
-		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
-		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
-		erase_item(item_in_focus)# delete bundled item
-	else:
-		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
-		item_in_focus.decrease_num()
+#func harvest_from_bundle():
+	#if item_in_focus.get_num() == 2:#time to get deleted
+		#create_animated_item(item_in_focus.item_name, get_global_mouse_position())
+		#create_animated_item(item_in_focus.item_name, get_global_mouse_position())
+		#erase_item(item_in_focus)# delete bundled item
+	#else:
+		#create_animated_item(item_in_focus.item_name, get_global_mouse_position())
+		#item_in_focus.decrease_num()
 
 #func absorb_all_items():
 	#$BundleField.monitoring = true
