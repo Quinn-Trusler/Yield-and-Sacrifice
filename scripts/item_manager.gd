@@ -15,6 +15,8 @@ var focus_items = []
 var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0}
 var items_in_bundle_field = []
 
+var left_down : bool = false
+var right_down : bool = false
 
 var mouse_on_mouth = false
 
@@ -115,30 +117,51 @@ func consume_gold():
 	refocus()
 	GodChoiceManager.increase_gold(1)
 	
-	
-func _process(_delta: float) -> void:
-	$BundleField.position = get_global_mouse_position()
-	if item_being_dragged:
-		item_being_dragged.go_to_mouse_pos()
-		if not Input.is_action_pressed("mouse_down"): # Drop item being dragged
-			item_being_dragged.drop()
-			drop_item(item_being_dragged)
-			
-	elif item_in_focus:
-		if Input.is_action_just_pressed("right_click"):
-			if item_in_focus.item_name == "gold":
-				consume_gold()
-			else:
-				if item_in_focus.IS_BUNDLE == true:
-					grab_from_bundle()
-				else:
-					form_bundle()
-		elif Input.is_action_just_pressed("mouse_down"):# Normally Pick up item
+func deal_with_state() -> void:
+	if not left_down and not right_down and item_being_dragged: # Drop Item
+		print("drop item")
+		item_being_dragged.drop()
+		drop_item(item_being_dragged)
+		
+	if item_in_focus:
+		if left_down:
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
 				item_in_focus.pick_up()
 				pickup_item(item_in_focus)
+		elif right_down:
+			if item_in_focus.item_name == "gold":
+				consume_gold()
+			elif item_in_focus.IS_BUNDLE == true:
+				grab_from_bundle()
+				
+	if item_being_dragged and left_down and right_down: # Instantly absorb
+		absorbing_items = true
+		$BundleField.monitoring = true
+	else:
+		absorbing_items = false
+		$BundleField.monitoring = false
+	
+func _process(_delta: float) -> void:
+	$BundleField.position = get_global_mouse_position()
+	
+	if Input.is_action_just_pressed("left_click"):
+		left_down = true
+		deal_with_state()
+	if Input.is_action_just_released("left_click"):
+		left_down = false
+		print("left released")
+		deal_with_state()
+	if Input.is_action_just_pressed("right_click"):
+		right_down = true
+		deal_with_state()
+	if Input.is_action_just_released("right_click"):
+		right_down = false
+		deal_with_state()
+	
+	if item_being_dragged:
+		item_being_dragged.go_to_mouse_pos()
 			
 func erase_item(item):
 	remove_from_focus_list(item)
@@ -169,35 +192,20 @@ func harvest_from_bundle():
 	else:
 		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
 		item_in_focus.decrease_num()
-	
-	
-	
 
-func form_bundle():
-	var valid_items = []
-	for item in items_in_bundle_field:
-		if item != item_in_focus and item.item_name == item_in_focus.item_name:
-			valid_items.append(item)
-	var num_valid_items = len(valid_items)
-	
-	var num_to_gain = 0
-	if num_valid_items >= 1:
-		var num_items_deleted = 0
-		while num_items_deleted < num_valid_items:
-			if not valid_items[num_items_deleted].IS_BUNDLE or GLOBALCONSTS.CAN_BUNDLE_BUNDLES:
-				num_to_gain += valid_items[num_items_deleted].num_items
-				erase_item(valid_items[num_items_deleted])
-				num_items_deleted += 1
-
-		#var bundled_item = create_bundled_item(item_in_focus.item_name, get_global_mouse_position(), num_to_gain)
-		item_in_focus.increase_num(num_to_gain)
-	absorbing_items = true
-	item_in_focus.pick_up()
-	pickup_item(item_in_focus)
-		
-		#erase_item(item_in_focus)
-		#bundled_item.pick_up()
-		#pickup_item(bundled_item)
+#func absorb_all_items():
+	#$BundleField.monitoring = true
+	#var valid_items = []
+	#for item in items_in_bundle_field:
+		#if item != item_being_dragged and item.item_name == item_being_dragged.item_name:
+			#valid_items.append(item)
+	#
+	#var num_to_gain = 0
+	#for i in range(len(valid_items)-1):
+		#num_to_gain += valid_items[i].num_items
+		#erase_item(valid_items[i])
+		#
+	#item_being_dragged.increase_num(num_to_gain)
 		
 func _on_bundle_field_area_entered(area: Area2D) -> void:
 	if area.name == "DraggableItemArea2D":
@@ -247,14 +255,6 @@ func create_draggable_item(item_name,pos):
 	add_child(temp)
 	draggable_items.append(temp)
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
-	temp.position = pos
-	return temp
-func create_bundled_item(item_name: String, pos: Vector2, num : int):
-	var temp = BUNDLED_ITEM.instantiate()
-	add_child(temp)
-	draggable_items.append(temp)
-	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
-	temp.set_num(num)
 	temp.position = pos
 	return temp
 
@@ -308,7 +308,6 @@ func is_last_item(item):
 	return (item_is_last and crops_planted[item.item_name] == 0)
 #called by the item itself
 func drop_item(item):
-	absorbing_items = false
 	item_being_dragged = null
 	refocus()
 	
