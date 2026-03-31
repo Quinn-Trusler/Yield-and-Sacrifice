@@ -247,7 +247,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	elif choice_type == CHOICE_TYPES.Shop:
 		strike_shop_items_from_shop(choice_name)
 		strike_id_from_chain(chained_shop_items, id)
-	
+		$SkipButton.visible = false
 	
 	print("Cost: ", cost)
 	increase_gold(-cost)
@@ -289,7 +289,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	if choice["type"] != TYPES.Placement:
 		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
 			display_shop()
-		else:
+		else: # Finished the shop
 			get_tree().paused = false
 
 func place_building(choice_name : String):
