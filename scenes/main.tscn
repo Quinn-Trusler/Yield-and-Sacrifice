@@ -752,9 +752,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fv21b"]
-radius = 18.0
-
 [node name="Main" type="Node2D" unique_id=1004566761]
 script = ExtResource("1_o5qli")
 
@@ -1003,8 +1000,8 @@ stream = ExtResource("22_2wyq8")
 
 [node name="BundleField" type="Area2D" parent="ItemManager" unique_id=1744631502]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemManager/BundleField" unique_id=830481283]
-shape = SubResource("CircleShape2D_fv21b")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ItemManager/BundleField" unique_id=6411469]
+polygon = PackedVector2Array(1, -5, 5, 0, -1, 5, -4, -3)
 
 [node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TileLayer", "TileLayer2", "EffectLayer", "TerrainLayer", "TileMapManager", "ItemManager", "TutorialManager")]
 script = ExtResource("12_eb6dy")
