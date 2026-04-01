@@ -27,6 +27,7 @@ func initialize(n,item_def, n_items : int = 1):
 		print("Warning: No colision polygon for " + item_name)
 
 func update_display_num() -> void:
+	# override
 	if num_items == 1:
 		$NumItems.visible = false
 	else:
@@ -76,7 +77,7 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	get_parent().remove_from_focus_list(self)
-	
+
 	
 # --- Polygon Generator
 #Snap value to nearest 0.5 or 0
