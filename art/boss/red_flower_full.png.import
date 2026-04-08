@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5t5q24r8a1m7"
-path="res://.godot/imported/devil_boss.png-fbeb7f1ec338c6b7655700012f14f749.ctex"
+uid="uid://dv6kyx3isongc"
+path="res://.godot/imported/red_flower_full.png-878ecb77a3222c27a130a13c2931a337.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/devil_boss.png"
-dest_files=["res://.godot/imported/devil_boss.png-fbeb7f1ec338c6b7655700012f14f749.ctex"]
+source_file="res://art/boss/red_flower_full.png"
+dest_files=["res://.godot/imported/red_flower_full.png-878ecb77a3222c27a130a13c2931a337.ctex"]
 
 [params]
 

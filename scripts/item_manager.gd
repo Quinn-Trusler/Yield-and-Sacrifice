@@ -256,19 +256,14 @@ func refocus():
 	if len(focus_items):
 		#Search through array for biggest layer
 		for i in range(len(focus_items)):
-			if not focus_items[i]:
-				print("Preventing dumbass focus item get index issue: " + str(i) + ", ",focus_items)
-			elif focus_items[i].get_index() > largest_layer:
+			if focus_items[i].get_index() > largest_layer:
 				largest_layer = focus_items[i].get_index()
 				ind = i
-		if (ind == -1):
-			print("something is going horibbly wrong", focus_items)
-			item_in_focus = null
-		else:
-			if item_in_focus:
-				item_in_focus.stop_focus()
-			item_in_focus = focus_items[ind]
-			item_in_focus.focus()
+	
+		if item_in_focus:
+			item_in_focus.stop_focus()
+		item_in_focus = focus_items[ind]
+		item_in_focus.focus()
 	else:
 		item_in_focus = null
 		

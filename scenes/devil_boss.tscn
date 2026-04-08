@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c28rlhfpewft1"]
 
 [ext_resource type="Script" uid="uid://6wb3ldwodh7d" path="res://scripts/devil_boss.gd" id="1_ll8et"]
-[ext_resource type="Texture2D" uid="uid://b5uq270fp2lm8" path="res://art/devil_small_boss.png" id="2_do0kv"]
+[ext_resource type="Texture2D" uid="uid://cbjbnfnagnd1a" path="res://art/boss/red_flower_stem.png" id="2_7kdxx"]
 [ext_resource type="Shader" uid="uid://2wlg26lq5ojx" path="res://scenes/devil_boss.gdshader" id="2_ta6n1"]
-[ext_resource type="Texture2D" uid="uid://bel4dvdn0vopk" path="res://art/devil_small_full_boss.png" id="3_ta6n1"]
+[ext_resource type="Texture2D" uid="uid://dv6kyx3isongc" path="res://art/boss/red_flower_full.png" id="4_7kdxx"]
+[ext_resource type="Texture2D" uid="uid://dp62irjsawxyc" path="res://art/boss/red_flower.png" id="4_ta6n1"]
 
 [sub_resource type="Shader" id="Shader_ta6n1"]
 code = "shader_type canvas_item;
@@ -121,7 +122,7 @@ shader_parameter/glow_threshold = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ta6n1")
+"texture": ExtResource("4_7kdxx")
 }],
 "loop": true,
 "name": &"full",
@@ -129,17 +130,24 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_do0kv")
+"texture": ExtResource("4_ta6n1")
 }],
 "loop": true,
 "name": &"hungry",
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kdxx"]
+radius = 23.194826
+
 [node name="devil_boss" type="Node2D" unique_id=1423359932]
 material = SubResource("ShaderMaterial_ish2d")
 position = Vector2(0, -19)
 script = ExtResource("1_ll8et")
+
+[node name="Stem" type="Sprite2D" parent="." unique_id=1565821269]
+position = Vector2(0, 6)
+texture = ExtResource("2_7kdxx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=491154054]
 material = SubResource("ShaderMaterial_7kdxx")
@@ -151,10 +159,15 @@ animation = &"full"
 [node name="Mouth" type="CollisionPolygon2D" parent="MouthHitbox" unique_id=223664754]
 visible = false
 polygon = PackedVector2Array(-17, 3, -12, 17, -4, 23, 5, 23, 12, 17, 17, 3, 14, 2, 5, 11, -5, 10, -15, 2)
+disabled = true
 
 [node name="Body" type="CollisionPolygon2D" parent="MouthHitbox" unique_id=1786156314]
 visible = false
 polygon = PackedVector2Array(-20, -16, -17, -21, -12, -23, -14, -14, -10, -15, -7, -16, 6, -16, 8, -15, 12, -13, 11, -22, 16, -21, 19, -18, 19, -12, 17, -9, 17, 7, 14, 15, 2, 24, -3, 24, -15, 15, -18, 7)
+disabled = true
+
+[node name="Flower" type="CollisionShape2D" parent="MouthHitbox" unique_id=1249689983]
+shape = SubResource("CircleShape2D_7kdxx")
 
 [connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]

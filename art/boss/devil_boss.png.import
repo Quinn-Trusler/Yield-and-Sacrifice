@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bel4dvdn0vopk"
-path="res://.godot/imported/devil_small_full_boss.png-65f248ad6ed6ce143016eec947094723.ctex"
+uid="uid://b5t5q24r8a1m7"
+path="res://.godot/imported/devil_boss.png-db72bbbb07dabd5656842c6adac2077d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/devil_small_full_boss.png"
-dest_files=["res://.godot/imported/devil_small_full_boss.png-65f248ad6ed6ce143016eec947094723.ctex"]
+source_file="res://art/boss/devil_boss.png"
+dest_files=["res://.godot/imported/devil_boss.png-db72bbbb07dabd5656842c6adac2077d.ctex"]
 
 [params]
 
