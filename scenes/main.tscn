@@ -752,6 +752,58 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_fuf3a"]
+resource_name = "Close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c6pm6"]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pibwh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pibwh"]
+_data = {
+&"Close": SubResource("Animation_fuf3a"),
+&"Open": SubResource("Animation_c6pm6"),
+&"RESET": SubResource("Animation_pibwh")
+}
+
 [node name="Main" type="Node2D" unique_id=1004566761]
 script = ExtResource("1_o5qli")
 
@@ -768,7 +820,7 @@ tile_set = SubResource("TileSet_o5qli")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1649178319]
 position = Vector2(72, -59)
-tile_map_data = PackedByteArray("AADy//3/AAALAAEAAADz//3/AAALAAEAAAD0//3/AAALAAEAAAD0//7/AAALAAEAAADz//7/AAALAAEAAADy//7/AAALAAEAAADy////AAALAAEAAADz////AAALAAEAAAD0////AAALAAEAAAD3//z/AAALAAEAAAD4//z/AAALAAEAAAD5//z/AAALAAEAAAD6//z/AAALAAEAAAD7//z/AAALAAEAAAD8//z/AAALAAEAAAD9//z/AAALAAEAAAD+//z/AAALAAEAAAD///z/AAALAAEAAAD///3/AAALAAEAAAD+//3/AAALAAEAAAD9//3/AAALAAEAAAD8//3/AAALAAEAAAD7//3/AAALAAEAAAD6//3/AAALAAEAAAD5//3/AAALAAEAAAD4//3/AAALAAEAAAD3//3/AAALAAEAAAD7/wIAAAALAAEAAAD7/wMAAAALAAEAAAD8/wIAAAALAAEAAAD8/wMAAAALAAEAAAD6/wIAAAALAAEAAAD6/wMAAAALAAEAAAD7/wQAAAALAAEAAAD7/wEAAAALAAEAAAD8/wEAAAALAAEAAAD6/wQAAAALAAEAAAD6/wEAAAALAAEAAAA=")
+tile_map_data = PackedByteArray("AADy//3/AAALAAEAAADz//3/AAALAAEAAAD0//3/AAALAAEAAAD0//7/AAALAAEAAADz//7/AAALAAEAAADy//7/AAALAAEAAADy////AAALAAEAAADz////AAALAAEAAAD0////AAALAAEAAAD3//z/AAALAAEAAAD4//z/AAALAAEAAAD5//z/AAALAAEAAAD6//z/AAALAAEAAAD7//z/AAALAAEAAAD8//z/AAALAAEAAAD9//z/AAALAAEAAAD+//z/AAALAAEAAAD///z/AAALAAEAAAD///3/AAALAAEAAAD+//3/AAALAAEAAAD9//3/AAALAAEAAAD8//3/AAALAAEAAAD7//3/AAALAAEAAAD6//3/AAALAAEAAAD5//3/AAALAAEAAAD4//3/AAALAAEAAAD3//3/AAALAAEAAAD7/wIAAAALAAEAAAD7/wMAAAALAAEAAAD8/wIAAAALAAEAAAD8/wMAAAALAAEAAAD6/wIAAAALAAEAAAD6/wMAAAALAAEAAAD7/wQAAAALAAEAAAD7/wEAAAALAAEAAAD8/wEAAAALAAEAAAD6/wEAAAALAAEAAAA=")
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("6_5q0nq")
 
@@ -899,7 +951,6 @@ position = Vector2(0, -72)
 
 [node name="GodChoiceManager" type="CanvasLayer" parent="." unique_id=2123672198 node_paths=PackedStringArray("ItemManager", "TileLayer", "TileLayer2", "EffectLayer", "Lives", "BuildingManager", "SacrificeManager", "GOLD", "BuildingPlacementManager")]
 process_mode = 3
-visible = false
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("7_o6xl0")
@@ -913,13 +964,19 @@ SacrificeManager = NodePath("../SacrificeManager")
 GOLD = NodePath("../Gold")
 BuildingPlacementManager = NodePath("../BuildingPlacementManager")
 
-[node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager" unique_id=1704588727]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GodChoiceManager" unique_id=259571455]
+libraries/ = SubResource("AnimationLibrary_pibwh")
+
+[node name="Node2D" type="Node2D" parent="GodChoiceManager" unique_id=926797956]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="GodChoiceManager/Node2D" unique_id=1704588727]
 position = Vector2(-80.039505, -43.84252)
 scale = Vector2(0.31590164, 0.31496063)
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 polygon = PackedVector2Array(-52, -47, 1302, -64, 1408, 751, -117, 825)
 
-[node name="TitleText" type="Label" parent="GodChoiceManager" unique_id=345626464]
+[node name="TitleText" type="Label" parent="GodChoiceManager/Node2D" unique_id=345626464]
 offset_top = 10.0
 offset_right = 320.0
 offset_bottom = 33.0
@@ -929,7 +986,7 @@ text = "blah blah blah
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager" unique_id=333087834]
+[node name="HBoxContainer" type="HBoxContainer" parent="GodChoiceManager/Node2D" unique_id=333087834]
 offset_top = 70.0
 offset_right = 320.0
 offset_bottom = 120.0
@@ -937,11 +994,11 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="ClickButton" type="AudioStreamPlayer" parent="GodChoiceManager" unique_id=1296709624]
+[node name="ClickButton" type="AudioStreamPlayer" parent="GodChoiceManager/Node2D" unique_id=1296709624]
 stream = ExtResource("17_vxglm")
 volume_db = 5.0
 
-[node name="SkipButton" type="TextureButton" parent="GodChoiceManager" unique_id=1596730009]
+[node name="SkipButton" type="TextureButton" parent="GodChoiceManager/Node2D" unique_id=1596730009]
 visible = false
 offset_left = 140.0
 offset_top = 161.75
@@ -951,16 +1008,16 @@ pivot_offset = Vector2(20, 8)
 texture_normal = ExtResource("22_5q0nq")
 texture_hover = ExtResource("21_qkpxi")
 
-[node name="GoldCount" type="Node2D" parent="GodChoiceManager" unique_id=509738890]
+[node name="GoldCount" type="Node2D" parent="GodChoiceManager/Node2D" unique_id=509738890]
 position = Vector2(5.75, 18.75)
 script = ExtResource("16_fv21b")
 
-[node name="Sprite2D" type="Sprite2D" parent="GodChoiceManager/GoldCount" unique_id=1754966755]
+[node name="Sprite2D" type="Sprite2D" parent="GodChoiceManager/Node2D/GoldCount" unique_id=1754966755]
 visible = false
 position = Vector2(17.25, 44.5)
 texture = ExtResource("15_jscy8")
 
-[node name="GoldText" type="RichTextLabel" parent="GodChoiceManager/GoldCount" unique_id=1631080900]
+[node name="GoldText" type="RichTextLabel" parent="GodChoiceManager/Node2D/GoldCount" unique_id=1631080900]
 offset_left = -5.25
 offset_top = -10.25
 offset_right = 42.75
@@ -969,6 +1026,13 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("10_dp3eg")
 theme_override_font_sizes/normal_font_size = 12
 text = "Gold"
+
+[node name="Blocker" type="Control" parent="GodChoiceManager/Node2D" unique_id=2068062455]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 333.75
+offset_bottom = 197.0
+mouse_filter = 2
 
 [node name="ItemManager" type="Node2D" parent="." unique_id=643317085 node_paths=PackedStringArray("TutorialManager", "DialogManager", "GodChoiceManager", "TileLayer", "TileLayer2", "TerrainLayer", "SacrificeManager", "TileMapManager", "BuildingManager")]
 z_index = 3
@@ -1098,7 +1162,7 @@ centered = false
 visible = false
 
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
-[connection signal="pressed" from="GodChoiceManager/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
+[connection signal="pressed" from="GodChoiceManager/Node2D/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]

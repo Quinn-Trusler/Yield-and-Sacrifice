@@ -33,7 +33,7 @@ func create_description(c_name,choice):
 		$Description.text = choice["text"]
 
 func _on_texture_button_pressed() -> void:
-	get_parent().get_parent().god_choice_chosen(choice_name, chain_id)
+	get_parent().get_parent().get_parent().god_choice_chosen(choice_name, chain_id)
 
 
 

@@ -104,7 +104,7 @@ func chose_rewards():
 
 func load_godchoices(godchoice_list):
 	get_tree().paused = true
-	visible = true
+	#visible = true
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
@@ -115,7 +115,7 @@ func load_godchoices(godchoice_list):
 
 func load_shopchoices(shopchoice_list) -> void:
 	get_tree().paused = true
-	visible = true
+	#visible = true
 	var copy = shopchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
@@ -127,11 +127,11 @@ func load_shopchoices(shopchoice_list) -> void:
 
 func add_choice_to_hbox(choice):
 	choice_instances.append(choice)
-	$HBoxContainer.add_child(choice)
+	$Node2D/HBoxContainer.add_child(choice)
 
 func load_chained_godchoices(godchoice_list, is_shop : bool = false):
 	get_tree().paused = true
-	visible = true
+	#visible = true
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
@@ -152,36 +152,60 @@ func load_chained_godchoices(godchoice_list, is_shop : bool = false):
 			makeshift_game_end = false
 	if makeshift_game_end:
 		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
-		
-		
+
+func open_godchoice():
+	$AnimationPlayer.play("Open")
+	visible = true
+	
+	# Blocker so user can't interact with buttons (Interacting with buttons are a big no no)
+	$Node2D/Blocker.mouse_filter = Control.MOUSE_FILTER_STOP
+	await $AnimationPlayer.animation_finished
+	$Node2D/Blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+# Run animation but don't set visible false
+func semi_close_godchoice():
+	$AnimationPlayer.play("Close")
+	await $AnimationPlayer.animation_finished
+	
+func close_godchoice():
+	$AnimationPlayer.play("Close")
+	await $AnimationPlayer.animation_finished
+	visible = false
+
 func display_punishments():
 	round_num +=1
 	punishments_collected += 1
 	Lives.lose_life()
-	$TitleText.text = PUNISH_TEXT
+	$Node2D/TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments())
 	choice_type = CHOICE_TYPES.Punishment
-	$GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.update_gold_num(num_gold)
+	
+	open_godchoice()
+	
+
 	
 func display_rewards():
 	increase_gold(completion_gold)
 	round_num +=1
 	rewards_collected += 1
 	Lives.set_max_lives()
-	$TitleText.text = REWARD_TEXT
+	$Node2D/TitleText.text = REWARD_TEXT
 	load_chained_godchoices(chained_rewards)
 	choice_type = CHOICE_TYPES.Reward
-	$GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.update_gold_num(num_gold)
+	open_godchoice()
 
 func display_shop():
-	$TitleText.text = SHOP_TEXT
-	$SkipButton.visible = true
-	$GoldCount.visible = true
+	$Node2D/TitleText.text = SHOP_TEXT
+	$Node2D/SkipButton.visible = true
+	$Node2D/GoldCount.visible = true
 	print("num gold: ", num_gold)
-	$GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.update_gold_num(num_gold)
 	#load_shopchoices(chose_shop_items())
 	load_chained_godchoices(chained_shop_items, true)
 	choice_type = CHOICE_TYPES.Shop
+	open_godchoice()
 
 
 # Choice Chosen /  Close display ----------------------------------------------------------------------
@@ -237,9 +261,9 @@ func unlock_sacrifices(items_unlocked, unlock_literal):
 	
 # Runs after a punishment or reward is chosen
 func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
-	visible = false
+	
 	delete_choice_instances()
-	$ClickButton.play()
+	$Node2D/ClickButton.play()
 	# Warning: If choice_name exists in both, then they will both be removed.
 	if choice_type == CHOICE_TYPES.Reward:
 		strike_reward_from_rewards(choice_name)
@@ -247,7 +271,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 	elif choice_type == CHOICE_TYPES.Shop:
 		strike_shop_items_from_shop(choice_name)
 		strike_id_from_chain(chained_shop_items, id)
-		$SkipButton.visible = false
+		$Node2D/SkipButton.visible = false
 	
 	print("Cost: ", cost)
 	increase_gold(-cost)
@@ -285,11 +309,14 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		
 					
 	SacrificeManager.update_requirements()
-	
-	if choice["type"] != TYPES.Placement:
+	if choice["type"] == TYPES.Placement:
+		await close_godchoice()
+	else:
 		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
-			display_shop()
+			await semi_close_godchoice()
+			await display_shop()
 		else: # Finished the shop
+			await close_godchoice()
 			get_tree().paused = false
 
 func place_building(choice_name : String):
@@ -331,11 +358,12 @@ func destroy_land(choice : Dictionary) -> void:
 				
 # Skip shop screen
 func _on_skip_button_pressed() -> void:
-	visible = false
-	$SkipButton.visible = false
-	$GoldCount.visible = false
+	await close_godchoice()
+	
+	$Node2D/SkipButton.visible = false
+	$Node2D/GoldCount.visible = false
 	delete_choice_instances()
-	$ClickButton.play()
+	$Node2D/ClickButton.play()
 	get_tree().paused = false
 	SacrificeManager.update_requirements()
 	
