@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://g5q1v4yl1xxg"]
+
+[ext_resource type="Texture2D" uid="uid://d4hwhcjdmrn36" path="res://art/buildings/prickly_pear_cactus.png" id="1_4nr5g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3idhw"]
+atlas = ExtResource("1_4nr5g")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thp4d"]
+atlas = ExtResource("1_4nr5g")
+region = Rect2(17, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nr5g"]
+atlas = ExtResource("1_4nr5g")
+region = Rect2(34, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_butfa"]
+atlas = ExtResource("1_4nr5g")
+region = Rect2(51, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvxmo"]
+atlas = ExtResource("1_4nr5g")
+region = Rect2(68, 0, 17, 17)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3idhw")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thp4d")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nr5g")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_butfa")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvxmo")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]

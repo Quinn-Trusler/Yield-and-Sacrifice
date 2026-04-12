@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://g5vv8ggpr4xn"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://g5vv8ggpr4xn"]
 
 [ext_resource type="Texture2D" uid="uid://wsmx0m10axpp" path="res://art/buildings/mushroom_crop.png" id="1_o2esd"]
 

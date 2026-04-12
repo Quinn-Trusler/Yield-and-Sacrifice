@@ -35,6 +35,9 @@ var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on
 }
 var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
 "potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
+"plastic_bag":{"display_name":"Plastic Bag","img_name":ITEMS_FOLDER + "plastic_bag","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [5, -1]},
+"prickly_pear":{"display_name":"Prickly Pear","img_name":ITEMS_FOLDER + "prickly_pear","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [3, -1]},
+"devil_pepper":{"display_name":"Devil Pepper","img_name":ITEMS_FOLDER + "devil_pepper","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [6,-3]},
 "wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
 "sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
 "fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
@@ -50,14 +53,20 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 }
 var IMG_EXTENSION = ".png"
 
+# Place on means what terrain tiles the building is ristricted to
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
 	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":true},
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
 	"barrel":{"display_name":"Barrel","output_items":["voldka"],"items_to_start_timer":1,"input_items":{"potatoe" : "voldka", "sugarcane":"rum"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true},
 	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
 	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-2.5], "extra_tiles": [],"bounce":true},
-	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1,"frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false}
+	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
+	"devil_vine":{"display_name":"Devil Vine","output_items":["devil_pepper"],"items_to_start_timer":0,"input_items":{},"total_stages":6,"stage_to_harvest":6,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 6, "place_on":["sand"],"frames": BUILDINGS_FRAMES_FOLDER + "devil_vine.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
+	"prickly_pear_cactus":{"display_name":"Prickly Pear Cactus","output_items":["prickly_pear"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":1,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["sand"], "frames": BUILDINGS_FRAMES_FOLDER + "prickly_pear_cactus.tres", "offset": [0,0], "extra_tiles": [], "bounce":false}
 }
+
+
+	
 
 var ANIMAL_DEF = null
 
@@ -84,5 +93,8 @@ var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 
 "rum": [[2.5, 9.0], [-2.5, 9.0], [-4.5, 7.0], [-4.5, 1.0], [-1.5, -1.5], [-1.5, -9.0], [1.5, -9.0], [1.5, -1.5], [4.5, 1.0], [4.5, 7.0]],
 "sugar":[[3.5, 6.5], [-3.5, 6.5], [-8.5, 2.5], [-8.5, 0.5], [-1.5, -6.5], [1.5, -6.5], [8.5, 0.5], [8.5, 2.5]],
 "voldka":[[3.5, 9.0], [2.5, 10.0], [-2.5, 10.0], [-3.5, 9.0], [-3.5, -2.0], [-1.5, -3.0], [-1.5, -10.0], [1.5, -10.0], [1.5, -3.0], [3.5, -2.0]],
-"gold":[[2.0, 7.0], [-2.0, 7.0], [-5.0, 5.0], [-7.0, 2.0], [-7.0, -2.0], [-5.0, -5.0], [-2.0, -7.0], [2.0, -7.0], [5.0, -5.0], [7.0, -2.0], [7.0, 2.0], [5.0, 5.0]]
+"gold":[[2.0, 7.0], [-2.0, 7.0], [-5.0, 5.0], [-7.0, 2.0], [-7.0, -2.0], [-5.0, -5.0], [-2.0, -7.0], [2.0, -7.0], [5.0, -5.0], [7.0, -2.0], [7.0, 2.0], [5.0, 5.0]],
+"prickly_pear" : [[2.0, 6.0], [-3.0, 6.0], [-5.0, 4.0], [-5.0, -4.0], [-3.0, -6.0], [2.0, -6.0], [4.0, -4.0], [4.0, 4.0]],
+"devil_pepper" : [[7.5, 9.5], [-0.5, 5.5], [-4.5, 1.5], [-10.5, -2.5], [-10.5, -4.5], [-7.5, -4.5], [-1.5, -1.5], [-4.5, -5.5], [-4.5, -8.5], [-3.0, -9.5], [-0.5, -7.5], [2.5, -2.5], [6.5, 1.5], [10.5, 6.5], [10.5, 9.5]],
+"plastic_bag": [[3.5, 5.5], [-3.5, 5.5], [-5.5, 3.5], [-5.5, -2.5], [-3.5, -5.5], [-0.5, -3.5], [0.5, -1.5], [1.5, -4.5], [3.0, -5.5], [5.5, -2.5], [5.5, 3.5]]
 }

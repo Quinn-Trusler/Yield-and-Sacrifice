@@ -13,9 +13,9 @@ func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2
 	if source_id != -1:#If setting a valid tile
 		set_cell(coords, source_id, atlas_coords, alternative_tile)
 
-func is_valid_building_location(pos : Vector2i) -> bool:
+func is_valid_building_location(pos : Vector2i, building_name : String = "null") -> bool:
 	var tile_name : String = get_tile_name(pos)
-	return !(no_building_placement_tiles.has(tile_name))
+	return not no_building_placement_tiles.has(tile_name) and (building_name == "null" or not "place_on" in GLOBALCONSTS.BUILDING_DEF[building_name] or GLOBALCONSTS.BUILDING_DEF[building_name]["place_on"].has(tile_name))
 
 func get_tile_name(pos):
 	var data = get_cell_tile_data(pos)

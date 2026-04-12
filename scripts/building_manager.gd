@@ -57,8 +57,8 @@ func get_all_burnt_tiles():
 				burnt_tiles.append(pos)
 	return burnt_tiles
 
-func is_valid_building_location(pos : Vector2i) -> bool:
-	return (TileLayer.is_valid_building_location(pos)and TerrainLayer.is_valid_building_location(pos) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+func is_valid_building_location(pos : Vector2i, building_name : String) -> bool:
+	return (TileLayer.is_valid_building_location(pos)and TerrainLayer.is_valid_building_location(pos, building_name) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
 #func is_valid_building_location(pos: Vector2i):
 	#if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
@@ -89,7 +89,7 @@ func create_gift(item,num):
 	gift_items = items
 	
 	#var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
-	var pos = get_random_valid_pos()
+	var pos = get_random_valid_pos("god_gift")
 	place_building(pos, "god_gift")
 	
 func place_building(pos : Vector2i, name : String) -> void:
@@ -201,12 +201,12 @@ func is_pos_in_bounds(pos: Vector2, bounds: Array):
 func get_random_pos() -> Vector2i:
 	return Vector2i(RNG.randi_range(GLOBALCONSTS.MAPSIZE[0],GLOBALCONSTS.MAPSIZE[2]), RNG.randi_range(GLOBALCONSTS.MAPSIZE[1],GLOBALCONSTS.MAPSIZE[3]))
 	
-func get_random_valid_pos() -> Vector2i:
+func get_random_valid_pos(building_name : String) -> Vector2i:
 	var num_tiles_checked = 0
 	while num_tiles_checked < TILE_CHECK_LIMIT:
 		var pos = get_random_pos()
 		num_tiles_checked += 1
-		if is_valid_building_location(pos):
+		if is_valid_building_location(pos, building_name):
 			return pos
 	push_error("TILE_CHECK_LIMIT PASSED. Tried loop " + str(TILE_CHECK_LIMIT) + " times")
 	return Vector2i(999,999)

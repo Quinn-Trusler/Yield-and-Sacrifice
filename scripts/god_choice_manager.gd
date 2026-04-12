@@ -14,6 +14,8 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
+"prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
+"devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This wishing well works in reverse.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
@@ -28,18 +30,8 @@ var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],
 var punishments = {3:["lose all gold","burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
 var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
-var chained_rewards = [ChainedReward.new(["well","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
-ChainedReward.new(["activate fish","wheat","mill","oven","mill","oven"], 1)]
-#ChainedReward.new(["mushroom patch", "mushroom patch", "mushroom patch","mushroom patch", "mushroom patch", "mushroom patch"], 1)]
-#ChainedReward.new(["sugarcane","sugarcane","sugarcane"], 1),
-#ChainedReward.new(["carrot","carrot","carrot"], 1)]
-
-var placemnet_locations = {"mushroom patch":[[-14,4],[-14,5],[-14,6],[-13,3],[-13,4],[-13,5],[-13,5],[-13,6],[-12,3],[-12,4],[-12,5],[-12,6]],
-"barrel": [[0,1],[1,1],[2,1]],
-"mill": [[-3,5],[-2,5],[-1,5]],
-"oven": [[-2,2],[-1,2],[0,2]],
-"farmland": [[-2,1], [-11,4], [-10,5], [-8, 5]],
-"well": [[0,0]]}
+var chained_rewards = [ChainedReward.new(["prickly pear cactus","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
+ChainedReward.new(["devil vine","activate fish","wheat","mill","oven","mill","oven"], 1)]
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -320,11 +312,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 			get_tree().paused = false
 
 func place_building(choice_name : String):
-	var locations = placemnet_locations[choice_name]
-	var pos = locations[RNG.randi_range(0, len(locations)-1)]
 	BuildingPlacementManager.toggle_on(choices[choice_name]["reward"])
-	#BuildingManager.place_building(Vector2i(pos[0], pos[1]), choices[choice_name]["reward"])
-	#placemnet_locations[choice_name].erase(pos) #Erase so position will not be used again in future
 
 func build_finished() -> void:
 	if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:

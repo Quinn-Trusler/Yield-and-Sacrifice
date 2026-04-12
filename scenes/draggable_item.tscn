@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://b5o8bu16f8iqk"]
 
-[ext_resource type="Texture2D" uid="uid://c4we8di7dul1l" path="res://art/items/coin.png" id="1_a4jc7"]
 [ext_resource type="Script" uid="uid://yvfg2nfbt1md" path="res://scripts/draggable_item.gd" id="1_c446u"]
+[ext_resource type="Texture2D" uid="uid://dswy7apjxjrrp" path="res://art/items/plastic_bag.png" id="2_lo2el"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_55gtw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c446u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_a4jc7")
+"texture": ExtResource("2_lo2el")
 }],
 "loop": true,
 "name": &"default",
@@ -24,7 +24,7 @@ script = ExtResource("1_c446u")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableItemArea2D" unique_id=2092545832]
 position = Vector2(0.00840287, -0.06722698)
-polygon = PackedVector2Array(1.9921064, 6.9812436, -1.8819494, 7.1187844, -4.8557215, 5.134108, -7.0192327, 1.9742419, -6.9885926, -1.8976139, -5.0497036, -4.909559, -1.9270744, -6.9521008, 1.9441309, -6.9627943, 4.8742695, -4.8881707, 7.0884686, -1.8833803, 7.045767, 2.030868, 5.081526, 4.8491263)
+polygon = PackedVector2Array(7.534812, 9.5362215, -0.41272742, 5.4773865, -4.544475, 1.4671603, -10.526937, -2.4844036, -10.482747, -4.4287558, -7.522029, -4.4508505, -1.5343084, -1.468038, -4.4950266, -5.4893117, -4.4947643, -8.485008, -2.9882936, -9.449149, -0.5598946, -7.3128085, 2.5511637, -2.4090352, 6.4840565, 1.5680491, 10.475644, 6.571084, 10.4059105, 9.562313)
 
 [node name="PickUp" type="AudioStreamPlayer" parent="." unique_id=1112216627]
 
@@ -33,10 +33,10 @@ polygon = PackedVector2Array(1.9921064, 6.9812436, -1.8819494, 7.1187844, -4.855
 [node name="NumItems" type="Label" parent="." unique_id=1006032167]
 anchors_preset = -1
 anchor_right = 0.022000002
-offset_left = 5.0
-offset_top = 1.0
-offset_right = 12.846
-offset_bottom = 9.380318
+offset_left = 5.420067
+offset_top = -1.1528349
+offset_right = 13.266067
+offset_bottom = 7.227483
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_55gtw")
 theme_override_font_sizes/font_size = 8

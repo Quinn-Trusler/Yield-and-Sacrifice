@@ -85,7 +85,7 @@ func update_building_notice():
 
 func toggle_on(building_name : String) -> void:
 	$BuildingNotice.visible = true
-	$ValidBuildingLayer.display_invalid_tiles()
+	$ValidBuildingLayer.display_invalid_tiles(building_name)
 	in_placing_phase = true
 	$ValidBuildingLayer.visible = true
 	$TileOutline.visible = true

@@ -1,0 +1,78 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b3o2ij3j3lk1"]
+
+[ext_resource type="Texture2D" uid="uid://b0u0wkx4y6rdw" path="res://art/buildings/devil_vine.png" id="1_uxuqu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf2mt"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(0, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3epk"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46khh"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(32, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbnve"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(48, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b5u0"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(64, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxuqu"]
+atlas = ExtResource("1_uxuqu")
+region = Rect2(80, 0, 16, 20)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf2mt")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3epk")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46khh")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbnve")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b5u0")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxuqu")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}]

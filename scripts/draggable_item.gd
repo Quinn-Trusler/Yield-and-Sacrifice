@@ -20,7 +20,7 @@ func initialize(n,item_def, n_items : int = 1):
 		$NumItems.position = Vector2(item_def["num_offset"][0], item_def["num_offset"][1])
 	else:
 		print("Warning: No number offset for " + item_name)
-	#print_polygon()
+	print_polygon()
 	if item_name in GLOBALCONSTS.ITEM_POLYGONS:
 		$DraggableItemArea2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
 	else:
@@ -81,16 +81,16 @@ func _on_area_2d_mouse_exited() -> void:
 	
 # --- Polygon Generator
 #Snap value to nearest 0.5 or 0
-#func snap05(num : float) -> String:
-	#return str(roundi(num*2) / 2.0)
-##Used to generate polygon strings used in global consts
-#func print_polygon():
-	#var poly = $DraggableItemArea2D/CollisionPolygon2D.polygon
-	#var string = "["
-	#for i in range(len(poly)):
-		#var point = poly[i]
-		#string += "["+snap05(point[0]) + ", " + snap05(point[1]) + "]"
-		#if i < len(poly) -1:
-			#string += ", "
-	#string += "]"
-	#print(string)
+func snap05(num : float) -> String:
+	return str(roundi(num*2) / 2.0)
+#Used to generate polygon strings used in global consts
+func print_polygon():
+	var poly = $DraggableItemArea2D/CollisionPolygon2D.polygon
+	var string = "["
+	for i in range(len(poly)):
+		var point = poly[i]
+		string += "["+snap05(point[0]) + ", " + snap05(point[1]) + "]"
+		if i < len(poly) -1:
+			string += ", "
+	string += "]"
+	print(string)
