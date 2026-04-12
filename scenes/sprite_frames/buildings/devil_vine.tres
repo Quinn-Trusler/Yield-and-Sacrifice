@@ -18,14 +18,6 @@ region = Rect2(32, 0, 16, 20)
 atlas = ExtResource("1_uxuqu")
 region = Rect2(48, 0, 16, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2b5u0"]
-atlas = ExtResource("1_uxuqu")
-region = Rect2(64, 0, 16, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uxuqu"]
-atlas = ExtResource("1_uxuqu")
-region = Rect2(80, 0, 16, 20)
-
 [resource]
 animations = [{
 "frames": [{
@@ -58,21 +50,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2b5u0")
-}],
-"loop": true,
-"name": &"4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uxuqu")
-}],
-"loop": true,
-"name": &"5",
 "speed": 5.0
 }]
