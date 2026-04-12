@@ -300,7 +300,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 			print("ERROR: Only implemented 1 life gain/loss")
 		
 					
-	SacrificeManager.update_requirements()
+	
 	if choice["type"] == TYPES.Placement:
 		await close_godchoice()
 	else:
@@ -308,6 +308,7 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 			await semi_close_godchoice()
 			await display_shop()
 		else: # Finished the shop
+			SacrificeManager.update_requirements()
 			await close_godchoice()
 			get_tree().paused = false
 
