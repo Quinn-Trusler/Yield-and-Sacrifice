@@ -992,6 +992,9 @@ texture = ExtResource("2_tipki")
 9:8/0 = 0
 9:7/0 = 0
 8:7/0 = 0
+5:0/0 = 0
+4:3/0 = 0
+4:3/0/custom_data_0 = "sandy_farmland"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]
 texture = ExtResource("3_kmb1v")

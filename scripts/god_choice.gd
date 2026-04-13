@@ -10,11 +10,6 @@ func initialize(c_name,choice, chain_i : int = -1):
 	$Name.text = choice["title"]
 	create_description(c_name,choice)
 	chain_id = chain_i
-#var choices = {"Carrot":{"img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"reward": "carrot","amt" : 1},
-#"Farmland":{"img": "res://art/godchoice/farmland.png","text":"default","type": TYPES.Placement,"reward": "farmland"},
-#"Burn Land":{"img": "res://art/godchoice/burn_land.png","text":"default","type": TYPES.Destroy_Land,"reward": ["farmland"],"amt": 3}
-#}
-	
 	
 func create_description(c_name,choice):
 	if choice["text"] == "default":

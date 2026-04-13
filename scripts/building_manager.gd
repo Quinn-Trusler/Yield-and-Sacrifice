@@ -92,17 +92,19 @@ func create_gift(item,num):
 	var pos = get_random_valid_pos("god_gift")
 	place_building(pos, "god_gift")
 	
-func place_building(pos : Vector2i, name : String) -> void:
-	if name == "farmland":
-		TileLayer.place_farmland(pos)
+func place_building(pos : Vector2i, building_name : String) -> void:
+	print(building_name)
+	if GLOBALCONSTS.MIDDLE_TILES.has(building_name):
+		TileLayer.place_farmland(pos, building_name)
 	else:
-		TileLayer2.place_building(pos, name) 
+		TileLayer2.place_building(pos, building_name) 
 		
-func place_phantom_building(pos : Vector2i, name : String) -> void:
-	if name == "farmland":
-		TileLayer.place_phantom_farmland(pos)
+func place_phantom_building(pos : Vector2i, building_name : String) -> void:
+	print(building_name)
+	if GLOBALCONSTS.MIDDLE_TILES.has(building_name):
+		TileLayer.place_phantom_farmland(pos, building_name)
 	else:
-		TileLayer2.place_phantom_building(pos, name)
+		TileLayer2.place_phantom_building(pos, building_name)
 		
 func remove_phantom_building(pos: Vector2i):
 	TileLayer.set_cell(pos)
@@ -138,7 +140,6 @@ func click_tile():
 						if not first_crop_harvested:
 							first_crop_harvested = true
 							TutorialManager.next(true, true, false)
-						#$TileMapLayer.set_cell(pos,0,atlas_decoded["dry_farmland"],0)#replace with dry farmland
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
 						ItemManager.output_resources(resources)
 						ItemManager.crop_uprooted(resources[0])

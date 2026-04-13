@@ -77,10 +77,7 @@ func cancel_phantom_building() -> void:
 	
 func update_building_notice():
 	$BuildingNotice/SacrificeText.clear()
-	if building_to_place == "farmland":
-		$BuildingNotice/SacrificeText.add_text(BUILDING_NOTICE_PREFIX + "Farmland" + BUILDING_NOTICE_SUFFIX)
-	else:
-		$BuildingNotice/SacrificeText.add_text(BUILDING_NOTICE_PREFIX + GLOBALCONSTS.BUILDING_DEF[building_to_place]["display_name"] + BUILDING_NOTICE_SUFFIX)
+	$BuildingNotice/SacrificeText.add_text(BUILDING_NOTICE_PREFIX + GLOBALCONSTS.BUILDING_DEF[building_to_place]["display_name"] + BUILDING_NOTICE_SUFFIX)
 		
 
 func toggle_on(building_name : String) -> void:
