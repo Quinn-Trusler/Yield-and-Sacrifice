@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddeexglmjaw1y"
-path="res://.godot/imported/voldka_outline.png-1fbcb2f9f147ecbd49c0bbc418a92284.ctex"
+uid="uid://bfsmb22pgoit2"
+path="res://.godot/imported/sake_outline.png-4e815d3499cbc5705539acfc0c68ac72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/items/voldka_outline.png"
-dest_files=["res://.godot/imported/voldka_outline.png-1fbcb2f9f147ecbd49c0bbc418a92284.ctex"]
+source_file="res://art/items/sake_outline.png"
+dest_files=["res://.godot/imported/sake_outline.png-4e815d3499cbc5705539acfc0c68ac72.ctex"]
 
 [params]
 

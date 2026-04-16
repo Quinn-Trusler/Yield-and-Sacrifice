@@ -41,7 +41,7 @@ var ShopChoice_Scene = load("res://scenes/shop_choice.tscn")
 
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
 var unlock_map = [[["barrel", "sugarcane"],["rum"]],
-				[["barrel", "potatoe"],["voldka"]],
+				[["barrel", "potatoe"],["vodka"]],
 				[["mill", "sugarcane"],["sugar"]],
 				[["mill", "wheat"],["flour"]],
 				[["mill", "oven", "wheat"],["bread"]]]

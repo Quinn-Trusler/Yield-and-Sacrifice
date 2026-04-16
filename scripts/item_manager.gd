@@ -81,9 +81,7 @@ func spawn_testing_items():
 	#create_draggable_item("carrot",Vector2(-70,-30))
 	#create_draggable_item("carrot",Vector2(-70,-30))
 	##
-	#create_draggable_item("voldka",Vector2(-30,-20))
-	#create_draggable_item("voldka",Vector2(-30,-20))
-	#create_draggable_item("voldka",Vector2(-30,-20))
+	create_draggable_item("vodka",Vector2(-30,-20))
 	#create_draggable_item("rum",Vector2(-50,-40))
 	#create_draggable_item("rum",Vector2(-50,-40))
 	#create_draggable_item("rum",Vector2(-50,-40))

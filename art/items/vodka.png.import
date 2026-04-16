@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4o1ixvi025da"
-path="res://.godot/imported/voldka.png-cb1bdffd49d9afb3cf4e6706f8268578.ctex"
+uid="uid://dec0bx5taa1oe"
+path="res://.godot/imported/vodka.png-1d60463c5d42e8eb0cffe47c4541b21b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/items/voldka.png"
-dest_files=["res://.godot/imported/voldka.png-cb1bdffd49d9afb3cf4e6706f8268578.ctex"]
+source_file="res://art/items/vodka.png"
+dest_files=["res://.godot/imported/vodka.png-1d60463c5d42e8eb0cffe47c4541b21b.ctex"]
 
 [params]
 
