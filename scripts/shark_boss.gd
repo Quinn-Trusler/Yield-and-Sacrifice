@@ -77,6 +77,7 @@ func animate_shark() -> void:
 	$AnimatedSprite2D.position.y = delta_y
 	$MouthHitbox.position.y = delta_y
 	if delta_y > amplitude -0.1:
+		$Ripple.visible = true
 		$Ripple.play()
 	
 
