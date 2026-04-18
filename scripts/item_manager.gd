@@ -344,7 +344,9 @@ func drop_item(item):
 	
 	var delete_item = false
 	var pos = TileLayer.to_local(item.position)
+	
 	var tile_name = TileLayer.get_tile_name_from_local(pos)
+	var terrain_tile_name = TerrainLayer.get_tile_name_from_local(pos)
 	pos = TileLayer.local_to_map(pos)
 	item_dropped.emit()
 	
@@ -361,7 +363,7 @@ func drop_item(item):
 			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
 	elif not item.IS_BUNDLE:
 		#Attempt place crop
-		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
+		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] or terrain_tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 			if TileLayer2.is_empty(pos):#empty cell
 				delete_item = true
 				TileLayer2.plant_crop(pos,item.item_name)

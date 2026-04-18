@@ -9,10 +9,13 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 2},
+"rice":{"title": "Rice","img": "res://art/items/rice.png","text":"default","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
+"melon":{"title": "Melon","img": "res://art/items/melon.png","text":"default","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
+"cranberry bush":{"title": "Cranberry Bush", "img": "res://art/items/cranberry.png","text":"Grows Cranberries dumbass","item unlock":["cranberry"],"unlock literal":true,"type": TYPES.Placement,"reward": "cranberry_bush"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
 "prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
 "devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
@@ -31,9 +34,9 @@ var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],
 var punishments = {3:["lose all gold","burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
 var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["sandy_farmland","+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
-var chained_rewards = [ChainedReward.new(["prickly pear cactus","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
-ChainedReward.new(["devil vine","activate fish","wheat","mill","oven","mill","oven"], 1),
-ChainedReward.new(["sugarcane", "devil vine","prickly pear cactus"],2)]
+var chained_rewards = [ChainedReward.new(["cranberry bush","prickly pear cactus","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
+ChainedReward.new(["mill","melon","devil vine","activate fish","wheat","mill","oven","mill","oven"], 1),
+ChainedReward.new(["rice","sugarcane", "devil vine","prickly pear cactus"],2)]
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -42,9 +45,14 @@ var ShopChoice_Scene = load("res://scenes/shop_choice.tscn")
 # unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
 var unlock_map = [[["barrel", "sugarcane"],["rum"]],
 				[["barrel", "potatoe"],["vodka"]],
+				[["barrel", "rice"],["sake"]],
+				[["barrel", "prickly_pear"],["prickly_pear_jam"]],
+				[["barrel", "cranberry"],["cranberry_jam"]],
+				[["barrel", "melon"],["melon_jam"]],
 				[["mill", "sugarcane"],["sugar"]],
 				[["mill", "wheat"],["flour"]],
-				[["mill", "oven", "wheat"],["bread"]]]
+				[["mill", "oven", "wheat"],["bread"]],
+				[["oven","rice"],["cooked_rice"]]]
 
 var choice_instances = []
 @export var ItemManager : Node2D

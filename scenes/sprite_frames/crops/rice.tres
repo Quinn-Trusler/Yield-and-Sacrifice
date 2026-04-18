@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bal4lesgtxqm8"]
+
+[ext_resource type="Texture2D" uid="uid://waoq14g84sa8" path="res://art/crops/rice.png" id="1_a1qsf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b02m"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5hfq"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(17, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypiik"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(34, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0fp6"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(51, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gnpr"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(68, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or224"]
+atlas = ExtResource("1_a1qsf")
+region = Rect2(85, 0, 17, 17)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b02m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5hfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypiik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0fp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gnpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or224")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

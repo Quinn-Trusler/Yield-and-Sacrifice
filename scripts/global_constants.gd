@@ -22,17 +22,20 @@ var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var MIDDLE_TILES = {"farmland" : {"ID" : Vector2i(3, 3), "phantom_ID" : Vector2i(4,0)},
-					"sandy_farmland" : {"ID" : Vector2i(4, 3), "phantom_ID" : Vector2i(5,0)}}
+					"sandy_farmland" : {"ID" : Vector2i(4, 3), "phantom_ID" : Vector2i(5,0)},
+					"swamp_farmland" : {"ID" : Vector2i(5, 3), "phantom_ID" : Vector2i(6,0)}}
 
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
-var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water", "lava", "dry_farmland", "sandy_farmland"]
+var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water","swamp_water","swamp_water_edge", "lava", "dry_farmland", "sandy_farmland", "swamp_farmland"]
 var UNBURNABLE_TILES = ["burnt land", "UI"]
-var UNBURNABLE_TERRAIN_TILES = ["water","lava"]
-var INITIALLY_UNBURNABLE_TILES = ["dry_farmland", "sandy_farmland"] # Fire can not be placed directly on these tiles
+var UNBURNABLE_TERRAIN_TILES = ["water","swamp_water","swamp_water_edge","lava"]
+var INITIALLY_UNBURNABLE_TILES = ["dry_farmland", "sandy_farmland","swamp_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potatoe":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potatoe","potatoe","potatoe"],"frames":CROP_FRAMES_FOLDER + "potatoe.tres","offset":Vector2(0,-8)},
 "wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
-"sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)}
+"sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)},
+"rice":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["rice","rice"],"frames":CROP_FRAMES_FOLDER + "rice.tres","offset":Vector2(0,0)},
+"melon":{"stage_growth_duration":0.2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["melon","melon","melon"],"frames":CROP_FRAMES_FOLDER + "melon.tres","offset":Vector2(0,0)}
 }
 var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
 "potatoe":{"display_name":"Potatoe","img_name":ITEMS_FOLDER + "potatoe","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
@@ -41,7 +44,7 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 "prickly_pear":{"display_name":"Prickly Pear","img_name":ITEMS_FOLDER + "prickly_pear","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [3, -1]},
 "devil_pepper":{"display_name":"Devil Pepper","img_name":ITEMS_FOLDER + "devil_pepper","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [6,-3]},
 "wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
-"sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["swampy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
+"sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["swamp_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
 "melon":{"display_name":"Melon","img_name":ITEMS_FOLDER + "melon","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
 "fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
 "sugar":{"display_name":"Sugar","img_name":ITEMS_FOLDER + "sugar","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,3]},
@@ -57,8 +60,7 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 "rum":{"display_name":"Rum","img_name":ITEMS_FOLDER + "rum","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [5,2]},
 "sake":{"display_name":"Sake","img_name":ITEMS_FOLDER + "sake","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [3.5, 2]},
 "gold":{"display_name":"Gold","img_name":ITEMS_FOLDER + "coin","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE},
-"pepper_juice":{"display_name":"Pepper Juice","img_name":ITEMS_FOLDER + "pepper_juice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE},
-"watering_can":{"display_name":"Watering Can","img_name":ITEM_FRAMES_FOLDER + "watering_can.tres","points":100,"is_animated":true,"place_on":[],"reaction":REACTIONS.NONE}
+"pepper_juice":{"display_name":"Pepper Juice","img_name":ITEMS_FOLDER + "pepper_juice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE}
 }
 var IMG_EXTENSION = ".png"
 
@@ -66,14 +68,16 @@ var IMG_EXTENSION = ".png"
 var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
 	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":true},
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
-	"barrel":{"display_name":"Barrel","output_items":["vodka"],"items_to_start_timer":1,"input_items":{"potatoe" : "vodka", "sugarcane":"rum"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true},
+	"barrel":{"display_name":"Barrel","output_items":["vodka"],"items_to_start_timer":1,"input_items":{"potatoe" : "vodka", "sugarcane":"rum","rice":"sake","prickly_pear":"prickly_pear_jam","melon":"melon_jam","cranberry":"cranberry_jam"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true},
 	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
-	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-2.5], "extra_tiles": [],"bounce":true},
-	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
+	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar", "rice" : "cooked_rice"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-2.5], "extra_tiles": [],"bounce":true},
+	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass", "swamp_grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
 	"devil_vine":{"display_name":"Devil Vine","output_items":["devil_pepper"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 4, "place_on":["sand"],"frames": BUILDINGS_FRAMES_FOLDER + "devil_vine.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
 	"prickly_pear_cactus":{"display_name":"Prickly Pear Cactus","output_items":["prickly_pear"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":1,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["sand"], "frames": BUILDINGS_FRAMES_FOLDER + "prickly_pear_cactus.tres", "offset": [0,-1], "extra_tiles": [], "bounce":false},
+	"cranberry_bush":{"display_name":"Cranberry Bush","output_items":["cranberry", "cranberry", "cranberry"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 3, "place_on":["swamp_water_edge"],"no_building_placement_override" : true, "frames": BUILDINGS_FRAMES_FOLDER + "cranberry_bush.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
 	"farmland":{"display_name": "Farmland","place_on": ["grass"]},
 	"sandy_farmland":{"display_name": "Sandy Farmland","place_on": ["sand"]},
+	"swamp_farmland":{"display_name": "Swamp Farmland","place_on": ["swamp_grass"]}
 }
 
 

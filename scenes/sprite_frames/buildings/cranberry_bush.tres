@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://g5vv8ggpr4xn"]
+
+[ext_resource type="Texture2D" uid="uid://cyerrx3agjjif" path="res://art/buildings/cranberry.png" id="1_o2esd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4t3s"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnm7a"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agx44"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0wf3"]
+atlas = ExtResource("1_o2esd")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4t3s")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnm7a")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agx44")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0wf3")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]

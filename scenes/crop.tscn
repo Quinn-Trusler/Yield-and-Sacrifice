@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://284n533bqlq8"]
+[gd_scene format=3 uid="uid://284n533bqlq8"]
 
 [ext_resource type="SpriteFrames" uid="uid://d4alk0huvsj0c" path="res://scenes/sprite_frames/crops/wheat.tres" id="1_fe780"]
 [ext_resource type="Script" uid="uid://cngroc4l3rkj6" path="res://scripts/crop.gd" id="1_pl0dt"]
 
-[node name="Crop" type="AnimatedSprite2D"]
+[node name="Crop" type="AnimatedSprite2D" unique_id=789018538]
 sprite_frames = ExtResource("1_fe780")
 script = ExtResource("1_pl0dt")

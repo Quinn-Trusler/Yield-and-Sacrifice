@@ -1,21 +1,21 @@
-[gd_resource type="SpriteFrames" format=3 uid="uid://g5vv8ggpr4xn"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://gbh7ihofaf4x"]
 
-[ext_resource type="Texture2D" uid="uid://wsmx0m10axpp" path="res://art/buildings/mushroom_crop.png" id="1_o2esd"]
+[ext_resource type="Texture2D" uid="uid://wsmx0m10axpp" path="res://art/buildings/mushroom_crop.png" id="1_kx3gi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejq8p"]
-atlas = ExtResource("1_o2esd")
+atlas = ExtResource("1_kx3gi")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rla3o"]
-atlas = ExtResource("1_o2esd")
+atlas = ExtResource("1_kx3gi")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lm2ef"]
-atlas = ExtResource("1_o2esd")
+atlas = ExtResource("1_kx3gi")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f5uvq"]
-atlas = ExtResource("1_o2esd")
+atlas = ExtResource("1_kx3gi")
 region = Rect2(48, 0, 16, 16)
 
 [resource]

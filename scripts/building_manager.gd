@@ -12,7 +12,7 @@ var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmla
 
 var fish_spawn_spots : Array[Vector2i] = []
 var ui_tiles : Array[Vector2i] = []
-var WATER_TILE_NAME : String = "water"
+var WATER_TILE_NAMES : Array[String] = ["water","swamp_water","swamp_water_edge"]
 var UI_TILE_NAME : String = "UI"
 var BURNT_TILE_NAME : String = "burnt land"
 var TILE_CHECK_LIMIT : int = 1000
@@ -44,7 +44,7 @@ func update_location_lists():
 			var terrain_tile_name = TerrainLayer.get_tile_name(pos)
 			if tile_name == UI_TILE_NAME:
 				ui_tiles.append(pos)
-			elif  terrain_tile_name == WATER_TILE_NAME:
+			elif WATER_TILE_NAMES.has(terrain_tile_name):
 				fish_spawn_spots.append(pos)
 			
 func get_all_burnt_tiles():
@@ -58,7 +58,7 @@ func get_all_burnt_tiles():
 	return burnt_tiles
 
 func is_valid_building_location(pos : Vector2i, building_name : String) -> bool:
-	return (TileLayer.is_valid_building_location(pos)and TerrainLayer.is_valid_building_location(pos, building_name) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+	return (TileLayer.is_valid_building_location(pos) and TerrainLayer.is_valid_building_location(pos, building_name) and TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
 #func is_valid_building_location(pos: Vector2i):
 	#if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
@@ -134,14 +134,14 @@ func click_tile():
 				if scene.DESTROY_ON_HARVEST:
 					TileLayer2.set_cell_scene(pos,-1)#delete cell
 			if scene.BUILDING_TYPE == "crop":
-				if scene.harvest_on_click:
-					var resources = scene.harvest()#a list of resources or False
-					if resources:
+				var resources = scene.harvest()#a list of resources or False
+				if resources:
+					ItemManager.output_resources(resources)
+					if scene.harvest_on_click:
 						if not first_crop_harvested:
 							first_crop_harvested = true
 							TutorialManager.next(true, true, false)
 						TileLayer2.set_cell_scene(pos,-1)#delete cell
-						ItemManager.output_resources(resources)
 						ItemManager.crop_uprooted(resources[0])
 	
 func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:

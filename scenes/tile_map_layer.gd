@@ -13,7 +13,9 @@ func set_cell_scene(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2
 
 func is_valid_building_location(pos : Vector2i, building_name : String = "null") -> bool:
 	var tile_name : String = get_tile_name(pos)
-	return not no_building_placement_tiles.has(tile_name) and (building_name == "null" or not "place_on" in GLOBALCONSTS.BUILDING_DEF[building_name] or GLOBALCONSTS.BUILDING_DEF[building_name]["place_on"].has(tile_name))
+	
+	# If (not tile not in no build placement tiles or we have an exception) and (null or no placement restrictions or placement restriction tile has been found)
+	return (not no_building_placement_tiles.has(tile_name) or (building_name != "null" and GLOBALCONSTS.BUILDING_DEF[building_name].has("no_building_placement_override"))) and (building_name == "null" or not "place_on" in GLOBALCONSTS.BUILDING_DEF[building_name] or GLOBALCONSTS.BUILDING_DEF[building_name]["place_on"].has(tile_name))
 
 func get_tile_name(pos):
 	var data = get_cell_tile_data(pos)

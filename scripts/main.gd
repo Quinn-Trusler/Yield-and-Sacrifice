@@ -8,7 +8,8 @@ func _ready():
 	pass
 
 	#create building
-	#$TileMapLayer2.place_building(Vector2(-3,4),"oven")
+	$TileMapLayer2.place_building(Vector2(-3,4),"barrel")
+	$TileMapLayer2.place_building(Vector2(-4,4),"barrel")
 	#$TileMapLayer2.place_building(Vector2(-1,3),"mill")
 	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
 	
