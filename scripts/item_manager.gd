@@ -12,7 +12,7 @@ var item_being_dragged
 var absorbing_items : bool = false
 var item_in_focus = null
 var focus_items = []
-var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0}
+var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0,"melon":0,"rice":0}
 var items_in_bundle_field = []
 
 var left_down : bool = false
@@ -21,8 +21,6 @@ var right_down : bool = false
 var mouse_on_mouth = false
 
 var RNG = RandomNumberGenerator.new()
-
-var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(14,1)}
 
 #Tutorial
 @export var TutorialManager : Node
@@ -50,6 +48,17 @@ func spawn_testing_items():
 	create_draggable_item("prickly_pear",Vector2(-70,-30))
 	create_draggable_item("plastic_bag",Vector2(-100,-30))
 	create_draggable_item("plastic_bag",Vector2(-70,-30))
+	
+	for i in range(5):
+		create_draggable_item("rice",Vector2(-75,-30))
+		create_draggable_item("cooked_rice",Vector2(-75,-30))
+		create_draggable_item("melon",Vector2(-75,-30))
+		create_draggable_item("melon_jam",Vector2(-75,-30))
+		create_draggable_item("cranberry",Vector2(-75,-30))
+		create_draggable_item("cranberry_jam",Vector2(-75,-30))
+		create_draggable_item("sake",Vector2(-75,-30))
+		create_draggable_item("prickly_pear_jam",Vector2(-75,-30))
+	
 	#create_draggable_item("wheat",Vector2(-70,-30))
 	#create_draggable_item("wheat",Vector2(-70,-30))
 	#create_draggable_item("wheat",Vector2(-70,-30))

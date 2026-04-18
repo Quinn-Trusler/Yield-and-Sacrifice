@@ -1,30 +1,52 @@
 [gd_scene format=3 uid="uid://b5o8bu16f8iqk"]
 
+[ext_resource type="Texture2D" uid="uid://cdaw4gqx10gdk" path="res://art/items/cooked_rice.png" id="1_2tgrh"]
 [ext_resource type="Script" uid="uid://yvfg2nfbt1md" path="res://scripts/draggable_item.gd" id="1_c446u"]
-[ext_resource type="Texture2D" uid="uid://dswy7apjxjrrp" path="res://art/items/plastic_bag.png" id="2_lo2el"]
+[ext_resource type="Texture2D" uid="uid://bqbl0uhnpxn4w" path="res://art/items/cranberry.png" id="2_20v46"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_55gtw"]
+[ext_resource type="Texture2D" uid="uid://djilnjplwsyan" path="res://art/items/cranberry_jam.png" id="3_f5irm"]
+[ext_resource type="Texture2D" uid="uid://kqiytppye73m" path="res://art/items/melon.png" id="4_akhkc"]
+[ext_resource type="Texture2D" uid="uid://wyipsr6i3xtu" path="res://art/items/rice.png" id="5_jdtic"]
+[ext_resource type="Texture2D" uid="uid://dav4m7x48d3c" path="res://art/items/sake.png" id="6_vqwpj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c446u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_lo2el")
+"texture": ExtResource("1_2tgrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_20v46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f5irm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_akhkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jdtic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vqwpj")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [node name="DraggableItem" type="AnimatedSprite2D" unique_id=412994486]
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_c446u")
+frame = 5
+frame_progress = 0.468647
 script = ExtResource("1_c446u")
 
 [node name="DraggableItemArea2D" type="Area2D" parent="." unique_id=1458869720]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableItemArea2D" unique_id=2092545832]
 position = Vector2(0.00840287, -0.06722698)
-polygon = PackedVector2Array(7.534812, 9.5362215, -0.41272742, 5.4773865, -4.544475, 1.4671603, -10.526937, -2.4844036, -10.482747, -4.4287558, -7.522029, -4.4508505, -1.5343084, -1.468038, -4.4950266, -5.4893117, -4.4947643, -8.485008, -2.9882936, -9.449149, -0.5598946, -7.3128085, 2.5511637, -2.4090352, 6.4840565, 1.5680491, 10.475644, 6.571084, 10.4059105, 9.562313)
+polygon = PackedVector2Array(3.5056047, -1.8234524, 3.4273214, 8.94073, 2.3314524, 10.057246, -2.3656454, 9.978961, -3.5791836, 8.862445, -3.6574688, -1.9017376, -1.5437746, -4.1328588, -1.3872042, -10.082516, 1.5093393, -10.0042305, 1.7441931, -4.1328588)
 
 [node name="PickUp" type="AudioStreamPlayer" parent="." unique_id=1112216627]
 
@@ -33,10 +55,10 @@ polygon = PackedVector2Array(7.534812, 9.5362215, -0.41272742, 5.4773865, -4.544
 [node name="NumItems" type="Label" parent="." unique_id=1006032167]
 anchors_preset = -1
 anchor_right = 0.022000002
-offset_left = 5.420067
-offset_top = -1.1528349
-offset_right = 13.266067
-offset_bottom = 7.227483
+offset_left = 3.4200668
+offset_top = 1.8471651
+offset_right = 11.266067
+offset_bottom = 10.227483
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_55gtw")
 theme_override_font_sizes/font_size = 8
