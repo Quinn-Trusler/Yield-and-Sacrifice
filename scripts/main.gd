@@ -1,17 +1,14 @@
 extends Node2D
 
-
+@export var TMM :Node2D
 
 var RNG = RandomNumberGenerator.new()
 
 func _ready():
-	pass
 
 	#create building
-	$TileMapLayer2.place_building(Vector2(-3,4),"barrel")
-	$TileMapLayer2.place_building(Vector2(-4,4),"barrel")
-	#$TileMapLayer2.place_building(Vector2(-1,3),"mill")
-	#$TileMapLayer2.place_building(Vector2(0,3),"mushroom_patch")
+	TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
+	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):

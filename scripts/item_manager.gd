@@ -29,11 +29,11 @@ var RNG = RandomNumberGenerator.new()
 var first_item_planted : bool = false
 
 
-@export var TileLayer : TileMapLayer
-@export var TileLayer2 : TileMapLayer
-@export var TerrainLayer : TileMapLayer
+#@export var TileLayer : TileMapLayer
+#@export var TileLayer2 : TileMapLayer
+#@export var TerrainLayer : TileMapLayer
 @export var SacrificeManager : Node2D
-@export var TileMapManager : Node2D
+@export var TMM : Node2D
 @export var BuildingManager = Node2D
 
 signal item_picked_up(item_name, last_item)
@@ -323,9 +323,9 @@ func drop_item_ukn():
 		
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
-		var pos = TileLayer.local_to_map(TileLayer.to_local(item_being_dragged.position))
-		var tile_name = TileLayer.get_tile_name(pos)
-		if TileLayer2.is_empty(pos):#empty cell
+		var pos = TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))
+		var tile_name = TMM.TileLayer.get_tile_name(pos)
+		if TMM.TileLayer2.is_empty(pos):#empty cell
 			return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
 	return false
 			
@@ -343,11 +343,11 @@ func drop_item(item):
 	refocus()
 	
 	var delete_item = false
-	var pos = TileLayer.to_local(item.position)
+	var pos = TMM.TileLayer.to_local(item.position)
 	
-	var tile_name = TileLayer.get_tile_name_from_local(pos)
-	var terrain_tile_name = TerrainLayer.get_tile_name_from_local(pos)
-	pos = TileLayer.local_to_map(pos)
+	var tile_name = TMM.TileLayer.get_tile_name_from_local(pos)
+	var terrain_tile_name = TMM.TerrainLayer.get_tile_name_from_local(pos)
+	pos = TMM.TileLayer.local_to_map(pos)
 	item_dropped.emit()
 	
 	
@@ -364,9 +364,9 @@ func drop_item(item):
 	elif not item.IS_BUNDLE:
 		#Attempt place crop
 		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] or terrain_tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
-			if TileLayer2.is_empty(pos):#empty cell
+			if TMM.TileLayer2.is_empty(pos):#empty cell
 				delete_item = true
-				TileLayer2.plant_crop(pos,item.item_name)
+				TMM.TileLayer2.plant_crop(pos,item.item_name)
 				crops_planted[item.item_name] +=1
 				$DropInBuilding.play()
 				if not first_item_planted:
@@ -376,8 +376,8 @@ func drop_item(item):
 				print("Error: Cannot plant on already planted farmland")
 					
 		#Attempt to place item in building
-		elif not TileLayer2.is_empty(pos):#2nd layer cell not empty
-			var scene = TileLayer2.get_cell_scene(pos)
+		elif not TMM.TileLayer2.is_empty(pos):#2nd layer cell not empty
+			var scene = TMM.TileLayer2.get_cell_scene(pos)
 			if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item):
 				delete_item = scene.place_item(item.item_name)
 				$DropInBuilding.play()

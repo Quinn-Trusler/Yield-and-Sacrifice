@@ -15,7 +15,7 @@ var allowed_sacrifices = ["carrot"]
 
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
-var DEVIL_BOSS_SCENE = preload("res://scenes/shark_boss.tscn")
+var DEVIL_BOSS_SCENE = preload("res://scenes/boss/devil_boss.tscn")
 var devil_boss : Node2D
 
 var mouse_on_mouth = false

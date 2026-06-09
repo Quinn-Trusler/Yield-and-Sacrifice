@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c60asmxn0lwj4"]
 
-[ext_resource type="Script" uid="uid://x1y8me7x1liu" path="res://scripts/shark_boss.gd" id="1_iqnn2"]
+[ext_resource type="Script" uid="uid://x1y8me7x1liu" path="res://scenes/boss/shark_boss.gd" id="1_iqnn2"]
 [ext_resource type="Texture2D" uid="uid://54p0cg4xo4xr" path="res://art/boss/shark_full.png" id="4_iqnn2"]
 [ext_resource type="Texture2D" uid="uid://gkr2iy5nlcyh" path="res://art/boss/ripple.png" id="5_iqnn2"]
 [ext_resource type="Texture2D" uid="uid://bu6wnck3xi05r" path="res://art/boss/shark.png" id="5_monwa"]
@@ -197,9 +197,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7kdxx"]
-radius = 23.194826
-
 [node name="shark_boss" type="Node2D" unique_id=1423359932]
 material = SubResource("ShaderMaterial_ish2d")
 position = Vector2(0, -19)
@@ -210,6 +207,7 @@ sprite_frames = SubResource("SpriteFrames_ta6n1")
 animation = &"full"
 
 [node name="FalseWater" type="Sprite2D" parent="." unique_id=2033013875]
+visible = false
 position = Vector2(0, 19.5)
 texture = ExtResource("5_t6nj6")
 
@@ -230,8 +228,8 @@ visible = false
 polygon = PackedVector2Array(-20, -16, -17, -21, -12, -23, -14, -14, -10, -15, -7, -16, 6, -16, 8, -15, 12, -13, 11, -22, 16, -21, 19, -18, 19, -12, 17, -9, 17, 7, 14, 15, 2, 24, -3, 24, -15, 15, -18, 7)
 disabled = true
 
-[node name="Flower" type="CollisionShape2D" parent="MouthHitbox" unique_id=1249689983]
-shape = SubResource("CircleShape2D_7kdxx")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouthHitbox" unique_id=1664662412]
+polygon = PackedVector2Array(0, 18, 16, 15, 16, 5, 11, -7, 7, -14, 2, -18, -2, -18, -9, -12, -14, -1, -16, 6, -16, 15)
 
 [connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]

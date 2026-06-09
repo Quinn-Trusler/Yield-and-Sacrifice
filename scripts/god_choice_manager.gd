@@ -56,9 +56,10 @@ var unlock_map = [[["barrel", "sugarcane"],["rum"]],
 
 var choice_instances = []
 @export var ItemManager : Node2D
-@export var TileLayer : TileMapLayer
-@export var TileLayer2 : TileMapLayer
-@export var EffectLayer = TileMapLayer
+#@export var TileLayer : TileMapLayer
+#@export var TileLayer2 : TileMapLayer
+#@export var EffectLayer = TileMapLayer
+@export var TMM : Node2D
 @export var Lives = Node2D
 @export var BuildingManager : Node2D
 @export var SacrificeManager : Node2D
@@ -218,7 +219,7 @@ func delete_choice_instances():
 	choice_instances = []
 	
 func get_tile_name(pos):
-	var data = TileLayer.get_cell_tile_data(pos)
+	var data = TMM.TileLayer.get_cell_tile_data(pos)
 	if data != null:
 		return data.get_custom_data_by_layer_id(0)
 		
@@ -345,8 +346,8 @@ func destroy_land(choice : Dictionary) -> void:
 			print("Tried(and failed) to place fire " + str(tries) + " times")
 		if choice["reward"] == null:
 			if BuildingManager.is_valid_fire_placement(pos):
-				EffectLayer.set_cell_scene(pos,-1)#delete cell
-				EffectLayer.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
+				TMM.EffectLayer.set_cell_scene(pos,-1)#delete cell
+				TMM.EffectLayer.set_cell_scene(pos,2,Vector2.ZERO,FIRE_SCENE_ID)
 				count+=1
 		#elif tile_name in choice["reward"]:
 			#EffectLayer.set_cell_scene(pos,-1)#delete cell
