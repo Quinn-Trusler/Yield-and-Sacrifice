@@ -2,12 +2,17 @@ extends TileMapLayer
 	
 #used code from https://www.reddit.com/r/godot/comments/10ql0ch/godot_4_does_tilemap_have_a_way_to_retrieve_the/
 class_name SceneTileMapLayer
-@export var BuildingManager : Node2D
-@export var ItemManager : Node2D
+var BuildingManager : Node2D
+var ItemManager : Node2D
 	
 var scene_coords: Dictionary[Vector2i, Node] = {}
 var building_names_temp: Dictionary[Vector2i, String] = {}
 var next_building_phantom : bool = false
+	
+func _ready() -> void:
+	var parent = get_parent()
+	BuildingManager = parent.BuildingManager
+	ItemManager = parent.ItemManager
 	
 func _enter_tree():
 	child_entered_tree.connect(_register_child)

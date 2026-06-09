@@ -19,6 +19,7 @@ var TILE_CHECK_LIMIT : int = 1000
 var SIDES_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),Vector2i(0,1), Vector2i(-1,0)]
 var NINE_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(-1,-1),Vector2i(-1,0),Vector2i(-1,1),Vector2i(0,-1),Vector2i(0,1),Vector2i(1,-1),Vector2i(1,0),Vector2i(1,1)]
 var FIRE_SPREAD_WEIGHTS : Array[float] = [0,1,2,0,0] # 0,1,2,3,4 spread respectivly
+var BURNT_TILE_ATLAS = Vector2i(3,13)
 
 var fish_spawning_active : bool = false
 
@@ -156,9 +157,12 @@ func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:
 func finish_burn(pos) -> void:
 	TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
 	TMM.EffectLayer.set_cell_scene(pos,-1)#delete cell
+	
 	var positions = get_nine_adjacent_positions(pos)
 	positions.append(pos)
-	TMM.TileLayer.set_cells_terrain_connect(positions, 0, 3)
+	print("finish burn", pos)
+	#TMM.TileLayer.set_cell_scene(pos, 0, BURNT_TILE_ATLAS)
+	TMM.TileLayer.set_cells_terrain_connect(positions, 0, 2)
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):

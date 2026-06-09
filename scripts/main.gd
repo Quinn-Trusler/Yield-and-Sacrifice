@@ -4,6 +4,12 @@ extends Node2D
 
 var RNG = RandomNumberGenerator.new()
 
+@export var DeathScreen :CanvasLayer
+func game_over():
+	#go back to menu or something
+	DeathScreen.visible = true
+	get_tree().paused = true
+
 func _ready():
 
 	#create building
@@ -34,5 +40,15 @@ func reward():
 	$GodChoiceManager.display_rewards()
 
 
+func set_round_time(round_time):
+	$SacrificeManager.set_round_time(round_time)
 	
+func set_godchoices(shop, rewards, punishments):
+	$GodChoiceManager.set_godchoices(shop, rewards, punishments)
+	
+func set_tile_layers(tile_layers):
+	TMM.set_tile_layers(tile_layers)
+	
+func set_boss(boss, boss_position):
+	$SacrificeManager.set_boss(boss, boss_position)
 	

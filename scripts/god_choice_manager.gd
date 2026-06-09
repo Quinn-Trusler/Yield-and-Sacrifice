@@ -31,12 +31,13 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 }
 var rewards = {4:["potatoe","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
-var punishments = {3:["lose all gold","burn land","-2 seconds"],20:["burn land"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
-var chained_shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["sandy_farmland","+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
-var chained_rewards = [ChainedReward.new(["cranberry bush","prickly pear cactus","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
-ChainedReward.new(["mill","melon","devil vine","activate fish","wheat","mill","oven","mill","oven"], 1),
-ChainedReward.new(["rice","sugarcane", "devil vine","prickly pear cactus"],2)]
+
+var punishments = null#{3:["lose all gold","burn land","-2 seconds"],20:["burn land"]}
+var chained_shop_items = null#[ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),ChainedReward.new(["sandy_farmland","+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),ChainedReward.new(["farmland","farmland","farmland"],2)]
+var chained_rewards = null#[ChainedReward.new(["cranberry bush","prickly pear cactus","potatoe","barrel","mushroom patch", "barrel","barrel"], 0),
+#ChainedReward.new(["mill","melon","devil vine","activate fish","wheat","mill","oven","mill","oven"], 1),
+#ChainedReward.new(["rice","sugarcane", "devil vine","prickly pear cactus"],2)]
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/god_choice.tscn")
@@ -81,7 +82,12 @@ func _ready():
 	GOLD.update_gold_num(num_gold)
 	
 	BuildingPlacementManager.build_finished.connect(build_finished)
-	
+
+func set_godchoices(shop_items_, rewards_, punishments_):
+	chained_shop_items = shop_items_
+	chained_rewards = rewards_
+	punishments = punishments_
+
 func get_gold():
 	return num_gold
 	
@@ -203,7 +209,6 @@ func display_shop():
 	$Node2D/TitleText.text = SHOP_TEXT
 	$Node2D/SkipButton.visible = true
 	$Node2D/GoldCount.visible = true
-	print("num gold: ", num_gold)
 	$Node2D/GoldCount.update_gold_num(num_gold)
 	#load_shopchoices(chose_shop_items())
 	load_chained_godchoices(chained_shop_items, true)
@@ -257,7 +262,6 @@ func unlock_sacrifices(items_unlocked, unlock_literal):
 					if len(element[0]) == 0: #No requirments left
 						for unlock in element[1]:
 							new_unlocks.append(unlock)
-							print(unlock + " due to unlock map`")
 
 		for unlock in new_unlocks:
 			SacrificeManager.add_allowed_sacrifice(unlock)
@@ -276,7 +280,6 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		strike_id_from_chain(chained_shop_items, id)
 		$Node2D/SkipButton.visible = false
 	
-	print("Cost: ", cost)
 	increase_gold(-cost)
 	
 	

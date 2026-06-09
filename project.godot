@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Deadly Worship"
-run/main_scene="uid://dai1cil5auac7"
+run/main_scene="uid://baqw73xvkgkre"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=60
 config/icon="res://icon.svg"

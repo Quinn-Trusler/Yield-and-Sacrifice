@@ -7,7 +7,7 @@ var MAX_LIVES = GLOBALCONSTS.MAX_LIVES
 var LIFE_SPACING = 15
 var lives_left = MAX_LIVES
 @onready var life_scene = load("res://scenes/life.tscn")
-@onready var DeathScreen = get_node("/root/Main/DeathScreen")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(MAX_LIVES):
@@ -25,12 +25,8 @@ func gain_life():
 func lose_life():
 	lives_left -= 1
 	if lives_left <= 0:
-		game_over()
+		get_parent().game_over()
 	set_lives()
-func game_over():
-	#go back to menu or something
-	DeathScreen.visible = true
-	get_tree().paused = true
 	
 func set_max_lives():
 	lives_left = MAX_LIVES

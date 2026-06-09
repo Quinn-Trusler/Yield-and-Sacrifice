@@ -15,8 +15,8 @@ var allowed_sacrifices = ["carrot"]
 
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
-var DEVIL_BOSS_SCENE = preload("res://scenes/boss/devil_boss.tscn")
-var devil_boss : Node2D
+var BOSS_SCENE = preload("res://scenes/boss/devil_boss.tscn")
+var boss : Node2D
 
 var mouse_on_mouth = false
 
@@ -26,16 +26,21 @@ var first_sacrifice_made: bool = false
 @export var DialogManager: Node2D
 @export var ItemManager: Node2D
 
+
 func _ready():
-	devil_boss = DEVIL_BOSS_SCENE.instantiate()
-	add_child(devil_boss)
-	devil_boss.attempt_eat_item.connect(_attempt_eat_item)
 	if Cheats.ROUND_TIME_OVERRIDE:
 		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
 		$Timer.wait_time = round_time
 	$Timer.start()
 	start()
+	
+func set_boss(boss_, boss_position):
+	boss = boss_.instantiate()
+	boss.attempt_eat_item.connect(_attempt_eat_item)
+	boss.position += boss_position # += since boss may already have an inteded offset
+	add_child(boss)
+	
 func _process(_delta: float) -> void:
 	update_timer_text()
 	
@@ -49,16 +54,21 @@ func next_round():
 		reward()
 	else:
 		punish()
-	devil_boss.set_hungry()
+	boss.set_hungry()
 	$Timer.start()
 
 func modify_round_time(change_time):
-	round_time += change_time
+	set_round_time(round_time + change_time)
 	if Cheats.ROUND_TIME_OVERRIDE:
 		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
 		$Timer.wait_time = round_time
 	$Timer.start()
+	
+	
+func set_round_time(time):
+	round_time = time
+	
 
 var TIMEDECIMALTHRESHOLD = 5
 var TIMEDECIMALS = 10
@@ -121,7 +131,7 @@ func update_sacrifice_text():
 			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
 		
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
-	devil_boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], num_items)
+	boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], num_items)
 	if sacrificed_item_name in requirements:
 		if filled_requirements[sacrificed_item_name] < requirements[sacrificed_item_name]:
 			if not first_sacrifice_made:
@@ -131,7 +141,7 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
 			update_sacrifice_text()
 			check_requirements_met()
 			if requirements_met:
-				devil_boss.set_full()
+				boss.set_full()
 		else:
 			DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 	else:
