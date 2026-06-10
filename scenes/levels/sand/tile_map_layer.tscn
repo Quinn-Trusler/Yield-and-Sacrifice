@@ -1,13 +1,14 @@
-[gd_scene format=4 uid="uid://bj3hmli7768i4"]
+[gd_scene format=4 uid="uid://curf4nei0a3ow"]
 
-[ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="1_incvv"]
-[ext_resource type="Texture2D" uid="uid://h0kmoq5uuo0k" path="res://art/ui/invalid_building_layer.png" id="2_8tce7"]
-[ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_5c0hm"]
-[ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_s6ukk"]
-[ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_gmfmv"]
+[ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="1_kfcnv"]
+[ext_resource type="Texture2D" uid="uid://h0kmoq5uuo0k" path="res://art/ui/invalid_building_layer.png" id="2_q1cr6"]
+[ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_2uw1y"]
+[ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_cuqvd"]
+[ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_mslkg"]
+[ext_resource type="Script" uid="uid://bb4dnse2iphs5" path="res://scenes/tile_map_layer.gd" id="6_jkupj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
-texture = ExtResource("1_incvv")
+texture = ExtResource("1_kfcnv")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrains_peering_bit/right_side = 0
@@ -442,6 +443,7 @@ texture = ExtResource("1_incvv")
 2:13/0/custom_data_0 = "burnt land"
 3:13/0 = 0
 3:13/0/terrain_set = 0
+3:13/0/terrain = 2
 3:13/0/custom_data_0 = "burnt land"
 4:13/0 = 0
 4:13/0/terrain_set = 0
@@ -1119,15 +1121,15 @@ texture = ExtResource("1_incvv")
 5:2/0/custom_data_0 = "swamp_grass"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]
-texture = ExtResource("2_8tce7")
+texture = ExtResource("2_q1cr6")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jyhfs"]
-scenes/1/scene = ExtResource("3_5c0hm")
-scenes/2/scene = ExtResource("4_s6ukk")
-scenes/3/scene = ExtResource("5_gmfmv")
+scenes/1/scene = ExtResource("3_2uw1y")
+scenes/2/scene = ExtResource("4_cuqvd")
+scenes/3/scene = ExtResource("5_mslkg")
 
 [sub_resource type="TileSet" id="TileSet_o5qli"]
 terrain_set_0/mode = 0
@@ -1151,6 +1153,7 @@ sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 sources/1 = SubResource("TileSetAtlasSource_fuf3a")
 
-[node name="DecorLayer" type="TileMapLayer" unique_id=1986990289]
-tile_map_data = PackedByteArray("AAABAAMAAAAIAAcAAAD7/wAAAAAHAAEAAAD7////AAAGAAEAAAD3//7/AAAHAAIAAAD6////AAAHAAEAAAD6/wYAAAAGAAIAAAD1/wUAAAAHAAIAAAA=")
+[node name="TileMapLayer" type="TileMapLayer" unique_id=284882148]
+tile_map_data = PackedByteArray("AADy//3/AAALAAEAAADz//3/AAALAAEAAAD0//3/AAALAAEAAAD0//7/AAALAAEAAADz//7/AAALAAEAAADy//7/AAALAAEAAADy////AAALAAEAAADz////AAALAAEAAAD0////AAALAAEAAAD3//z/AAALAAEAAAD4//z/AAALAAEAAAD5//z/AAALAAEAAAD6//z/AAALAAEAAAD7//z/AAALAAEAAAD8//z/AAALAAEAAAD9//z/AAALAAEAAAD+//z/AAALAAEAAAD///z/AAALAAEAAAD///3/AAALAAEAAAD+//3/AAALAAEAAAD9//3/AAALAAEAAAD8//3/AAALAAEAAAD7//3/AAALAAEAAAD6//3/AAALAAEAAAD5//3/AAALAAEAAAD4//3/AAALAAEAAAD3//3/AAALAAEAAAD2/wEAAAAEAAMAAAD4/wUAAAAEAAMAAAD//wEAAAALAAEAAAAAAAEAAAALAAEAAAAAAAIAAAALAAEAAAAAAAMAAAALAAEAAAD//wIAAAALAAEAAAD//wMAAAALAAEAAAA=")
 tile_set = SubResource("TileSet_o5qli")
+script = ExtResource("6_jkupj")

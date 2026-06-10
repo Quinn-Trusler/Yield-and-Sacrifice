@@ -207,7 +207,6 @@ sprite_frames = SubResource("SpriteFrames_ta6n1")
 animation = &"full"
 
 [node name="FalseWater" type="Sprite2D" parent="." unique_id=2033013875]
-visible = false
 position = Vector2(0, 19.5)
 texture = ExtResource("5_t6nj6")
 

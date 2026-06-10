@@ -6,15 +6,14 @@ var RNG = RandomNumberGenerator.new()
 
 @export var DeathScreen :CanvasLayer
 func game_over():
-	#go back to menu or something
-	DeathScreen.visible = true
-	get_tree().paused = true
+	get_parent().game_over()
 
 func _ready():
 
 	#create building
-	TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
-	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
+	#TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
+	#TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
+	pass
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
@@ -22,13 +21,13 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("end_round"):
 		$SacrificeManager.next_round()
-		print("End Round Debug used")
+		print("End Round Debug pressed")
 		
 	if Input.is_action_just_pressed("debug"):
-		#print("Nothing bound to debug key(s)")
+		print("Nothing bound to debug key")
 		#$BuildingManager.spawn_random_fish()#create_gift("wheat", 2)
 		#print("\n---------------------------------\n")
-		$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
+		#$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
 		$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
 	
 		

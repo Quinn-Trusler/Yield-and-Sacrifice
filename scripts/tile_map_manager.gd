@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var TileLayer : TileMapLayer
-@export var TileLayer2 : TileMapLayer
-@export var EffectLayer : TileMapLayer
-@export var TerrainLayer : TileMapLayer
-@export var DecorLayer : TileMapLayer
+var TileLayer : TileMapLayer
+var TileLayer2 : TileMapLayer
+var EffectLayer : TileMapLayer
+var TerrainLayer : TileMapLayer
+var DecorLayer : TileMapLayer
 
 @export var BuildingManager : Node2D
 @export var ItemManager : Node2D

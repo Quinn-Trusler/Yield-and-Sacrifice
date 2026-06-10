@@ -33,8 +33,8 @@ var gift_items = []
 
 func _ready():
 	update_location_lists()
-	TMM.TileLayer.place_farmland(Vector2i(-11,2))
-	TMM.TileLayer.place_farmland(Vector2i(-9,2))
+	#TMM.TileLayer.place_farmland(Vector2i(-11,2))
+	#TMM.TileLayer.place_farmland(Vector2i(-9,2))
 	
 # Grabs data from layer 2 and fills fish spawn spots and ui tiles list
 func update_location_lists():
@@ -160,8 +160,6 @@ func finish_burn(pos) -> void:
 	
 	var positions = get_nine_adjacent_positions(pos)
 	positions.append(pos)
-	print("finish burn", pos)
-	#TMM.TileLayer.set_cell_scene(pos, 0, BURNT_TILE_ATLAS)
 	TMM.TileLayer.set_cells_terrain_connect(positions, 0, 2)
 
 # This is for initially placing fires and NOT for spreading

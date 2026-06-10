@@ -16,13 +16,10 @@
 [ext_resource type="Script" uid="uid://cogtvbbl7ibfw" path="res://scripts/building_manager.gd" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://bpxhrff5aqg64" path="res://art/ui/stopwatch.png" id="13_gqmmt"]
 [ext_resource type="Script" uid="uid://c4ikxs2xowcr0" path="res://scripts/lives.gd" id="13_trceg"]
-[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="14_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://c6ebs5nndaen6" path="res://art/ui/requests_scroll.png" id="14_yc10j"]
 [ext_resource type="Script" uid="uid://d1v40dijb78ie" path="res://scenes/tutorial_manager.gd" id="15_fv21b"]
-[ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="15_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://bvbj3bo2ni6tj" path="res://art/ui/life scroll.png" id="15_jscy8"]
 [ext_resource type="Script" uid="uid://bfesuyaqtmo5r" path="res://scenes/gold.gd" id="16_fv21b"]
-[ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="16_muem4"]
 [ext_resource type="AudioStream" uid="uid://cjalawduvlllu" path="res://audio/UI/click button.wav" id="17_vxglm"]
 [ext_resource type="PackedScene" uid="uid://cn2vqi5iut3jl" path="res://scenes/dialog_manager.tscn" id="17_yq6so"]
 [ext_resource type="AudioStream" uid="uid://bo2jkhcfx1wcp" path="res://audio/game/item_pop.wav" id="18_jscy8"]
@@ -1541,45 +1538,6 @@ TutorialManager = NodePath("../TutorialManager")
 wait_time = 6.0
 autostart = true
 
-[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1350873332]
-process_mode = 3
-visible = false
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
-script = ExtResource("14_a8y0u")
-
-[node name="Polygon2D" type="Polygon2D" parent="DeathScreen" unique_id=854887507]
-color = Color(0.87959766, 0.5890536, 0.36864072, 1)
-polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
-
-[node name="PlayAgain" type="TextureButton" parent="DeathScreen" unique_id=1526225169]
-anchors_preset = -1
-anchor_right = 0.003
-anchor_bottom = 0.0050000004
-offset_left = 122.25
-offset_top = 62.75
-offset_right = 197.41
-offset_bottom = 70.4
-texture_normal = ExtResource("15_jbj1t")
-texture_hover = ExtResource("15_jbj1t")
-
-[node name="BackToMenu" type="TextureButton" parent="DeathScreen" unique_id=2078703589]
-offset_left = 118.0
-offset_top = 117.5
-offset_right = 213.0
-offset_bottom = 128.25
-texture_normal = ExtResource("16_muem4")
-texture_hover = ExtResource("16_muem4")
-
-[node name="All Lives Lost" type="Label" parent="DeathScreen" unique_id=2133744565]
-offset_top = 31.5
-offset_right = 320.0
-offset_bottom = 45.25
-theme_override_fonts/font = ExtResource("10_dp3eg")
-theme_override_font_sizes/font_size = 12
-text = "All Lives Lost"
-horizontal_alignment = 1
-
 [node name="BuildingPlacementManager" type="Node2D" parent="." unique_id=1622394179 node_paths=PackedStringArray("BuildingManager", "ItemManager", "TileMapManager")]
 process_mode = 3
 script = ExtResource("34_dgi5k")
@@ -1626,5 +1584,3 @@ visible = false
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]
-[connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
-[connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://4w4cuv8llkbg"]
+
+[ext_resource type="PackedScene" uid="uid://bostypfuff7cg" path="res://scenes/levels/sand/terrain_layer.tscn" id="1_4n3uv"]
+[ext_resource type="PackedScene" uid="uid://gkedkuerpvuc" path="res://scenes/levels/sand/decor_layer.tscn" id="2_8oll4"]
+[ext_resource type="PackedScene" uid="uid://curf4nei0a3ow" path="res://scenes/levels/sand/tile_map_layer.tscn" id="3_jyl2r"]
+[ext_resource type="PackedScene" uid="uid://xug5sbnv85j3" path="res://scenes/levels/sand/tile_map_layer2.tscn" id="4_cphnv"]
+[ext_resource type="PackedScene" uid="uid://c60asmxn0lwj4" path="res://scenes/boss/shark_boss.tscn" id="5_8oll4"]
+
+[node name="Level2Tester" type="Node2D" unique_id=1153543723]
+
+[node name="TerrainLayer" parent="." unique_id=343643866 instance=ExtResource("1_4n3uv")]
+
+[node name="DecorLayer" parent="." unique_id=1896796520 instance=ExtResource("2_8oll4")]
+
+[node name="TileMapLayer" parent="." unique_id=284882148 instance=ExtResource("3_jyl2r")]
+
+[node name="TileMapLayer2" parent="." unique_id=1920032927 instance=ExtResource("4_cphnv")]
+
+[node name="shark_boss" parent="." unique_id=1423359932 instance=ExtResource("5_8oll4")]
+position = Vector2(0, 40)

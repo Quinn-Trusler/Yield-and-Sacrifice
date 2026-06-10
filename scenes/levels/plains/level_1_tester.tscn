@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c0lqn4eatd000"]
+
+[ext_resource type="PackedScene" uid="uid://bj3hmli7768i4" path="res://scenes/levels/plains/decor_layer.tscn" id="1_fxx0v"]
+[ext_resource type="PackedScene" uid="uid://dg3dewem4arv5" path="res://scenes/levels/plains/effect_layer.tscn" id="2_n4em5"]
+[ext_resource type="PackedScene" uid="uid://bluccor5t2p8a" path="res://scenes/levels/plains/terrain_layer.tscn" id="3_rhp5g"]
+[ext_resource type="PackedScene" uid="uid://c11pu8epf8n0l" path="res://scenes/levels/plains/tile_map_layer2.tscn" id="4_8flof"]
+[ext_resource type="PackedScene" uid="uid://cttv8h7vpvqvq" path="res://scenes/levels/plains/tile_map_layer.tscn" id="5_qcrla"]
+
+[node name="Level 1 tester" type="Node2D" unique_id=764150172]
+
+[node name="TerrainLayer" parent="." unique_id=2068728322 instance=ExtResource("3_rhp5g")]
+
+[node name="DecorLayer" parent="." unique_id=1986990289 instance=ExtResource("1_fxx0v")]
+
+[node name="TileMapLayer" parent="." unique_id=2007038488 instance=ExtResource("5_qcrla")]
+
+[node name="TileMapLayer2" parent="." unique_id=1920032927 instance=ExtResource("4_8flof")]
+
+[node name="EffectLayer" parent="." unique_id=1527377579 instance=ExtResource("2_n4em5")]

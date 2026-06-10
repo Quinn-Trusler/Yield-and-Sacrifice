@@ -1152,8 +1152,6 @@ sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 sources/1 = SubResource("TileSetAtlasSource_fuf3a")
 
-[node name="EffectLayer" type="TileMapLayer" unique_id=1527377579 node_paths=PackedStringArray("BuildingManager", "ItemManager")]
+[node name="EffectLayer" type="TileMapLayer" unique_id=1527377579]
 tile_set = SubResource("TileSet_o5qli")
 script = ExtResource("6_5vt0u")
-BuildingManager = NodePath("")
-ItemManager = NodePath("")

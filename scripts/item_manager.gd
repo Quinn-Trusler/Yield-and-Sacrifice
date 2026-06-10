@@ -241,6 +241,8 @@ func _on_bundle_field_area_entered(area: Area2D) -> void:
 	if area.name == "DraggableItemArea2D":
 		var item = area.get_parent()
 
+		print(item.item_name)
+		print(item_being_dragged.item_name)
 		if absorbing_items and item_being_dragged != item and item.item_name == item_being_dragged.item_name:
 			item_being_dragged.increase_num(item.num_items)
 			erase_item(item)
@@ -320,6 +322,9 @@ func drop_item_ukn():
 	if item_being_dragged:
 		item_being_dragged.drop()
 		drop_item(item_being_dragged)
+		# Hack job to get bundles to not cause an error when getting a godchoice
+		absorbing_items = false
+		$BundleField.monitoring = false
 		
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
@@ -335,6 +340,18 @@ func delete_animated_item(item):
 func crop_uprooted(item_name):
 	crops_planted[item_name] -=1
 	
+func is_last_item_bundle(item): # Hack Job
+	if GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] != [] and crops_planted[item.item_name] == 0:#Item is crop
+		print("this bundle might be a last item")
+		var count = 0
+		for draggable_item in draggable_items:
+			if draggable_item.item_name == item.item_name:
+				count +=1
+		if count == 1:#just self
+			print("This bundle is the last item")
+			return true
+	return false
+			
 func is_last_item(item):
 	return (item_is_last and crops_planted[item.item_name] == 0)
 #called by the item itself
@@ -351,12 +368,13 @@ func drop_item(item):
 	item_dropped.emit()
 	
 	
-	if mouse_on_mouth:
-		if not (item_is_last and crops_planted[item.item_name] == 0):
-			if item.IS_BUNDLE:
-				SacrificeManager.sacrifice(item.item_name, item.num_items) 
-			else:		
-				SacrificeManager.sacrifice(item.item_name)
+	if mouse_on_mouth:# Kind of ugly/repetitive code, it could be cleaned up
+		if item.IS_BUNDLE and not is_last_item_bundle(item):
+			SacrificeManager.sacrifice(item.item_name, item.num_items)
+			delete_item = true
+			$EatItem.play()
+		elif not item.IS_BUNDLE and not is_last_item(item):
+			SacrificeManager.sacrifice(item.item_name)
 			delete_item = true
 			$EatItem.play()
 		else:

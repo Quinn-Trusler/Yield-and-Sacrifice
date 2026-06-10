@@ -1,13 +1,13 @@
-[gd_scene format=4 uid="uid://bj3hmli7768i4"]
+[gd_scene format=4 uid="uid://gkedkuerpvuc"]
 
-[ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="1_incvv"]
-[ext_resource type="Texture2D" uid="uid://h0kmoq5uuo0k" path="res://art/ui/invalid_building_layer.png" id="2_8tce7"]
-[ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_5c0hm"]
-[ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_s6ukk"]
-[ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_gmfmv"]
+[ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="1_mt0iw"]
+[ext_resource type="Texture2D" uid="uid://h0kmoq5uuo0k" path="res://art/ui/invalid_building_layer.png" id="2_rmpoj"]
+[ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/crop.tscn" id="3_jml4c"]
+[ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/fire.tscn" id="4_d0a5q"]
+[ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/building.tscn" id="5_i6kuj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
-texture = ExtResource("1_incvv")
+texture = ExtResource("1_mt0iw")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrains_peering_bit/right_side = 0
@@ -1119,15 +1119,15 @@ texture = ExtResource("1_incvv")
 5:2/0/custom_data_0 = "swamp_grass"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]
-texture = ExtResource("2_8tce7")
+texture = ExtResource("2_rmpoj")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jyhfs"]
-scenes/1/scene = ExtResource("3_5c0hm")
-scenes/2/scene = ExtResource("4_s6ukk")
-scenes/3/scene = ExtResource("5_gmfmv")
+scenes/1/scene = ExtResource("3_jml4c")
+scenes/2/scene = ExtResource("4_d0a5q")
+scenes/3/scene = ExtResource("5_i6kuj")
 
 [sub_resource type="TileSet" id="TileSet_o5qli"]
 terrain_set_0/mode = 0
@@ -1151,6 +1151,6 @@ sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 sources/1 = SubResource("TileSetAtlasSource_fuf3a")
 
-[node name="DecorLayer" type="TileMapLayer" unique_id=1986990289]
-tile_map_data = PackedByteArray("AAABAAMAAAAIAAcAAAD7/wAAAAAHAAEAAAD7////AAAGAAEAAAD3//7/AAAHAAIAAAD6////AAAHAAEAAAD6/wYAAAAGAAIAAAD1/wUAAAAHAAIAAAA=")
+[node name="DecorLayer" type="TileMapLayer" unique_id=1896796520]
+tile_map_data = PackedByteArray("AAD7/wAAAAAJAAkAAAD7////AAAJAAgAAAD3//7/AAAJAAkAAAD6////AAAIAAkAAAD6/wYAAAAJAAgAAAD1/wUAAAAJAAcAAAD0/wIAAAAIAAcAAAD4/wMAAAAJAAkAAAD7/wYAAAAQAAEAAAD+/wUAAAARAAEAAAD0/wYAAAAIAAcAAAAAAP3/AAAJAAkAAAACAP//AAAJAAkAAAD2/wAAAAAJAAkAAADy/wQAAAAJAAgAAAD7/wMAAAAJAAgAAAD6/wEAAAAIAAcAAAD4//7/AAAQAAEAAAA=")
 tile_set = SubResource("TileSet_o5qli")

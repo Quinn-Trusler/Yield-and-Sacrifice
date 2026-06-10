@@ -1,6 +1,114 @@
 [gd_scene format=3 uid="uid://baqw73xvkgkre"]
 
 [ext_resource type="Script" uid="uid://b27c2vy2gtf7j" path="res://scene_manager.gd" id="1_jo5df"]
+[ext_resource type="Script" uid="uid://dtkxrf4g18ax3" path="res://level_selector2.gd" id="2_a4gjy"]
+[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="3_8xgxq"]
+[ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="4_yaxe4"]
+[ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="5_b515q"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_xfx5j"]
 
-[node name="Scene Manager" type="Node" unique_id=232193636]
+[node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen")]
 script = ExtResource("1_jo5df")
+DeathScreen = NodePath("DeathScreen")
+
+[node name="LevelSelector" type="Node" parent="." unique_id=840365461 node_paths=PackedStringArray("Level_Option", "Difficulty_Option")]
+script = ExtResource("2_a4gjy")
+Level_Option = NodePath("HBoxContainer/VBoxContainer/Level/OptionButton")
+Difficulty_Option = NodePath("HBoxContainer/VBoxContainer/Difficulty/OptionButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector" unique_id=1968916952]
+offset_right = 1280.0
+offset_bottom = 722.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelector/HBoxContainer" unique_id=1752617599]
+layout_mode = 2
+alignment = 1
+
+[node name="Level" type="HBoxContainer" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=731839611]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelector/HBoxContainer/VBoxContainer/Level" unique_id=691729240]
+layout_mode = 2
+text = "Level       "
+
+[node name="OptionButton" type="OptionButton" parent="LevelSelector/HBoxContainer/VBoxContainer/Level" unique_id=613965078]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Level 1"
+popup/item_0/id = 0
+popup/item_1/text = "Level 2"
+popup/item_1/id = 1
+popup/item_2/text = "Level 3"
+popup/item_2/id = 2
+
+[node name="Difficulty" type="HBoxContainer" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=1918757879]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelector/HBoxContainer/VBoxContainer/Difficulty" unique_id=363351007]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="OptionButton" type="OptionButton" parent="LevelSelector/HBoxContainer/VBoxContainer/Difficulty" unique_id=1477132646]
+layout_mode = 2
+selected = 2
+item_count = 5
+popup/item_0/text = "Baby"
+popup/item_0/id = 0
+popup/item_1/text = "Easy"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Hard"
+popup/item_3/id = 3
+popup/item_4/text = "Insane"
+popup/item_4/id = 4
+
+[node name="Play" type="Button" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=1081838782]
+layout_mode = 2
+text = "Play"
+
+[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1409522031]
+process_mode = 3
+visible = false
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("3_8xgxq")
+
+[node name="Polygon2D" type="Polygon2D" parent="DeathScreen" unique_id=1445219821]
+color = Color(0.87959766, 0.5890536, 0.36864072, 1)
+polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
+
+[node name="PlayAgain" type="TextureButton" parent="DeathScreen" unique_id=1839373022]
+visible = false
+anchors_preset = -1
+anchor_right = 0.003
+anchor_bottom = 0.0050000004
+offset_left = 122.25
+offset_top = 62.75
+offset_right = 197.41
+offset_bottom = 70.4
+texture_normal = ExtResource("4_yaxe4")
+texture_hover = ExtResource("4_yaxe4")
+
+[node name="BackToMenu" type="TextureButton" parent="DeathScreen" unique_id=171266679]
+offset_left = 118.0
+offset_top = 117.5
+offset_right = 213.0
+offset_bottom = 128.25
+texture_normal = ExtResource("5_b515q")
+texture_hover = ExtResource("5_b515q")
+
+[node name="All Lives Lost" type="Label" parent="DeathScreen" unique_id=135999220]
+offset_top = 31.5
+offset_right = 320.0
+offset_bottom = 45.25
+theme_override_fonts/font = ExtResource("6_xfx5j")
+theme_override_font_sizes/font_size = 12
+text = "All Lives Lost"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="LevelSelector/HBoxContainer/VBoxContainer/Play" to="LevelSelector" method="_on_play_pressed"]
+[connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
+[connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]
