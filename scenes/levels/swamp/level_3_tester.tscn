@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cftvd078p21ov"]
+
+[ext_resource type="PackedScene" uid="uid://bqm7mmn785pav" path="res://scenes/boss/leach_boss.tscn" id="1_5fxmg"]
+[ext_resource type="PackedScene" uid="uid://dg6igubghlwyo" path="res://scenes/levels/swamp/terrain_layer.tscn" id="2_o35ct"]
+[ext_resource type="PackedScene" uid="uid://vrps7wbwps28" path="res://scenes/levels/swamp/decor_layer.tscn" id="3_5oguj"]
+[ext_resource type="PackedScene" uid="uid://b1wq2p84mqa8u" path="res://scenes/levels/swamp/tile_map_layer2.tscn" id="4_5fxmg"]
+[ext_resource type="PackedScene" uid="uid://dcha186c8n123" path="res://scenes/levels/swamp/tile_map_layer.tscn" id="4_5oqqo"]
+
+[node name="Level3Tester" type="Node2D" unique_id=1153543723]
+
+[node name="TerrainLayer" parent="." unique_id=380002925 instance=ExtResource("2_o35ct")]
+
+[node name="DecorLayer" parent="." unique_id=1284029298 instance=ExtResource("3_5oguj")]
+
+[node name="TileMapLayer" parent="." unique_id=820523574 instance=ExtResource("4_5oqqo")]
+
+[node name="TileMapLayer2" parent="." unique_id=296146777 instance=ExtResource("4_5fxmg")]
+
+[node name="leach_boss" parent="." unique_id=1423359932 instance=ExtResource("1_5fxmg")]
+position = Vector2(-63, -3)

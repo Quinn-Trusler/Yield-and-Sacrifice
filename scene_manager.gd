@@ -20,6 +20,12 @@ func game_over():
 	DeathScreen.visible = true
 	game_scene.queue_free()
 	get_tree().paused = true
+	
+@export var WinScreen :CanvasLayer
+func win_game():
+	WinScreen.visible = true
+	game_scene.queue_free()
+	get_tree().paused = true
 
 
 
@@ -85,6 +91,7 @@ func game_over():
 #"lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 #"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
 #"sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow sugarcane","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
+#"sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow sugarcane","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
 #"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
 #"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 #}
@@ -111,6 +118,7 @@ func generate_level(level_name, level_dificulty):
 		var shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),
 		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),
 		ChainedReward.new(["farmland","farmland","farmland"],2)]
+		#var rewards = []
 		var rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","barrel","mushroom patch", "barrel"], 0),
 		ChainedReward.new(["wheat","mill","oven","mill","oven"], 1),
 		ChainedReward.new(["well","activate fish","mushroom patch"],2)]
@@ -139,6 +147,23 @@ func generate_level(level_name, level_dificulty):
 		tile_layers["TerrainLayer"] = load("res://scenes/levels/sand/terrain_layer.tscn")
 		tile_layers["EffectLayer"] = load("res://scenes/levels/plains/effect_layer.tscn")
 	
+		load_level(round_time, shop_items, rewards, punishments, tile_layers, boss, boss_position)
+	elif level_name == "swamp": #kinda like shrek
+		var boss = load("res://scenes/boss/leach_boss.tscn")
+		var boss_position = Vector2(-63,-3+19) + Vector2(72,-59)
+
+		
+		var shop_items = [ChainedReward.new(["gain life", "gain life", "gain life", "gain life"],0),
+		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],1),
+		ChainedReward.new(["swamp_farmland","swamp_farmland","swamp_farmland"],2)]
+		var rewards = [ChainedReward.new(["cranberry bush", "barrel","cranberry bush","mushroom patch","barrel"], 0),
+		ChainedReward.new(["rice","oven","activate fish","mill","oven","barrel"], 1),
+		ChainedReward.new(["well","sugarcane","mushroom patch","barrel", "mill"],2)]
+		tile_layers["TileLayer"] = load("res://scenes/levels/swamp/tile_map_layer.tscn")
+		tile_layers["TileLayer2"] = load("res://scenes/levels/swamp/tile_map_layer2.tscn")
+		tile_layers["DecorLayer"] = load("res://scenes/levels/swamp/decor_layer.tscn")
+		tile_layers["TerrainLayer"] = load("res://scenes/levels/swamp/terrain_layer.tscn")
+		tile_layers["EffectLayer"] = load("res://scenes/levels/plains/effect_layer.tscn")
 
 		load_level(round_time, shop_items, rewards, punishments, tile_layers, boss, boss_position)
 	else:

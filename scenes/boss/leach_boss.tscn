@@ -336,6 +336,7 @@ polygon = PackedVector2Array(-20, -16, -17, -21, -12, -23, -14, -14, -10, -15, -
 disabled = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouthHitbox" unique_id=1040172048]
+polygon = PackedVector2Array(12, -12, 15, -4, 8, 16, 6, 17, -6, 17, -10, 13, -13, 5, -14, -8, -11, -13, -2, -17, 3, -17)
 
 [connection signal="mouse_entered" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="MouthHitbox" to="." method="_on_mouth_hitbox_mouse_exited"]

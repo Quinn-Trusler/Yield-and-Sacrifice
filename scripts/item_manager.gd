@@ -330,8 +330,11 @@ func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))
 		var tile_name = TMM.TileLayer.get_tile_name(pos)
-		if TMM.TileLayer2.is_empty(pos):#empty cell
-			return (tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"])
+		var terrain_tile_name = TMM.TerrainLayer.get_tile_name(pos)
+		
+		if tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"] or terrain_tile_name in GLOBALCONSTS.ITEM_DEF[item_being_dragged.item_name]["place_on"]:
+			if TMM.TileLayer2.is_empty(pos):#empty cell
+				return true
 	return false
 			
 func delete_animated_item(item):

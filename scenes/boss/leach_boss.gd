@@ -32,11 +32,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func update_alcohol_effect():
-	$AnimatedSprite2D.material.set_shader_parameter("saturation", clampf(1.1 - alcohol_level/500.0,0,2))
+	pass
+	#$AnimatedSprite2D.material.set_shader_parameter("saturation", clampf(1.1 - alcohol_level/500.0,0,2))
 
 func update_shroom_effect():
-	$AnimatedSprite2D.material.set_shader_parameter("chroma_offset_px", sqrt(shroom_level/100.0))
-	$AnimatedSprite2D.material.set_shader_parameter("wobble_px", 0.5 + shroom_level/500.0)
+	pass
+	#$AnimatedSprite2D.material.set_shader_parameter("chroma_offset_px", sqrt(shroom_level/100.0))
+	#$AnimatedSprite2D.material.set_shader_parameter("wobble_px", 0.5 + shroom_level/500.0)
 
 func tick_alcohol(delta):
 	if alcohol_level:

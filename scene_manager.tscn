@@ -7,9 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="5_b515q"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_xfx5j"]
 
-[node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen")]
+[node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen", "WinScreen")]
 script = ExtResource("1_jo5df")
 DeathScreen = NodePath("DeathScreen")
+WinScreen = NodePath("WinScreen")
 
 [node name="LevelSelector" type="Node" parent="." unique_id=840365461 node_paths=PackedStringArray("Level_Option", "Difficulty_Option")]
 script = ExtResource("2_a4gjy")
@@ -109,6 +110,33 @@ theme_override_font_sizes/font_size = 12
 text = "All Lives Lost"
 horizontal_alignment = 1
 
+[node name="WinScreen" type="CanvasLayer" parent="." unique_id=1718766369]
+process_mode = 3
+visible = false
+script = ExtResource("3_8xgxq")
+
+[node name="Polygon2D" type="Polygon2D" parent="WinScreen" unique_id=951386970]
+color = Color(0, 0.7873511, 0.49339175, 1)
+polygon = PackedVector2Array(-45.25, -44.25, 5556, -413, 5929, 3237, -55, 3195)
+
+[node name="BackToMenu" type="TextureButton" parent="WinScreen" unique_id=388527563]
+offset_left = 472.0
+offset_top = 471.0
+offset_right = 567.0
+offset_bottom = 479.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("5_b515q")
+texture_hover = ExtResource("5_b515q")
+
+[node name="Label" type="Label" parent="WinScreen" unique_id=667212801]
+offset_left = 438.0
+offset_top = 77.0
+offset_right = 519.0
+offset_bottom = 100.0
+scale = Vector2(4, 4)
+text = "You Win!!!!"
+
 [connection signal="pressed" from="LevelSelector/HBoxContainer/VBoxContainer/Play" to="LevelSelector" method="_on_play_pressed"]
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="WinScreen/BackToMenu" to="WinScreen" method="_on_back_to_menu_pressed"]

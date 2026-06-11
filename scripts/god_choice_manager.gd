@@ -9,13 +9,13 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
 "potatoe":{"title": "Potatoe","img": "res://art/items/potatoe.png","text":"default","type": TYPES.Item,"item unlock":["potatoe"],"unlock literal":true,"reward": "potatoe","amt" : 2},
-"rice":{"title": "Rice","img": "res://art/items/rice.png","text":"default","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
+"rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water edge.","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
 "melon":{"title": "Melon","img": "res://art/items/melon.png","text":"default","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
-"cranberry bush":{"title": "Cranberry Bush", "img": "res://art/items/cranberry.png","text":"Grows Cranberries dumbass","item unlock":["cranberry"],"unlock literal":true,"type": TYPES.Placement,"reward": "cranberry_bush"},
+"cranberry bush":{"title": "Cranberry Bush", "img": "res://art/items/cranberry.png","text":"Grows Cranberries","item unlock":["cranberry"],"unlock literal":true,"type": TYPES.Placement,"reward": "cranberry_bush"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to brew","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"cost" : 3,"reward": "barrel"},
 "prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
 "devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
@@ -27,6 +27,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
 "sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
+"swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 }
@@ -160,7 +161,8 @@ func load_chained_godchoices(godchoice_list, is_shop : bool = false):
 				add_choice_to_hbox(temp)
 			makeshift_game_end = false
 	if makeshift_game_end:
-		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+		get_parent().get_parent().win_game()
+		#get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 
 func open_godchoice():
 	$AnimationPlayer.play("Open")
