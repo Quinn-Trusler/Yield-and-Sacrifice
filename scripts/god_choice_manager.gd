@@ -22,12 +22,12 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This wishing well works in reverse.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
-"activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water ocasionaly","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
+"activate fish":{"title": "Let there be fish","img": "res://art/godchoice/fish.png","text":"Fish will appear in water occasionally","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to put them out","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
 "sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
-"swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
+"swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "swamp_farmland", "cost" : 6, "amt" : 1},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
 "gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 }

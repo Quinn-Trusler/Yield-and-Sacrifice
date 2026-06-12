@@ -15,4 +15,8 @@ func _process(delta: float) -> void:
 var difficulties = ["Baby","Easy", "Normal", "Hard", "Insane"]
 var levels = ["grass", "sand", "swamp"]
 func _on_play_pressed() -> void:
+	$HBoxContainer.visible = false
 	get_parent().generate_level(levels[Level_Option.selected], difficulties[Difficulty_Option.selected])
+
+func show_level_selector():
+	$HBoxContainer.visible = true

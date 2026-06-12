@@ -2,6 +2,8 @@ extends CanvasLayer
 
 #@onready var menu_file_name = "res://scenes/level_selector.tscn"
 #@onready var main_scene = "res://scenes/main.tscn"
+@export var level_selector : Node
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,3 +17,5 @@ func _ready() -> void:
 func _on_back_to_menu_pressed() -> void:
 	get_tree().paused = false
 	visible = false
+	level_selector.show_level_selector()
+	
