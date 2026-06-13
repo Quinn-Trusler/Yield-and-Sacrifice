@@ -1,32 +1,36 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://dduvejmx3lkso"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dduvejmx3lkso"]
 
 [ext_resource type="Texture2D" uid="uid://bspg0sroggv3a" path="res://art/buildings/oven.png" id="1_hgtnn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hgtnn"]
-atlas = ExtResource("1_hgtnn")
-region = Rect2(0, 0, 16, 13)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_e7pbc"]
 atlas = ExtResource("1_hgtnn")
-region = Rect2(32, 0, 16, 13)
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_34ey0"]
 atlas = ExtResource("1_hgtnn")
-region = Rect2(48, 0, 16, 13)
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_af7tn"]
 atlas = ExtResource("1_hgtnn")
-region = Rect2(64, 0, 16, 13)
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_72iqb"]
 atlas = ExtResource("1_hgtnn")
-region = Rect2(16, 0, 16, 13)
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6esv"]
+atlas = ExtResource("1_hgtnn")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgtnn"]
+atlas = ExtResource("1_hgtnn")
+region = Rect2(80, 0, 16, 16)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hgtnn")
+"texture": SubResource("AtlasTexture_e7pbc")
 }],
 "loop": true,
 "name": &"0",
@@ -34,13 +38,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e7pbc")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_34ey0")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_af7tn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72iqb")
 }],
 "loop": true,
 "name": &"1",
@@ -48,9 +52,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_72iqb")
+"texture": SubResource("AtlasTexture_l6esv")
 }],
 "loop": true,
 "name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgtnn")
+}],
+"loop": true,
+"name": &"burnt",
 "speed": 5.0
 }]

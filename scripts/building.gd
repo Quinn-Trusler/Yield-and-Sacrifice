@@ -18,12 +18,16 @@ var STAGE_TO_HARVEST = 0
 var STAGE_LOSS_ON_HARVEST = 0
 var BOUNCE_WHEN_LAST_STAGE = false
 
+var HAS_BURNT_STATE = false # Has an animation called burnt 
+
 var stage = 0#stages are zero indexed
 var timer = 0
 var num_items_inputed = 0
 
 var ready_to_collect = false
 var item_inputed = null
+
+var burnt = false
 
 
 var delta_gift = 0
@@ -59,6 +63,10 @@ func initialize(def : Dictionary, is_phantom : bool) -> void:
 	offset.x = def["offset"][0]
 	offset.y = def["offset"][1]
 	sprite_frames = load(def["frames"])
+	
+	if "has_burnt_state" in def:
+		HAS_BURNT_STATE = def["has_burnt_state"]
+		
 	if is_phantom:
 		modulate = GLOBALCONSTS.BUILDING_PHANTOM_MODULATION
 	
@@ -84,24 +92,37 @@ func bounce_animation(delta):
 
 #when click to empty
 func _process(delta: float) -> void:
-	if TIME_PER_STAGE != 0 and num_items_inputed>=ITEMS_TO_START_TIMER and stage < TOTAL_STAGES:
-		timer += delta
-	if timer > TIME_PER_STAGE:
-		go_up_a_stage()
-	if BOUNCE_WHEN_LAST_STAGE and stage >= TOTAL_STAGES:
-		bounce_animation(delta)
-	delta_gift += delta
+	if not burnt:
+		if TIME_PER_STAGE != 0 and num_items_inputed>=ITEMS_TO_START_TIMER and stage < TOTAL_STAGES:
+			timer += delta
+		if timer > TIME_PER_STAGE:
+			go_up_a_stage()
+		if BOUNCE_WHEN_LAST_STAGE and stage >= TOTAL_STAGES:
+			bounce_animation(delta)
+		delta_gift += delta
 
-	$Arrow.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
-	$ArrowRed.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
-	if BUILDING_DISPLAY_NAME == "Gift":
-		rotation = PI/180* 20*sin(delta_gift*2)
+		$Arrow.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
+		$ArrowRed.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
+		if BUILDING_DISPLAY_NAME == "Gift":
+			rotation = PI/180* 20*sin(delta_gift*2)
 	
 func go_up_a_stage():#go up a stage
 	stage +=1 
 	timer = 0
 	update_stage()
-	
+
+
+func burn():
+	$Arrow.visible = false
+	$ArrowRed.visible = false
+	burnt = true
+	stage = 0
+	timer = 0
+	item_inputed = null
+	play("burnt")
+func unburn():
+	burnt = false
+	update_stage()
 	
 func update_stage():
 	if sprite_frames.has_animation(str(stage)):
@@ -125,6 +146,13 @@ func place_item(item_name):
 	
 func get_harvestable():
 	return ready_to_collect
+	
+func get_items_before_burn():
+	if get_harvestable():
+		return harvest()
+	if item_inputed:
+		return [item_inputed]
+	return []
 
 func harvest():
 	if ready_to_collect:
@@ -145,14 +173,15 @@ func connectItemSignals(ItemManager):
 	ItemManager.item_dropped.connect(_item_dropped)
 #Recieve signal that says what item is being held/not held
 func _item_picked_up(item_name, last_item):
-	if item_name in INPUT_ITEMS and num_items_inputed < ITEMS_TO_START_TIMER:
-		if last_item:
-			$ArrowRed.visible = true
+	if not burnt:
+		if item_name in INPUT_ITEMS and num_items_inputed < ITEMS_TO_START_TIMER:
+			if last_item:
+				$ArrowRed.visible = true
+			else:
+				$Arrow.visible = true
 		else:
-			$Arrow.visible = true
-	else:
-		$Arrow.visible = false
-		$ArrowRed.visible = false
+			$Arrow.visible = false
+			$ArrowRed.visible = false
 func _item_dropped():
 	$Arrow.visible = false
 	$ArrowRed.visible = false

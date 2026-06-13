@@ -3,6 +3,8 @@ extends AnimatedSprite2D
 #don't touch this
 var BUILDING_TYPE = "crop"
 var IS_BUILDING = false
+var HAS_BURNT_STATE = false
+var burnt = false
 
 #differ by plant
 var stage_growth_duration = 2
@@ -63,9 +65,6 @@ func _process(delta: float) -> void:
 		grow()
 	if growth_complete:
 		animate(delta)
-		
-		
-		#right half of sin wave every second
 	
 	
 func grow():
@@ -85,6 +84,11 @@ func pick():
 		
 func get_harvestable():
 	return (stage >= total_stages-1)
+
+func get_items_before_burn():
+	if get_harvestable():
+		return harvest()
+	return [resources[0]] # This will be ilogical if the seed item is not resources[0]
 	
 func harvest():
 	if get_harvestable():
@@ -92,7 +96,6 @@ func harvest():
 			queue_free()
 		else:
 			pick()
-		print("here are da resource: ", resources)
 		return resources
 	else:
-		return false
+		return []

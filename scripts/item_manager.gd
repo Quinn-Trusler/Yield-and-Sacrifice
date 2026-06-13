@@ -422,8 +422,11 @@ func drop_item(item):
 	if delete_item:
 		erase_item(item)
 		
-func output_resources(resources):
+func output_resources_at_mouse(resources):
+	output_resources(resources, get_global_mouse_position())
+	
+func output_resources(resources, pos):
 	if resources:
 		$item_pop.play()
-	for i in range(len(resources)):
-		create_animated_item(resources[i],get_global_mouse_position())
+		for i in range(len(resources)):
+			create_animated_item(resources[i],pos)

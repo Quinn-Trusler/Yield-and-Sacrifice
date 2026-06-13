@@ -35,6 +35,12 @@ func _ready():
 	update_location_lists()
 	#TMM.TileLayer.place_farmland(Vector2i(-11,2))
 	#TMM.TileLayer.place_farmland(Vector2i(-9,2))
+	place_building(Vector2i(-9,2),"mushroom patch")
+	place_building(Vector2i(-9,2),"barrel")
+	place_building(Vector2i(-9,3),"mill")
+	place_building(Vector2i(-9,4),"well")
+	place_building(Vector2i(-9,5),"oven")
+	
 	
 # Grabs data from layer 2 and fills fish spawn spots and ui tiles list
 func update_location_lists():
@@ -59,12 +65,11 @@ func get_all_burnt_tiles():
 	return burnt_tiles
 
 func is_valid_building_location(pos : Vector2i, building_name : String) -> bool:
-	return (TMM.TileLayer.is_valid_building_location(pos) and TMM.TerrainLayer.is_valid_building_location(pos, building_name) and TMM.TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+	return (TMM.TileLayer.is_no_building_placement_tiles_location(pos, building_name) and TMM.TerrainLayer.is_valid_building_location(pos, building_name) and TMM.TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
-#func is_valid_building_location(pos: Vector2i):
-	#if TileLayer2.is_empty_building_location(pos) and not fish_spawn_spots.has(pos) and not ui_tiles.has(pos):
-		#return true
-	#return false
+func is_valid_gift_location(pos : Vector2i, building_name : String):
+	return (TMM.TileLayer.gift_placeable_on_tile_layer(pos) and TMM.TerrainLayer.is_valid_building_location(pos, building_name) and TMM.TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
+
 #uses tile position and not global position
 func get_building_interactable(pos):
 	if not TMM.EffectLayer.is_empty(pos):
@@ -94,14 +99,12 @@ func create_gift(item,num):
 	place_building(pos, "god_gift")
 	
 func place_building(pos : Vector2i, building_name : String) -> void:
-	print(building_name)
 	if GLOBALCONSTS.MIDDLE_TILES.has(building_name):
 		TMM.TileLayer.place_farmland(pos, building_name)
 	else:
 		TMM.TileLayer2.place_building(pos, building_name) 
 		
 func place_phantom_building(pos : Vector2i, building_name : String) -> void:
-	print(building_name)
 	if GLOBALCONSTS.MIDDLE_TILES.has(building_name):
 		TMM.TileLayer.place_phantom_farmland(pos, building_name)
 	else:
@@ -131,13 +134,13 @@ func click_tile():
 		if scene:
 			if scene.BUILDING_TYPE == "building":
 				var resources = scene.harvest()
-				ItemManager.output_resources(resources)
+				ItemManager.output_resources_at_mouse(resources)
 				if scene.DESTROY_ON_HARVEST:
 					TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
 			if scene.BUILDING_TYPE == "crop":
 				var resources = scene.harvest()#a list of resources or False
-				if resources:
-					ItemManager.output_resources(resources)
+				if resources != []:
+					ItemManager.output_resources_at_mouse(resources)
 					if scene.harvest_on_click:
 						if not first_crop_harvested:
 							first_crop_harvested = true
@@ -155,12 +158,28 @@ func get_nine_adjacent_positions(pos : Vector2i) -> Array[Vector2i]:
 
 # Burns tile bellow and extinguishes fire
 func finish_burn(pos) -> void:
-	TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
 	TMM.EffectLayer.set_cell_scene(pos,-1)#delete cell
+	var burn_terrain: bool = true
+	
+	if not TMM.TileLayer2.is_empty(pos):
+		var scene = TMM.TileLayer2.get_cell_scene(pos)
+		var resources = scene.get_items_before_burn()
+		ItemManager.output_resources(resources, TMM.TileLayer2.map_to_local(pos) + TMM.position)
+		if scene.HAS_BURNT_STATE:
+			scene.burn()
+			burn_terrain = false
+		else:
+			TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
+	
 	
 	var positions = get_nine_adjacent_positions(pos)
 	positions.append(pos)
-	TMM.TileLayer.set_cells_terrain_connect(positions, 0, 2)
+	if TMM.TileLayer.get_tile_name(pos) in GLOBALCONSTS.MIDDLE_TILES:
+		TMM.TileLayer.burn_farmland(pos)
+		burn_terrain = false
+
+	if burn_terrain:
+		TMM.TileLayer.set_cells_terrain_connect(positions, 0, 2)
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):
@@ -171,11 +190,15 @@ func is_valid_fire_placement(pos):
 					return true
 	return false
 	
+# Tile must not be unburnable and building/crop must not be burnt
 func is_valid_spread_position(pos):
 	if is_pos_in_bounds(pos, GLOBALCONSTS.FIRE_RANGE):
 		if not TMM.TileLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TILES and not TMM.TerrainLayer.get_tile_name(pos) in GLOBALCONSTS.UNBURNABLE_TERRAIN_TILES:
-			if TMM.EffectLayer.get_cell_scene(pos) == null or TMM.EffectLayer.get_cell_scene(pos).BUILDING_TYPE != "fire":
-				return true
+			var tile_scene = TMM.TileLayer2.get_cell_scene(pos)
+			if  tile_scene == null or not TMM.TileLayer2.get_cell_scene(pos).burnt:
+				var effect_tile = TMM.EffectLayer.get_cell_scene(pos)
+				if  effect_tile == null or effect_tile.BUILDING_TYPE != "fire":
+					return true
 	return false
 	
 func spread_fire(pos) -> void:
@@ -209,7 +232,10 @@ func get_random_valid_pos(building_name : String) -> Vector2i:
 	while num_tiles_checked < TILE_CHECK_LIMIT:
 		var pos = get_random_pos()
 		num_tiles_checked += 1
-		if is_valid_building_location(pos, building_name):
+		if building_name == "god_gift":
+			if is_valid_gift_location(pos, building_name):
+				return pos
+		elif is_valid_building_location(pos, building_name):
 			return pos
 	push_error("TILE_CHECK_LIMIT PASSED. Tried loop " + str(TILE_CHECK_LIMIT) + " times")
 	return Vector2i(999,999)

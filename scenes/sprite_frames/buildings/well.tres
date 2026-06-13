@@ -10,6 +10,10 @@ region = Rect2(0, 0, 16, 17)
 atlas = ExtResource("1_hflpi")
 region = Rect2(16, 0, 16, 17)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hflpi"]
+atlas = ExtResource("1_hflpi")
+region = Rect2(32, 0, 16, 17)
+
 [resource]
 animations = [{
 "frames": [{
@@ -26,5 +30,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hflpi")
+}],
+"loop": true,
+"name": &"burnt",
 "speed": 5.0
 }]
