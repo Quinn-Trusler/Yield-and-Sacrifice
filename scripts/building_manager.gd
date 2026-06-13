@@ -30,6 +30,7 @@ var invalid_spawn_spots : Array = []
 var first_crop_harvested = false
 
 var gift_items = []
+var number_of_fish = 0
 
 func _ready():
 	update_location_lists()
@@ -133,6 +134,8 @@ func click_tile():
 		var scene = TMM.TileLayer2.get_cell_scene(pos)
 		if scene:
 			if scene.BUILDING_TYPE == "building":
+				if scene.BUILDING_DISPLAY_NAME == "Fishing Spot": # Very bad to use dispaly name
+					number_of_fish -=1
 				var resources = scene.harvest()
 				ItemManager.output_resources_at_mouse(resources)
 				if scene.DESTROY_ON_HARVEST:
@@ -241,10 +244,12 @@ func get_random_valid_pos(building_name : String) -> Vector2i:
 	return Vector2i(999,999)
 
 func spawn_random_fish():
-	assert(len(fish_spawn_spots), "Attempting to spawn fish with no spawn spots")
-	var i = RNG.randi_range(0,len(fish_spawn_spots)-1)
-	#spawn fish at 
-	TMM.TileLayer2.place_building(fish_spawn_spots[i], "fishing_spot")
+	if number_of_fish < GLOBALCONSTS.MAX_FISH:
+		assert(len(fish_spawn_spots), "Attempting to spawn fish with no spawn spots")
+		var i = RNG.randi_range(0,len(fish_spawn_spots)-1)
+		#spawn fish at 
+		TMM.TileLayer2.place_building(fish_spawn_spots[i], "fishing_spot")
+		number_of_fish += 1
 
 func _on_fish_timer_timeout() -> void:
 	if fish_spawning_active:
