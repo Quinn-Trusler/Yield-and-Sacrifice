@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://2o0anaa5tbgo" path="res://scenes/building_placement_manager/confirmation_popup.gd" id="1_wxd10"]
 [ext_resource type="Texture2D" uid="uid://do080bvxnmt1d" path="res://art/ui/confirm_building_placement_button.png" id="2_8tq2p"]
+[ext_resource type="Texture2D" uid="uid://cfy27bylmyk2n" path="res://art/ui/cancel_building_placement_button_hover.png" id="3_8tq2p"]
 [ext_resource type="Texture2D" uid="uid://j1ld1hx5cebg" path="res://art/ui/cancel_building_placement_button.png" id="3_wbdtk"]
+[ext_resource type="Texture2D" uid="uid://f56ft0w401bj" path="res://art/ui/confirm_building_placement_button_hover.png" id="5_wbdtk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wxd10"]
 size = Vector2(11, 11)
@@ -25,11 +27,13 @@ grow_vertical = 2
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("3_wbdtk")
+texture_hover = ExtResource("3_8tq2p")
 
 [node name="Confirm" type="TextureButton" parent="HBoxContainer" unique_id=925742021]
 layout_mode = 2
 mouse_filter = 1
 texture_normal = ExtResource("2_8tq2p")
+texture_hover = ExtResource("5_wbdtk")
 
 [node name="hoverDetector" type="Area2D" parent="." unique_id=1869732711]
 

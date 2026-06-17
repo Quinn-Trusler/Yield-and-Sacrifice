@@ -112,57 +112,53 @@ func chose_rewards():
 		if rewards_collected <= key:
 			return rewards[key]
 
-func load_godchoices(godchoice_list):
-	get_tree().paused = true
-	#visible = true
-	var copy = godchoice_list.duplicate()
-	copy.shuffle()
-	var new_godchoice_list = copy.slice(0, 3)
-	for choice in new_godchoice_list:
-		var temp = GodChoice_Scene.instantiate()
-		temp.initialize(choice,choices[choice])
-		add_choice_to_hbox(temp)
-
-func load_shopchoices(shopchoice_list) -> void:
-	get_tree().paused = true
-	#visible = true
-	var copy = shopchoice_list.duplicate()
-	copy.shuffle()
-	var new_godchoice_list = copy.slice(0, 3)
-	for choice in new_godchoice_list:
-		if not (choices[choice]["type"] == TYPES.Life and Lives.is_at_max()):
-			var temp = ShopChoice_Scene.instantiate()
-			temp.initialize(choice, choices[choice], num_gold)
-			add_choice_to_hbox(temp)
-
 func add_choice_to_hbox(choice):
 	choice_instances.append(choice)
 	$Node2D/HBoxContainer.add_child(choice)
 
-func load_chained_godchoices(godchoice_list, is_shop : bool = false):
+func godchoice_restricted(choice_name, choice_type : CHOICE_TYPES):
+	if choice_type == CHOICE_TYPES.Shop:
+		if not (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
+			return false
+		return true
+	if choice_type == CHOICE_TYPES.Punishment:
+		if not (choices[choice_name]["type"] == TYPES.Lose_All_Gold and num_gold <= 4):
+			return false
+		return true
+	return false
+
+func load_godchoices(godchoice_list, chained: bool, choice_type : CHOICE_TYPES):
 	get_tree().paused = true
 	#visible = true
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
 	var makeshift_game_end = true
+	
+	var choice_names_already_added = []
+	
 	for choice in new_godchoice_list:
-		var choice_name = choice.get_reward()
-		if choice_name:# Not last in the chain
-			var temp
-			if is_shop:
-				if not (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
-					temp = ShopChoice_Scene.instantiate()
-					temp.initialize(choice_name,choices[choice_name],num_gold,choice.get_id())
-					add_choice_to_hbox(temp)
-			else:
+		var choice_name
+		if chained:
+			choice_name = choice.get_reward()
+		else:
+			choice_name = choice
+		
+		if choice_name and not choice_name in choice_names_already_added: # Not last item and not a duplicate
+			choice_names_already_added.append(choice_name)
+			
+			if not godchoice_restricted(choice_name, choice_type):
+				var temp
 				temp = GodChoice_Scene.instantiate()
-				temp.initialize(choice_name,choices[choice_name],choice.get_id())
+				if chained:
+					temp.initialize(choice_name,choices[choice_name],choice.get_id())
+				else:
+					temp.initialize(choice_name,choices[choice_name])
 				add_choice_to_hbox(temp)
-			makeshift_game_end = false
+				makeshift_game_end = false
+			
 	if makeshift_game_end:
 		get_parent().get_parent().win_game()
-		#get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 
 func open_godchoice():
 	$AnimationPlayer.play("Open")
@@ -188,7 +184,7 @@ func display_punishments():
 	punishments_collected += 1
 	Lives.lose_life()
 	$Node2D/TitleText.text = PUNISH_TEXT
-	load_godchoices(chose_punishments())
+	load_godchoices(chose_punishments(), false, CHOICE_TYPES.Punishment)
 	choice_type = CHOICE_TYPES.Punishment
 	$Node2D/GoldCount.update_gold_num(num_gold)
 	
@@ -202,7 +198,7 @@ func display_rewards():
 	rewards_collected += 1
 	Lives.set_max_lives()
 	$Node2D/TitleText.text = REWARD_TEXT
-	load_chained_godchoices(chained_rewards)
+	load_godchoices(chained_rewards, true, CHOICE_TYPES.Reward)
 	choice_type = CHOICE_TYPES.Reward
 	$Node2D/GoldCount.update_gold_num(num_gold)
 	open_godchoice()
@@ -213,7 +209,7 @@ func display_shop():
 	$Node2D/GoldCount.visible = true
 	$Node2D/GoldCount.update_gold_num(num_gold)
 	#load_shopchoices(chose_shop_items())
-	load_chained_godchoices(chained_shop_items, true)
+	load_godchoices(chained_shop_items, true, CHOICE_TYPES.Shop)
 	choice_type = CHOICE_TYPES.Shop
 	open_godchoice()
 
