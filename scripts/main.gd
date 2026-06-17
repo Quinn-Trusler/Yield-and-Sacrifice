@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("end_round"):
 		$BuildingManager.create_gift("wheat", 1)
-		#$SacrificeManager.next_round()
+		$SacrificeManager.next_round()
 		print("End Round Debug pressed")
 		
 	if Input.is_action_just_pressed("debug"):

@@ -36,11 +36,11 @@ func _ready():
 	update_location_lists()
 	#TMM.TileLayer.place_farmland(Vector2i(-11,2))
 	#TMM.TileLayer.place_farmland(Vector2i(-9,2))
-	place_building(Vector2i(-9,2),"mushroom patch")
-	place_building(Vector2i(-9,2),"barrel")
-	place_building(Vector2i(-9,3),"mill")
-	place_building(Vector2i(-9,4),"well")
-	place_building(Vector2i(-9,5),"oven")
+	#place_building(Vector2i(-9,2),"mushroom patch")
+	#place_building(Vector2i(-9,2),"barrel")
+	#place_building(Vector2i(-9,3),"mill")
+	#place_building(Vector2i(-9,4),"well")
+	#place_building(Vector2i(-9,5),"oven")
 	
 	
 # Grabs data from layer 2 and fills fish spawn spots and ui tiles list

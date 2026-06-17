@@ -18,6 +18,7 @@ signal build_finished
 @export var ItemManager : Node2D
 @export var TileMapManager : Node2D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$ConfirmationPopup.confirm.connect(confirm_placement)

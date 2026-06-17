@@ -1323,89 +1323,6 @@ sprite_frames = SubResource("SpriteFrames_jscy8")
 frame_progress = 0.45605686
 centered = false
 
-[node name="SacrificeManager" type="Node2D" parent="." unique_id=1921713198 node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager")]
-script = ExtResource("5_tbgi4")
-TutorialManager = NodePath("../TutorialManager")
-DialogManager = NodePath("../DialogManager")
-ItemManager = NodePath("../ItemManager")
-
-[node name="Timer" type="Timer" parent="SacrificeManager" unique_id=1253906982]
-autostart = true
-
-[node name="TimerGUI" type="Node2D" parent="SacrificeManager" unique_id=910710815]
-position = Vector2(-131, -85)
-
-[node name="TimerBG" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=2128667031]
-texture = ExtResource("15_jscy8")
-
-[node name="TimerSymbol" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=1831956212]
-position = Vector2(-17, 0)
-texture = ExtResource("13_gqmmt")
-
-[node name="TimeText" type="Label" parent="SacrificeManager/TimerGUI" unique_id=380928192]
-offset_left = -10.0
-offset_top = -6.0
-offset_right = 24.0
-offset_bottom = 8.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("10_dp3eg")
-theme_override_font_sizes/font_size = 12
-
-[node name="SacrificeGUI" type="Node2D" parent="SacrificeManager" unique_id=654801594]
-position = Vector2(0, -107)
-
-[node name="SacrificeBg" type="Polygon2D" parent="SacrificeManager/SacrificeGUI" unique_id=567244064]
-visible = false
-color = Color(0.16565639, 0.16565642, 0.16565639, 1)
-polygon = PackedVector2Array(-49, -83, 48, -83, 48, -56, -50, -56)
-
-[node name="SacrificeBG2" type="Sprite2D" parent="SacrificeManager/SacrificeGUI" unique_id=745133524]
-texture = ExtResource("14_yc10j")
-
-[node name="SacrificeText" type="RichTextLabel" parent="SacrificeManager/SacrificeGUI" unique_id=784471640]
-offset_left = -87.0
-offset_top = -11.0
-offset_right = 87.0
-offset_bottom = 12.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("6_tefeu")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-text = "Sacrifice"
-horizontal_alignment = 1
-
-[node name="SacrificeBar" type="TextureProgressBar" parent="SacrificeManager/SacrificeGUI" unique_id=1220429030]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Lives" type="Node2D" parent="." unique_id=1574145883]
-position = Vector2(-149, -107)
-script = ExtResource("13_trceg")
-
-[node name="Sprite2D" type="Sprite2D" parent="Lives" unique_id=596144807]
-position = Vector2(18.25, -0.5)
-texture = ExtResource("15_jscy8")
-
-[node name="Gold" type="Node2D" parent="." unique_id=482196792]
-position = Vector2(-149, -107)
-script = ExtResource("16_fv21b")
-
-[node name="Sprite2D" type="Sprite2D" parent="Gold" unique_id=507619477]
-position = Vector2(17.25, 44.5)
-texture = ExtResource("15_jscy8")
-
-[node name="GoldText" type="RichTextLabel" parent="Gold" unique_id=693687358]
-offset_left = -5.0
-offset_top = 37.0
-offset_right = 43.0
-offset_bottom = 58.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("10_dp3eg")
-theme_override_font_sizes/normal_font_size = 12
-
 [node name="TutorialManager" type="Node" parent="." unique_id=342083716 node_paths=PackedStringArray("DialogManager", "SacrificeTimer")]
 script = ExtResource("15_fv21b")
 DialogManager = NodePath("../DialogManager")
@@ -1578,9 +1495,93 @@ centered = false
 
 [node name="ConfirmationPopup" parent="BuildingPlacementManager" unique_id=1302086566 instance=ExtResource("37_fuf3a")]
 visible = false
+z_index = 1
 
-[connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
+[node name="SacrificeManager" type="Node2D" parent="." unique_id=1921713198 node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager")]
+script = ExtResource("5_tbgi4")
+TutorialManager = NodePath("../TutorialManager")
+DialogManager = NodePath("../DialogManager")
+ItemManager = NodePath("../ItemManager")
+
+[node name="Timer" type="Timer" parent="SacrificeManager" unique_id=1253906982]
+autostart = true
+
+[node name="TimerGUI" type="Node2D" parent="SacrificeManager" unique_id=910710815]
+position = Vector2(-131, -85)
+
+[node name="TimerBG" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=2128667031]
+texture = ExtResource("15_jscy8")
+
+[node name="TimerSymbol" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=1831956212]
+position = Vector2(-17, 0)
+texture = ExtResource("13_gqmmt")
+
+[node name="TimeText" type="Label" parent="SacrificeManager/TimerGUI" unique_id=380928192]
+offset_left = -10.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_dp3eg")
+theme_override_font_sizes/font_size = 12
+
+[node name="SacrificeGUI" type="Node2D" parent="SacrificeManager" unique_id=654801594]
+position = Vector2(0, -107)
+
+[node name="SacrificeBg" type="Polygon2D" parent="SacrificeManager/SacrificeGUI" unique_id=567244064]
+visible = false
+color = Color(0.16565639, 0.16565642, 0.16565639, 1)
+polygon = PackedVector2Array(-49, -83, 48, -83, 48, -56, -50, -56)
+
+[node name="SacrificeBG2" type="Sprite2D" parent="SacrificeManager/SacrificeGUI" unique_id=745133524]
+texture = ExtResource("14_yc10j")
+
+[node name="SacrificeText" type="RichTextLabel" parent="SacrificeManager/SacrificeGUI" unique_id=784471640]
+offset_left = -87.0
+offset_top = -11.0
+offset_right = 87.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("6_tefeu")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Sacrifice"
+horizontal_alignment = 1
+
+[node name="SacrificeBar" type="TextureProgressBar" parent="SacrificeManager/SacrificeGUI" unique_id=1220429030]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lives" type="Node2D" parent="." unique_id=1574145883]
+position = Vector2(-149, -107)
+script = ExtResource("13_trceg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Lives" unique_id=596144807]
+position = Vector2(18.25, -0.5)
+texture = ExtResource("15_jscy8")
+
+[node name="Gold" type="Node2D" parent="." unique_id=482196792]
+position = Vector2(-149, -107)
+script = ExtResource("16_fv21b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gold" unique_id=507619477]
+position = Vector2(17.25, 44.5)
+texture = ExtResource("15_jscy8")
+
+[node name="GoldText" type="RichTextLabel" parent="Gold" unique_id=693687358]
+offset_left = -5.0
+offset_top = 37.0
+offset_right = 43.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("10_dp3eg")
+theme_override_font_sizes/normal_font_size = 12
+
 [connection signal="pressed" from="GodChoiceManager/Node2D/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]
+[connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
