@@ -318,12 +318,14 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 					
 	
 	if choice["type"] == TYPES.Placement:
+		SacrificeManager.update_requirements()
 		await close_godchoice()
+		get_tree().paused = false
 	else:
 		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
 			await semi_close_godchoice()
 			await display_shop()
-		else: # Finished the shop
+		elif choice_type == CHOICE_TYPES.Shop: # Finished the shop
 			SacrificeManager.update_requirements()
 			await close_godchoice()
 			get_tree().paused = false

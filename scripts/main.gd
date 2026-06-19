@@ -20,13 +20,13 @@ func _process(_delta: float) -> void:
 		$BuildingManager.click_tile()
 		
 	if Input.is_action_just_pressed("end_round"):
-		$BuildingManager.create_gift("wheat", 1)
+		#$BuildingManager.create_gift("wheat", 1)
 		$SacrificeManager.next_round()
 		print("End Round Debug pressed")
 		
 	if Input.is_action_just_pressed("debug"):
 		print("Nothing bound to debug key")
-		$BuildingManager.spawn_random_fish()#create_gift("wheat", 2)
+		#$BuildingManager.spawn_random_fish()#create_gift("wheat", 2)
 		#print("\n---------------------------------\n")
 		#$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
 		#$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
