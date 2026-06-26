@@ -175,7 +175,7 @@ func open_godchoice():
 	
 # Run animation but don't set visible false
 func semi_close_godchoice():
-	$AnimationPlayer.play("Close")
+	$AnimationPlayer.play("SemiClose")
 	await $AnimationPlayer.animation_finished
 	
 func close_godchoice():
@@ -212,10 +212,19 @@ func display_shop():
 	$Node2D/SkipButton.visible = true
 	$Node2D/GoldCount.visible = true
 	$Node2D/GoldCount.update_gold_num(num_gold)
-	#load_shopchoices(chose_shop_items())
 	load_godchoices(chained_shop_items, true, CHOICE_TYPES.Shop)
 	choice_type = CHOICE_TYPES.Shop
 	open_godchoice()
+	
+# Copy pasted code (fix later?)
+func display_shop_semi_transition():
+	$Node2D/TitleText.text = SHOP_TEXT
+	$Node2D/SkipButton.visible = true
+	$Node2D/GoldCount.visible = true
+	$Node2D/GoldCount.update_gold_num(num_gold)
+	load_godchoices(chained_shop_items, true, CHOICE_TYPES.Shop)
+	choice_type = CHOICE_TYPES.Shop
+	#open_godchoice() # Replace with better transition
 
 
 # Choice Chosen /  Close display ----------------------------------------------------------------------
@@ -322,8 +331,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		await close_godchoice()
 	else:
 		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
-			await semi_close_godchoice()
-			await display_shop()
+			#await semi_close_godchoice()
+			await display_shop_semi_transition()
 		elif choice_type == CHOICE_TYPES.Shop: # Finished the shop
 			SacrificeManager.update_requirements()
 			await close_godchoice()
