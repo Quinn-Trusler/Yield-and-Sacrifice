@@ -41,7 +41,12 @@ func is_valid_building_location(pos : Vector2i, building_name : String = "null")
 func is_no_building_placement_tiles_location(pos : Vector2i, building_name : String = "null"):
 	var tile_name : String = get_tile_name(pos)
 	var def = GLOBALCONSTS.BUILDING_DEF[building_name]
-	return not no_building_placement_tiles.has(tile_name) or (building_name != "null" and def.has("no_building_placement_override"))
+	return (
+		not no_building_placement_tiles.has(tile_name)
+		or (building_name != "null"
+			and def.has("no_building_placement_override")
+		)
+	)
 	
 func gift_placeable_on_tile_layer(pos: Vector2i)  -> bool:
 	var tile_name : String = get_tile_name(pos)
