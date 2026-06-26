@@ -1124,6 +1124,7 @@ texture = ExtResource("1_my3fo")
 4:4/0/custom_data_0 = "burnt_sandy_farmland"
 3:4/0 = 0
 3:4/0/custom_data_0 = "burnt_dry_farmland"
+6:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]
 texture = ExtResource("2_27mc6")
