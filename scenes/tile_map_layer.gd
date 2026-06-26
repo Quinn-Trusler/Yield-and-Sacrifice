@@ -24,8 +24,18 @@ func is_valid_building_location(pos : Vector2i, building_name : String = "null")
 	var tile_name : String = get_tile_name(pos)
 	var def = GLOBALCONSTS.BUILDING_DEF[building_name]
 	# If (not tile not in no build placement tiles or we have an exception) and (null or no placement restrictions or placement restriction tile has been found)
-	return (not no_building_placement_tiles.has(tile_name) or (building_name != "null" and def.has("no_building_placement_override") and tile_name in def["no_building_placement_override"])
-	and (building_name == "null" or not "place_on" in def or def["place_on"].has(tile_name)))
+	return (
+		not no_building_placement_tiles.has(tile_name) 
+		or (
+			building_name != "null" 
+			and def.has("no_building_placement_override") 
+			and tile_name in def["no_building_placement_override"]
+		)
+	) and (
+		building_name == "null"
+		or not "place_on" in def 
+		or def["place_on"].has(tile_name)
+	)
 
 # Use this if you want to ignore place on rules
 func is_no_building_placement_tiles_location(pos : Vector2i, building_name : String = "null"):
