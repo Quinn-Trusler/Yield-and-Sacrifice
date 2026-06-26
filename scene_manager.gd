@@ -121,7 +121,7 @@ func generate_level(level_name, level_dificulty):
 		#var rewards = [ChainedReward.new(["potatoe","potatoe","potatoe"], 0)]
 		var rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","barrel","mushroom patch", "barrel"], 0),
 		ChainedReward.new(["wheat","mill","oven","mill","oven"], 1),
-		ChainedReward.new(["well","activate fish","mushroom patch"],2)]
+		ChainedReward.new(["activate fish","mushroom patch"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/plains/tile_map_layer.tscn")
 		tile_layers["TileLayer2"] = load("res://scenes/levels/plains/tile_map_layer2.tscn")
 		tile_layers["DecorLayer"] = load("res://scenes/levels/plains/decor_layer.tscn")
@@ -140,7 +140,7 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["sandy_farmland","sandy_farmland","sandy_farmland"],2)]
 		var rewards = [ChainedReward.new(["melon", "barrel","prickly pear cactus","devil vine","barrel"], 0),
 		ChainedReward.new(["prickly pear cactus","barrel","devil vine","barrel"], 1),
-		ChainedReward.new(["well","activate fish","devil vine","prickly pear cactus"],2)]
+		ChainedReward.new(["activate fish","devil vine","prickly pear cactus"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/sand/tile_map_layer.tscn")
 		tile_layers["TileLayer2"] = load("res://scenes/levels/sand/tile_map_layer2.tscn")
 		tile_layers["DecorLayer"] = load("res://scenes/levels/sand/decor_layer.tscn")
@@ -158,7 +158,7 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["swamp_farmland","swamp_farmland","swamp_farmland"],2)]
 		var rewards = [ChainedReward.new(["cranberry bush", "barrel","cranberry bush","mushroom patch","barrel"], 0),
 		ChainedReward.new(["rice","oven","activate fish","mill","oven","barrel"], 1),
-		ChainedReward.new(["well","sugarcane","mushroom patch","barrel", "mill"],2)]
+		ChainedReward.new(["sugarcane","mushroom patch","barrel", "mill"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/swamp/tile_map_layer.tscn")
 		tile_layers["TileLayer2"] = load("res://scenes/levels/swamp/tile_map_layer2.tscn")
 		tile_layers["DecorLayer"] = load("res://scenes/levels/swamp/decor_layer.tscn")

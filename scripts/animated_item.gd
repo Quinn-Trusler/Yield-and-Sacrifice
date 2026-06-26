@@ -6,12 +6,12 @@ var RNG = RandomNumberGenerator.new()
 @export var accel : Vector2
 var vel : Vector2
 var item_name : String
-var end_y
-var vel_factor
+var end_y : float
+var vel_factor : float
 
 func set_vel():
 	vel = vel_factor * Vector2(RNG.randf_range(vel_range[0].x, vel_range[0].y), RNG.randf_range(vel_range[1].x, vel_range[1].y))
-func initialize(y, v,n : String,item_def : Dictionary ):
+func initialize(y:float, v:float,n : String,item_def : Dictionary ):
 	item_name = n
 	end_y = y
 	vel_factor = v

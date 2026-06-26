@@ -75,7 +75,7 @@ func spawn_testing_items():
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("mushroom",Vector2(-75,-30))
-	create_draggable_item("mushroom",Vector2(-75,-30))
+	create_draggable_item("carrot",Vector2(-75,-30))
 	#create_draggable_item("mushroom",Vector2(-75,-30))
 	#create_draggable_item("mushroom",Vector2(-75,-30))
 	#create_draggable_item("mushroom",Vector2(-75,-30))

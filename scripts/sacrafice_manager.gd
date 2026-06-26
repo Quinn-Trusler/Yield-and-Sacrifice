@@ -13,6 +13,8 @@ var round_time = GLOBALCONSTS.ROUND_TIME
 var RNG = RandomNumberGenerator.new()
 var allowed_sacrifices = ["carrot"]
 
+var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
+var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
 var BOSS_SCENE = preload("res://scenes/boss/devil_boss.tscn")
@@ -118,6 +120,9 @@ func update_requirements():
 	set_new_requirements()
 	update_sacrifice_text()
 	
+	
+var sacrifice_text_image_positions : Dictionary= {}
+
 #Updates the sacrifice text and images to match what they actualy are
 func update_sacrifice_text():
 	$SacrificeGUI/SacrificeText.text = ""
@@ -125,11 +130,30 @@ func update_sacrifice_text():
 		$SacrificeGUI/SacrificeText.add_image(load(GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
 		if filled_requirements[key] >= requirements[key]:
 			$SacrificeGUI/SacrificeText.add_image(CHECKMARK_IMG)
+			#var sacrifice_text_image_positions[key] = 
 		else:
 			$SacrificeGUI/SacrificeText.add_text(str(filled_requirements[key]))
 			$SacrificeGUI/SacrificeText.add_image(FORWARD_SLASH_IMG)
 			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
+			
 		
+		#func initialize(y, v,n : String,item_def : Dictionary ):
+	#item_name = n
+	#end_y = y
+	#vel_factor = v
+		
+func give_coin_to_player():
+	var temp = ANIMATED_ITEM.instantiate()
+	ItemManager.add_child(temp)
+	temp.position = $CoinSpawnLocation.position
+	temp.initialize(temp.position.y + 30, 0, "gold", GLOBALCONSTS.ITEM_DEF["gold"])
+	
+	
+	# Spawn flying coin at location in the sacrifice text
+	#var temp = FLYING_COIN_SCENE.instantiate()
+	#get_parent().add_child(temp)
+	
+	
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
 	boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], num_items)
 	if sacrificed_item_name in requirements:
@@ -138,6 +162,8 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
 				first_sacrifice_made = true
 				TutorialManager.next(true, false, false)
 			filled_requirements[sacrificed_item_name] += num_items
+			if filled_requirements[sacrificed_item_name] >= requirements[sacrificed_item_name]: # Finished Requirment
+				give_coin_to_player()
 			update_sacrifice_text()
 			check_requirements_met()
 			if requirements_met:

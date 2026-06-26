@@ -1554,6 +1554,9 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CoinSpawnLocation" type="Node2D" parent="SacrificeManager" unique_id=1982950770]
+position = Vector2(0, -107)
+
 [node name="Lives" type="Node2D" parent="." unique_id=1574145883]
 position = Vector2(-149, -107)
 script = ExtResource("13_trceg")
