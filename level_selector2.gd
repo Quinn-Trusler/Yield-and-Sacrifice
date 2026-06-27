@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	pass
 
 var difficulties = ["Baby","Easy", "Normal", "Hard", "Insane"]
-var levels = ["grass", "sand", "swamp"]
+var levels = ["none","grass", "sand", "swamp"]
 func _on_play_pressed() -> void:
 	$HBoxContainer.visible = false
 	get_parent().generate_level(levels[Level_Option.selected], difficulties[Difficulty_Option.selected])

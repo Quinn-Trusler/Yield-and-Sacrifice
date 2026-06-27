@@ -1,74 +1,20 @@
 [gd_scene format=3 uid="uid://baqw73xvkgkre"]
 
 [ext_resource type="Script" uid="uid://b27c2vy2gtf7j" path="res://scene_manager.gd" id="1_jo5df"]
-[ext_resource type="Script" uid="uid://dtkxrf4g18ax3" path="res://level_selector2.gd" id="2_a4gjy"]
 [ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="3_8xgxq"]
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="4_yaxe4"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="5_b515q"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_xfx5j"]
+[ext_resource type="PackedScene" uid="uid://dpu6netsfebb4" path="res://scenes/level_selector.tscn" id="7_yaxe4"]
 
 [node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen", "WinScreen")]
 script = ExtResource("1_jo5df")
 DeathScreen = NodePath("DeathScreen")
 WinScreen = NodePath("WinScreen")
 
-[node name="LevelSelector" type="Node" parent="." unique_id=840365461 node_paths=PackedStringArray("Level_Option", "Difficulty_Option")]
-script = ExtResource("2_a4gjy")
-Level_Option = NodePath("HBoxContainer/VBoxContainer/Level/OptionButton")
-Difficulty_Option = NodePath("HBoxContainer/VBoxContainer/Difficulty/OptionButton")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector" unique_id=1968916952]
-offset_right = 1280.0
-offset_bottom = 722.0
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelector/HBoxContainer" unique_id=1752617599]
-layout_mode = 2
-alignment = 1
-
-[node name="Level" type="HBoxContainer" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=731839611]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="LevelSelector/HBoxContainer/VBoxContainer/Level" unique_id=691729240]
-layout_mode = 2
-text = "Level       "
-
-[node name="OptionButton" type="OptionButton" parent="LevelSelector/HBoxContainer/VBoxContainer/Level" unique_id=613965078]
-layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "Level 1"
-popup/item_0/id = 0
-popup/item_1/text = "Level 2"
-popup/item_1/id = 1
-popup/item_2/text = "Level 3"
-popup/item_2/id = 2
-
-[node name="Difficulty" type="HBoxContainer" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=1918757879]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="LevelSelector/HBoxContainer/VBoxContainer/Difficulty" unique_id=363351007]
-layout_mode = 2
-text = "Difficulty"
-
-[node name="OptionButton" type="OptionButton" parent="LevelSelector/HBoxContainer/VBoxContainer/Difficulty" unique_id=1477132646]
-layout_mode = 2
-selected = 2
-item_count = 5
-popup/item_0/text = "Baby"
-popup/item_0/id = 0
-popup/item_1/text = "Easy"
-popup/item_1/id = 1
-popup/item_2/text = "Normal"
-popup/item_2/id = 2
-popup/item_3/text = "Hard"
-popup/item_3/id = 3
-popup/item_4/text = "Insane"
-popup/item_4/id = 4
-
-[node name="Play" type="Button" parent="LevelSelector/HBoxContainer/VBoxContainer" unique_id=1081838782]
-layout_mode = 2
-text = "Play"
+[node name="LevelSelector" parent="." unique_id=11770184 node_paths=PackedStringArray("scene_manager") instance=ExtResource("7_yaxe4")]
+position = Vector2(640, 360)
+scene_manager = NodePath("..")
 
 [node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1409522031 node_paths=PackedStringArray("level_selector")]
 process_mode = 3
@@ -138,7 +84,6 @@ offset_bottom = 100.0
 scale = Vector2(4, 4)
 text = "You Win!!!!"
 
-[connection signal="pressed" from="LevelSelector/HBoxContainer/VBoxContainer/Play" to="LevelSelector" method="_on_play_pressed"]
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]
 [connection signal="pressed" from="WinScreen/BackToMenu" to="WinScreen" method="_on_back_to_menu_pressed"]

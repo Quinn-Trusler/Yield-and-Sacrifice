@@ -2,7 +2,7 @@ extends CanvasLayer
 
 #@onready var menu_file_name = "res://scenes/level_selector.tscn"
 #@onready var main_scene = "res://scenes/main.tscn"
-@export var level_selector : Node
+@export var level_selector : Node2D
 
 
 # Called when the node enters the scene tree for the first time.

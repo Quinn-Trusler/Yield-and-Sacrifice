@@ -1,28 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpu6netsfebb4"]
+[gd_scene format=3 uid="uid://dpu6netsfebb4"]
 
 [ext_resource type="Script" uid="uid://c3bhop1of3kh6" path="res://level_selector.gd" id="1_aeu7d"]
-[ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="2_gkmvm"]
+[ext_resource type="Script" uid="uid://ubkt8ica2ejr" path="res://scenes/popup.gd" id="2_gkmvm"]
+[ext_resource type="Texture2D" uid="uid://c6x3mb5u8udso" path="res://art/level_selector_bg.png" id="2_tr5s6"]
+[ext_resource type="Texture2D" uid="uid://5kve1812h53s" path="res://art/ui/life on.png" id="5_vj03c"]
+[ext_resource type="PackedScene" uid="uid://d3glm3klpq7k4" path="res://scenes/level_button.tscn" id="6_hjtau"]
 
-[node name="LevelSelector" type="Node2D"]
+[node name="LevelSelector" type="Node2D" unique_id=11770184]
 scale = Vector2(4, 4)
 script = ExtResource("1_aeu7d")
 
-[node name="PlayGameButton" type="Button" parent="."]
-offset_left = 116.75
-offset_top = 127.0
-offset_right = 210.0
-offset_bottom = 137.25
-theme_override_fonts/font = ExtResource("2_gkmvm")
-theme_override_font_sizes/font_size = 8
-text = "Play Game"
+[node name="BG" type="Sprite2D" parent="." unique_id=109732055]
+texture = ExtResource("2_tr5s6")
 
-[node name="TitleText" type="Label" parent="."]
-offset_top = 38.0
-offset_right = 320.5
-offset_bottom = 55.25
-theme_override_fonts/font = ExtResource("2_gkmvm")
-theme_override_font_sizes/font_size = 16
-text = "Deadyly Worship"
-horizontal_alignment = 1
+[node name="LevelButton1" parent="." unique_id=322504438 instance=ExtResource("6_hjtau")]
+position = Vector2(-118, -46)
+level_number = 1
 
-[connection signal="pressed" from="PlayGameButton" to="." method="_on_play_game_button_pressed"]
+[node name="LevelButton2" parent="." unique_id=596473443 instance=ExtResource("6_hjtau")]
+position = Vector2(9, -39)
+level_number = 2
+
+[node name="LevelButton3" parent="." unique_id=307380534 instance=ExtResource("6_hjtau")]
+position = Vector2(72, 47)
+level_number = 3
+
+[node name="Popup" type="Node2D" parent="." unique_id=680348618]
+script = ExtResource("2_gkmvm")
+
+[node name="BG" type="Sprite2D" parent="Popup" unique_id=2067318355]
+texture = ExtResource("5_vj03c")
