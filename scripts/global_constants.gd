@@ -89,6 +89,7 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 }
 
 var DEFAULT_DIFFICULTY : int = 1 # Difficulty shown in level popup
+var DIFFICULTY_TIMES = [27, 23, 19, 16]
 var DIFFICULTY_NAMES = ["Easy", "Normal", "Hard", "Insane"] # Displayed in level selector
 var LEVEL_DISPlAY_NAMES = ["Grass Land", "Beach", "Swamp"]
 

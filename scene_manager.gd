@@ -29,13 +29,13 @@ func win_game():
 
 # Want to instantiate a main and then put it as the child
 
-var difficulties = [27, 23, 19, 16]#"Baby" : 27, "Easy" : 25, "Normal": 23, "Hard" : 19, "Insane": 16}
+
 
 func generate_level(level_name, level_dificulty):
 	
 	print("Level Name: ", level_name)
 	
-	var round_time = difficulties[level_dificulty]
+	var round_time = GLOBALCONSTS.DIFFICULTY_TIMES[level_dificulty]
 	var tile_layers = {}
 	var punishments = {20:["lose all gold","burn land","-2 seconds"],1000:["burn land"]}
 	

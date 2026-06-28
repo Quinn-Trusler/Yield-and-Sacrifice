@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ckqvqf7rgxpek" path="res://art/ui/play_button_down.png" id="17_xuyd7"]
 [ext_resource type="Texture2D" uid="uid://b3oflf7kpjpmn" path="res://art/ui/play_button_hover.png" id="18_35x7k"]
 [ext_resource type="Script" uid="uid://sg03yijmah4y" path="res://scenes/animated_button.gd" id="19_xuyd7"]
+[ext_resource type="Texture2D" uid="uid://5sfflpac7ag" path="res://art/ui/level_selector_popup.png" id="20_35x7k"]
 
 [node name="LevelSelector" type="Node2D" unique_id=11770184]
 script = ExtResource("1_aeu7d")
@@ -43,17 +44,18 @@ scale = Vector2(4, 4)
 level_number = 3
 
 [node name="Popup" type="Node2D" parent="." unique_id=680348618]
+position = Vector2(-190, -200)
 script = ExtResource("2_gkmvm")
 
-[node name="Polygon2D" type="Polygon2D" parent="Popup" unique_id=1520343219]
-color = Color(0.2509804, 0.2, 0.3254902, 1)
-polygon = PackedVector2Array(-157, -445, 266, -456, 280, 139, -174, 141)
+[node name="Sprite2D" type="Sprite2D" parent="Popup" unique_id=1144814906]
+scale = Vector2(4, 4)
+texture = ExtResource("20_35x7k")
+centered = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Popup" unique_id=274232795]
-offset_left = -129.0
-offset_top = -324.0
-offset_right = 233.75
-offset_bottom = -164.0
+offset_left = 10.0
+offset_right = 374.0
+offset_bottom = 160.0
 
 [node name="LevelNumber" type="Label" parent="Popup/VBoxContainer" unique_id=1127349300]
 layout_mode = 2
@@ -79,7 +81,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_56kad")
 theme_override_font_sizes/font_size = 24
-text = "• 20 Rounds"
+text = "Number of Rounds: 20"
 label_settings = ExtResource("7_56kad")
 
 [node name="RoundTime" type="Label" parent="Popup/VBoxContainer/BulletInfo" unique_id=1233174701]
@@ -96,59 +98,64 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Popup/VBoxContainer/HBoxContainer" unique_id=214895803]
 layout_mode = 2
 
-[node name="Difficulty" type="Label" parent="Popup" unique_id=560506007]
-offset_left = -129.0
-offset_top = -140.0
-offset_right = 233.0
-offset_bottom = -92.0
+[node name="DifficultyHBox" type="VBoxContainer" parent="Popup" unique_id=658101022]
+offset_left = 10.0
+offset_top = 235.0
+offset_right = 332.0
+offset_bottom = 303.0
+
+[node name="Difficulty" type="Label" parent="Popup/DifficultyHBox" unique_id=560506007]
+visible = false
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_56kad")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 36
 text = "Difficulty"
+horizontal_alignment = 1
 
-[node name="DifficultyDisplay" type="RichTextLabel" parent="Popup" unique_id=31243328]
-offset_left = -130.0
-offset_top = -97.0
-offset_right = 232.0
-offset_bottom = -40.0
+[node name="DifficultyDisplay" type="RichTextLabel" parent="Popup/DifficultyHBox" unique_id=31243328]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("6_56kad")
-theme_override_font_sizes/normal_font_size = 48
-text = "Easy"
+theme_override_font_sizes/normal_font_size = 24
+text = "Temp"
 
 [node name="Up" type="TextureButton" parent="Popup" unique_id=1527395401]
-offset_left = 143.0
-offset_top = -134.0
-offset_right = 158.0
-offset_bottom = -124.0
+offset_left = 304.0
+offset_top = 208.0
+offset_right = 319.0
+offset_bottom = 218.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("8_v1k4p")
 texture_pressed = ExtResource("9_ljvb0")
 texture_hover = ExtResource("10_f20t4")
 
 [node name="Down" type="TextureButton" parent="Popup" unique_id=2062607924]
-offset_left = 146.0
-offset_top = -80.0
-offset_right = 161.0
-offset_bottom = -70.0
+offset_left = 304.0
+offset_top = 259.0
+offset_right = 319.0
+offset_bottom = 269.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("11_wioao")
 texture_pressed = ExtResource("12_wkdyj")
 texture_hover = ExtResource("13_afu6s")
 
 [node name="Close" type="TextureButton" parent="Popup" unique_id=1149889871]
-offset_left = 198.0
-offset_top = -356.0
-offset_right = 209.0
-offset_bottom = -343.0
+offset_left = 364.0
+offset_top = -36.0
+offset_right = 375.0
+offset_bottom = -23.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("13_cgre3")
 texture_pressed = ExtResource("14_k4w6p")
 texture_hover = ExtResource("15_4ly2d")
 
 [node name="Play" type="TextureButton" parent="Popup" unique_id=1781728266]
-offset_right = 38.0
-offset_bottom = 16.0
+offset_left = 171.0
+offset_top = 356.0
+offset_right = 209.0
+offset_bottom = 372.0
 scale = Vector2(4, 4)
 pivot_offset = Vector2(19, 8)
 texture_normal = ExtResource("16_4ly2d")
