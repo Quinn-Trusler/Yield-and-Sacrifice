@@ -29,7 +29,7 @@ func win_game():
 
 # Want to instantiate a main and then put it as the child
 
-var difficulties = {"Baby" : 27, "Easy" : 25, "Normal": 23, "Hard" : 19, "Insane": 16}
+var difficulties = [27, 23, 19, 16]#"Baby" : 27, "Easy" : 25, "Normal": 23, "Hard" : 19, "Insane": 16}
 
 func generate_level(level_name, level_dificulty):
 	

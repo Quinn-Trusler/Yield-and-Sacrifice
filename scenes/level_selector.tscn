@@ -3,30 +3,157 @@
 [ext_resource type="Script" uid="uid://c3bhop1of3kh6" path="res://level_selector.gd" id="1_aeu7d"]
 [ext_resource type="Script" uid="uid://ubkt8ica2ejr" path="res://scenes/popup.gd" id="2_gkmvm"]
 [ext_resource type="Texture2D" uid="uid://c6x3mb5u8udso" path="res://art/level_selector_bg.png" id="2_tr5s6"]
-[ext_resource type="Texture2D" uid="uid://5kve1812h53s" path="res://art/ui/life on.png" id="5_vj03c"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_56kad"]
 [ext_resource type="PackedScene" uid="uid://d3glm3klpq7k4" path="res://scenes/level_button.tscn" id="6_hjtau"]
+[ext_resource type="LabelSettings" uid="uid://d1mv5i1httpe0" path="res://font/level_bullet_details.tres" id="7_56kad"]
+[ext_resource type="Texture2D" uid="uid://bq3nu33gwe7xf" path="res://art/ui/arrow_up.png" id="8_v1k4p"]
+[ext_resource type="Texture2D" uid="uid://cgon4x1e5xipp" path="res://art/ui/arrow_up_pressed.png" id="9_ljvb0"]
+[ext_resource type="Texture2D" uid="uid://3vkgap1gse3b" path="res://art/ui/arrow_up_hover.png" id="10_f20t4"]
+[ext_resource type="Texture2D" uid="uid://be50pb2iepg4r" path="res://art/ui/arrow_down.png" id="11_wioao"]
+[ext_resource type="Texture2D" uid="uid://s7xtru6uxr4m" path="res://art/ui/arrow_down_pressed.png" id="12_wkdyj"]
+[ext_resource type="Texture2D" uid="uid://bphdofust4tst" path="res://art/ui/arrow_down_hover.png" id="13_afu6s"]
+[ext_resource type="Texture2D" uid="uid://bh7esripvv8ao" path="res://art/ui/level_cancel_button.png" id="13_cgre3"]
+[ext_resource type="Texture2D" uid="uid://caigh5mtpgwms" path="res://art/ui/level_cancel_button_pressed.png" id="14_k4w6p"]
+[ext_resource type="Texture2D" uid="uid://bug8gylpt50wq" path="res://art/ui/level_cancel_button_hover.png" id="15_4ly2d"]
+[ext_resource type="Texture2D" uid="uid://bpjg85yatl433" path="res://art/ui/play_button.png" id="16_4ly2d"]
+[ext_resource type="Texture2D" uid="uid://ckqvqf7rgxpek" path="res://art/ui/play_button_down.png" id="17_xuyd7"]
+[ext_resource type="Texture2D" uid="uid://b3oflf7kpjpmn" path="res://art/ui/play_button_hover.png" id="18_35x7k"]
 
 [node name="LevelSelector" type="Node2D" unique_id=11770184]
-scale = Vector2(4, 4)
 script = ExtResource("1_aeu7d")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=109732055]
+scale = Vector2(4, 4)
 texture = ExtResource("2_tr5s6")
 
 [node name="LevelButton1" parent="." unique_id=322504438 instance=ExtResource("6_hjtau")]
-position = Vector2(-118, -46)
+position = Vector2(-446, -164)
+scale = Vector2(4, 4)
 level_number = 1
 
 [node name="LevelButton2" parent="." unique_id=596473443 instance=ExtResource("6_hjtau")]
-position = Vector2(9, -39)
+position = Vector2(72, -142)
+scale = Vector2(4, 4)
 level_number = 2
 
 [node name="LevelButton3" parent="." unique_id=307380534 instance=ExtResource("6_hjtau")]
-position = Vector2(72, 47)
+position = Vector2(299, 234)
+scale = Vector2(4, 4)
 level_number = 3
 
 [node name="Popup" type="Node2D" parent="." unique_id=680348618]
 script = ExtResource("2_gkmvm")
 
-[node name="BG" type="Sprite2D" parent="Popup" unique_id=2067318355]
-texture = ExtResource("5_vj03c")
+[node name="Polygon2D" type="Polygon2D" parent="Popup" unique_id=1520343219]
+color = Color(0.2509804, 0.2, 0.3254902, 1)
+polygon = PackedVector2Array(-157, -445, 266, -456, 280, 139, -174, 141)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup" unique_id=274232795]
+offset_left = -129.0
+offset_top = -324.0
+offset_right = 233.75
+offset_bottom = -164.0
+
+[node name="LevelNumber" type="Label" parent="Popup/VBoxContainer" unique_id=1127349300]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_56kad")
+theme_override_font_sizes/font_size = 48
+text = "Level 0"
+horizontal_alignment = 1
+
+[node name="LevelName" type="Label" parent="Popup/VBoxContainer" unique_id=1481395281]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_56kad")
+theme_override_font_sizes/font_size = 48
+text = "Grasslandia"
+horizontal_alignment = 1
+
+[node name="BulletInfo" type="VBoxContainer" parent="Popup/VBoxContainer" unique_id=2146945132]
+layout_mode = 2
+
+[node name="RoundNumber" type="Label" parent="Popup/VBoxContainer/BulletInfo" unique_id=2033535180]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_56kad")
+theme_override_font_sizes/font_size = 24
+text = "• 20 Rounds"
+label_settings = ExtResource("7_56kad")
+
+[node name="RoundTime" type="Label" parent="Popup/VBoxContainer/BulletInfo" unique_id=1233174701]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_56kad")
+theme_override_font_sizes/font_size = 24
+text = "• 20s Per Round"
+label_settings = ExtResource("7_56kad")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popup/VBoxContainer" unique_id=387636609]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/VBoxContainer/HBoxContainer" unique_id=214895803]
+layout_mode = 2
+
+[node name="Difficulty" type="Label" parent="Popup" unique_id=560506007]
+offset_left = -129.0
+offset_top = -140.0
+offset_right = 233.0
+offset_bottom = -92.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_56kad")
+theme_override_font_sizes/font_size = 48
+text = "Difficulty"
+
+[node name="DifficultyDisplay" type="RichTextLabel" parent="Popup" unique_id=31243328]
+offset_left = -130.0
+offset_top = -97.0
+offset_right = 232.0
+offset_bottom = -40.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("6_56kad")
+theme_override_font_sizes/normal_font_size = 48
+text = "Easy"
+
+[node name="Up" type="TextureButton" parent="Popup" unique_id=1527395401]
+offset_left = 143.0
+offset_top = -134.0
+offset_right = 158.0
+offset_bottom = -124.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("8_v1k4p")
+texture_pressed = ExtResource("9_ljvb0")
+texture_hover = ExtResource("10_f20t4")
+
+[node name="Down" type="TextureButton" parent="Popup" unique_id=2062607924]
+offset_left = 146.0
+offset_top = -80.0
+offset_right = 161.0
+offset_bottom = -70.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("11_wioao")
+texture_pressed = ExtResource("12_wkdyj")
+texture_hover = ExtResource("13_afu6s")
+
+[node name="Close" type="TextureButton" parent="Popup" unique_id=1149889871]
+offset_left = 198.0
+offset_top = -356.0
+offset_right = 209.0
+offset_bottom = -343.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("13_cgre3")
+texture_pressed = ExtResource("14_k4w6p")
+texture_hover = ExtResource("15_4ly2d")
+
+[node name="Play" type="TextureButton" parent="Popup" unique_id=1781728266]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("16_4ly2d")
+texture_pressed = ExtResource("17_xuyd7")
+texture_hover = ExtResource("18_35x7k")
+
+[connection signal="pressed" from="Popup/Up" to="Popup" method="_on_up_pressed"]
+[connection signal="pressed" from="Popup/Down" to="Popup" method="_on_down_pressed"]
+[connection signal="pressed" from="Popup/Close" to="Popup" method="_on_close_pressed"]
+[connection signal="pressed" from="Popup/Play" to="Popup" method="_on_play_pressed"]

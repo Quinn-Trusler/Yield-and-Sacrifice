@@ -3,16 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://bung8u1x1v06a" path="res://art/ui/level_button.png" id="1_i0sit"]
 [ext_resource type="Script" uid="uid://tv0ku7tk60v6" path="res://scenes/level_button.gd" id="1_nfgsp"]
 [ext_resource type="Texture2D" uid="uid://ccigssstwl64j" path="res://art/ui/level_button_hover.png" id="2_o8246"]
+[ext_resource type="Texture2D" uid="uid://bsqwywnr0mgka" path="res://art/ui/level_button_down.png" id="3_6acxe"]
 [ext_resource type="Texture2D" uid="uid://bke20eynpdfoj" path="res://art/ui/level_button_locked.png" id="3_ium1h"]
-[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="4_b0rp6"]
+[ext_resource type="LabelSettings" uid="uid://n2nmfevd8xm7" path="res://font/yoster_label_settings.tres" id="4_b0rp6"]
 [ext_resource type="Texture2D" uid="uid://dobj8c8xffdki" path="res://art/ui/level_button_locked_down.png" id="4_nfgsp"]
 [ext_resource type="Texture2D" uid="uid://f8uvt5nldrgx" path="res://art/ui/level_button_locked_hover.png" id="5_b0rp6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6acxe"]
-line_spacing = 0.0
-font = ExtResource("4_b0rp6")
-font_size = 12
-shadow_size = 0
 
 [node name="LevelButton" type="Node2D" unique_id=596473443]
 script = ExtResource("1_nfgsp")
@@ -26,6 +21,7 @@ offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
 texture_normal = ExtResource("1_i0sit")
+texture_pressed = ExtResource("3_6acxe")
 texture_hover = ExtResource("2_o8246")
 
 [node name="Text" type="Label" parent="UnlockedLevelButton" unique_id=1249995134]
@@ -33,7 +29,7 @@ layout_mode = 0
 offset_right = 20.0
 offset_bottom = 18.0
 text = "3"
-label_settings = SubResource("LabelSettings_6acxe")
+label_settings = ExtResource("4_b0rp6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -46,4 +42,7 @@ texture_normal = ExtResource("3_ium1h")
 texture_pressed = ExtResource("4_nfgsp")
 texture_hover = ExtResource("5_b0rp6")
 
+[connection signal="button_down" from="UnlockedLevelButton" to="." method="_on_unlocked_level_button_button_down"]
+[connection signal="button_up" from="UnlockedLevelButton" to="." method="_on_unlocked_level_button_button_up"]
 [connection signal="pressed" from="UnlockedLevelButton" to="." method="_on_unlocked_level_button_pressed"]
+[connection signal="toggled" from="UnlockedLevelButton" to="." method="_on_unlocked_level_button_toggled"]

@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://baqw73xvkgkre"]
+
+[ext_resource type="Script" uid="uid://b27c2vy2gtf7j" path="res://scene_manager.gd" id="1_jo5df"]
+[ext_resource type="Script" uid="uid://dbctlbiciexmx" path="res://scripts/death_screen.gd" id="3_8xgxq"]
+[ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="4_yaxe4"]
+[ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="5_b515q"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_xfx5j"]
+[ext_resource type="PackedScene" uid="uid://dpu6netsfebb4" path="res://scenes/level_selector.tscn" id="7_yaxe4"]
+
+[node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen", "WinScreen")]
+script = ExtResource("1_jo5df")
+DeathScreen = NodePath("DeathScreen")
+WinScreen = NodePath("WinScreen")
+
+[node name="LevelSelector" parent="." unique_id=11770184 node_paths=PackedStringArray("scene_manager") instance=ExtResource("7_yaxe4")]
+position = Vector2(640, 360)
+scene_manager = NodePath("..")
+
+[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1409522031 node_paths=PackedStringArray("level_selector")]
+process_mode = 3
+visible = false
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("3_8xgxq")
+level_selector = NodePath("../LevelSelector")
+
+[node name="Polygon2D" type="Polygon2D" parent="DeathScreen" unique_id=1445219821]
+color = Color(0.87959766, 0.5890536, 0.36864072, 1)
+polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
+
+[node name="PlayAgain" type="TextureButton" parent="DeathScreen" unique_id=1839373022]
+visible = false
+anchors_preset = -1
+anchor_right = 0.003
+anchor_bottom = 0.0050000004
+offset_left = 122.25
+offset_top = 62.75
+offset_right = 197.41
+offset_bottom = 70.4
+texture_normal = ExtResource("4_yaxe4")
+texture_hover = ExtResource("4_yaxe4")
+
+[node name="BackToMenu" type="TextureButton" parent="DeathScreen" unique_id=171266679]
+offset_left = 118.0
+offset_top = 117.5
+offset_right = 213.0
+offset_bottom = 128.25
+texture_normal = ExtResource("5_b515q")
+texture_hover = ExtResource("5_b515q")
+
+[node name="All Lives Lost" type="Label" parent="DeathScreen" unique_id=135999220]
+offset_top = 31.5
+offset_right = 320.0
+offset_bottom = 45.25
+theme_override_fonts/font = ExtResource("6_xfx5j")
+theme_override_font_sizes/font_size = 12
+text = "All Lives Lost"
+horizontal_alignment = 1
+
+[node name="WinScreen" type="CanvasLayer" parent="." unique_id=1718766369 node_paths=PackedStringArray("level_selector")]
+process_mode = 3
+visible = false
+script = ExtResource("3_8xgxq")
+level_selector = NodePath("../LevelSelector")
+
+[node name="Polygon2D" type="Polygon2D" parent="WinScreen" unique_id=951386970]
+color = Color(0, 0.7873511, 0.49339175, 1)
+polygon = PackedVector2Array(-45.25, -44.25, 5556, -413, 5929, 3237, -55, 3195)
+
+[node name="BackToMenu" type="TextureButton" parent="WinScreen" unique_id=388527563]
+offset_left = 472.0
+offset_top = 471.0
+offset_right = 567.0
+offset_bottom = 479.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("5_b515q")
+texture_hover = ExtResource("5_b515q")
+
+[node name="Label" type="Label" parent="WinScreen" unique_id=667212801]
+offset_left = 438.0
+offset_top = 77.0
+offset_right = 519.0
+offset_bottom = 100.0
+scale = Vector2(4, 4)
+text = "You Win!!!!"
+
+[connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
+[connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="WinScreen/BackToMenu" to="WinScreen" method="_on_back_to_menu_pressed"]

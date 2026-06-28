@@ -14,6 +14,9 @@ func _on_locked_level_button_pressed() -> void:
 
 func _on_unlocked_level_button_pressed() -> void:
 	get_parent().open_popup(level_number)
+	
+
+	
 
 func set_locked(locked : bool):
 	$LockedLevelButton.visible = locked
@@ -21,3 +24,11 @@ func set_locked(locked : bool):
 	print("visibility", level_number)
 	print("locked", $LockedLevelButton.visible)
 	print("unlocked",$UnlockedLevelButton.visible)
+	
+	
+# Fix label not moving up and down with button press
+func _on_unlocked_level_button_button_down() -> void:
+	$UnlockedLevelButton/Text.position.y += 1
+
+func _on_unlocked_level_button_button_up() -> void:
+	$UnlockedLevelButton/Text.position.y -= 1

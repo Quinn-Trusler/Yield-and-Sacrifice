@@ -88,6 +88,9 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 	"swamp_farmland":{"display_name": "Swamp Farmland","place_on": ["swamp_grass"]}
 }
 
+var DEFAULT_DIFFICULTY : int = 1 # Difficulty shown in level popup
+var DIFFICULTY_NAMES = ["Easy", "Normal", "Hard", "Insane"] # Displayed in level selector
+var LEVEL_DISPlAY_NAMES = ["Grass Land", "Beach", "Swamp"]
 
 var ANIMAL_DEF = null
 

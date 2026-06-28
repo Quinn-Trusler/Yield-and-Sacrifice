@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d1mv5i1httpe0"]
+
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="1_kdwoq"]
+
+[resource]
+font = ExtResource("1_kdwoq")
+font_size = 24
