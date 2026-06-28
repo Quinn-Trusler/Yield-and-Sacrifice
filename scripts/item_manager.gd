@@ -126,6 +126,9 @@ func dim() -> void:
 func undim() -> void:
 	modulate = Color.WHITE
 
+func increase_gold(num_gold : int):
+	GodChoiceManager.increase_gold(num_gold)
+
 func consume_gold():
 	# Create flying gold particle
 	var temp = FLYING_COIN_SCENE.instantiate()
@@ -135,7 +138,6 @@ func consume_gold():
 	# Delete gold item
 	erase_item(item_in_focus)
 	refocus()
-	GodChoiceManager.increase_gold(1)
 	
 func deal_with_state() -> void:
 	if not left_down and not right_down and item_being_dragged: # Drop Item

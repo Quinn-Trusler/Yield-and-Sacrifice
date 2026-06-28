@@ -80,7 +80,7 @@ var completion_gold = GLOBALCONSTS.ROUND_COMPLETION_GOLD
 func _ready():
 	if Cheats.GOLD_OVERRIDE:
 		num_gold = Cheats.GOLD_OVERRIDE
-	GOLD.update_gold_num(num_gold)
+	GOLD.set_gold_num(num_gold)
 	
 	BuildingPlacementManager.build_finished.connect(build_finished)
 
@@ -93,8 +93,10 @@ func get_gold():
 	return num_gold
 	
 func increase_gold(amt):
-	num_gold += amt
-	GOLD.update_gold_num(num_gold)
+	if amt != 0:
+		num_gold += amt
+		GOLD.update_gold_num(num_gold)
+		$Node2D/GoldCount.update_gold_num(num_gold)
 
 # Load Display ----------------------------------------------------------------------
 
@@ -190,7 +192,7 @@ func display_punishments():
 	$Node2D/TitleText.text = PUNISH_TEXT
 	load_godchoices(chose_punishments(), false, CHOICE_TYPES.Punishment)
 	choice_type = CHOICE_TYPES.Punishment
-	$Node2D/GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.set_gold_num(num_gold)
 	
 	open_godchoice()
 	
@@ -204,14 +206,14 @@ func display_rewards():
 	$Node2D/TitleText.text = REWARD_TEXT
 	load_godchoices(chained_rewards, true, CHOICE_TYPES.Reward)
 	choice_type = CHOICE_TYPES.Reward
-	$Node2D/GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.set_gold_num(num_gold)
 	open_godchoice()
 
 func display_shop():
 	$Node2D/TitleText.text = SHOP_TEXT
 	$Node2D/SkipButton.visible = true
 	$Node2D/GoldCount.visible = true
-	$Node2D/GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.set_gold_num(num_gold)
 	load_godchoices(chained_shop_items, true, CHOICE_TYPES.Shop)
 	choice_type = CHOICE_TYPES.Shop
 	open_godchoice()
@@ -221,7 +223,7 @@ func display_shop_semi_transition():
 	$Node2D/TitleText.text = SHOP_TEXT
 	$Node2D/SkipButton.visible = true
 	$Node2D/GoldCount.visible = true
-	$Node2D/GoldCount.update_gold_num(num_gold)
+	$Node2D/GoldCount.set_gold_num(num_gold)
 	load_godchoices(chained_shop_items, true, CHOICE_TYPES.Shop)
 	choice_type = CHOICE_TYPES.Shop
 	#open_godchoice() # Replace with better transition

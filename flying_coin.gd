@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 	delta_total += delta
 	position = lerp(starting_pos, ending_pos, delta_total*2)
 	if delta_total*2 >= 1:
-		queue_free()
+		get_parent().increase_gold(1)
+		queue_free() 
 	
 	#Lerp it the collection loncation and then disapear

@@ -52,3 +52,7 @@ func _on_close_pressed() -> void:
 
 func _on_play_pressed() -> void:
 	play()
+	
+
+	
+	
