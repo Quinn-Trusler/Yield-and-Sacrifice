@@ -172,7 +172,7 @@ func give_coin_to_player():
 	var temp = ANIMATED_ITEM.instantiate()
 	ItemManager.add_child(temp)
 	temp.position = $CoinSpawnLocation.position
-	temp.initialize(temp.position.y + 30, 0, "gold", GLOBALCONSTS.ITEM_DEF["gold"])
+	temp.initialize(temp.position.y + 30, Vector2(3,0), "gold", GLOBALCONSTS.ITEM_DEF["gold"])
 	
 	
 	# Spawn flying coin at location in the sacrifice text

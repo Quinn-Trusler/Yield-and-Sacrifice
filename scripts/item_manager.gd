@@ -305,7 +305,7 @@ func create_animated_item(item_name, pos):
 	add_child(temp)
 	animated_items.append(temp)
 	var up_factor = 16#RNG.randi_range(16,24)
-	temp.initialize(pos.y - up_factor,up_factor/16.0,item_name,GLOBALCONSTS.ITEM_DEF[item_name])
+	temp.initialize(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0),item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.position = pos
 	
 # If the item must be replanted it sets item_is_last var to true

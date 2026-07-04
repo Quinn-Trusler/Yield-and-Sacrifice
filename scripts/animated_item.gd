@@ -7,11 +7,11 @@ var RNG = RandomNumberGenerator.new()
 var vel : Vector2
 var item_name : String
 var end_y : float
-var vel_factor : float
+var vel_factor : Vector2
 
 func set_vel():
-	vel = vel_factor * Vector2(RNG.randf_range(vel_range[0].x, vel_range[0].y), RNG.randf_range(vel_range[1].x, vel_range[1].y))
-func initialize(y:float, v:float,n : String,item_def : Dictionary ):
+	vel = Vector2(vel_factor.x * RNG.randf_range(vel_range[0].x, vel_range[0].y), vel_factor.y * RNG.randf_range(vel_range[1].x, vel_range[1].y))
+func initialize(y:float, v:Vector2,n : String,item_def : Dictionary ):
 	item_name = n
 	end_y = y
 	vel_factor = v
