@@ -25,7 +25,7 @@ script = ExtResource("3_8xgxq")
 level_selector = NodePath("../LevelSelector")
 
 [node name="Polygon2D" type="Polygon2D" parent="DeathScreen" unique_id=1445219821]
-color = Color(0.87959766, 0.5890536, 0.36864072, 1)
+color = Color(0.7058824, 0.1254902, 0.16470589, 1)
 polygon = PackedVector2Array(-45.25, -44.25, 1359.5, -114, 1451, 793.25, -45.25, 828.25)
 
 [node name="PlayAgain" type="TextureButton" parent="DeathScreen" unique_id=1839373022]
@@ -57,6 +57,14 @@ theme_override_font_sizes/font_size = 12
 text = "All Lives Lost"
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="DeathScreen" unique_id=1389451658]
+offset_left = 107.25
+offset_top = 164.0
+offset_right = 212.0
+offset_bottom = 177.75
+theme_override_font_sizes/font_size = 8
+text = "This Screen is placeholder"
+
 [node name="WinScreen" type="CanvasLayer" parent="." unique_id=1718766369 node_paths=PackedStringArray("level_selector")]
 process_mode = 3
 visible = false
@@ -64,7 +72,7 @@ script = ExtResource("3_8xgxq")
 level_selector = NodePath("../LevelSelector")
 
 [node name="Polygon2D" type="Polygon2D" parent="WinScreen" unique_id=951386970]
-color = Color(0, 0.7873511, 0.49339175, 1)
+color = Color(0.101960786, 0.47843137, 0.24313726, 1)
 polygon = PackedVector2Array(-45.25, -44.25, 5556, -413, 5929, 3237, -55, 3195)
 
 [node name="BackToMenu" type="TextureButton" parent="WinScreen" unique_id=388527563]
@@ -76,13 +84,22 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("5_b515q")
 texture_hover = ExtResource("5_b515q")
 
-[node name="Label" type="Label" parent="WinScreen" unique_id=667212801]
-offset_left = 438.0
-offset_top = 77.0
-offset_right = 519.0
-offset_bottom = 100.0
-scale = Vector2(4, 4)
-text = "You Win!!!!"
+[node name="Label" type="Label" parent="WinScreen" unique_id=174766417]
+offset_left = 546.0
+offset_top = 679.0
+offset_right = 650.75
+offset_bottom = 692.75
+theme_override_font_sizes/font_size = 16
+text = "This Screen is placeholder"
+
+[node name="Win" type="Label" parent="WinScreen" unique_id=642063734]
+offset_top = 94.0
+offset_right = 1291.0
+offset_bottom = 216.0
+theme_override_fonts/font = ExtResource("6_xfx5j")
+theme_override_font_sizes/font_size = 48
+text = "Level Complete"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]

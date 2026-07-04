@@ -35,7 +35,7 @@ func update_difficulty_display():
 	for i in range(difficulty +1):
 		difficulty_display.add_image(pepper_img)
 		
-	var level_key = GLOBALCONSTS.LEVEL_KEYS[level_num]
+	var level_key = GLOBALCONSTS.LEVEL_KEYS[level_num-1]
 	round_time.text = "Round Time: " + str(GLOBALCONSTS.LEVELDEF[level_key]["round_time"][difficulty])+ "s" 
 	round_number.text = "Number of Rounds: " + str(GLOBALCONSTS.LEVELDEF[level_key]["total_rounds"][difficulty])
 	

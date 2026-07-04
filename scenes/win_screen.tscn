@@ -1,24 +1,33 @@
 [gd_scene format=3 uid="uid://dsiisn1uciawx"]
 
-[node name="WinScreen" type="Node2D"]
+[node name="WinScreen" type="Node2D" unique_id=1218600985]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1797936814]
 offset_right = 1333.0
 offset_bottom = 731.0
-color = Color(0.55640966, 0.9999998, 0.5241661, 1)
+color = Color(0.101960786, 0.47843137, 0.24313726, 1)
 
-[node name="YouWinText" type="Label" parent="."]
-offset_right = 1283.0
-offset_bottom = 23.0
+[node name="YouWinText" type="Label" parent="." unique_id=1826537742]
+offset_right = 1293.0
+offset_bottom = 88.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
-text = "YOU WIN!!!!"
+text = "Level Complete"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="."]
-offset_left = 557.0
-offset_top = 351.0
-offset_right = 862.0
-offset_bottom = 392.0
+[node name="Label2" type="Label" parent="." unique_id=1735338269]
+offset_left = 459.0
+offset_top = 236.0
+offset_right = 914.0
+offset_bottom = 281.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "If you can't tell this screen is temporary"
+theme_override_font_sizes/font_size = 32
+text = "You completed all the rounds"
+
+[node name="Label" type="Label" parent="." unique_id=1582044878]
+offset_left = 526.0
+offset_top = 655.0
+offset_right = 831.0
+offset_bottom = 696.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "This is a temporary screen"
