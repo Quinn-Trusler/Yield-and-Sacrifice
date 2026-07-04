@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("end_round"):
 		#$BuildingManager.create_gift("wheat", 1)
-		$SacrificeManager.next_round()
+		$SacrificeManager.open_godchoice_UI()
 		print("End Round Debug pressed")
 		
 	if Input.is_action_just_pressed("debug"):
@@ -39,6 +39,9 @@ func reward():
 	$ItemManager.drop_item_ukn()
 	$GodChoiceManager.display_rewards()
 
+
+func set_total_rounds(total_rounds):
+	$SacrificeManager.set_total_rounds(total_rounds)
 
 func set_round_time(round_time):
 	$SacrificeManager.set_round_time(round_time)

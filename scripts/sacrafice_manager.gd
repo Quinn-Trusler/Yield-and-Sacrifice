@@ -3,8 +3,10 @@ extends Node2D
 
 #Removing a scene stays in memory but does not keep updating
 
+enum CHOICE_TYPES {Reward, Punishment}
 
 var round_num = 0
+var total_round_num = 0
 
 var requirements = {}
 var filled_requirements = {}
@@ -12,6 +14,7 @@ var requirements_met = false
 var round_time = GLOBALCONSTS.ROUND_TIME
 var RNG = RandomNumberGenerator.new()
 var allowed_sacrifices = ["carrot"]
+var choice_type : CHOICE_TYPES = CHOICE_TYPES.Reward
 
 var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
 var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
@@ -27,6 +30,7 @@ var first_sacrifice_made: bool = false
 @export var TutorialManager: Node
 @export var DialogManager: Node2D
 @export var ItemManager: Node2D
+@export var RoundNumber: Node2D
 
 
 func _ready():
@@ -47,17 +51,39 @@ func _process(_delta: float) -> void:
 	update_timer_text()
 	
 func start():
-	round_num = 0
+	set_round_number(0)
 	update_requirements()
-func next_round():
-	round_num +=1
+	
+func set_total_rounds(num: int) -> void:
+	total_round_num = num
+	
+func set_round_number(num : int) -> void:
+	round_num = num
+	RoundNumber.set_round_number(round_num, total_round_num)
+	
+	
+func update_round_number(num : int) -> void:
+	round_num = num
+	RoundNumber.update_round_number(round_num, total_round_num)
+	
+	
+func open_godchoice_UI() -> void:
 	if (requirements_met or Cheats.ALWAYS_REWARD) and not Cheats.ALWAYS_PUNISH:
+		if round_num + 1 >= total_round_num:
+			get_parent().get_parent().win_game()
 		requirements_met = false
+		choice_type = CHOICE_TYPES.Reward
 		reward()
 	else:
+		choice_type = CHOICE_TYPES.Punishment
 		punish()
+
+func next_round() -> void:
+	if choice_type == CHOICE_TYPES.Reward:
+		update_round_number(round_num + 1)
 	boss.set_hungry()
 	$Timer.start()
+	update_requirements()
 
 func modify_round_time(change_time):
 	set_round_time(round_time + change_time)
@@ -182,7 +208,7 @@ func check_requirements_met():
 			
 	
 func _on_timer_timeout() -> void:
-	next_round()
+	open_godchoice_UI()
 	
 func reward():
 	get_parent().reward()

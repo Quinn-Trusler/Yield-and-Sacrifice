@@ -88,8 +88,18 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 	"swamp_farmland":{"display_name": "Swamp Farmland","place_on": ["swamp_grass"]}
 }
 
-var DEFAULT_DIFFICULTY : int = 1 # Difficulty shown in level popup
+
+
 var DIFFICULTY_TIMES = [27, 23, 19, 16]
+
+var LEVEL_KEYS = ["grass", "sand", "swamp"] # Turns Level numbers into a key for level_def
+var LEVELDEF = {"grass" : {"round_time" : DIFFICULTY_TIMES, "total_rounds" : [10,11,12,14]},
+"sand" : {"round_time" : DIFFICULTY_TIMES, "total_rounds" : [10,11,12,14]},
+"swamp" : {"round_time" : DIFFICULTY_TIMES, "total_rounds" : [10,11,12,14]}
+} # Describe round times and total round number using level and difficulty
+
+
+var DEFAULT_DIFFICULTY : int = 1 # Difficulty shown in level popup
 var DIFFICULTY_NAMES = ["Easy", "Normal", "Hard", "Insane"] # Displayed in level selector
 var LEVEL_DISPlAY_NAMES = ["Grass Land", "Beach", "Swamp"]
 
@@ -103,6 +113,8 @@ var EXTRA_ITEM_FED_DIALOG = ["Don't sacrifice more then you need to",5]
 var BUILDING_PHANTOM_MODULATION : Color = Color(1,1,1,0.5)
 var ITEM_DIM_COLOUR : Color = Color(1,1,1,0)
 
+
+var FLYING_COIN_END_POS = Vector2(-152.0, -41)
 var ROUND_COMPLETION_GOLD = 0
 var ROUND_TIME = 23
 var MAX_FISH = 7

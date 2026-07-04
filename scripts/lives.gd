@@ -4,7 +4,8 @@ var life_scenes = []
 var LIFE_ON = "life on"
 var LIFE_OFF = "life off"
 var MAX_LIVES = GLOBALCONSTS.MAX_LIVES
-var LIFE_SPACING = 15
+@export var LIFE_SPACING : float
+@export var OFFSET : Vector2
 var lives_left = MAX_LIVES
 @onready var life_scene = load("res://scenes/life.tscn")
 
@@ -13,6 +14,7 @@ func _ready() -> void:
 	for i in range(MAX_LIVES):
 		var temp = life_scene.instantiate()
 		temp.position.x = i*LIFE_SPACING
+		temp.position += OFFSET
 		life_scenes.append(temp)
 		add_child(temp)
 		

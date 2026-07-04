@@ -135,7 +135,6 @@ func load_godchoices(godchoice_list, chained: bool, choice_type : CHOICE_TYPES):
 	var copy = godchoice_list.duplicate()
 	copy.shuffle()
 	var new_godchoice_list = copy.slice(0, 3)
-	var makeshift_game_end = true
 	
 	var choice_names_already_added = []
 	
@@ -161,10 +160,7 @@ func load_godchoices(godchoice_list, chained: bool, choice_type : CHOICE_TYPES):
 				else:
 					temp.initialize(choice_name,choices[choice_name])
 				add_choice_to_hbox(temp)
-				makeshift_game_end = false
-			
-	if makeshift_game_end:
-		get_parent().get_parent().win_game()
+				
 
 func open_godchoice():
 	$AnimationPlayer.play("Open")
@@ -329,16 +325,15 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 					
 	
 	if choice["type"] == TYPES.Placement:
-		SacrificeManager.update_requirements()
 		await close_godchoice()
 	else:
 		if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
 			#await semi_close_godchoice()
 			await display_shop_semi_transition()
 		elif choice_type == CHOICE_TYPES.Shop: # Finished the shop
-			SacrificeManager.update_requirements()
 			await close_godchoice()
-			get_tree().paused = false
+			next_round()
+
 
 func place_building(choice_name : String):
 	BuildingPlacementManager.toggle_on(choices[choice_name]["reward"])
@@ -347,7 +342,21 @@ func build_finished() -> void:
 	if choice_type == CHOICE_TYPES.Reward or choice_type == CHOICE_TYPES.Punishment:
 		display_shop()
 	else:
-		get_tree().paused = false
+		next_round()
+		
+func next_round() -> void:
+	SacrificeManager.next_round()
+	get_tree().paused = false
+
+# Skip shop screen
+func _on_skip_button_pressed() -> void:
+	await close_godchoice()
+	
+	$Node2D/SkipButton.visible = false
+	$Node2D/GoldCount.visible = false
+	delete_choice_instances()
+	$Node2D/ClickButton.play()
+	next_round()
 
 # Used by god choice chosen
 func destroy_land(choice : Dictionary) -> void:
@@ -373,14 +382,5 @@ func destroy_land(choice : Dictionary) -> void:
 			#count+=1
 				
 				
-# Skip shop screen
-func _on_skip_button_pressed() -> void:
-	await close_godchoice()
-	
-	$Node2D/SkipButton.visible = false
-	$Node2D/GoldCount.visible = false
-	delete_choice_instances()
-	$Node2D/ClickButton.play()
-	get_tree().paused = false
-	SacrificeManager.update_requirements()
+
 	

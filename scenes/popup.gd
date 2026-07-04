@@ -5,6 +5,7 @@ extends Node2D
 @onready var level_number = $VBoxContainer/LevelNumber
 @onready var difficulty_display = $DifficultyHBox/DifficultyDisplay
 @onready var round_time = $VBoxContainer/BulletInfo/RoundTime
+@onready var round_number = $VBoxContainer/BulletInfo/RoundNumber
 
 var level_num = 0
 var difficulty = 0
@@ -33,7 +34,10 @@ func update_difficulty_display():
 	difficulty_display.add_text(GLOBALCONSTS.DIFFICULTY_NAMES[difficulty] + " ")
 	for i in range(difficulty +1):
 		difficulty_display.add_image(pepper_img)
-	round_time.text = "Round Time: " + str(GLOBALCONSTS.DIFFICULTY_TIMES[difficulty]) + "s" 
+		
+	var level_key = GLOBALCONSTS.LEVEL_KEYS[level_num]
+	round_time.text = "Round Time: " + str(GLOBALCONSTS.LEVELDEF[level_key]["round_time"][difficulty])+ "s" 
+	round_number.text = "Number of Rounds: " + str(GLOBALCONSTS.LEVELDEF[level_key]["total_rounds"][difficulty])
 	
 
 func play():

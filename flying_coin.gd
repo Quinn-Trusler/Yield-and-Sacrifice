@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 
-var ending_pos : Vector2 = Vector2(-146.75, -62.5)
+var ending_pos : Vector2 = GLOBALCONSTS.FLYING_COIN_END_POS
 var starting_pos : Vector2
 var delta_total : float = 0
 
