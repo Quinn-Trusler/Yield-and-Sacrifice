@@ -4,7 +4,7 @@ class_name DraggableItem
 
 var item_name : String
 var IS_BUNDLE : bool = false
-var num_items : int 
+var num_items : int  = 1
 
 func initialize(n,item_def, n_items : int = 1):
 	set_num(n_items)
@@ -59,18 +59,12 @@ func convert_polygon(poly):
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
-	
-func pick_up():
-	$PickUp.play()
 
 func focus():
 	frame = 1
 
 func stop_focus():
 	frame = 0
-	
-func drop():
-	$Drop.play()
 	
 func _on_area_2d_mouse_entered() -> void:
 	get_parent().add_to_focus_list(self)

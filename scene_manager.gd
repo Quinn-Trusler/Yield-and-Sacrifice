@@ -50,7 +50,7 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
 		ChainedReward.new(["farmland","farmland","farmland"],1)]
 
-		var rewards = [ChainedReward.new(["potatoe","barrel","mushroom patch","barrel","mushroom patch", "barrel"], 0),
+		var rewards = [ChainedReward.new(["potato","barrel","mushroom patch","barrel","mushroom patch", "barrel"], 0),
 		ChainedReward.new(["wheat","mill","oven","mill","oven","mill","mushroom patch"], 1),
 		ChainedReward.new(["activate fish","mushroom patch"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/plains/tile_map_layer.tscn")

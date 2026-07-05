@@ -30,7 +30,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_vqwpj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 1.0
 }]
@@ -47,10 +47,6 @@ script = ExtResource("1_c446u")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableItemArea2D" unique_id=2092545832]
 position = Vector2(0.00840287, -0.06722698)
 polygon = PackedVector2Array(3.5056047, -1.8234524, 3.4273214, 8.94073, 2.3314524, 10.057246, -2.3656454, 9.978961, -3.5791836, 8.862445, -3.6574688, -1.9017376, -1.5437746, -4.1328588, -1.3872042, -10.082516, 1.5093393, -10.0042305, 1.7441931, -4.1328588)
-
-[node name="PickUp" type="AudioStreamPlayer" parent="." unique_id=1112216627]
-
-[node name="Drop" type="AudioStreamPlayer" parent="." unique_id=602477572]
 
 [node name="NumItems" type="Label" parent="." unique_id=1006032167]
 anchors_preset = -1

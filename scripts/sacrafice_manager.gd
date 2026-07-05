@@ -179,15 +179,26 @@ func give_coin_to_player():
 	#var temp = FLYING_COIN_SCENE.instantiate()
 	#get_parent().add_child(temp)
 	
+# Returns number of items successfully saccrificed
+func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
+	var number_items_consumed = 0
 	
-func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
-	boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], num_items)
-	if sacrificed_item_name in requirements:
+	# If part of requirments and the requirment is not yet filled
+	if sacrificed_item_name in requirements and filled_requirements[sacrificed_item_name] <= requirements[sacrificed_item_name]:
+		var max_consume = requirements[sacrificed_item_name] - filled_requirements[sacrificed_item_name] # max number of items boss can consume
+		print("The max number of %s I can consume is %d" % [sacrificed_item_name,max_consume])
+		if num_items > max_consume:
+			number_items_consumed = max_consume
+		else:
+			number_items_consumed = num_items
+		
+		boss.react_to(GLOBALCONSTS.ITEM_DEF[sacrificed_item_name]["reaction"], number_items_consumed)
+		
 		if filled_requirements[sacrificed_item_name] < requirements[sacrificed_item_name]:
 			if not first_sacrifice_made:
 				first_sacrifice_made = true
 				TutorialManager.next(true, false, false)
-			filled_requirements[sacrificed_item_name] += num_items
+			filled_requirements[sacrificed_item_name] += number_items_consumed
 			if filled_requirements[sacrificed_item_name] >= requirements[sacrificed_item_name]: # Finished Requirment
 				give_coin_to_player()
 			update_sacrifice_text()
@@ -198,6 +209,8 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> void:
 			DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 	else:
 		DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
+		
+	return number_items_consumed
 
 #Check if the all the requirments to please the boss have been met
 func check_requirements_met():

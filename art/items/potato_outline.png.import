@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ein5k5qnsqdg"
-path="res://.godot/imported/potatoe_outline.png-289f9fc2a166685b506ba27424dcb493.ctex"
+path="res://.godot/imported/potato_outline.png-ce7b5b7073b853a5c439188b335ec286.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/items/potatoe_outline.png"
-dest_files=["res://.godot/imported/potatoe_outline.png-289f9fc2a166685b506ba27424dcb493.ctex"]
+source_file="res://art/items/potato_outline.png"
+dest_files=["res://.godot/imported/potato_outline.png-ce7b5b7073b853a5c439188b335ec286.ctex"]
 
 [params]
 

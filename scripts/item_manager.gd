@@ -12,11 +12,12 @@ var item_being_dragged
 var absorbing_items : bool = false
 var item_in_focus = null
 var focus_items = []
-var crops_planted:Dictionary[String,int] = {"carrot":0,"potatoe":0,"wheat":0,"sugarcane":0,"melon":0,"rice":0}
+var crops_planted:Dictionary[String,int] = {"carrot":0,"potato":0,"wheat":0,"sugarcane":0,"melon":0,"rice":0}
 var items_in_bundle_field = []
 
 var left_down : bool = false
 var right_down : bool = false
+var form_bundle_down : bool = false
 
 var mouse_on_mouth = false
 
@@ -58,53 +59,14 @@ func spawn_testing_items():
 		create_draggable_item("cranberry_jam",Vector2(-75,-30))
 		create_draggable_item("sake",Vector2(-75,-30))
 		create_draggable_item("prickly_pear_jam",Vector2(-75,-30))
-	
-	#create_draggable_item("wheat",Vector2(-70,-30))
-	#create_draggable_item("wheat",Vector2(-70,-30))
-	#create_draggable_item("wheat",Vector2(-70,-30))
-	#
-	#create_draggable_item("flour",Vector2(-60,-20))
-	#create_draggable_item("bread",Vector2(-60,-20))
-	#create_draggable_item("sugarcane",Vector2(-40,-30))
-	#create_draggable_item("sugar",Vector2(-40,-30))
-	#create_draggable_item("flour",Vector2(-60,-20))
-	#create_draggable_item("bread",Vector2(-60,-20))
-	#create_draggable_item("sugarcane",Vector2(-40,-30))
-	#create_draggable_item("sugar",Vector2(-40,-30))
 	##
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("mushroom",Vector2(-75,-30))
 	create_draggable_item("carrot",Vector2(-75,-30))
-	#create_draggable_item("mushroom",Vector2(-75,-30))
-	#create_draggable_item("mushroom",Vector2(-75,-30))
-	#create_draggable_item("mushroom",Vector2(-75,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("fish",Vector2(-70,-30))
-	#create_draggable_item("potatoe",Vector2(-70,-30))
-	#create_draggable_item("carrot",Vector2(-70,-30))
-	#create_draggable_item("carrot",Vector2(-70,-30))
-	#create_draggable_item("carrot",Vector2(-70,-30))
 	##
 	create_draggable_item("vodka",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	create_draggable_item("wheat",Vector2(-30,-20))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#create_draggable_item("rum",Vector2(-50,-40))
-	#
+
 	create_draggable_item("gold",Vector2(-50,-40))
 	create_draggable_item("gold",Vector2(-60,-40))
 	create_draggable_item("gold",Vector2(-60,-40))
@@ -139,29 +101,33 @@ func consume_gold():
 	erase_item(item_in_focus)
 	refocus()
 	
-func deal_with_state() -> void:
-	if not left_down and not right_down and item_being_dragged: # Drop Item
-		print("drop item")
-		item_being_dragged.drop()
+# Extra unused variables to make modifications easier in future
+func deal_with_state(just_pressed : String = "none", just_released : String = "none") -> void:
+	if item_being_dragged and just_pressed == "left_click": # Drop Item
 		drop_item(item_being_dragged)
 		
-	if item_in_focus:
-		if left_down:
+	elif item_being_dragged and just_pressed == "right_click": # Drop One Item
+		if item_being_dragged.IS_BUNDLE and item_being_dragged.num_items > 1:
+			drop_one()
+		else:
+			drop_item(item_being_dragged)
+		
+	elif item_in_focus:
+		if just_pressed == "left_click":
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
-				item_in_focus.pick_up()
 				pickup_item(item_in_focus)
-		elif right_down:
+		elif just_pressed == "right_click":
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			elif item_in_focus.IS_BUNDLE == true:
 				grab_from_bundle()
 			else:
-				item_in_focus.pick_up()
+				$PickUp.play()
 				pickup_item(item_in_focus)
 				
-	if item_being_dragged and left_down and right_down: # Instantly absorb
+	if item_being_dragged and form_bundle_down: # Instantly absorb
 		absorbing_items = true
 		$BundleField.monitoring = true
 		if item_being_dragged.item_name in GLOBALCONSTS.ITEM_POLYGONS:
@@ -183,17 +149,22 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("left_click"):
 		left_down = true
-		deal_with_state()
+		deal_with_state("left_click")
 	if Input.is_action_just_released("left_click"):
 		left_down = false
-		print("left released")
-		deal_with_state()
+		deal_with_state("none","left_click")
 	if Input.is_action_just_pressed("right_click"):
 		right_down = true
-		deal_with_state()
+		deal_with_state("right_click")
 	if Input.is_action_just_released("right_click"):
 		right_down = false
-		deal_with_state()
+		deal_with_state("none", "right_click")
+	if Input.is_action_just_pressed("form_bundle"):
+		form_bundle_down = true
+		deal_with_state("form_bundle")
+	if Input.is_action_just_released("form_bundle"):
+		form_bundle_down = false
+		deal_with_state("none", "form_bundle")
 	
 	if item_being_dragged:
 		item_being_dragged.go_to_mouse_pos()
@@ -218,7 +189,7 @@ func grab_from_bundle():
 		item_in_focus.stop_focus()
 	temp.focus()
 	item_in_focus = temp
-	temp.pick_up()
+	$PickUp.play()
 	pickup_item(temp)
 
 #Pop items out of bundle
@@ -329,7 +300,7 @@ func pickup_item(item):
 	
 func drop_item_ukn():
 	if item_being_dragged:
-		item_being_dragged.drop()
+		$PutDown.play()
 		drop_item(item_being_dragged)
 		# Hack job to get bundles to not cause an error when getting a godchoice
 		absorbing_items = false
@@ -366,36 +337,35 @@ func is_last_item_bundle(item): # Hack Job
 			
 func is_last_item(item):
 	return (item_is_last and crops_planted[item.item_name] == 0)
-#called by the item itself
-func drop_item(item):
-	item_being_dragged = null
-	refocus()
 	
-	var delete_item = false
+	
+# Either consuming a bundle or an item	
+func attempt_consume_item(item, consume_max : int = 1):
 	var pos = TMM.TileLayer.to_local(item.position)
-	
 	var tile_name = TMM.TileLayer.get_tile_name_from_local(pos)
 	var terrain_tile_name = TMM.TerrainLayer.get_tile_name_from_local(pos)
 	pos = TMM.TileLayer.local_to_map(pos)
-	item_dropped.emit()
+	
+	var number_items_consumed = 0
 	
 	
 	if mouse_on_mouth:# Kind of ugly/repetitive code, it could be cleaned up
-		if item.IS_BUNDLE and not is_last_item_bundle(item):
-			SacrificeManager.sacrifice(item.item_name, item.num_items)
-			delete_item = true
-			$EatItem.play()
+		if item.IS_BUNDLE: 
+			if is_last_item_bundle(item) and consume_max == item.num_items: # Last of the items and trying to expend all, expend all but one
+				number_items_consumed = SacrificeManager.sacrifice(item.item_name, consume_max - 1)
+			else:
+				number_items_consumed = SacrificeManager.sacrifice(item.item_name, consume_max)
 		elif not item.IS_BUNDLE and not is_last_item(item):
-			SacrificeManager.sacrifice(item.item_name)
-			delete_item = true
-			$EatItem.play()
+			number_items_consumed = SacrificeManager.sacrifice(item.item_name)
 		else:
 			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
-	elif not item.IS_BUNDLE:
+		if number_items_consumed > 0:
+			$EatItem.play()
+	elif consume_max == 1:
 		#Attempt place crop
 		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] or terrain_tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 			if TMM.TileLayer2.is_empty(pos):#empty cell
-				delete_item = true
+				number_items_consumed = 1
 				TMM.TileLayer2.plant_crop(pos,item.item_name)
 				crops_planted[item.item_name] +=1
 				$DropInBuilding.play()
@@ -409,7 +379,9 @@ func drop_item(item):
 		elif not TMM.TileLayer2.is_empty(pos):#2nd layer cell not empty
 			var scene = TMM.TileLayer2.get_cell_scene(pos)
 			if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item):
-				delete_item = scene.place_item(item.item_name)
+				var delete_item = scene.place_item(item.item_name)
+				if delete_item:
+					number_items_consumed = 1
 				$DropInBuilding.play()
 			else:
 				$PutDown.play()
@@ -418,11 +390,33 @@ func drop_item(item):
 		#Item drop normaly
 	else:
 		$PutDown.play()
+	return number_items_consumed
+	
+func drop_one():
+	item_being_dragged.decrease_num()
+	var delete_item = attempt_consume_item(item_being_dragged, 1)
+	if not delete_item: # Create an item instance underneath bundle
+		output_resources_at_mouse([item_being_dragged.item_name])
+		
+		
+		
+		
+	
+#called by the item itself
+func drop_item(item):
+	item_being_dragged = null
+	refocus()
+	
+	item_dropped.emit()
+	var number_items_consumed = attempt_consume_item(item, item.num_items)
 	
 	item_is_last = false
 	
-	if delete_item:
+	if number_items_consumed >= item.num_items: # Consumed all items then delete
 		erase_item(item)
+	else: # Not all items consumed so decrement
+		item.decrease_num(number_items_consumed)
+		
 		
 func output_resources_at_mouse(resources):
 	output_resources(resources, get_global_mouse_position())
