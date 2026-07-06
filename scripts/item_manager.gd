@@ -5,7 +5,6 @@ var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var BUNDLED_ITEM = DRAGGABLE_ITEM
 var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var draggable_items = []
-var animated_items = []
 var item_is_last:bool = false
 var item_being_dragged
 var absorbing_items : bool = false
@@ -273,7 +272,7 @@ func create_draggable_item(item_name,pos):
 func create_animated_item(item_name, pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
 	add_child(temp)
-	animated_items.append(temp)
+	draggable_items.append(temp)
 	var up_factor = 16
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
 	temp.play_animation(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0))
@@ -317,9 +316,6 @@ func get_dragging_item_placeable():
 				return true
 	return false
 			
-func delete_animated_item(item):
-	animated_items.erase(item)
-	item.queue_free()
 func crop_uprooted(item_name):
 	crops_planted[item_name] -=1
 	
@@ -351,9 +347,12 @@ func attempt_consume_item(item, consume_max : int = 1):
 	
 	if mouse_on_mouth:# Kind of ugly/repetitive code, it could be cleaned up
 		if item.IS_BUNDLE: 
+			print("%s is a bundle." % [item.item_name])
 			if is_last_item_bundle(item) and consume_max == item.num_items: # Last of the items and trying to expend all, expend all but one
+				print("Attempt sacrifice all - one")
 				number_items_consumed = SacrificeManager.sacrifice(item.item_name, consume_max - 1)
 			else:
+				print("Attempt sacrifice all")
 				number_items_consumed = SacrificeManager.sacrifice(item.item_name, consume_max)
 		elif not item.IS_BUNDLE and not is_last_item(item):
 			number_items_consumed = SacrificeManager.sacrifice(item.item_name)

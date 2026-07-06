@@ -173,7 +173,6 @@ func give_coin_to_player():
 # Returns number of items successfully saccrificed
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
 	var number_items_consumed = 0
-	
 	# If part of requirments and the requirment is not yet filled
 	if sacrificed_item_name in requirements and filled_requirements[sacrificed_item_name] <= requirements[sacrificed_item_name]:
 		var max_consume = requirements[sacrificed_item_name] - filled_requirements[sacrificed_item_name] # max number of items boss can consume
