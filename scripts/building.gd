@@ -133,7 +133,7 @@ func update_stage():
 		ready_to_collect = false
 		
 func place_item(item_name):
-	if item_name in INPUT_ITEMS:
+	if not burnt and item_name in INPUT_ITEMS:
 		if num_items_inputed < ITEMS_TO_START_TIMER:
 			item_inputed = item_name
 			num_items_inputed += 1

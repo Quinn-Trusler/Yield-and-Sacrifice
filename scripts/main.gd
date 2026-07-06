@@ -12,7 +12,7 @@ func _ready():
 
 	#create building
 	#TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
-	#TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
+	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
 	pass
 	
 func _process(_delta: float) -> void:
@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 		#$BuildingManager.spawn_random_fish()#create_gift("wheat", 2)
 		#print("\n---------------------------------\n")
 		#$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
-		#$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
+		$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
 	
 		
 func punish():
