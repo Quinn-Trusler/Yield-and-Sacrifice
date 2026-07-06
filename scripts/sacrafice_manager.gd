@@ -16,7 +16,7 @@ var RNG = RandomNumberGenerator.new()
 var allowed_sacrifices = ["carrot"]
 var choice_type : CHOICE_TYPES = CHOICE_TYPES.Reward
 
-var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
+var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var CHECKMARK_IMG = load("res://art/ui/green_checkmark_outline.png")
 var FORWARD_SLASH_IMG = load("res://art/ui/forward_slash.png")
@@ -163,21 +163,12 @@ func update_sacrifice_text():
 			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
 			
 		
-		#func initialize(y, v,n : String,item_def : Dictionary ):
-	#item_name = n
-	#end_y = y
-	#vel_factor = v
-		
 func give_coin_to_player():
-	var temp = ANIMATED_ITEM.instantiate()
+	var temp = DRAGGABLE_ITEM.instantiate()
 	ItemManager.add_child(temp)
 	temp.position = $CoinSpawnLocation.position
-	temp.initialize(temp.position.y + 30, Vector2(3,0), "gold", GLOBALCONSTS.ITEM_DEF["gold"])
-	
-	
-	# Spawn flying coin at location in the sacrifice text
-	#var temp = FLYING_COIN_SCENE.instantiate()
-	#get_parent().add_child(temp)
+	temp.initialize("gold", GLOBALCONSTS.ITEM_DEF["gold"])
+	temp.play_animation(temp.position.y + 30, Vector2(3,0),)
 	
 # Returns number of items successfully saccrificed
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:

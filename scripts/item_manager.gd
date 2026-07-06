@@ -3,7 +3,6 @@ extends Node2D
 
 var DRAGGABLE_ITEM = preload("res://scenes/draggable_item.tscn")
 var BUNDLED_ITEM = DRAGGABLE_ITEM
-var ANIMATED_ITEM = preload("res://scenes/animated_item.tscn")
 var FLYING_COIN_SCENE = preload("res://scenes/flying_coin.tscn")
 var draggable_items = []
 var animated_items = []
@@ -272,11 +271,12 @@ func create_draggable_item(item_name,pos):
 	return temp
 
 func create_animated_item(item_name, pos):
-	var temp = ANIMATED_ITEM.instantiate()
+	var temp = DRAGGABLE_ITEM.instantiate()
 	add_child(temp)
 	animated_items.append(temp)
-	var up_factor = 16#RNG.randi_range(16,24)
-	temp.initialize(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0),item_name,GLOBALCONSTS.ITEM_DEF[item_name])
+	var up_factor = 16
+	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
+	temp.play_animation(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0))
 	temp.position = pos
 	
 # If the item must be replanted it sets item_is_last var to true

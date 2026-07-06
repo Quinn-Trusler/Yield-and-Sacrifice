@@ -2,9 +2,20 @@ extends AnimatedSprite2D
 
 class_name DraggableItem
 
+var RNG = RandomNumberGenerator.new()
+
 var item_name : String
 var IS_BUNDLE : bool = false
 var num_items : int  = 1
+
+
+@export var vel_range : Array[Vector2]
+@export var accel : Vector2
+var vel : Vector2
+var end_y : float
+var vel_factor : Vector2
+var running_animation : bool = false
+
 
 func initialize(n,item_def, n_items : int = 1):
 	set_num(n_items)
@@ -25,6 +36,26 @@ func initialize(n,item_def, n_items : int = 1):
 		$DraggableItemArea2D/CollisionPolygon2D.polygon = convert_polygon(GLOBALCONSTS.ITEM_POLYGONS[item_name])
 	else:
 		print("Warning: No colision polygon for " + item_name)
+		
+func play_animation(ending_y_position:float, velocity_factor:Vector2):
+	end_y = ending_y_position
+	vel_factor = velocity_factor
+	running_animation = true
+	set_vel()
+	
+func set_vel():
+	vel = Vector2(vel_factor.x * RNG.randf_range(vel_range[0].x, vel_range[0].y), vel_factor.y * RNG.randf_range(vel_range[1].x, vel_range[1].y))
+	
+func _process(delta: float) -> void:
+	if running_animation:
+		position += vel * delta
+		vel += accel * delta
+		if vel.y > 0 and position.y > end_y: #Moving downwards and below postion
+			running_animation = false
+	
+	
+
+
 
 func update_display_num() -> void:
 	# override
@@ -59,6 +90,7 @@ func convert_polygon(poly):
 
 func go_to_mouse_pos():
 	position = get_global_mouse_position()
+	running_animation = false
 
 func focus():
 	frame = 1
