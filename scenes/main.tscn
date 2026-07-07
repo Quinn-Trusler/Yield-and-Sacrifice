@@ -1447,6 +1447,7 @@ offset_top = -10.25
 offset_right = 42.75
 offset_bottom = 10.75
 pivot_offset = Vector2(20, 8)
+mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("10_dp3eg")
 theme_override_font_sizes/normal_font_size = 12
@@ -1498,7 +1499,7 @@ position = Vector2(0.5, -109.25)
 shape = SubResource("RectangleShape2D_rltrk")
 
 [node name="Counters" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1849964880]
-position = Vector2(-131, -75.5)
+position = Vector2(-131, -76)
 shape = SubResource("RectangleShape2D_w01tv")
 
 [node name="Up" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1572837083]
