@@ -62,5 +62,7 @@ theme_override_fonts/font = ExtResource("3_55gtw")
 theme_override_font_sizes/font_size = 8
 text = "1"
 
+[connection signal="area_entered" from="DraggableItemArea2D" to="." method="_on_draggable_item_area_2d_area_entered"]
+[connection signal="area_exited" from="DraggableItemArea2D" to="." method="_on_draggable_item_area_2d_area_exited"]
 [connection signal="mouse_entered" from="DraggableItemArea2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="DraggableItemArea2D" to="." method="_on_area_2d_mouse_exited"]

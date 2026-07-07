@@ -31,6 +31,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 
+[global_group]
+
+PushItemZone="Items in this zone get pushed off"
+
 [input]
 
 mouse_down={

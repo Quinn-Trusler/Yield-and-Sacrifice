@@ -16,6 +16,11 @@ var end_y : float
 var vel_factor : Vector2
 var running_animation : bool = false
 
+var in_push_zone : int = 0
+var push_vel : Vector2
+var push_direction : Vector2
+
+var in_focus = false
 
 func initialize(n,item_def, n_items : int = 1):
 	set_num(n_items)
@@ -52,10 +57,10 @@ func _process(delta: float) -> void:
 		vel += accel * delta
 		if vel.y > 0 and position.y > end_y: #Moving downwards and below postion
 			running_animation = false
-	
-	
-
-
+	elif in_push_zone and not in_focus:
+		push_vel += push_direction * GLOBALCONSTS.PUSH_ACCEL * delta
+		position += push_vel * delta
+		
 
 func update_display_num() -> void:
 	# override
@@ -93,10 +98,14 @@ func go_to_mouse_pos():
 	running_animation = false
 
 func focus():
+	in_focus = true
 	frame = 1
 
 func stop_focus():
+	in_focus = false
 	frame = 0
+	if in_push_zone: 
+		set_push_direction()
 	
 func _on_area_2d_mouse_entered() -> void:
 	get_parent().add_to_focus_list(self)
@@ -120,3 +129,17 @@ func print_polygon():
 			string += ", "
 	string += "]"
 	print(string)
+
+func set_push_direction():
+	push_direction = (GLOBALCONSTS.PUSH_ITEM_DEST - position).normalized() 
+	push_vel = push_direction * GLOBALCONSTS.PUSH_ITEM_SPEED
+
+func _on_draggable_item_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("PushItemZone"):
+		if in_push_zone == 0: # First no item zone entered
+			set_push_direction()
+		in_push_zone += 1
+
+func _on_draggable_item_area_2d_area_exited(area: Area2D) -> void:
+	if area.is_in_group("PushItemZone"):
+		in_push_zone -= 1
