@@ -34,6 +34,7 @@ var first_item_planted : bool = false
 @export var SacrificeManager : Node2D
 @export var TMM : Node2D
 @export var BuildingManager = Node2D
+@export var vel_range :Array[Vector2]
 
 signal item_picked_up(item_name, last_item)
 signal item_dropped()
@@ -172,11 +173,13 @@ func erase_item(item):
 	draggable_items.erase(item)
 	item.free()
 
+
+
 #drage items from bundle
 func grab_from_bundle():
 	var temp
 	if item_in_focus.get_num() == 2:#time to get deleted
-		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
+		create_animated_item(item_in_focus.item_name, get_global_mouse_position(), )
 		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
 		erase_item(item_in_focus)# delete bundled item
 	else:
@@ -269,13 +272,16 @@ func create_draggable_item(item_name,pos):
 	temp.position = pos
 	return temp
 
+func get_random_popout_vel():
+	return Vector2(RNG.randf_range(vel_range[0].x, vel_range[0].y), RNG.randf_range(vel_range[1].x, vel_range[1].y))
+
 func create_animated_item(item_name, pos):
 	var temp = DRAGGABLE_ITEM.instantiate()
 	add_child(temp)
 	draggable_items.append(temp)
 	var up_factor = 16
 	temp.initialize(item_name,GLOBALCONSTS.ITEM_DEF[item_name])
-	temp.play_animation(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0))
+	temp.play_animation(pos.y - up_factor,Vector2(up_factor/16.0,up_factor/16.0), get_random_popout_vel())
 	temp.position = pos
 	
 # If the item must be replanted it sets item_is_last var to true

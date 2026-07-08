@@ -1470,6 +1470,7 @@ GodChoiceManager = NodePath("../GodChoiceManager")
 SacrificeManager = NodePath("../SacrificeManager")
 TMM = NodePath("../TileMapManager")
 BuildingManager = NodePath("../BuildingManager")
+vel_range = Array[Vector2]([Vector2(-10, 10), Vector2(-90, -110)])
 
 [node name="item_pop" type="AudioStreamPlayer" parent="ItemManager" unique_id=58524719]
 stream = ExtResource("18_jscy8")

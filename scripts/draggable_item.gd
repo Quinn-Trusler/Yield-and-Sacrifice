@@ -8,8 +8,6 @@ var item_name : String
 var IS_BUNDLE : bool = false
 var num_items : int  = 1
 
-
-@export var vel_range : Array[Vector2]
 @export var accel : Vector2
 var vel : Vector2
 var end_y : float
@@ -42,14 +40,14 @@ func initialize(n,item_def, n_items : int = 1):
 	else:
 		print("Warning: No colision polygon for " + item_name)
 		
-func play_animation(ending_y_position:float, velocity_factor:Vector2):
+
+func play_animation(ending_y_position:float, velocity_factor:Vector2, velocity : Vector2):
 	end_y = ending_y_position
 	vel_factor = velocity_factor
 	running_animation = true
-	set_vel()
+	vel = vel_factor * velocity
 	
-func set_vel():
-	vel = Vector2(vel_factor.x * RNG.randf_range(vel_range[0].x, vel_range[0].y), vel_factor.y * RNG.randf_range(vel_range[1].x, vel_range[1].y))
+	
 	
 func _process(delta: float) -> void:
 	if running_animation:

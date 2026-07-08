@@ -168,7 +168,7 @@ func give_coin_to_player():
 	ItemManager.add_child(temp)
 	temp.position = $CoinSpawnLocation.position
 	temp.initialize("gold", GLOBALCONSTS.ITEM_DEF["gold"])
-	temp.play_animation(temp.position.y + 30, Vector2(3,0),)
+	temp.play_animation(temp.position.y + 30, Vector2(3,0),ItemManager.get_random_popout_vel())
 	
 # Returns number of items successfully saccrificed
 func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
