@@ -191,16 +191,19 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rltrk"]
-size = Vector2(143, 30.5)
+size = Vector2(136, 28.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w01tv"]
-size = Vector2(58, 89)
+size = Vector2(44, 23.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0a4y6"]
 size = Vector2(321, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f81ai"]
 size = Vector2(97, 289)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi6bd"]
+size = Vector2(50, 17.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_85g3d"]
 texture = ExtResource("2_tipki")
@@ -1496,11 +1499,11 @@ polygon = PackedVector2Array(1, -5, 5, 0, -1, 5, -4, -3)
 monitoring = false
 
 [node name="SacrificeBanner" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1236842751]
-position = Vector2(0.5, -109.25)
+position = Vector2(0, -110.25)
 shape = SubResource("RectangleShape2D_rltrk")
 
-[node name="Counters" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1849964880]
-position = Vector2(-131, -76)
+[node name="Counter" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1849964880]
+position = Vector2(-138, -108.75)
 shape = SubResource("RectangleShape2D_w01tv")
 
 [node name="Up" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1572837083]
@@ -1518,6 +1521,18 @@ shape = SubResource("RectangleShape2D_f81ai")
 [node name="Right" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=809458911]
 position = Vector2(208.5, -30.5)
 shape = SubResource("RectangleShape2D_f81ai")
+
+[node name="Counter2" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1050342490]
+position = Vector2(-135, -85.5)
+shape = SubResource("RectangleShape2D_xi6bd")
+
+[node name="Counter3" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=989489393]
+position = Vector2(-138, -61.75)
+shape = SubResource("RectangleShape2D_w01tv")
+
+[node name="Counter4" type="CollisionShape2D" parent="ItemManager/PushItemZone" unique_id=1197759658]
+position = Vector2(-135, -42.75)
+shape = SubResource("RectangleShape2D_xi6bd")
 
 [node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TMM", "ItemManager", "TutorialManager")]
 script = ExtResource("12_eb6dy")
@@ -1585,7 +1600,7 @@ autostart = true
 position = Vector2(-160, -63)
 
 [node name="TimerBG" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=2128667031]
-position = Vector2(29.5, 0)
+position = Vector2(21.5, 0)
 texture = ExtResource("15_jscy8")
 
 [node name="TimerSymbol" type="Sprite2D" parent="SacrificeManager/TimerGUI" unique_id=1831956212]
@@ -1669,7 +1684,7 @@ position = Vector2(-160, -108)
 script = ExtResource("34_j8jky")
 
 [node name="Sprite2D" type="Sprite2D" parent="RoundsRemaining" unique_id=390839846]
-position = Vector2(29.5, 0)
+position = Vector2(21.5, 0)
 texture = ExtResource("15_jscy8")
 
 [node name="RoundText" type="RichTextLabel" parent="RoundsRemaining" unique_id=246236487]
