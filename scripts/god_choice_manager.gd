@@ -152,7 +152,7 @@ func load_godchoices(godchoice_list, chained: bool, choice_type : CHOICE_TYPES):
 				var temp
 				temp = GodChoice_Scene.instantiate()
 				if chained:
-					if choice_type == CHOICE_TYPES.Shop:
+					if "cost" in choices[choice_name]: #if choice_type == CHOICE_TYPES.Shop:
 						temp = ShopChoice_Scene.instantiate()
 						temp.initialize(choice_name,choices[choice_name],num_gold, choice.get_id())
 					else:

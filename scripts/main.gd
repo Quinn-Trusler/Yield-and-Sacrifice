@@ -12,7 +12,7 @@ func _ready():
 
 	#create building
 	#TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
-	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
+	#TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
 	pass
 	
 func _process(_delta: float) -> void:
