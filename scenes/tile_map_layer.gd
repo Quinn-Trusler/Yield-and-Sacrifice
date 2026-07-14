@@ -6,7 +6,7 @@ var no_building_placement_tiles : Array = GLOBALCONSTS.NO_BUILDING_PLACEMENT_TIL
 func burn_farmland(coords: Vector2i):
 	place_burnt_farmland(coords, get_tile_name(coords))
 func unburn_farmland(coords: Vector2i):
-	place_farmland(coords, GLOBALCONSTS.MIDDLE_TILES[get_tile_name(coords)]["unburnt"])
+	place_farmland(coords, GLOBALCONSTS.BURNT_TILES_MATRIX[get_tile_name(coords)])
 	
 func place_burnt_farmland(coords: Vector2i, tile_name : String = "farmland") -> void:
 	print("placing burnt farmland",GLOBALCONSTS.MIDDLE_TILES[tile_name]["burnt_ID"])

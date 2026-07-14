@@ -22,20 +22,18 @@ var CROP_SCENE_ID = 1
 var FIRE_SCENE_ID = 2
 var BUILDING_SCENE_ID = 3
 var MIDDLE_TILES = {"farmland" : {"ID" : Vector2i(3, 3), "phantom_ID" : Vector2i(4,0), "burnt_ID" : Vector2i(3, 4)},
-					"dry_farmland" : {"ID" : Vector2i(3, 3), "phantom_ID" : Vector2i(4,0), "burnt_ID" : Vector2i(3, 4)},
 					"sandy_farmland" : {"ID" : Vector2i(4, 3), "phantom_ID" : Vector2i(5,0), "burnt_ID" : Vector2i(4, 4)},
 					"swamp_farmland" : {"ID" : Vector2i(5, 3), "phantom_ID" : Vector2i(6,0), "burnt_ID" : Vector2i(5, 4)}}
-var BURNT_TILES_MATRIX = {"burnt_dry_farmland": "farmland",
+var BURNT_TILES_MATRIX = {"burnt_farmland": "farmland",
  "burnt_sandy_farmland" : "sandy_farmland",
 "burnt_swamp_farmland": "swamp_farmland"} # Name on tile map: key in middle tiles
-#var FARMLAND_NAMES = ["dry_farmland","sandy_farmland", "swamp_farmland"] # Refers to the name scene on tilemap
 var gift_tile_layer_exceptions = ["burnt land"]
 
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
-var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water","swamp_water","swamp_water_edge", "lava", "dry_farmland", "sandy_farmland", "swamp_farmland","burnt_dry_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
-var UNBURNABLE_TILES = ["burnt land", "UI", "burnt_dry_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
+var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water","swamp_water","swamp_water_edge", "lava", "farmland", "sandy_farmland", "swamp_farmland","burnt_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
+var UNBURNABLE_TILES = ["burnt land", "UI", "burnt_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
 var UNBURNABLE_TERRAIN_TILES = ["water","swamp_water","swamp_water_edge","lava"]
-var INITIALLY_UNBURNABLE_TILES = ["dry_farmland", "sandy_farmland","swamp_farmland"] # Fire can not be placed directly on these tiles
+var INITIALLY_UNBURNABLE_TILES = ["farmland", "sandy_farmland","swamp_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
 "potato":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potato","potato","potato"],"frames":CROP_FRAMES_FOLDER + "potato.tres","offset":Vector2(0,-8)},
 "wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
@@ -43,13 +41,13 @@ var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on
 "rice":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["rice","rice"],"frames":CROP_FRAMES_FOLDER + "rice.tres","offset":Vector2(0,0)},
 "melon":{"stage_growth_duration":1.3,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["melon","melon","melon"],"frames":CROP_FRAMES_FOLDER + "melon.tres","offset":Vector2(0,0)}
 }
-var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":10,"place_on":["dry_farmland","sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
-"potato":{"display_name":"potato","img_name":ITEMS_FOLDER + "potato","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "carrot","is_animated":false,"points":10,"place_on":["farmland","sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
+"potato":{"display_name":"potato","img_name":ITEMS_FOLDER + "potato","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
 "plastic_bag":{"display_name":"Plastic Bag","img_name":ITEMS_FOLDER + "plastic_bag","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [5, -1]},
 "rice":{"display_name":"Rice","img_name":ITEMS_FOLDER + "rice","is_animated":false,"points":10,"place_on":["swamp_water_edge"],"reaction":REACTIONS.NONE,  "num_offset" : [6.5, 0]},
 "prickly_pear":{"display_name":"Prickly Pear","img_name":ITEMS_FOLDER + "prickly_pear","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [3, -1]},
 "devil_pepper":{"display_name":"Devil Pepper","img_name":ITEMS_FOLDER + "devil_pepper","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [6,-3]},
-"wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":10,"place_on":["dry_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
+"wheat":{"display_name":"Wheat","img_name":ITEMS_FOLDER + "wheat","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
 "sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["swamp_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
 "melon":{"display_name":"Melon","img_name":ITEMS_FOLDER + "melon","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
 "fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},

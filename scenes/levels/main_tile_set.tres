@@ -132,7 +132,7 @@ texture = ExtResource("1_my3fo")
 2:3/0/custom_data_0 = "dry_farmland"
 3:3/0 = 0
 3:3/0/terrain_set = 0
-3:3/0/custom_data_0 = "dry_farmland"
+3:3/0/custom_data_0 = "farmland"
 0:5/0 = 0
 0:5/0/terrain_set = 0
 0:5/0/terrains_peering_bit/right_side = 1
@@ -1123,7 +1123,7 @@ texture = ExtResource("1_my3fo")
 4:4/0 = 0
 4:4/0/custom_data_0 = "burnt_sandy_farmland"
 3:4/0 = 0
-3:4/0/custom_data_0 = "burnt_dry_farmland"
+3:4/0/custom_data_0 = "burnt_farmland"
 6:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fuf3a"]

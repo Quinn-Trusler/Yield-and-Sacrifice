@@ -8,7 +8,7 @@ extends Node2D
 @export var ItemManager : Node2D
 var RNG = RandomNumberGenerator.new()
 
-var atlas_decoded = {"carrot_0":Vector2(2,4),"dry_farmland":Vector2(1,1),"farmland":Vector2(3,3),"burnt tile":Vector2(1,11)}
+var atlas_decoded = {"carrot_0":Vector2(2,4),"farmland":Vector2(3,3),"burnt tile":Vector2(1,11)}
 
 var fish_spawn_spots : Array[Vector2i] = []
 var ui_tiles : Array[Vector2i] = []
@@ -20,6 +20,10 @@ var SIDES_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(0,-1),Vector2i(1,0),V
 var NINE_ADJACENT_POSITIONS : Array[Vector2i] = [Vector2i(-1,-1),Vector2i(-1,0),Vector2i(-1,1),Vector2i(0,-1),Vector2i(0,1),Vector2i(1,-1),Vector2i(1,0),Vector2i(1,1)]
 var FIRE_SPREAD_WEIGHTS : Array[float] = [0,1,2,0,0] # 0,1,2,3,4 spread respectivly
 var BURNT_TILE_ATLAS = Vector2i(3,13)
+
+
+var burnt_buildings : Array = []
+var burnt_farmland : Array = []
 
 var fish_spawning_active : bool = false
 
@@ -170,6 +174,7 @@ func finish_burn(pos) -> void:
 		ItemManager.output_resources(resources, TMM.TileLayer2.map_to_local(pos) + TMM.position)
 		if scene.HAS_BURNT_STATE:
 			scene.burn()
+			burnt_buildings.append(scene)
 			burn_terrain = false
 		else:
 			TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
@@ -179,10 +184,27 @@ func finish_burn(pos) -> void:
 	positions.append(pos)
 	if TMM.TileLayer.get_tile_name(pos) in GLOBALCONSTS.MIDDLE_TILES:
 		TMM.TileLayer.burn_farmland(pos)
+		burnt_farmland.append(pos)
 		burn_terrain = false
 
 	if burn_terrain:
 		TMM.TileLayer.set_cells_terrain_connect(positions, 0, 2)
+# Unburns all building in burn_buildings
+func unburn_burnt_buildings() -> void:
+	for scene in burnt_buildings:
+		scene.unburn()
+	burnt_buildings = []
+
+# Unburns all farmland in burnt_farmland
+func unburn_burnt_farmland() -> void:
+	for pos in burnt_farmland:
+		TMM.TileLayer.unburn_farmland(pos)
+	burnt_farmland = []
+
+func get_number_burnt_buildings() -> int:
+	return len(burnt_buildings)
+func get_number_burnt_farmland() -> int:
+	return len(burnt_farmland)
 
 # This is for initially placing fires and NOT for spreading
 func is_valid_fire_placement(pos):

@@ -47,7 +47,7 @@ func generate_level(level_name, level_dificulty):
 
 		
 		var shop_items = [
-		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
+		ChainedReward.new(["unburn buildings","+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
 		ChainedReward.new(["farmland","farmland","farmland"],1)]
 
 		var rewards = [ChainedReward.new(["farmland","barrel","mushroom patch","barrel","mushroom patch", "barrel"], 0),

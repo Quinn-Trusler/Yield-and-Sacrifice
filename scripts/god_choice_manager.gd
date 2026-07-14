@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold}
+enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold, Unburn_Buildings}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Choose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Choose a punishment!"
@@ -29,7 +29,8 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
 "swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "swamp_farmland", "cost" : 6, "amt" : 1},
 "+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
-"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
+"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1},
+"unburn buildings": {"title": "Repairs","img": "res://art/godchoice/time.png","text": "Farmland, plants, buildings that where burned will be repaired","type": TYPES.Unburn_Buildings,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 }
 var rewards = {4:["potato","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}
@@ -119,13 +120,11 @@ func add_choice_to_hbox(choice):
 	$Node2D/HBoxContainer.add_child(choice)
 
 func godchoice_restricted(choice_name, choice_type : CHOICE_TYPES):
-	if choice_type == CHOICE_TYPES.Shop:
-		if not (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
-			return false
+	if (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
 		return true
-	if choice_type == CHOICE_TYPES.Punishment:
-		if not (choices[choice_name]["type"] == TYPES.Lose_All_Gold and num_gold <= 4):
-			return false
+	if (choices[choice_name]["type"] == TYPES.Unburn_Buildings and (BuildingManager.get_number_burnt_buildings() + BuildingManager.get_number_burnt_farmland() == 0)):
+		return true
+	if (choices[choice_name]["type"] == TYPES.Lose_All_Gold and num_gold <= 4):
 		return true
 	return false
 
@@ -314,6 +313,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		BuildingManager.fish_spawning_active = true
 	elif choice["type"] == TYPES.Lose_All_Gold:
 		increase_gold(-num_gold)
+	elif choice["type"] == TYPES.Unburn_Buildings:
+		unburn_buildings()
 	elif choice["type"] == TYPES.Life:
 		if choice["amt"] == 1: 
 			Lives.gain_life()
@@ -334,6 +335,10 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 			await close_godchoice()
 			next_round()
 
+func unburn_buildings():
+	print("Unburning all buildings and farmland")
+	BuildingManager.unburn_burnt_buildings()
+	BuildingManager.unburn_burnt_farmland()
 
 func place_building(choice_name : String):
 	BuildingPlacementManager.toggle_on(choices[choice_name]["reward"])
