@@ -310,7 +310,7 @@ func drop_item_ukn():
 		# Hack job to get bundles to not cause an error when getting a godchoice
 		absorbing_items = false
 		$BundleField.monitoring = false
-		
+
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))

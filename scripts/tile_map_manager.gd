@@ -20,11 +20,18 @@ func get_building_manager():
 func get_item_manager():
 	return ItemManager
 func _process(_delta: float) -> void:
-	var tile_pos = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
-	if ItemManager.get_dragging_item_placeable() or BuildingManager.get_building_interactable(tile_pos):
-		display_tile_outline(tile_pos)
+	var mouse_tile_pos = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
+	if BuildingManager.get_building_interactable(mouse_tile_pos):
+		display_tile_outline(mouse_tile_pos)
 	else:
-		hide_tile_outline()
+		if ItemManager.item_being_dragged:
+			var item_tile_pos = TileLayer.local_to_map(TileLayer.to_local(ItemManager.item_being_dragged.position))
+			if item_tile_pos and ItemManager.get_dragging_item_placeable():
+				display_tile_outline(item_tile_pos)
+			else:
+				hide_tile_outline()
+		else:
+			hide_tile_outline()
 
 func display_tile_outline(pos):#input tile coords
 	$TileOutline.visible = true
