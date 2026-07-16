@@ -174,12 +174,21 @@ func erase_item(item):
 	item.free()
 
 
+func disband_all_bundles():
+	for item in draggable_items:
+		if item.IS_BUNDLE:
+			disband_bundle(item)
+# Bundle becomes a bunch of items all in one spot
+func disband_bundle(item):
+	for i in item.get_num() - 1:
+		create_draggable_item(item.item_name,item.position)
+		item.decrease_num()
 
 #drage items from bundle
 func grab_from_bundle():
 	var temp
 	if item_in_focus.get_num() == 2:#time to get deleted
-		create_animated_item(item_in_focus.item_name, get_global_mouse_position(), )
+		create_animated_item(item_in_focus.item_name, get_global_mouse_position())
 		temp = create_draggable_item(item_in_focus.item_name,get_global_mouse_position())
 		erase_item(item_in_focus)# delete bundled item
 	else:
@@ -311,6 +320,14 @@ func drop_item_ukn():
 		absorbing_items = false
 		$BundleField.monitoring = false
 
+	
+
+func scatter_items(): #Want to bound these items so they don't overshoot # Unbundle items
+	disband_all_bundles()
+	for item in draggable_items:
+		var pos = item.position + Vector2(RNG.randi_range(-100, 100), RNG.randi_range(-100, 100)).normalized() * RNG.randi_range(GLOBALCONSTS.SCATTER_ITEM_DIST[0], GLOBALCONSTS.SCATTER_ITEM_DIST[1])
+		item.scatter_to(pos, RNG.randf_range(GLOBALCONSTS.SCATTER_ITEM_TIME[0],GLOBALCONSTS.SCATTER_ITEM_TIME[1]), RNG.randi_range(GLOBALCONSTS.SCATTER_ITEM_ROTATION[0],GLOBALCONSTS.SCATTER_ITEM_ROTATION[1]))
+
 func get_dragging_item_placeable():
 	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
 		var pos = TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))
@@ -404,10 +421,6 @@ func drop_one():
 		output_resources_at_mouse([item_being_dragged.item_name])
 		
 		
-		
-		
-	
-#called by the item itself
 func drop_item(item):
 	item_being_dragged = null
 	refocus()

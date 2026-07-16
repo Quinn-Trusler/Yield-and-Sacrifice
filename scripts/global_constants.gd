@@ -121,6 +121,10 @@ var PUSH_ITEM_SPEED = 0
 var PUSH_ACCEL = 12
 var PUSH_ITEM_DEST = Vector2.ZERO
 
+var SCATTER_ITEM_DIST = [40, 100]
+var SCATTER_ITEM_ROTATION = [-25,25]
+var SCATTER_ITEM_TIME = [0.6, 1.2]
+
 
 var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 7.0], [-0.5, -3.5], [-1.5, -5.5], [1.5, -9.5], [8.5, -9.0], [10.5, -5.5], [9.5, -1.0], [3.5, 0.5]],
 "potato": [[0.0, 5.0], [4.5, 5.5], [7.5, 2.5], [7.5, -0.5], [1.5, -5.5], [-5.5, -5.5], [-7.5, -4.0], [-7.5, 0.5], [-4.5, 3.5]],

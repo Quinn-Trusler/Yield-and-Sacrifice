@@ -41,7 +41,6 @@ sprite_frames = SubResource("SpriteFrames_c446u")
 frame = 5
 frame_progress = 0.468647
 script = ExtResource("1_c446u")
-vel_range = Array[Vector2]([Vector2(-10, 10), Vector2(-90, -110)])
 accel = Vector2(0, 250)
 
 [node name="DraggableItemArea2D" type="Area2D" parent="." unique_id=1458869720]

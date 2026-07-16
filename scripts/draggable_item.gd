@@ -13,10 +13,12 @@ var vel : Vector2
 var end_y : float
 var vel_factor : Vector2
 var running_animation : bool = false
+var scatter_tween
 
 var in_push_zone : int = 0
 var push_vel : Vector2
 var push_direction : Vector2
+
 
 var in_focus = false
 
@@ -47,7 +49,19 @@ func play_animation(ending_y_position:float, velocity_factor:Vector2, velocity :
 	running_animation = true
 	vel = vel_factor * velocity
 	
+func scatter_to(pos : Vector2, time : float, rot : int):
+	scatter_tween = create_tween()
+	scatter_tween.set_trans(Tween.TRANS_SPRING)
+	scatter_tween.set_ease(Tween.EASE_IN_OUT)
+	scatter_tween.tween_property(self, "position", pos, time)
+
 	
+	var rotation_tween = create_tween()
+	#rotation_tween.set_trans(Tween.TRANS_SPRING)
+	rotation_tween.set_ease(Tween.EASE_IN_OUT)
+	rotation_tween.set_parallel().tween_property(self, "rotation_degrees", rot, time/2)
+	rotation_tween.chain().tween_property(self, "rotation_degrees", -rot, time/2)
+	rotation_tween.chain().tween_property(self, "rotation_degrees", 0, time/2)
 	
 func _process(delta: float) -> void:
 	if running_animation:
@@ -134,7 +148,11 @@ func set_push_direction():
 
 func _on_draggable_item_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("PushItemZone"):
-		if in_push_zone == 0: # First no item zone entered
+		if scatter_tween: # Hacky way of stopping scatter from going out of bounds too much
+			scatter_tween.kill()
+			push_direction = (GLOBALCONSTS.PUSH_ITEM_DEST - position).normalized() 
+			push_vel = push_direction * (GLOBALCONSTS.PUSH_ITEM_SPEED + 200) 
+		elif in_push_zone == 0: # First no item zone entered
 			set_push_direction()
 		in_push_zone += 1
 

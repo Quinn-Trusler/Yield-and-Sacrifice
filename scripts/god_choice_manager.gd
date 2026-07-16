@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold, Unburn_Buildings}
+enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold, Unburn_Buildings, Scatter_Items}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Choose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Choose a punishment!"
@@ -24,6 +24,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This wishing well works in reverse.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
 "activate fish":{"title": "Let There be Fish","img": "res://art/godchoice/fish.png","text":"Fish will occasionally appear in water","item unlock":["fish"],"unlock literal":true,"type": TYPES.Activate_Fish,"reward": "fish activation"},
 "burn land":{"title": "Burn Land","img": "res://art/godchoice/burn_land.png","text":"Click the fires to extinguish them","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
+"scatter items":{"title": "Scatter Items","img": "res://art/godchoice/time.png","text":"Your items get scattered","type": TYPES.Scatter_Items,"item unlock":null,"unlock literal":false,"reward": null},
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 "farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
 "sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
@@ -308,6 +309,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		increase_gold(-num_gold)
 	elif choice["type"] == TYPES.Unburn_Buildings:
 		unburn_buildings()
+	elif choice["type"] == TYPES.Scatter_Items:
+		ItemManager.scatter_items()
 	elif choice["type"] == TYPES.Life:
 		if choice["amt"] == 1: 
 			Lives.gain_life()
