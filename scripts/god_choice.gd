@@ -18,6 +18,7 @@ func set_all_buttons_invisible():
 	$Cost.visible = false
 	
 func initialize(c_name,choice,gold_num : int, chain_i : int = -1):
+	#$Name.scale = Vector2(0.5,0.5)
 	choice_name = c_name
 	$Sprite2D.texture = load(choice["img"])
 	$Name.text = choice["title"]
