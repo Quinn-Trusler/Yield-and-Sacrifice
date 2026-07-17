@@ -19,6 +19,7 @@ func get_building_manager():
 	return BuildingManager
 func get_item_manager():
 	return ItemManager
+
 func _process(_delta: float) -> void:
 	var mouse_tile_pos = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
 	if BuildingManager.get_building_interactable(mouse_tile_pos):

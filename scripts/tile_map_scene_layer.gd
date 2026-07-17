@@ -30,11 +30,12 @@ func _register_child(child):
 		building_names_temp.erase(vectored_coords)
 	elif child.BUILDING_TYPE == "building":
 		child.connectItemSignals(ItemManager)
-		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_names_temp[vectored_coords]]
-		child.initialize(building_def, next_building_phantom)
+		var building_name = building_names_temp[vectored_coords]
+		var building_def =  GLOBALCONSTS.BUILDING_DEF[building_name]
+		child.initialize(building_name, building_def, next_building_phantom)
 		next_building_phantom = false
 			
-		if child.BUILDING_DISPLAY_NAME == "Gift": # Very bad idea to use DISPLAY_NAME for functionality
+		if building_name == "god_gift" or building_name == "restock_box": # Very bad idea to use DISPLAY_NAME for functionality
 			child.OUTPUT_ITEMS = BuildingManager.get_gift_items()
 		var temp_meta = [coords]
 		if "extra_tiles" in building_def:

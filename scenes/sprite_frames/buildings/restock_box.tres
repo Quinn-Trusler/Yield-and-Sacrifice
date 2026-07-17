@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dpp27fu3tj1m3"]
+
+[ext_resource type="Texture2D" uid="uid://43lixoxoys2b" path="res://art/buildings/restock_box.png" id="1_t0ip1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t0ip1")
+}],
+"loop": 1,
+"name": &"0",
+"speed": 5.0
+}]

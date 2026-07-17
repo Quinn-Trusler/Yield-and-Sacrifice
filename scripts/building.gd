@@ -45,8 +45,10 @@ var animation_rest_timer = 0
 var original_pos_y
 var delta_total = 0
 
-func initialize(def : Dictionary, is_phantom : bool) -> void:
-	#BUILDING_NAME = building_name
+var do_wobble : bool = false
+
+func initialize(building_name : String, def : Dictionary, is_phantom : bool) -> void:
+	BUILDING_NAME = building_name
 	BUILDING_DISPLAY_NAME = def["display_name"]
 	OUTPUT_ITEMS = def["output_items"]
 	ITEMS_TO_START_TIMER = def["items_to_start_timer"]
@@ -70,6 +72,8 @@ func initialize(def : Dictionary, is_phantom : bool) -> void:
 	if is_phantom:
 		modulate = GLOBALCONSTS.BUILDING_PHANTOM_MODULATION
 	
+	if BUILDING_NAME == "god_gift" or BUILDING_NAME == "restock_box":
+		do_wobble = true
 	
 	update_stage()
 	arrow_pos_y = -10
@@ -103,7 +107,7 @@ func _process(delta: float) -> void:
 
 		$Arrow.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
 		$ArrowRed.position.y = arrow_pos_y + 4 * sin(arrow_freq * 2 * PI * delta_gift)
-		if BUILDING_DISPLAY_NAME == "Gift":
+		if do_wobble:
 			rotation = PI/180* 20*sin(delta_gift*2)
 	
 func go_up_a_stage():#go up a stage

@@ -1534,10 +1534,11 @@ shape = SubResource("RectangleShape2D_w01tv")
 position = Vector2(-135, -42.75)
 shape = SubResource("RectangleShape2D_xi6bd")
 
-[node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TMM", "ItemManager", "TutorialManager")]
+[node name="BuildingManager" type="Node2D" parent="." unique_id=1061930057 node_paths=PackedStringArray("TMM", "ItemManager", "SacrificeManager", "TutorialManager")]
 script = ExtResource("12_eb6dy")
 TMM = NodePath("../TileMapManager")
 ItemManager = NodePath("../ItemManager")
+SacrificeManager = NodePath("../SacrificeManager")
 TutorialManager = NodePath("../TutorialManager")
 
 [node name="FishTimer" type="Timer" parent="BuildingManager" unique_id=158535035]

@@ -6,6 +6,7 @@ extends Node2D
 #@export var TerrainLayer : Node2D
 @export var TMM : Node2D
 @export var ItemManager : Node2D
+@export var SacrificeManager : Node2D
 var RNG = RandomNumberGenerator.new()
 
 var atlas_decoded = {"carrot_0":Vector2(2,4),"farmland":Vector2(3,3),"burnt tile":Vector2(1,11)}
@@ -91,6 +92,11 @@ func get_building_interactable(pos):
 				return scene.get_harvestable()
 	return false
 
+func create_restock_box():
+	gift_items = SacrificeManager.get_allowed_sacrifices()
+	
+	var pos = get_random_valid_pos("restock_box")
+	place_building(pos, "restock_box")
 
 #Only one gift can be created per frame
 func create_gift(item,num):
@@ -99,7 +105,6 @@ func create_gift(item,num):
 		items.append(item)
 	gift_items = items
 	
-	#var i = RNG.randi_range(0,len(gift_spawn_spots)-1)
 	var pos = get_random_valid_pos("god_gift")
 	place_building(pos, "god_gift")
 	
@@ -257,7 +262,7 @@ func get_random_valid_pos(building_name : String) -> Vector2i:
 	while num_tiles_checked < TILE_CHECK_LIMIT:
 		var pos = get_random_pos()
 		num_tiles_checked += 1
-		if building_name == "god_gift":
+		if building_name == "god_gift" or building_name == "restock_box":
 			if is_valid_gift_location(pos, building_name):
 				return pos
 		elif is_valid_building_location(pos, building_name):

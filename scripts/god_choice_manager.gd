@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold, Unburn_Buildings, Scatter_Items}
+enum TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Activate_Fish, Life, Lose_All_Gold, Unburn_Buildings, Scatter_Items, Restock_Box}
 enum CHOICE_TYPES {Reward, Punishment, Shop}
 var REWARD_TEXT = "I am Satisfied.\n Choose a reward."
 var PUNISH_TEXT = "I am Unsatisfied!\n Choose a punishment!"
@@ -9,6 +9,7 @@ var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
 "potato":{"title": "Potato","img": "res://art/items/potato.png","text":"default","type": TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
+"restock box":{"title": "Restock Box","img": "res://art/buildings/restock_box.png","text": "Contains 1 of each unlocked item.","type": TYPES.Restock_Box,"item unlock":null,"unlock literal":true,"reward": null},
 "rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water's edge.","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
 "melon":{"title": "Melon","img": "res://art/items/melon.png","text":"default","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
@@ -314,6 +315,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		unburn_buildings()
 	elif choice["type"] == TYPES.Scatter_Items:
 		ItemManager.scatter_items()
+	elif choice["type"] == TYPES.Restock_Box:
+		BuildingManager.create_restock_box()
 	elif choice["type"] == TYPES.Life:
 		if choice["amt"] == 1: 
 			Lives.gain_life()

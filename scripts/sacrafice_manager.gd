@@ -109,7 +109,10 @@ func update_timer_text():
 func add_allowed_sacrifice(item_name):
 	if not(item_name in allowed_sacrifices):
 		allowed_sacrifices.append(item_name)
-	
+
+func get_allowed_sacrifices():
+	return allowed_sacrifices
+
 # Will get item not already in requirments list
 func get_random_sacrifice_item():
 	while true:
