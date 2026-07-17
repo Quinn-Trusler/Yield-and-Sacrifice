@@ -12,6 +12,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water's edge.","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
 "melon":{"title": "Melon","img": "res://art/items/melon.png","text":"default","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
+"barley":{"title": "Barley","img": "res://art/items/barley.png","text":"Yet another resource to manage! Gain 2 barley.","type": TYPES.Item,"item unlock":["barley"],"unlock literal":true,"reward": "barley","amt" : 2},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
@@ -52,7 +53,9 @@ var unlock_map = [[["barrel", "sugarcane"],["rum"]],
 				[["barrel", "cranberry"],["cranberry_jam"]],
 				[["barrel", "melon"],["melon_jam"]],
 				[["mill", "sugarcane"],["sugar"]],
+				[["mill", "barley"],["barley_flour"]],
 				[["mill", "wheat"],["flour"]],
+				[["mill", "oven", "barley_flower"],["barley_bread"]],
 				[["mill", "oven", "wheat"],["bread"]],
 				[["oven","rice"],["cooked_rice"]]]
 

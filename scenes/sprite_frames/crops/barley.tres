@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://biajfopmoi7e3"]
+
+[ext_resource type="Texture2D" uid="uid://c5tpa8ebgrnch" path="res://art/crops/barley.png" id="1_1rbyc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0p4e"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pimv"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa7c6"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm6uv"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbqoh"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mhbu"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74qrw"]
+atlas = ExtResource("1_1rbyc")
+region = Rect2(96, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0p4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pimv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa7c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm6uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbqoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mhbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74qrw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]

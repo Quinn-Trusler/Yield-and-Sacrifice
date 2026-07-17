@@ -39,7 +39,7 @@ func generate_level(level_name, level_dificulty):
 	var total_rounds = GLOBALCONSTS.LEVELDEF[level_name]["total_rounds"][level_dificulty]
 	print("Round time: ", round_time, total_rounds)
 	var tile_layers = {}
-	var punishments = {20:["scatter items","burn land","-2 seconds"],1000:["burn land"]}
+	var punishments = {20:["scatter items","burn land","-2 seconds", "barley"],1000:["burn land"]}
 	
 	if level_name == "grass":
 		var boss = load("res://scenes/boss/devil_boss.tscn")
