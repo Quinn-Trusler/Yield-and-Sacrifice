@@ -67,8 +67,10 @@ func _process(delta: float) -> void:
 	animate_devil()
 	
 func animate_devil() -> void:
-	$AnimatedSprite2D.rotation = 20*(PI/180)*sin(delta_total)
-	$MouthHitbox.rotation = 20*(PI/180)*sin(delta_total)
+	#$AnimatedSprite2D.scale = Vector2i(1,1) * (1 + 0.05*abs(sin(delta_total)))
+	#$AnimatedSprite2D.rotation = 20*(PI/180)*sin(delta_total)
+	#$MouthHitbox.rotation = 20*(PI/180)*sin(delta_total)
+	pass
 
 func _on_mouth_hitbox_mouse_entered() -> void:
 	#want to send signal up and say to eat item

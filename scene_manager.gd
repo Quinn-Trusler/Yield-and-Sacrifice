@@ -43,7 +43,7 @@ func generate_level(level_name, level_dificulty):
 	
 	if level_name == "grass":
 		var boss = load("res://scenes/boss/devil_boss.tscn")
-		var boss_position = Vector2.ZERO
+		var boss_position = Vector2.ZERO - Vector2(8,8)
 
 		
 		var shop_items = [
