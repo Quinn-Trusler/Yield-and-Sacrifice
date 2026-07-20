@@ -49,12 +49,17 @@ func set_tile_layers(tile_layers):
 	TileLayer = tile_layers["TileLayer"].instantiate()
 	TileLayer2 = tile_layers["TileLayer2"].instantiate()
 	EffectLayer = tile_layers["EffectLayer"].instantiate()
+
 	
 	add_child(TerrainLayer)
 	add_child(DecorLayer)
 	add_child(TileLayer)
+	if "DecorLayer2" in tile_layers:
+		var DecorLayer2 = tile_layers["DecorLayer2"].instantiate()
+		add_child(DecorLayer2)
 	add_child(TileLayer2)
 	add_child(EffectLayer)
+	
 	$TileOutline.move_to_front()
 	
 	

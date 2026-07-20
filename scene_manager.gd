@@ -76,6 +76,7 @@ func generate_level(level_name, level_dificulty):
 		tile_layers["DecorLayer"] = load("res://scenes/levels/sand/decor_layer.tscn")
 		tile_layers["TerrainLayer"] = load("res://scenes/levels/sand/terrain_layer.tscn")
 		tile_layers["EffectLayer"] = load("res://scenes/levels/plains/effect_layer.tscn")
+		tile_layers["DecorLayer2"] = load("res://scenes/levels/sand/decor_layer_2.tscn")
 	
 		load_level(round_time, shop_items, rewards, punishments, tile_layers, boss, boss_position, total_rounds)
 	elif level_name == "swamp": #kinda like shrek

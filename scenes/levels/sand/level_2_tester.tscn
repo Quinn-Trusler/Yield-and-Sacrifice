@@ -1,20 +1,25 @@
-[gd_scene format=3 uid="uid://4w4cuv8llkbg"]
+[gd_scene format=4 uid="uid://4w4cuv8llkbg"]
 
 [ext_resource type="PackedScene" uid="uid://bostypfuff7cg" path="res://scenes/levels/sand/terrain_layer.tscn" id="1_4n3uv"]
 [ext_resource type="PackedScene" uid="uid://gkedkuerpvuc" path="res://scenes/levels/sand/decor_layer.tscn" id="2_8oll4"]
 [ext_resource type="PackedScene" uid="uid://curf4nei0a3ow" path="res://scenes/levels/sand/tile_map_layer.tscn" id="3_jyl2r"]
 [ext_resource type="PackedScene" uid="uid://xug5sbnv85j3" path="res://scenes/levels/sand/tile_map_layer2.tscn" id="4_cphnv"]
 [ext_resource type="PackedScene" uid="uid://c60asmxn0lwj4" path="res://scenes/boss/shark_boss.tscn" id="5_8oll4"]
+[ext_resource type="PackedScene" uid="uid://dxkc66xo8w83r" path="res://scenes/levels/sand/decor_layer_2.tscn" id="5_jyl2r"]
 
 [node name="Level2Tester" type="Node2D" unique_id=1153543723]
+metadata/_edit_horizontal_guides_ = [122.0]
 
-[node name="TerrainLayer" parent="." unique_id=343643866 instance=ExtResource("1_4n3uv")]
+[node name="TerrainLayer" parent="." unique_id=522789636 instance=ExtResource("1_4n3uv")]
 
-[node name="DecorLayer" parent="." unique_id=1896796520 instance=ExtResource("2_8oll4")]
+[node name="DecorLayer" parent="." unique_id=376980532 instance=ExtResource("2_8oll4")]
 
 [node name="TileMapLayer" parent="." unique_id=284882148 instance=ExtResource("3_jyl2r")]
+tile_map_data = PackedByteArray("AADy//3/AAALAAEAAADz//3/AAALAAEAAAD0//3/AAALAAEAAAD0//7/AAALAAEAAADz//7/AAALAAEAAADy//7/AAALAAEAAADy////AAALAAEAAADz////AAALAAEAAAD0////AAALAAEAAAD3//z/AAALAAEAAAD4//z/AAALAAEAAAD5//z/AAALAAEAAAD6//z/AAALAAEAAAD7//z/AAALAAEAAAD8//z/AAALAAEAAAD9//z/AAALAAEAAAD+//z/AAALAAEAAAD///3/AAALAAEAAAD+//3/AAALAAEAAAD9//3/AAALAAEAAAD8//3/AAALAAEAAAD7//3/AAALAAEAAAD6//3/AAALAAEAAAD5//3/AAALAAEAAAD4//3/AAALAAEAAAD3//3/AAALAAEAAAD2/wEAAAAEAAMAAAD4/wUAAAAEAAMAAAD//wEAAAALAAEAAAAAAAEAAAALAAEAAAAAAAIAAAALAAEAAAAAAAMAAAALAAEAAAD//wIAAAALAAEAAAD//wMAAAALAAEAAAD0/wAAAAALAAEAAADz/wAAAAALAAEAAADy/wAAAAALAAEAAADy/wEAAAALAAEAAAD0/wEAAAALAAEAAADz/wEAAAALAAEAAADy//z/AAALAAEAAADz//z/AAALAAEAAAD0//z/AAALAAEAAAA=")
 
 [node name="TileMapLayer2" parent="." unique_id=1920032927 instance=ExtResource("4_cphnv")]
+
+[node name="DecorLayer2" parent="." unique_id=1659811946 instance=ExtResource("5_jyl2r")]
 
 [node name="shark_boss" parent="." unique_id=1423359932 instance=ExtResource("5_8oll4")]
 position = Vector2(0, 40)
