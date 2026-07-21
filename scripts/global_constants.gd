@@ -53,6 +53,13 @@ var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":ITEMS_FOLDER + "car
 "sugarcane":{"display_name":"Sugarname","img_name":ITEMS_FOLDER + "sugarcane","is_animated":false,"points":10,"place_on":["swamp_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
 "melon":{"display_name":"Melon","img_name":ITEMS_FOLDER + "melon","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
 "fish":{"display_name":"Fish","img_name":ITEMS_FOLDER + "fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_1":{"display_name":"Tropical Fish 1","img_name":ITEMS_FOLDER + "tropical_fish_1","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_2":{"display_name":"Tropical Fish 2","img_name":ITEMS_FOLDER + "tropical_fish_2","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_3":{"display_name":"Tropical Fish 3","img_name":ITEMS_FOLDER + "tropical_fish_3","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tentacle":{"display_name":"Tentacle","img_name":ITEMS_FOLDER + "tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"shrimp":{"display_name":"Shrimp","img_name":ITEMS_FOLDER + "shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"cooked_tentacle":{"display_name":"Cooked Tentacle","img_name":ITEMS_FOLDER + "cooked_tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"cooked_shrimp":{"display_name":"Cooked Shrimp","img_name":ITEMS_FOLDER + "cooked_shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
 "sugar":{"display_name":"Sugar","img_name":ITEMS_FOLDER + "sugar","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,3]},
 "cooked_rice":{"display_name":"Cooked Rice","img_name":ITEMS_FOLDER + "cooked_rice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [8.5,-1]},
 "flour":{"display_name":"Flour","img_name":ITEMS_FOLDER + "flour","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,1]},
@@ -80,7 +87,7 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
 	"restock_box":{"display_name":"Restock Box","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "restock_box.tres", "offset":[0,-3], "bounce":false},
 	"barrel":{"display_name":"Barrel","output_items":["vodka"],"items_to_start_timer":1,"input_items":{"potato" : "vodka", "sugarcane":"rum","rice":"sake","prickly_pear":"prickly_pear_jam","melon":"melon_jam","cranberry":"cranberry_jam"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
-	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread", "rice" : "cooked_rice", "barley_flour" : "barley_bread"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true, "has_burnt_state" : true},
+	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread", "rice" : "cooked_rice", "barley_flour" : "barley_bread", "tentacle" : "cooked_tentacle", "shrimp":"cooked_shrimp"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true, "has_burnt_state" : true},
 	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar", "barley" : "barley_flour"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-2.5], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
 	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass", "swamp_grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
 	"devil_vine":{"display_name":"Devil Vine","output_items":["devil_pepper"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 4, "place_on":["sand"],"frames": BUILDINGS_FRAMES_FOLDER + "devil_vine.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
@@ -120,7 +127,7 @@ var ITEM_DIM_COLOUR : Color = Color(1,1,1,0)
 var FLYING_COIN_END_POS = Vector2(-152.0, -41)
 var ROUND_COMPLETION_GOLD = 0
 var ROUND_TIME = 23
-var MAX_FISH = 7
+var MAX_FISH = 20#7
 
 var PUSH_ITEM_SPEED = 0
 var PUSH_ACCEL = 12

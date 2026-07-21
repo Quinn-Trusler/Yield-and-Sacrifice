@@ -24,6 +24,7 @@ var BOSS_SCENE = preload("res://scenes/boss/devil_boss.tscn")
 var boss : Node2D
 
 var mouse_on_mouth = false
+var godchoice_ui_open = false
 
 #Tutorial
 var first_sacrifice_made: bool = false
@@ -68,19 +69,21 @@ func update_round_number(num : int) -> void:
 	
 	
 func open_godchoice_UI() -> void:
+	godchoice_ui_open = true
 	if (requirements_met or Cheats.ALWAYS_REWARD) and not Cheats.ALWAYS_PUNISH:
 		if round_num + 1 >= total_round_num:
 			get_parent().get_parent().win_game()
 		requirements_met = false
 		choice_type = CHOICE_TYPES.Reward
-		reward()
+		get_parent().reward()
 	else:
 		choice_type = CHOICE_TYPES.Punishment
-		punish()
+		get_parent().punish()
 
 func next_round() -> void:
 	if choice_type == CHOICE_TYPES.Reward:
 		update_round_number(round_num + 1)
+	godchoice_ui_open = false
 	boss.set_hungry()
 	$Timer.start()
 	update_requirements()
@@ -197,7 +200,10 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
 			update_sacrifice_text()
 			check_requirements_met()
 			if requirements_met:
-				boss.set_full()
+				if not godchoice_ui_open:
+					#boss.set_full()
+					open_godchoice_UI()
+				
 		else:
 			DialogManager.override_current_dialog(GLOBALCONSTS.EXTRA_ITEM_FED_DIALOG)
 	else:
@@ -211,14 +217,10 @@ func check_requirements_met():
 	for key in requirements:
 		if filled_requirements[key] < requirements[key]:
 			requirements_met = false
-			
 	
 func _on_timer_timeout() -> void:
-	open_godchoice_UI()
+	if not godchoice_ui_open:
+		open_godchoice_UI()
 	
-func reward():
-	get_parent().reward()
-func punish():
-	get_parent().punish()
 func _attempt_eat_item(on_mouth : bool):
 	ItemManager.mouse_on_mouth = on_mouth

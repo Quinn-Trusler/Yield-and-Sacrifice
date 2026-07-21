@@ -27,15 +27,21 @@ var burnt_buildings : Array = []
 var burnt_farmland : Array = []
 
 var fish_spawning_active : bool = false
-
 var invalid_spawn_spots : Array = []
+var number_of_fish = 0 # Number of fish spawning spots
+
+#var shrimp_spawning_active :  bool = false
+#var octopus_spawning_active : bool = false
+#var tropical_fish_spawning_active : bool = false
+var fish_resource_pool : Array = []
+
 
 #Tutorial
 @export var TutorialManager: Node
 var first_crop_harvested = false
 
 var gift_items = []
-var number_of_fish = 0
+
 
 func _ready():
 	update_location_lists()
@@ -126,6 +132,16 @@ func remove_phantom_building(pos: Vector2i):
 	
 func get_gift_items():
 	return gift_items
+	
+func add_to_fishing_pool(resources : Array):
+	for resource in resources:
+		fish_resource_pool.append(resource)
+
+func harvest_fish_override() -> Array:
+	var resources = []
+	print(fish_resource_pool)
+	resources.append(fish_resource_pool[RNG.randi_range(0, len(fish_resource_pool) -1)])	
+	return resources
 
 func click_tile():
 	#var tile_name = get_mouse_tile_name()
@@ -143,9 +159,12 @@ func click_tile():
 		var scene = TMM.TileLayer2.get_cell_scene(pos)
 		if scene:
 			if scene.BUILDING_TYPE == "building":
+				var resources
 				if scene.BUILDING_DISPLAY_NAME == "Fishing Spot": # Very bad to use dispaly name
 					number_of_fish -=1
-				var resources = scene.harvest()
+					resources = harvest_fish_override()
+				else:
+					resources = scene.harvest()
 				ItemManager.output_resources_at_mouse(resources)
 				if scene.DESTROY_ON_HARVEST:
 					TMM.TileLayer2.set_cell_scene(pos,-1)#delete cell
