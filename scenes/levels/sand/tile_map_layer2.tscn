@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xug5sbnv85j3"]
 
 [ext_resource type="TileSet" uid="uid://4eesro3fj82a" path="res://scenes/levels/main_tile_set.tres" id="1_thqgi"]
-[ext_resource type="Script" uid="uid://c2gpwja10wik1" path="res://scripts/tile_map_scene_layer.gd" id="6_vro0f"]
+[ext_resource type="Script" uid="uid://c2gpwja10wik1" path="res://scenes/levels/tile_map_scene_layer.gd" id="6_vro0f"]
 
 [node name="TileMapLayer2" type="TileMapLayer" unique_id=1920032927]
 y_sort_enabled = true

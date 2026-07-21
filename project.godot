@@ -22,8 +22,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GLOBALCONSTS="*res://scripts/global_constants.gd"
-Cheats="*res://scripts/cheats.gd"
+GLOBALCONSTS="*res://scenes/global_constants.gd"
+Cheats="*res://scenes/sprite_frames/crops/cheats.gd"
 
 [display]
 
