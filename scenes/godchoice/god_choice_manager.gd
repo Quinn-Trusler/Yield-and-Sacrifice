@@ -22,7 +22,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This well makes coins.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
-"activate fish":{"title": "Let There be Fish","img": "res://art/godchoice/fish.png","text":"Fish will occasionally appear in water.","item unlock":["fish"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
+"activate fish":{"title": "Let There be Fish","img": "res://art/godchoice/fish.png","text":"Fishing spots will occasionally appear in water.","item unlock":["fish"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
 "tentacle":{"title": "Tentacle","img": "res://art/items/tentacle.png","text":"Fishing spots have a change to yield tentacles.","item unlock":["tentacle"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
 "shrimp":{"title": "The Shrimpy Wimpy","img": "res://art/items/shrimp.png","text":"Fishing spots have a chance to yield shrimp.","item unlock":["shrimp"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
 
@@ -31,7 +31,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "scatter items":{"title": "Scatter Items","img": "res://art/godchoice/scatter.png","text":"Your items get scatterd","type": TYPES.Scatter_Items,"item unlock":null,"unlock literal":false,"reward": null},
 "lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
 "barley":{"title": "Barley","img": "res://art/items/barley.png","text":"Yet another resource to manage! Gain 2 barley.","type": TYPES.Item,"item unlock":["barley"],"unlock literal":true,"reward": "barley","amt" : 2},
-"tropical_fish":{"title": "Tropical Fish","img": "res://art/godchoice/tropical_fish.png","text":"Yet another resource to manage! 3 tropical fish will occasionally appear in water.","type": TYPES.Change_Fish_Pool,"item unlock":["tropical_fish_1", "tropical_fish_2", "tropical_fish_3"],"unlock literal":true,"reward": null},
+"tropical_fish":{"title": "Tropical Fish","img": "res://art/godchoice/tropical_fish.png","text":"Yet more resources to manage! Fishing spots have a chance to yield a tropical fish.","type": TYPES.Change_Fish_Pool,"item unlock":["tropical_fish_1", "tropical_fish_2", "tropical_fish_3"],"unlock literal":true,"reward": null},
 
 
 "restock box":{"title": "Restock Box","img": "res://art/buildings/restock_box.png","text": "Contains 1 of each unlocked item.","type": TYPES.Restock_Box,"item unlock":null,"unlock literal":true,"cost":3,"reward": null},
@@ -133,6 +133,10 @@ func add_choice_to_hbox(choice):
 
 func godchoice_restricted(choice_name, choice_type : CHOICE_TYPES):
 	if (choices[choice_name]["type"] == TYPES.Life and Lives.is_at_max()):
+		return true
+	if (choice_name == "barley" and "barley" in SacrificeManager.allowed_sacrifices): # Temporary check
+		return true
+	if (choice_name == "tropical_fish" and (not BuildingManager.fish_spawning_active or "tropical_fish_1" in SacrificeManager.allowed_sacrifices)):
 		return true
 	if (choices[choice_name]["type"] == TYPES.Unburn_Buildings and (BuildingManager.get_number_burnt_buildings() + BuildingManager.get_number_burnt_farmland() == 0)):
 		return true
@@ -317,8 +321,8 @@ func god_choice_chosen(choice_name, id : int, cost : int = 0) -> void:
 		place_building(choice_name)
 		
 	#elif choice["type"] == TYPES.Activate_Fish:
-		BuildingManager.fish_spawning_active = true
-		BuildingManager.add_to_fishing_pool(["fish"])
+		#BuildingManager.fish_spawning_active = true
+		#BuildingManager.add_to_fishing_pool(["fish"])
 	elif choice["type"] == TYPES.Lose_All_Gold:
 		increase_gold(-num_gold)
 	elif choice["type"] == TYPES.Unburn_Buildings:

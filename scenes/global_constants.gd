@@ -128,7 +128,7 @@ var ITEM_DIM_COLOUR : Color = Color(1,1,1,0)
 var FLYING_COIN_END_POS = Vector2(-152.0, -41)
 var ROUND_COMPLETION_GOLD = 0
 var ROUND_TIME = 23
-var MAX_FISH = 20#7
+var MAX_FISH = 7
 
 var PUSH_ITEM_SPEED = 0
 var PUSH_ACCEL = 12

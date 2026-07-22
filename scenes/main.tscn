@@ -1542,7 +1542,7 @@ SacrificeManager = NodePath("../SacrificeManager")
 TutorialManager = NodePath("../TutorialManager")
 
 [node name="FishTimer" type="Timer" parent="BuildingManager" unique_id=158535035]
-wait_time = 0.2
+wait_time = 6.0
 autostart = true
 
 [node name="BuildingPlacementManager" type="Node2D" parent="." unique_id=1622394179 node_paths=PackedStringArray("BuildingManager", "ItemManager", "TileMapManager")]
