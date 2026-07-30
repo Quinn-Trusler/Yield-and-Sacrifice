@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bcdhnydd6rjii" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://ckf24wggwbdv1" path="res://art/tileset.png" id="2_tipki"]
 [ext_resource type="Script" uid="uid://c54jouui3gaa5" path="res://scenes/levels/tile_map_manager.gd" id="2_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://cr4tdsdpyf7yr" path="res://art/tile_outline.png" id="3_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://h0kmoq5uuo0k" path="res://art/ui/invalid_building_layer.png" id="3_kmb1v"]
-[ext_resource type="Texture2D" uid="uid://dhuvde8dye1wh" path="res://art/ui/tile_selected.png" id="3_muem4"]
 [ext_resource type="PackedScene" uid="uid://284n533bqlq8" path="res://scenes/buildings_and_crops/crop.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bnsn8ya4gxv2l" path="res://scenes/buildings_and_crops/fire.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://dpsnij44e04il" path="res://scenes/buildings_and_crops/building.tscn" id="5_85g3d"]
@@ -35,40 +35,54 @@
 [ext_resource type="Script" uid="uid://b6u24evboqwop" path="res://scenes/building_placement_manager/valid_building_layer.gd" id="35_j8jky"]
 [ext_resource type="PackedScene" uid="uid://djv5pyh8ircoi" path="res://scenes/building_placement_manager/confirmation_popup.tscn" id="37_fuf3a"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
-atlas = ExtResource("3_muem4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8jky"]
+atlas = ExtResource("3_dgi5k")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ld40"]
-atlas = ExtResource("3_muem4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmb1v"]
+atlas = ExtResource("3_dgi5k")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gqmmt"]
-atlas = ExtResource("3_muem4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuf3a"]
+atlas = ExtResource("3_dgi5k")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yc10j"]
-atlas = ExtResource("3_muem4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pibwh"]
+atlas = ExtResource("3_dgi5k")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6pm6"]
+atlas = ExtResource("3_dgi5k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5he1u"]
+atlas = ExtResource("3_dgi5k")
+region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jscy8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dp3eg")
+"texture": SubResource("AtlasTexture_j8jky")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0ld40")
+"texture": SubResource("AtlasTexture_kmb1v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gqmmt")
+"texture": SubResource("AtlasTexture_fuf3a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yc10j")
+"texture": SubResource("AtlasTexture_pibwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6pm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5he1u")
 }],
 "loop": 1,
 "name": &"default",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="Animation" id="Animation_fuf3a"]
