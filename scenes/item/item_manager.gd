@@ -39,40 +39,46 @@ var first_item_planted : bool = false
 signal item_picked_up(item_name, last_item)
 signal item_dropped()
 
-func spawn_testing_items():
-	create_draggable_item("devil_pepper",Vector2(-100,-30))
-	create_draggable_item("prickly_pear",Vector2(-70,-30))
-	create_draggable_item("devil_pepper",Vector2(-100,-30))
-	create_draggable_item("prickly_pear",Vector2(-70,-30))
-	create_draggable_item("devil_pepper",Vector2(-100,-30))
-	create_draggable_item("prickly_pear",Vector2(-70,-30))
-	create_draggable_item("plastic_bag",Vector2(-100,-30))
-	create_draggable_item("plastic_bag",Vector2(-70,-30))
-	
-	for i in range(5):
-		create_draggable_item("rice",Vector2(-75,-30))
-		create_draggable_item("cooked_rice",Vector2(-75,-30))
-		create_draggable_item("melon",Vector2(-75,-30))
-		create_draggable_item("melon_jam",Vector2(-75,-30))
-		create_draggable_item("cranberry",Vector2(-75,-30))
-		create_draggable_item("cranberry_jam",Vector2(-75,-30))
-		create_draggable_item("sake",Vector2(-75,-30))
-		create_draggable_item("prickly_pear_jam",Vector2(-75,-30))
-	##
-	create_draggable_item("mushroom",Vector2(-75,-30))
-	create_draggable_item("mushroom",Vector2(-75,-30))
-	create_draggable_item("mushroom",Vector2(-75,-30))
-	create_draggable_item("carrot",Vector2(-75,-30))
-	##
-	create_draggable_item("vodka",Vector2(-30,-20))
+func spawn_all_items():
+	for item_name in GLOBALCONSTS.ITEM_DEF:
+		create_draggable_item(item_name,Vector2(RNG.randi_range(-100,30),RNG.randi_range(-100,-50)))
 
-	create_draggable_item("gold",Vector2(-50,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
-	create_draggable_item("gold",Vector2(-60,-40))
+func spawn_testing_items():
+	spawn_all_items()
+	#pass
+	#create_draggable_item("devil_pepper",Vector2(-100,-30))
+	#create_draggable_item("prickly_pear",Vector2(-70,-30))
+	#create_draggable_item("devil_pepper",Vector2(-100,-30))
+	#create_draggable_item("prickly_pear",Vector2(-70,-30))
+	#create_draggable_item("devil_pepper",Vector2(-100,-30))
+	#create_draggable_item("prickly_pear",Vector2(-70,-30))
+	#create_draggable_item("plastic_bag",Vector2(-100,-30))
+	#create_draggable_item("plastic_bag",Vector2(-70,-30))
+	#
+	#for i in range(5):
+		#create_draggable_item("rice",Vector2(-75,-30))
+		#create_draggable_item("cooked_rice",Vector2(-75,-30))
+		#create_draggable_item("melon",Vector2(-75,-30))
+		#create_draggable_item("melon_jam",Vector2(-75,-30))
+		#create_draggable_item("cranberry",Vector2(-75,-30))
+		#create_draggable_item("cranberry_jam",Vector2(-75,-30))
+		#create_draggable_item("sake",Vector2(-75,-30))
+		#create_draggable_item("prickly_pear_jam",Vector2(-75,-30))
+	###
+	#create_draggable_item("sugarcane",Vector2(-75,-30))
+	#create_draggable_item("mushroom",Vector2(-75,-30))
+	#create_draggable_item("sugarcane",Vector2(-75,-30))
+	#create_draggable_item("carrot",Vector2(-75,-30))
+	###
+	#create_draggable_item("vodka",Vector2(-30,-20))
+#
+	#create_draggable_item("gold",Vector2(-50,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
+	#create_draggable_item("gold",Vector2(-60,-40))
 	
 	#create_draggable_item("pepper_juice",Vector2(-70,-40))
 

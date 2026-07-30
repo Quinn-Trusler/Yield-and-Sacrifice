@@ -1,34 +1,30 @@
 [gd_scene format=3 uid="uid://b5o8bu16f8iqk"]
 
-[ext_resource type="Texture2D" uid="uid://cdaw4gqx10gdk" path="res://art/items/cooked_rice.png" id="1_2tgrh"]
+[ext_resource type="Texture2D" uid="uid://c1pl2xj1nleh2" path="res://art/items/sugarcane.png" id="1_aoafg"]
 [ext_resource type="Script" uid="uid://yvfg2nfbt1md" path="res://scenes/item/draggable_item.gd" id="1_c446u"]
-[ext_resource type="Texture2D" uid="uid://bqbl0uhnpxn4w" path="res://art/items/cranberry.png" id="2_20v46"]
+[ext_resource type="Texture2D" uid="uid://cksn3qp18ooaj" path="res://art/items/barley_bread.png" id="2_hnfd2"]
+[ext_resource type="Texture2D" uid="uid://qrfs2m8nfxua" path="res://art/items/cooked_shrimp.png" id="3_8ud5p"]
 [ext_resource type="FontFile" uid="uid://t0c14ab5kis6" path="res://font/kongtext.ttf" id="3_55gtw"]
-[ext_resource type="Texture2D" uid="uid://djilnjplwsyan" path="res://art/items/cranberry_jam.png" id="3_f5irm"]
-[ext_resource type="Texture2D" uid="uid://kqiytppye73m" path="res://art/items/melon.png" id="4_akhkc"]
-[ext_resource type="Texture2D" uid="uid://wyipsr6i3xtu" path="res://art/items/rice.png" id="5_jdtic"]
-[ext_resource type="Texture2D" uid="uid://dav4m7x48d3c" path="res://art/items/sake.png" id="6_vqwpj"]
+[ext_resource type="Texture2D" uid="uid://oyorrj36siuf" path="res://art/items/cooked_tentacle.png" id="4_fiq54"]
+[ext_resource type="Texture2D" uid="uid://ckbhdj5qwa55a" path="res://art/items/tropical_fish_1.png" id="5_a7jr2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c446u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_2tgrh")
+"texture": ExtResource("1_aoafg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_20v46")
+"texture": ExtResource("2_hnfd2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_f5irm")
+"texture": ExtResource("3_8ud5p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_akhkc")
+"texture": ExtResource("4_fiq54")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_jdtic")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_vqwpj")
+"texture": ExtResource("5_a7jr2")
 }],
 "loop": 1,
 "name": &"default",
@@ -38,8 +34,8 @@ animations = [{
 [node name="DraggableItem" type="AnimatedSprite2D" unique_id=412994486]
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_c446u")
-frame = 5
-frame_progress = 0.468647
+frame = 4
+frame_progress = 0.30297732
 script = ExtResource("1_c446u")
 accel = Vector2(0, 250)
 
@@ -47,7 +43,7 @@ accel = Vector2(0, 250)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DraggableItemArea2D" unique_id=2092545832]
 position = Vector2(0.00840287, -0.06722698)
-polygon = PackedVector2Array(3.5056047, -1.8234524, 3.4273214, 8.94073, 2.3314524, 10.057246, -2.3656454, 9.978961, -3.5791836, 8.862445, -3.6574688, -1.9017376, -1.5437746, -4.1328588, -1.3872042, -10.082516, 1.5093393, -10.0042305, 1.7441931, -4.1328588)
+polygon = PackedVector2Array(-4.3307, 6.626439, -6.0128565, 4.6854897, -7.487978, 4.5690327, -10.577991, 1.4429814, -10.535215, -0.40707007, -6.424078, -4.4900618, -3.3033924, -6.4441357, -1.6312494, -6.4149704, 3.4703093, -5.4526095, 5.5604877, -3.4596486, 8.471167, -2.2812238, 10.530811, -0.18720093, 10.538367, 1.5041052, 8.543304, 3.484055, 6.767042, 3.5311084, 5.661289, 2.637096, 4.4614296, 5.436768, 3.3598452, 6.4117084, 1.8802443, 6.453386, 0.088049844, 4.5153174, -1.599946, 6.4117084)
 
 [node name="NumItems" type="Label" parent="." unique_id=1006032167]
 anchors_preset = -1
