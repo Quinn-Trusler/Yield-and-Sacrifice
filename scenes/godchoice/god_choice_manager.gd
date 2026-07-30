@@ -8,39 +8,39 @@ var SHOP_TEXT = "To buy or not to buy?\nThat is the question"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
-"potato":{"title": "Potato","img": "res://art/items/potato.png","text":"default","type": TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
+"potato":{"title": "Potato","img": "res://art/items/potato.png","text":"Gain 2 potatoes. Plant on farmland.","type": TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
 "rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water's edge.","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
-"melon":{"title": "Melon","img": "res://art/items/melon.png","text":"default","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
-"wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"default","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
-"-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
-"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"default","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
-"mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
-"cranberry bush":{"title": "Cranberry Bush", "img": "res://art/items/cranberry.png","text":"Grows cranberries","item unlock":["cranberry"],"unlock literal":true,"type": TYPES.Placement,"reward": "cranberry_bush"},
+"melon":{"title": "Melon","img": "res://art/items/melon.png","text":"Gain 2 melons. Plant on sandy farmland.","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
+"wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"Gain 2 wheat. Plant on farmland. Used to make flour.","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
+"-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter.","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
+"sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"Gain 2 sugarcane. Plant on swamp farmland.","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
+"mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms that can be picked.","item unlock":["mushroom"],"unlock literal":true,"type": TYPES.Placement,"reward": "mushroom_patch"},
+"cranberry bush":{"title": "Cranberry Bush", "img": "res://art/items/cranberry.png","text":"Grows cranberries that can be picked. Place on water's edge.","item unlock":["cranberry"],"unlock literal":true,"type": TYPES.Placement,"reward": "cranberry_bush"},
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to make alcohol and jam.","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"reward": "barrel"},
-"prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
-"devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
-"mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
-"oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
+"prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears that can be picked. Place on sand.","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
+"devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers that can be picked.","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
+"mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar.","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
+"oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake bread and cook certain foods.","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This well makes coins.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},
 "activate fish":{"title": "Let There be Fish","img": "res://art/godchoice/fish.png","text":"Fishing spots will occasionally appear in water.","item unlock":["fish"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
-"tentacle":{"title": "Tentacle","img": "res://art/items/tentacle.png","text":"Fishing spots have a change to yield tentacles.","item unlock":["tentacle"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
+"tentacle":{"title": "Tentacle","img": "res://art/items/tentacle.png","text":"Fishing spots have a chance to yield tentacles.","item unlock":["tentacle"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
 "shrimp":{"title": "The Shrimpy Wimpy","img": "res://art/items/shrimp.png","text":"Fishing spots have a chance to yield shrimp.","item unlock":["shrimp"],"unlock literal":true,"type": TYPES.Change_Fish_Pool,"reward": null},
 
 
 "burn land":{"title": "Fire!","img": "res://art/godchoice/burn_land.png","text":"Two to three fires will start on the island. Click the fires to extinguish them.","type": TYPES.Destroy_Land,"item unlock":null,"unlock literal":false,"reward": null,"amt": 3},
-"scatter items":{"title": "Scatter Items","img": "res://art/godchoice/scatter.png","text":"Your items get scatterd","type": TYPES.Scatter_Items,"item unlock":null,"unlock literal":false,"reward": null},
-"lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
-"barley":{"title": "Barley","img": "res://art/items/barley.png","text":"Yet another resource to manage! Gain 2 barley.","type": TYPES.Item,"item unlock":["barley"],"unlock literal":true,"reward": "barley","amt" : 2},
+"scatter items":{"title": "Scatter Items","img": "res://art/godchoice/scatter.png","text":"Your items get scattered.","type": TYPES.Scatter_Items,"item unlock":null,"unlock literal":false,"reward": null},
+"lose all gold":{"title": "Lose Gold","img": "res://art/items/coin.png","text":"Lose all your gold.","type": TYPES.Lose_All_Gold,"item unlock":null,"unlock literal":false,"reward": null,"amt": null},
+"barley":{"title": "Barley","img": "res://art/items/barley.png","text":"Another resource to manage! Gain 2 barley.","type": TYPES.Item,"item unlock":["barley"],"unlock literal":true,"reward": "barley","amt" : 2},
 "tropical_fish":{"title": "Tropical Fish","img": "res://art/godchoice/tropical_fish.png","text":"Yet more resources to manage! Fishing spots have a chance to yield a tropical fish.","type": TYPES.Change_Fish_Pool,"item unlock":["tropical_fish_1", "tropical_fish_2", "tropical_fish_3"],"unlock literal":true,"reward": null},
 
 
 "restock box":{"title": "Restock Box","img": "res://art/buildings/restock_box.png","text": "Contains 1 of each unlocked item.","type": TYPES.Restock_Box,"item unlock":null,"unlock literal":true,"cost":3,"reward": null},
-"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
-"sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
-"swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "swamp_farmland", "cost" : 6, "amt" : 1},
-"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
-"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1},
-"unburn buildings": {"title": "Repairs","img": "res://art/godchoice/repair_burnt.png","text": "Farmland, plants, buildings that where burned will be repaired","type": TYPES.Unburn_Buildings,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
+"farmland":{"title": "Farmland","img": "res://art/godchoice/farmland.png","text":"Used to grow crops.","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "farmland", "cost" : 6, "amt" : 1},
+"sandy_farmland":{"title": "Sandy Farmland","img": "res://art/godchoice/sandy_farmland.png","text":"Used to grow crops.","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "sandy_farmland", "cost" : 6, "amt" : 1},
+"swamp_farmland":{"title": "Swamp Farmland","img": "res://art/godchoice/swamp_farmland.png","text":"Used to grow crops.","type": TYPES.Placement,"item unlock":null,"unlock literal":false,"reward": "swamp_farmland", "cost" : 6, "amt" : 1},
+"+5 seconds":{"title": "God's Grace","img": "res://art/godchoice/time.png","text":"Every round will be 5 seconds longer.","type": TYPES.Time_,"item unlock":[],"unlock literal":false, "cost" : 7, "reward": 5,"amt" : 1},
+"gain life":{"title": "Gain Life","img": "res://art/UI/life on.png","text":"Gain 1 life.","type": TYPES.Life,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1},
+"unburn buildings": {"title": "Repairs","img": "res://art/godchoice/repair_burnt.png","text": "Repairs all burned farmland, plants, and buildings.","type": TYPES.Unburn_Buildings,"item unlock":null,"unlock literal":false,"reward": null,"cost" : 4,"amt": 1}
 }
 var rewards = {4:["potato","activate fish","wheat", "sugarcane", "+5 seconds"],7:["mushroom patch", "barrel","+5 seconds"],10:["mill","barrel"],12:["oven","mill"],20:["sugarcane","mushroom patch","mushroom patch","mill"]}
 var shop_items = {3: ["+5 seconds", "gain life", "farmland"],20:["+5 seconds"]}

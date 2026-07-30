@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dswotu0sdjmgf" path="res://art/ui/play again button.png" id="4_yaxe4"]
 [ext_resource type="Texture2D" uid="uid://clh5h582lkk71" path="res://art/ui/Back to menu button.png" id="5_b515q"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="6_xfx5j"]
+[ext_resource type="Script" uid="uid://dcby3kgmqxtu0" path="res://scenes/mouse_cursor_manager.gd" id="7_cjhpt"]
 [ext_resource type="PackedScene" uid="uid://dpu6netsfebb4" path="res://scenes/levels/level_selector.tscn" id="7_yaxe4"]
 
 [node name="Scene Manager" type="Node" unique_id=232193636 node_paths=PackedStringArray("DeathScreen", "WinScreen")]
@@ -100,6 +101,9 @@ theme_override_fonts/font = ExtResource("6_xfx5j")
 theme_override_font_sizes/font_size = 48
 text = "Level Complete"
 horizontal_alignment = 1
+
+[node name="MouseCursorManager" type="Node" parent="." unique_id=245339412]
+script = ExtResource("7_cjhpt")
 
 [connection signal="pressed" from="DeathScreen/PlayAgain" to="DeathScreen" method="_on_play_again_pressed"]
 [connection signal="pressed" from="DeathScreen/BackToMenu" to="DeathScreen" method="_on_back_to_menu_pressed"]
