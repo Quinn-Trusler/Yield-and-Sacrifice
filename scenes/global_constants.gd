@@ -36,7 +36,7 @@ var UNBURNABLE_TILES = ["burnt land", "UI", "burnt_farmland","burnt_sandy_farmla
 var UNBURNABLE_TERRAIN_TILES = ["water","swamp_water","swamp_water_edge","lava"]
 var INITIALLY_UNBURNABLE_TILES = ["farmland", "sandy_farmland","swamp_farmland"] # Fire can not be placed directly on these tiles
 var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
-"potato":{"stage_growth_duration":2,"total_stages":5,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potato","potato","potato"],"frames":CROP_FRAMES_FOLDER + "potato.tres","offset":Vector2(0,-8)},
+"potato":{"stage_growth_duration":1.7,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potato","potato","potato"],"frames":CROP_FRAMES_FOLDER + "potato.tres","offset":Vector2(0,-2)},
 "wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
 "barley":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["barley","barley","barley"],"frames":CROP_FRAMES_FOLDER + "barley.tres","offset":Vector2(0,-3)},
 "sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)},
@@ -130,7 +130,7 @@ var ROUND_COMPLETION_GOLD = 0
 var ROUND_TIME = 23
 var MAX_FISH = 7
 
-var PUSH_ITEM_SPEED = 0
+var PUSH_ITEM_SPEED = 10
 var PUSH_ACCEL = 12
 var PUSH_ITEM_DEST = Vector2.ZERO
 

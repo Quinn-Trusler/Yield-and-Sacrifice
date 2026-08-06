@@ -18,6 +18,7 @@ var scatter_tween
 var in_push_zone : int = 0
 var push_vel : Vector2
 var push_direction : Vector2
+var push_zone_entrance_point : Vector2
 
 
 var in_focus = false
@@ -70,10 +71,11 @@ func _process(delta: float) -> void:
 		if vel.y > 0 and position.y > end_y: #Moving downwards and below postion
 			running_animation = false
 	elif in_push_zone and not in_focus:
+		#set_push_direction()
 		push_vel += push_direction * GLOBALCONSTS.PUSH_ACCEL * delta
 		position += push_vel * delta
-		
-
+		#
+		pass
 func update_display_num() -> void:
 	# override
 	if num_items == 1:
@@ -143,6 +145,7 @@ func print_polygon():
 	print(string)
 
 func set_push_direction():
+	#push_direction = (push_zone_entrance_point - position).normalized() 
 	push_direction = (GLOBALCONSTS.PUSH_ITEM_DEST - position).normalized() 
 	push_vel = push_direction * GLOBALCONSTS.PUSH_ITEM_SPEED
 
@@ -153,6 +156,7 @@ func _on_draggable_item_area_2d_area_entered(area: Area2D) -> void:
 			push_direction = (GLOBALCONSTS.PUSH_ITEM_DEST - position).normalized() 
 			push_vel = push_direction * (GLOBALCONSTS.PUSH_ITEM_SPEED + 200) 
 		elif in_push_zone == 0: # First no item zone entered
+			#push_zone_entrance_point = position
 			set_push_direction()
 		in_push_zone += 1
 
