@@ -70,8 +70,8 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
 		ChainedReward.new(["sandy_farmland","sandy_farmland","sandy_farmland"],1),
 		ChainedReward.new(["unburn buildings","unburn buildings","unburn buildings","unburn buildings"],2)]
-		var rewards = [ChainedReward.new(["melon", "barrel","prickly pear cactus","barrel"], 0),
-		ChainedReward.new(["prickly pear cactus","barrel","restock box","barrel"], 1),
+		var rewards = [ChainedReward.new(["melon", "pot","prickly pear cactus","pot"], 0),
+		ChainedReward.new(["prickly pear cactus","pot","restock box","pot"], 1),
 		ChainedReward.new(["activate fish","shrimp","tentacle","prickly pear cactus","barrel"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/sand/tile_map_layer.tscn")
 		tile_layers["TileLayer2"] = load("res://scenes/levels/sand/tile_map_layer2.tscn")
@@ -90,7 +90,7 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
 		ChainedReward.new(["swamp_farmland","swamp_farmland","swamp_farmland"],1),
 		ChainedReward.new(["unburn buildings","unburn buildings","unburn buildings","unburn buildings"],1)]
-		var rewards = [ChainedReward.new(["cranberry bush", "barrel","cranberry bush","mushroom patch","barrel"], 0),
+		var rewards = [ChainedReward.new(["cranberry bush", "pot","cranberry bush","mushroom patch","barrel"], 0),
 		ChainedReward.new(["rice","oven","activate fish","mill","oven","barrel"], 1),
 		ChainedReward.new(["sugarcane","mushroom patch","barrel", "mill"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/swamp/tile_map_layer.tscn")

@@ -1,0 +1,100 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bxbcsujsribbl"]
+
+[ext_resource type="Texture2D" uid="uid://c5kmhulhsw0u2" path="res://art/buildings/pot.png" id="1_eclkg"]
+[ext_resource type="Texture2D" uid="uid://d3n4np4xsqmjq" path="res://art/buildings/pot_sheet.png" id="2_1qnj1"]
+[ext_resource type="Texture2D" uid="uid://s0cajulfweqd" path="res://art/buildings/burnt_pot.png" id="2_gbs55"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qnj1"]
+atlas = ExtResource("1_eclkg")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq6ev"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(16, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uok27"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(32, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuxry"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc13m"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(16, 18, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcl85"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(32, 18, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx386"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(0, 18, 16, 18)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qnj1")
+}],
+"loop": 1,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq6ev")
+}],
+"loop": 1,
+"name": &"1_cranberry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uok27")
+}],
+"loop": 1,
+"name": &"1_melon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuxry")
+}],
+"loop": 1,
+"name": &"1_prickly_pear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nc13m")
+}],
+"loop": 1,
+"name": &"2_cranberry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcl85")
+}],
+"loop": 1,
+"name": &"2_melon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx386")
+}],
+"loop": 1,
+"name": &"2_prickly_pear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gbs55")
+}],
+"loop": 1,
+"name": &"burnt",
+"speed": 5.0
+}]

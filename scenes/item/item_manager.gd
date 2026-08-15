@@ -49,10 +49,10 @@ func spawn_testing_items():
 	create_draggable_item("sugarcane",Vector2(-70,-30))
 	create_draggable_item("rice",Vector2(-100,-30))
 	create_draggable_item("wheat",Vector2(-100,-30))
-	#create_draggable_item("prickly_pear",Vector2(-70,-30))
+	create_draggable_item("melon",Vector2(-70,-30))
 	#create_draggable_item("devil_pepper",Vector2(-100,-30))
-	#create_draggable_item("prickly_pear",Vector2(-70,-30))
-	#create_draggable_item("plastic_bag",Vector2(-100,-30))
+	create_draggable_item("prickly_pear",Vector2(-70,-30))
+	create_draggable_item("cranberry",Vector2(-100,-30))
 	#create_draggable_item("plastic_bag",Vector2(-70,-30))
 	#
 	#for i in range(5):
