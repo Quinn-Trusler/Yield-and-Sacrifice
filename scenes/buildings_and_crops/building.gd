@@ -131,6 +131,13 @@ func unburn():
 func update_stage():
 	if sprite_frames.has_animation(str(stage)):
 		play(str(stage))
+	elif item_inputed:
+		var animation_name = "%d_%s" % [stage, item_inputed]
+		if sprite_frames.has_animation(animation_name):
+			play(animation_name)
+		else:
+			print("Warning: No animation called: %s" % animation_name)
+			
 	if stage >= STAGE_TO_HARVEST:
 		ready_to_collect = true
 	else:

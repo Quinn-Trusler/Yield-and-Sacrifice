@@ -11,8 +11,9 @@ func game_over():
 func _ready():
 
 	#create building
-	#TMM.TileLayer2.place_building(Vector2(-3,4),"mushroom_patch")
-	#TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
+	TMM.TileLayer2.place_building(Vector2(-2,4),"mill")
+	TMM.TileLayer2.place_building(Vector2(-3,4),"mushroom_patch")
+	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
 	pass
 	
 func _process(_delta: float) -> void:

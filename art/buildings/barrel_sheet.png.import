@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnr23cojoe251"
-path="res://.godot/imported/barrel_harvest.png-c90cd4263517f949466bc0b3645f6476.ctex"
+uid="uid://dxquyoyxotwne"
+path="res://.godot/imported/barrel_sheet.png-e6887af18e526e78cfc64e40e869ef67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/buildings/barrel_harvest.png"
-dest_files=["res://.godot/imported/barrel_harvest.png-c90cd4263517f949466bc0b3645f6476.ctex"]
+source_file="res://art/buildings/barrel_sheet.png"
+dest_files=["res://.godot/imported/barrel_sheet.png-e6887af18e526e78cfc64e40e869ef67.ctex"]
 
 [params]
 

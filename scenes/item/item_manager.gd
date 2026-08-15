@@ -45,10 +45,10 @@ func spawn_all_items():
 
 func spawn_testing_items():
 	spawn_all_items()
-	#pass
-	#create_draggable_item("devil_pepper",Vector2(-100,-30))
-	#create_draggable_item("prickly_pear",Vector2(-70,-30))
-	#create_draggable_item("devil_pepper",Vector2(-100,-30))
+	create_draggable_item("potato",Vector2(-100,-30))
+	create_draggable_item("sugarcane",Vector2(-70,-30))
+	create_draggable_item("rice",Vector2(-100,-30))
+	create_draggable_item("wheat",Vector2(-100,-30))
 	#create_draggable_item("prickly_pear",Vector2(-70,-30))
 	#create_draggable_item("devil_pepper",Vector2(-100,-30))
 	#create_draggable_item("prickly_pear",Vector2(-70,-30))
