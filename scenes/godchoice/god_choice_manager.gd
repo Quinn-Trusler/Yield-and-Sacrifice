@@ -19,7 +19,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "barrel":{"title": "Barrel","img": "res://art/godchoice/barrel.png","text":"Used to make alcohol.","item unlock":["barrel"],"unlock literal":false,"type": TYPES.Placement,"reward": "barrel"},
 "prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears that can be picked. Place on sand.","item unlock":["prickly_pear"],"unlock literal":true,"type": TYPES.Placement,"reward": "prickly_pear_cactus"},
 "devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers that can be picked.","item unlock":["devil_pepper"],"unlock literal":true,"type": TYPES.Placement,"reward": "devil_vine"},
-"mill":{"title": "Mill","img": "res://art/godchoice/mill.png","text":"Used to make flour and sugar.","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
+"mill":{"title": "Mill","img": "res://art/godchoice/hand_mill.png","text":"Used to make flour and sugar.","item unlock":["mill"],"unlock literal":false,"type": TYPES.Placement,"reward": "mill"},
 "pot":{"title": "Pot","img": "res://art/godchoice/pot.png","text":"Used to make Jam.","item unlock":["pot"],"unlock literal":false,"type": TYPES.Placement,"reward": "pot"},
 "oven":{"title": "Oven","img": "res://art/godchoice/oven.png","text":"Used to bake bread and cook certain foods.","item unlock":["oven"],"unlock literal":false,"type": TYPES.Placement,"reward": "oven"},
 "well":{"title": "Well","img": "res://art/godchoice/well.png","text":"This well makes coins.","item unlock":[],"unlock literal":false,"type": TYPES.Placement,"reward": "well"},

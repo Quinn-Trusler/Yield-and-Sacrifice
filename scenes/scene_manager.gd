@@ -90,7 +90,7 @@ func generate_level(level_name, level_dificulty):
 		ChainedReward.new(["+5 seconds", "+5 seconds", "+5 seconds", "+5 seconds"],0),
 		ChainedReward.new(["swamp_farmland","swamp_farmland","swamp_farmland"],1),
 		ChainedReward.new(["unburn buildings","unburn buildings","unburn buildings","unburn buildings"],1)]
-		var rewards = [ChainedReward.new(["cranberry bush", "pot","cranberry bush","mushroom patch","barrel"], 0),
+		var rewards = [ChainedReward.new(["pot","cranberry bush", "pot","cranberry bush","mushroom patch","barrel"], 0),
 		ChainedReward.new(["rice","oven","activate fish","mill","oven","barrel"], 1),
 		ChainedReward.new(["sugarcane","mushroom patch","barrel", "mill"],2)]
 		tile_layers["TileLayer"] = load("res://scenes/levels/swamp/tile_map_layer.tscn")
