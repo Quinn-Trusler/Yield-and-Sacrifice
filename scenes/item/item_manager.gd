@@ -10,7 +10,7 @@ var item_being_dragged
 var absorbing_items : bool = false
 var item_in_focus = null
 var focus_items = []
-var crops_planted:Dictionary[String,int] = {"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0}
+var crops_planted:Dictionary[String,int] = {"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
 var items_in_bundle_field = []
 
 var left_down : bool = false

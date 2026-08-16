@@ -16,6 +16,10 @@ region = Rect2(16, 0, 16, 18)
 atlas = ExtResource("2_1qnj1")
 region = Rect2(32, 0, 16, 18)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbs55"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(48, 0, 16, 18)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wuxry"]
 atlas = ExtResource("2_1qnj1")
 region = Rect2(0, 0, 16, 18)
@@ -27,6 +31,10 @@ region = Rect2(16, 18, 16, 18)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcl85"]
 atlas = ExtResource("2_1qnj1")
 region = Rect2(32, 18, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlour"]
+atlas = ExtResource("2_1qnj1")
+region = Rect2(48, 18, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sx386"]
 atlas = ExtResource("2_1qnj1")
@@ -60,6 +68,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gbs55")
+}],
+"loop": 1,
+"name": &"1_pineapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wuxry")
 }],
 "loop": 1,
@@ -80,6 +96,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"2_melon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlour")
+}],
+"loop": 1,
+"name": &"2_pineapple",
 "speed": 5.0
 }, {
 "frames": [{

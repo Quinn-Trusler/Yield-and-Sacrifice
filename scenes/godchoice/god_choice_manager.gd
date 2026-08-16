@@ -11,6 +11,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "potato":{"title": "Potato","img": "res://art/items/potato.png","text":"Gain 2 potatoes. Plant on farmland.","type": TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
 "rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water's edge.","type": TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
 "melon":{"title": "Melon","img": "res://art/items/melon.png","text":"Gain 2 melons. Plant on sandy farmland.","type": TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
+"pineapple":{"title": "Melon","img": "res://art/items/pineapple.png","text":"Gain 2 pineapples. Plant on sandy farmland.","type": TYPES.Item,"item unlock":["pineapple"],"unlock literal":true,"reward": "pineapple","amt" : 2},
 "wheat":{"title": "Wheat","img": "res://art/items/wheat.png","text":"Gain 2 wheat. Plant on farmland. Used to make flour.","type": TYPES.Item,"item unlock":["wheat"],"unlock literal":true,"reward": "wheat","amt" : 2},
 "-2 seconds":{"title": "God's Disgrace","img": "res://art/godchoice/time.png","text":"Every round will be 2 seconds shorter.","type": TYPES.Time_,"item unlock":[],"unlock literal":false,"reward": -2,"amt" : 1},
 "sugarcane":{"title": "Sugarcane","img": "res://art/items/sugarcane.png","text":"Gain 2 sugarcane. Plant on swamp farmland.","type": TYPES.Item,"item unlock":["sugarcane"],"unlock literal":true,"reward": "sugarcane","amt" : 3},
@@ -54,13 +55,14 @@ var chained_rewards = null#[ChainedReward.new(["cranberry bush","prickly pear ca
 
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/godchoice/god_choice.tscn")
-# unlock_map = [[[require1,require2][reward1,reward2]]] meet all requirments for reward
+
 var unlock_map = [[["barrel", "sugarcane"],["rum"]],
 				[["barrel", "potato"],["vodka"]],
 				[["barrel", "rice"],["sake"]],
 				[["pot", "prickly_pear"],["prickly_pear_jam"]],
 				[["pot", "cranberry"],["cranberry_jam"]],
 				[["pot", "melon"],["melon_jam"]],
+				[["pot", "pineapple"],["pineapple_jam"]],
 				[["mill", "sugarcane"],["sugar"]],
 				[["mill", "barley"],["barley_flour"]],
 				[["mill", "wheat"],["flour"]],
