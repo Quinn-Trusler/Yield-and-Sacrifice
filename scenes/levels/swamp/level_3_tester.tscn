@@ -8,7 +8,7 @@
 
 [node name="Level3Tester" type="Node2D" unique_id=1153543723]
 
-[node name="TerrainLayer" parent="." unique_id=380002925 instance=ExtResource("2_o35ct")]
+[node name="TerrainLayer" parent="." unique_id=965843296 instance=ExtResource("2_o35ct")]
 
 [node name="DecorLayer" parent="." unique_id=1284029298 instance=ExtResource("3_5oguj")]
 
