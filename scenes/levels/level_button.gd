@@ -2,6 +2,8 @@ extends Node
 
 
 @export var level_number : int
+const NUMBER_UP_POSITION = Vector2(0,0)
+const NUMBER_DOWN_POSITION = Vector2(0,1)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +30,10 @@ func set_locked(locked : bool):
 	
 # Fix label not moving up and down with button press
 func _on_unlocked_level_button_button_down() -> void:
-	$UnlockedLevelButton/Text.position.y += 1
+	$UnlockedLevelButton/Text.position = NUMBER_DOWN_POSITION
 
 func _on_unlocked_level_button_button_up() -> void:
-	$UnlockedLevelButton/Text.position.y -= 1
+	$UnlockedLevelButton/Text.position = NUMBER_UP_POSITION
+
+func _on_unlocked_level_button_mouse_exited() -> void:
+	$UnlockedLevelButton/Text.position = NUMBER_UP_POSITION
