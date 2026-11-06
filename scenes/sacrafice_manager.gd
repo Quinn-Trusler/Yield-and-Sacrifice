@@ -199,8 +199,8 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
 			if filled_requirements[sacrificed_item_name] >= requirements[sacrificed_item_name]: # Finished Requirment
 				give_coin_to_player()
 			update_sacrifice_text()
-			check_requirements_met()
-			if requirements_met:
+			requirements_met = are_requirements_met()
+			if GLOBALCONSTS.ROUND_END_AFTER_REQUIRMENTS_MET and  requirements_met:
 				if not godchoice_ui_open:
 					#boss.set_full()
 					open_godchoice_UI()
@@ -213,11 +213,11 @@ func sacrifice(sacrificed_item_name, num_items:int = 1) -> int:
 	return number_items_consumed
 
 #Check if the all the requirments to please the boss have been met
-func check_requirements_met():
-	requirements_met = true
+func are_requirements_met():
 	for key in requirements:
 		if filled_requirements[key] < requirements[key]:
-			requirements_met = false
+			return false
+	return true
 	
 func _on_timer_timeout() -> void:
 	if not godchoice_ui_open:

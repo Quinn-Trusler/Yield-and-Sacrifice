@@ -132,6 +132,7 @@ var ITEM_DIM_COLOUR : Color = Color(1,1,1,0)
 var FLYING_COIN_END_POS = Vector2(-152.0, -41)
 var ROUND_COMPLETION_GOLD = 0
 var ROUND_TIME = 23
+var ROUND_END_AFTER_REQUIRMENTS_MET : bool = false # If true then round will end imediatly after requirments are met
 var MAX_FISH = 7
 
 var PUSH_ITEM_SPEED = 10
