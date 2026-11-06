@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 	else:
 		if ItemManager.item_being_dragged:
 			var item_tile_pos = TileLayer.local_to_map(TileLayer.to_local(ItemManager.item_being_dragged.position))
-			if item_tile_pos and ItemManager.get_dragging_item_placeable():
+			if item_tile_pos and ItemManager.is_dragging_item_placeable():
 				display_tile_outline(item_tile_pos)
 			else:
 				hide_tile_outline()

@@ -95,7 +95,7 @@ func get_building_interactable(pos):
 		var scene = TMM.TileLayer2.get_cell_scene(pos)
 		if scene:
 			if scene.BUILDING_TYPE == "building" or scene.BUILDING_TYPE == "crop":
-				return scene.get_harvestable()
+				return scene.is_harvestable()
 	return false
 
 func create_restock_box():

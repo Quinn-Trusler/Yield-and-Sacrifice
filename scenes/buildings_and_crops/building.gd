@@ -142,24 +142,24 @@ func update_stage():
 		ready_to_collect = true
 	else:
 		ready_to_collect = false
-		
+
+func is_item_placeable(item_name):
+	return not burnt and item_name in INPUT_ITEMS and num_items_inputed < ITEMS_TO_START_TIMER
+
 func place_item(item_name):
-	if not burnt and item_name in INPUT_ITEMS:
-		if num_items_inputed < ITEMS_TO_START_TIMER:
-			item_inputed = item_name
-			num_items_inputed += 1
-			go_up_a_stage()
-			return true
-		else:
-			return false
+	if is_item_placeable(item_name):
+		item_inputed = item_name
+		num_items_inputed += 1
+		go_up_a_stage()
+		return true
 	else:
 		return false
 	
-func get_harvestable():
+func is_harvestable():
 	return ready_to_collect
 	
 func get_items_before_burn():
-	if get_harvestable():
+	if is_harvestable():
 		return harvest()
 	if item_inputed:
 		return [item_inputed]

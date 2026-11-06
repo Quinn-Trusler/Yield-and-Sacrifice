@@ -82,16 +82,16 @@ func pick():
 	growth_complete = false
 	timer = 0
 		
-func get_harvestable():
+func is_harvestable() -> bool:
 	return (stage >= total_stages-1)
 
 func get_items_before_burn():
-	if get_harvestable():
+	if is_harvestable():
 		return harvest()
 	return [resources[0]] # This will be ilogical if the seed item is not resources[0]
 	
 func harvest():
-	if get_harvestable():
+	if is_harvestable():
 		if harvest_on_click:
 			queue_free()
 		else:

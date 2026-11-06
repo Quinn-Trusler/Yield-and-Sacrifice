@@ -1,5 +1,6 @@
 extends Node2D
 
+enum Click {NONE, LEFT, RIGHT, DROP_ONE, FORM_BUNDLE}
 
 var DRAGGABLE_ITEM = preload("res://scenes/item/draggable_item.tscn")
 var BUNDLED_ITEM = DRAGGABLE_ITEM
@@ -9,6 +10,9 @@ var item_is_last:bool = false
 var item_being_dragged
 var absorbing_items : bool = false
 var item_in_focus = null
+var left_click_drag_time : float = 0
+var right_click_drag_time : float = 0
+var min_drag_time : float = 0.2
 var focus_items = []
 var crops_planted:Dictionary[String,int] = {"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
 var items_in_bundle_field = []
@@ -45,6 +49,7 @@ func spawn_all_items():
 
 func spawn_testing_items():
 	spawn_all_items()
+	spawn_all_items()
 	create_draggable_item("potato",Vector2(-100,-30))
 	create_draggable_item("sugarcane",Vector2(-70,-30))
 	create_draggable_item("rice",Vector2(-100,-30))
@@ -52,6 +57,10 @@ func spawn_testing_items():
 	create_draggable_item("melon",Vector2(-70,-30))
 	#create_draggable_item("devil_pepper",Vector2(-100,-30))
 	create_draggable_item("prickly_pear",Vector2(-70,-30))
+	create_draggable_item("cranberry",Vector2(-100,-30))
+	create_draggable_item("cranberry",Vector2(-100,-30))
+	create_draggable_item("cranberry",Vector2(-100,-30))
+	create_draggable_item("cranberry",Vector2(-100,-30))
 	create_draggable_item("cranberry",Vector2(-100,-30))
 	#create_draggable_item("plastic_bag",Vector2(-70,-30))
 	#
@@ -107,23 +116,31 @@ func consume_gold():
 	refocus()
 	
 # Extra unused variables to make modifications easier in future
-func deal_with_state(just_pressed : String = "none", just_released : String = "none") -> void:
-	if item_being_dragged and just_pressed == "left_click": # Drop Item
-		drop_item(item_being_dragged)
-		
-	elif item_being_dragged and just_pressed == "right_click": # Drop One Item
-		if item_being_dragged.IS_BUNDLE and item_being_dragged.num_items > 1:
-			drop_one()
-		else:
+func deal_with_input(just_pressed : Click = Click.NONE, just_released : Click = Click.NONE) -> void:
+	# Drop Item
+	if item_being_dragged:
+		# Drop entire item: Left click or dragging just released
+		if just_pressed == Click.LEFT or (just_released == Click.LEFT and left_click_drag_time >= min_drag_time) or (just_released == Click.RIGHT and right_click_drag_time >= min_drag_time): 
 			drop_item(item_being_dragged)
-		
+		# Drop One Item
+		elif just_pressed == Click.RIGHT or just_pressed == Click.DROP_ONE:
+			if item_being_dragged.IS_BUNDLE and item_being_dragged.num_items > 1:
+				if form_bundle_down: 
+					# Don't drop one item out of bundle since we would automatically merge it
+					print("Form bundle down while trying to drop one item. Add user feedback")
+				else:
+					drop_one()
+			else:
+				drop_item(item_being_dragged)
+	
+	# Pickup or collect item
 	elif item_in_focus:
-		if just_pressed == "left_click":
+		if just_pressed == Click.LEFT:
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
 				pickup_item(item_in_focus)
-		elif just_pressed == "right_click":
+		elif just_pressed == Click.RIGHT:
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			elif item_in_focus.IS_BUNDLE == true:
@@ -149,30 +166,42 @@ func convert_polygon(poly):
 		new_poly.append(Vector2(point[0], point[1]))
 	return new_poly
 	
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	$BundleField.position = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("left_click"):
+		left_click_drag_time = 0
 		left_down = true
-		deal_with_state("left_click")
+		deal_with_input(Click.LEFT)
 	if Input.is_action_just_released("left_click"):
 		left_down = false
-		deal_with_state("none","left_click")
+		deal_with_input(Click.NONE, Click.LEFT)
+		left_click_drag_time = 0
 	if Input.is_action_just_pressed("right_click"):
 		right_down = true
-		deal_with_state("right_click")
+		deal_with_input(Click.RIGHT)
+		right_click_drag_time = 0
 	if Input.is_action_just_released("right_click"):
 		right_down = false
-		deal_with_state("none", "right_click")
+		deal_with_input(Click.NONE, Click.RIGHT)
+		right_click_drag_time = 0
 	if Input.is_action_just_pressed("form_bundle"):
 		form_bundle_down = true
-		deal_with_state("form_bundle")
+		deal_with_input(Click.FORM_BUNDLE)
 	if Input.is_action_just_released("form_bundle"):
 		form_bundle_down = false
-		deal_with_state("none", "form_bundle")
+		deal_with_input(Click.NONE, Click.FORM_BUNDLE)
+	if Input.is_action_just_pressed("drop_one_item"):
+		deal_with_input(Click.DROP_ONE, Click.NONE)
+	if Input.is_action_just_released("drop_one_item"):
+		deal_with_input(Click.NONE, Click.DROP_ONE)
 	
 	if item_being_dragged:
 		item_being_dragged.go_to_mouse_pos()
+		if left_down:
+			left_click_drag_time += delta
+		if right_down:
+			right_click_drag_time += delta
 			
 func erase_item(item):
 	remove_from_focus_list(item)
@@ -334,9 +363,21 @@ func scatter_items(): #Want to bound these items so they don't overshoot # Unbun
 		var pos = item.position + Vector2(RNG.randi_range(-100, 100), RNG.randi_range(-100, 100)).normalized() * RNG.randi_range(GLOBALCONSTS.SCATTER_ITEM_DIST[0], GLOBALCONSTS.SCATTER_ITEM_DIST[1])
 		item.scatter_to(pos, RNG.randf_range(GLOBALCONSTS.SCATTER_ITEM_TIME[0],GLOBALCONSTS.SCATTER_ITEM_TIME[1]), RNG.randi_range(GLOBALCONSTS.SCATTER_ITEM_ROTATION[0],GLOBALCONSTS.SCATTER_ITEM_ROTATION[1]))
 
-func get_dragging_item_placeable():
-	if item_being_dragged and not item_being_dragged.IS_BUNDLE:
-		var pos = TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))
+func get_tile_pos_of_item_being_dragged():
+	return TMM.TileLayer.local_to_map(TMM.TileLayer.to_local(item_being_dragged.position))
+
+func is_dragging_item_placeable_in_building() -> bool:
+	if item_being_dragged:
+		var pos = get_tile_pos_of_item_being_dragged()
+		if not TMM.TileLayer2.is_empty(pos):#2nd layer cell not empty
+			var scene = TMM.TileLayer2.get_cell_scene(pos)
+			if scene and scene.BUILDING_TYPE == "building" and not is_last_item(item_being_dragged):
+				return scene.is_item_placeable(item_being_dragged.item_name)
+	return false
+	
+func is_dragging_item_placeable_as_crop() -> bool:
+	if item_being_dragged:
+		var pos = get_tile_pos_of_item_being_dragged()
 		var tile_name = TMM.TileLayer.get_tile_name(pos)
 		var terrain_tile_name = TMM.TerrainLayer.get_tile_name(pos)
 		
@@ -344,6 +385,11 @@ func get_dragging_item_placeable():
 			if TMM.TileLayer2.is_empty(pos):#empty cell
 				return true
 	return false
+	
+# Returns if dragging item can be placed in a building or as a crop
+func is_dragging_item_placeable() -> bool:
+	return is_dragging_item_placeable_in_building() or is_dragging_item_placeable_as_crop()
+	
 			
 func crop_uprooted(item_name):
 	crops_planted[item_name] -=1
@@ -389,7 +435,7 @@ func attempt_consume_item(item, consume_max : int = 1):
 			DialogManager.override_current_dialog(GLOBALCONSTS.LAST_CROP_ITEM_DIALOG)
 		if number_items_consumed > 0:
 			$EatItem.play()
-	elif consume_max == 1:
+	else:
 		#Attempt place crop
 		if tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"] or terrain_tile_name in GLOBALCONSTS.ITEM_DEF[item.item_name]["place_on"]:
 			if TMM.TileLayer2.is_empty(pos):#empty cell
@@ -415,9 +461,7 @@ func attempt_consume_item(item, consume_max : int = 1):
 				$PutDown.play()
 		else:
 			$PutDown.play()
-		#Item drop normaly
-	else:
-		$PutDown.play()
+
 	return number_items_consumed
 	
 func drop_one():
