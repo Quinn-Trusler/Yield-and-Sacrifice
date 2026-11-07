@@ -103,7 +103,21 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items"
 	"swamp_farmland":{"display_name": "Swamp Farmland","place_on": ["swamp_grass"]}
 }
 
-
+var UNLOCK_MAP = [[["barrel", "sugarcane"],["rum"]],
+				[["barrel", "potato"],["vodka"]],
+				[["barrel", "rice"],["sake"]],
+				[["pot", "prickly_pear"],["prickly_pear_jam"]],
+				[["pot", "cranberry"],["cranberry_jam"]],
+				[["pot", "melon"],["melon_jam"]],
+				[["pot", "pineapple"],["pineapple_jam"]],
+				[["mill", "sugarcane"],["sugar"]],
+				[["mill", "barley"],["barley_flour"]],
+				[["mill", "wheat"],["flour"]],
+				[["mill", "oven", "barley_flower"],["barley_bread"]],
+				[["mill", "oven", "wheat"],["bread"]],
+				[["oven","rice"],["cooked_rice"]],
+				[["oven","tentacle"],["cooked_tentacle"]],
+				[["oven","shrimp"],["cooked_shrimp"]]]
 
 var DIFFICULTY_TIMES = [27, 23, 19, 16]
 
@@ -142,6 +156,8 @@ var PUSH_ITEM_DEST = Vector2.ZERO
 var SCATTER_ITEM_DIST = [40, 100]
 var SCATTER_ITEM_ROTATION = [-25,25]
 var SCATTER_ITEM_TIME = [0.6, 1.2]
+
+enum TOOLTIP_TYPES {ITEM, BUILDING, FARMLAND}
 
 
 var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 7.0], [-0.5, -3.5], [-1.5, -5.5], [1.5, -9.5], [8.5, -9.0], [10.5, -5.5], [9.5, -1.0], [3.5, 0.5]],

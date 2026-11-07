@@ -56,22 +56,6 @@ var chained_rewards = null#[ChainedReward.new(["cranberry bush","prickly pear ca
 var FIRE_SCENE_ID = 2
 var GodChoice_Scene = load("res://scenes/godchoice/god_choice.tscn")
 
-var unlock_map = [[["barrel", "sugarcane"],["rum"]],
-				[["barrel", "potato"],["vodka"]],
-				[["barrel", "rice"],["sake"]],
-				[["pot", "prickly_pear"],["prickly_pear_jam"]],
-				[["pot", "cranberry"],["cranberry_jam"]],
-				[["pot", "melon"],["melon_jam"]],
-				[["pot", "pineapple"],["pineapple_jam"]],
-				[["mill", "sugarcane"],["sugar"]],
-				[["mill", "barley"],["barley_flour"]],
-				[["mill", "wheat"],["flour"]],
-				[["mill", "oven", "barley_flower"],["barley_bread"]],
-				[["mill", "oven", "wheat"],["bread"]],
-				[["oven","rice"],["cooked_rice"]],
-				[["oven","tentacle"],["cooked_tentacle"]],
-				[["oven","shrimp"],["cooked_shrimp"]]]
-
 var choice_instances = []
 @export var ItemManager : Node2D
 #@export var TileLayer : TileMapLayer
@@ -278,7 +262,7 @@ func unlock_sacrifices(items_unlocked, unlock_literal):
 				
 		#get unlocks from map
 		for item_unlocked in items_unlocked:
-			for element in unlock_map:
+			for element in GLOBALCONSTS.UNLOCK_MAP:
 				if item_unlocked in element[0]:
 					element[0].erase(item_unlocked)
 					if len(element[0]) == 0: #No requirments left

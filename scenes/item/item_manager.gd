@@ -14,7 +14,7 @@ var left_click_drag_time : float = 0
 var right_click_drag_time : float = 0
 var min_drag_time : float = 0.2
 var focus_items = []
-var crops_planted:Dictionary[String,int] = {"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
+var crops_planted:Dictionary[String,int] = {}#{"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
 var items_in_bundle_field = []
 
 var left_down : bool = false
@@ -92,9 +92,17 @@ func spawn_testing_items():
 	#create_draggable_item("pepper_juice",Vector2(-70,-40))
 
 func _ready() -> void:
+	initialize_crops_planted()
 	create_draggable_item("carrot",Vector2(-50,-30))
 	if Cheats.TESTING_ITEMS:
 		spawn_testing_items()
+
+# initializes crops_planted with 0s for every crop item
+func initialize_crops_planted() -> void:
+	for item_name in GLOBALCONSTS.ITEM_DEF:
+		if GLOBALCONSTS.ITEM_DEF[item_name].get("place_on"): # Checking if item is crop(crops are the only item that can be placed)
+			crops_planted[item_name] = 0
+			
 
 func dim() -> void:
 	modulate = GLOBALCONSTS.ITEM_DIM_COLOUR

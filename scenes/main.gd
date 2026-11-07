@@ -30,7 +30,8 @@ func _process(_delta: float) -> void:
 		#$BuildingManager.spawn_random_fish()#create_gift("wheat", 2)
 		#print("\n---------------------------------\n")
 		#$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
-		$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
+		#$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
+		$TooltipManager.create_tooltip(get_global_mouse_position(), "carrot", GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
 	
 		
 func punish():

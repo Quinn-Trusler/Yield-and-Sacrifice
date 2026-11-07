@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://3tex48fp062q"]
+
+[ext_resource type="Script" uid="uid://dbwu21wo8c65k" path="res://scenes/tooltip/recipe.gd" id="1_qf6oe"]
+
+[node name="Recipe" type="VBoxContainer" unique_id=1286795591]
+script = ExtResource("1_qf6oe")

@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://bo1ee6ne01h2q" path="res://scenes/building_placement_manager/building_placement_manager.gd" id="34_dgi5k"]
 [ext_resource type="Script" uid="uid://c7l084ta2vft0" path="res://scenes/rounds_remaining.gd" id="34_j8jky"]
 [ext_resource type="Script" uid="uid://b6u24evboqwop" path="res://scenes/building_placement_manager/valid_building_layer.gd" id="35_j8jky"]
+[ext_resource type="PackedScene" uid="uid://clld0ae4xe1vw" path="res://scenes/tooltip/tooltip_manager.tscn" id="35_kmb1v"]
 [ext_resource type="PackedScene" uid="uid://djv5pyh8ircoi" path="res://scenes/building_placement_manager/confirmation_popup.tscn" id="37_fuf3a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8jky"]
@@ -1715,6 +1716,8 @@ theme_override_fonts/normal_font = ExtResource("10_dp3eg")
 theme_override_font_sizes/normal_font_size = 12
 text = "0 10"
 script = ExtResource("33_5q0nq")
+
+[node name="TooltipManager" parent="." unique_id=1368850604 instance=ExtResource("35_kmb1v")]
 
 [connection signal="pressed" from="GodChoiceManager/Node2D/SkipButton" to="GodChoiceManager" method="_on_skip_button_pressed"]
 [connection signal="area_entered" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_entered"]
