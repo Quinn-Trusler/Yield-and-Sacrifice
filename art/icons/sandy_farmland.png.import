@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb4n7vjnabp8t"
-path="res://.godot/imported/prickly_pear_cactus.png-4fb46351638303599f5ee4de6345ee91.ctex"
+uid="uid://76m3rs76jto4"
+path="res://.godot/imported/sandy_farmland.png-64aeebc043c81839c1983def8117d66a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/prickly_pear_cactus.png"
-dest_files=["res://.godot/imported/prickly_pear_cactus.png-4fb46351638303599f5ee4de6345ee91.ctex"]
+source_file="res://art/icons/sandy_farmland.png"
+dest_files=["res://.godot/imported/sandy_farmland.png-64aeebc043c81839c1983def8117d66a.ctex"]
 
 [params]
 

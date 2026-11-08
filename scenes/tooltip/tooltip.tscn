@@ -3,19 +3,20 @@
 [ext_resource type="Script" uid="uid://bbvobd0jhjc6a" path="res://scenes/tooltip/tooltip.gd" id="1_2f1x2"]
 [ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="2_lkuvt"]
 
-[node name="Tooltip" type="Node2D" unique_id=2125085656 node_paths=PackedStringArray("Name")]
+[node name="Tooltip" type="Node2D" unique_id=2125085656 node_paths=PackedStringArray("Name", "VBox")]
 script = ExtResource("1_2f1x2")
-Name = NodePath("HBoxContainer/Name")
+Name = NodePath("VBoxContainer/Name")
+VBox = NodePath("VBoxContainer")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=738861230]
-polygon = PackedVector2Array(0, 59, 56, 58, 59, 0, 0, 0)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1923465672]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=460798279]
+anchors_preset = 10
+anchor_right = 1.0
 offset_left = -20.0
-offset_top = -40.0
 offset_right = 20.0
+offset_bottom = 48.0
+grow_horizontal = 2
 
-[node name="Name" type="Label" parent="HBoxContainer" unique_id=1823140895]
+[node name="Name" type="Label" parent="VBoxContainer" unique_id=1823140895]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_lkuvt")

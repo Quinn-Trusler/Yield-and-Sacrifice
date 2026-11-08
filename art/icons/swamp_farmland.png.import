@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4vdu1hywyywi"
-path="res://.godot/imported/swamp_farmland.png-84c1a55947cbdb815a9d37f27037e5df.ctex"
+path="res://.godot/imported/swamp_farmland.png-23cf1cbff57228d2c5f818aa4a1067bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/swamp_farmland.png"
-dest_files=["res://.godot/imported/swamp_farmland.png-84c1a55947cbdb815a9d37f27037e5df.ctex"]
+source_file="res://art/icons/swamp_farmland.png"
+dest_files=["res://.godot/imported/swamp_farmland.png-23cf1cbff57228d2c5f818aa4a1067bd.ctex"]
 
 [params]
 

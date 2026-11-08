@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://76m3rs76jto4"
-path="res://.godot/imported/sandy_farmland.png-1ab585deafbf3d66666ea3d0172cfc7d.ctex"
+uid="uid://dscxeo600gdxw"
+path="res://.godot/imported/barrel.png-8b683c39d7235da4096c658a5271645d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/sandy_farmland.png"
-dest_files=["res://.godot/imported/sandy_farmland.png-1ab585deafbf3d66666ea3d0172cfc7d.ctex"]
+source_file="res://art/icons/barrel.png"
+dest_files=["res://.godot/imported/barrel.png-8b683c39d7235da4096c658a5271645d.ctex"]
 
 [params]
 

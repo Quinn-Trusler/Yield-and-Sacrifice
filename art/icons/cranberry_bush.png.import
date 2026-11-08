@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bytvxt8eu0w4v"
-path="res://.godot/imported/farmland.png-cd4eba682e3eedff414a4ed484b679f4.ctex"
+uid="uid://0th0ygl8i3yt"
+path="res://.godot/imported/cranberry_bush.png-28bcbd111313c7dae779d9fa8a6d8cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/farmland.png"
-dest_files=["res://.godot/imported/farmland.png-cd4eba682e3eedff414a4ed484b679f4.ctex"]
+source_file="res://art/icons/cranberry_bush.png"
+dest_files=["res://.godot/imported/cranberry_bush.png-28bcbd111313c7dae779d9fa8a6d8cc1.ctex"]
 
 [params]
 

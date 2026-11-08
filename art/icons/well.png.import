@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dscxeo600gdxw"
-path="res://.godot/imported/barrel.png-5682464470c997a8e2761578540dbb34.ctex"
+uid="uid://buf7fhpcfgmow"
+path="res://.godot/imported/well.png-48a164fb16b1cfa328c90c55ff0f47ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/barrel.png"
-dest_files=["res://.godot/imported/barrel.png-5682464470c997a8e2761578540dbb34.ctex"]
+source_file="res://art/icons/well.png"
+dest_files=["res://.godot/imported/well.png-48a164fb16b1cfa328c90c55ff0f47ed.ctex"]
 
 [params]
 

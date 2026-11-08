@@ -9,6 +9,7 @@ var BUILDINGS_FRAMES_FOLDER = "res://scenes/sprite_frames/buildings/"
 var ITEMS_FOLDER = "res://art/items/"
 var OUTLINE_ITEMS_FOLDER = "res://art/outline_items/"
 var ITEM_FRAMES_FOLDER = "res://scenes/sprite_frames/items/"
+var ICON_IMAGE_FOLDER = "res://art/icons/"
 
 
 #used by other scripts
@@ -31,6 +32,7 @@ var BURNT_TILES_MATRIX = {"burnt_farmland": "farmland",
 var gift_tile_layer_exceptions = ["burnt land"]
 
 enum REACTIONS {NONE,ALCOHOL,SHROOMS}
+enum GOD_REWARD_TYPES {Item, Placement, Place_Farmland, Destroy_Land, Destroy_Item, Destroy_Animal, Time_, Life, Lose_All_Gold, Unburn_Buildings, Scatter_Items, Restock_Box, Change_Fish_Pool}
 var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water","swamp_water","swamp_water_edge", "lava", "farmland", "sandy_farmland", "swamp_farmland","burnt_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
 var UNBURNABLE_TILES = ["burnt land", "UI", "burnt_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
 var UNBURNABLE_TERRAIN_TILES = ["water","swamp_water","swamp_water_edge","lava"]
@@ -86,22 +88,25 @@ var IMG_EXTENSION = ".png"
 
 # Note that place_on_not_exclusive value does not matter only that they key exists
 # Place on means what terrain tiles the building is ristricted to
-var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
-	"well":{"display_name":"Well","output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":true, "has_burnt_state" : true},
+var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","icon_img" : "fishing_spot","output_items":["fish"],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "fishing_spot.tres", "offset":[0,0],"bounce":false},
+	"well":{"display_name":"Well","icon_img":"well" ,"output_items":["gold"],"items_to_start_timer":0,"input_items":{},"total_stages":1,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false,"stage_loss_on_harvest": 1, "frames": BUILDINGS_FRAMES_FOLDER + "well.tres", "offset":[0,-1],"bounce":true, "has_burnt_state" : true},
 	"god_gift":{"display_name":"Gift","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "gift.tres", "offset":[0,-3], "bounce":false},
 	"restock_box":{"display_name":"Restock Box","output_items":[],"items_to_start_timer":0,"input_items":{},"total_stages":0,"stage_to_harvest":0,"time_per_stage":0,"destroy_on_harvest":true,"stage_loss_on_harvest": 0, "frames": BUILDINGS_FRAMES_FOLDER + "restock_box.tres", "offset":[0,-3], "bounce":false},
-	"barrel":{"display_name":"Barrel","output_items":[],"items_to_start_timer":1,"input_items":{"potato" : "vodka", "sugarcane":"rum","rice":"sake"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
-	"pot":{"display_name":"Pot","output_items":[],"items_to_start_timer":1,"input_items":{"prickly_pear":"prickly_pear_jam","melon":"melon_jam","pineapple":"pineapple_jam","cranberry":"cranberry_jam"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "pot.tres", "offset": [0,-1], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
-	"oven":{"display_name":"Oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread", "rice" : "cooked_rice", "barley_flour" : "barley_bread", "tentacle" : "cooked_tentacle", "shrimp":"cooked_shrimp"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true, "has_burnt_state" : true},
-	"mill":{"display_name":"Mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar", "barley" : "barley_flour"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-0.5], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
-	"mushroom_patch":{"display_name":"Mushroom Patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass", "swamp_grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
+	"barrel":{"display_name":"Barrel","icon_img":"barrel","output_items":[],"items_to_start_timer":1,"input_items":{"potato" : "vodka", "sugarcane":"rum","rice":"sake"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "barrel.tres", "offset": [0,0], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
+	"pot":{"display_name":"Pot","icon_img":"pot","output_items":[],"items_to_start_timer":1,"input_items":{"prickly_pear":"prickly_pear_jam","melon":"melon_jam","pineapple":"pineapple_jam","cranberry":"cranberry_jam"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "pot.tres", "offset": [0,-1], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
+	"oven":{"display_name":"Oven","icon_img":"oven","output_items":[],"items_to_start_timer":1,"input_items":{"flour" : "bread", "rice" : "cooked_rice", "barley_flour" : "barley_bread", "tentacle" : "cooked_tentacle", "shrimp":"cooked_shrimp"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "oven.tres", "offset": [0,0], "extra_tiles": [], "bounce":true, "has_burnt_state" : true},
+	"mill":{"display_name":"Mill","icon_img":"hand_mill","output_items":[],"items_to_start_timer":1,"input_items":{"wheat" : "flour", "sugarcane" : "sugar", "barley" : "barley_flour"},"total_stages":2,"stage_to_harvest":2,"time_per_stage":3,"destroy_on_harvest":false, "stage_loss_on_harvest": 2,"frames": BUILDINGS_FRAMES_FOLDER + "mill.tres", "offset": [0,-0.5], "extra_tiles": [],"bounce":true, "has_burnt_state" : true},
+	"mushroom_patch":{"display_name":"Mushroom Patch","icon_img":"mushroom_patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass", "swamp_grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
 	"devil_vine":{"display_name":"Devil Vine","output_items":["devil_pepper"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 4, "place_on":["sand"],"frames": BUILDINGS_FRAMES_FOLDER + "devil_vine.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
-	"prickly_pear_cactus":{"display_name":"Prickly Pear Cactus","output_items":["prickly_pear"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["sand"], "frames": BUILDINGS_FRAMES_FOLDER + "prickly_pear_cactus.tres", "offset": [0,-1], "extra_tiles": [], "bounce":false},
-	"cranberry_bush":{"display_name":"Cranberry Bush","output_items":["cranberry", "cranberry", "cranberry"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":2,"destroy_on_harvest":false, "stage_loss_on_harvest": 3, "place_on":["swamp_water_edge"],"no_building_placement_override" : ["swamp_water_edge"], "frames": BUILDINGS_FRAMES_FOLDER + "cranberry_bush.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
-	"farmland":{"display_name": "Farmland","place_on": ["grass"]},
-	"sandy_farmland":{"display_name": "Sandy Farmland","place_on": ["sand"]},
-	"swamp_farmland":{"display_name": "Swamp Farmland","place_on": ["swamp_grass"]}
+	"prickly_pear_cactus":{"display_name":"Prickly Pear Cactus","icon_img":"prickly_pear_cactus","output_items":["prickly_pear"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["sand"], "frames": BUILDINGS_FRAMES_FOLDER + "prickly_pear_cactus.tres", "offset": [0,-1], "extra_tiles": [], "bounce":false},
+	"cranberry_bush":{"display_name":"Cranberry Bush","icon_img":"cranbbery_bush","output_items":["cranberry", "cranberry", "cranberry"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":2,"destroy_on_harvest":false, "stage_loss_on_harvest": 3, "place_on":["swamp_water_edge"],"no_building_placement_override" : ["swamp_water_edge"], "frames": BUILDINGS_FRAMES_FOLDER + "cranberry_bush.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
+	"farmland":{"display_name": "Farmland","icon_img":"farmland","place_on": ["grass"]},
+	"sandy_farmland":{"display_name": "Sandy Farmland","icon_img":"sandy_farmland","place_on": ["sand"]},
+	"swamp_farmland":{"display_name": "Swamp Farmland","icon_img":"swamp_farmland","place_on": ["swamp_grass"]}
 }
+
+# For any recipe elements that aren't listed in buildings or items
+var EXTRA_RECIPE_IMGS = {"swamp_water_edge" : "swamp_water_edge"}
 
 var UNLOCK_MAP = [[["barrel", "sugarcane"],["rum"]],
 				[["barrel", "potato"],["vodka"]],

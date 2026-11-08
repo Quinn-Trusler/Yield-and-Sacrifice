@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0rdvihf8pvkk"
-path="res://.godot/imported/hand_mill.png-4c7d9923c190bc61850be1f27e14b08d.ctex"
+uid="uid://cb4n7vjnabp8t"
+path="res://.godot/imported/prickly_pear_cactus.png-fedad1a8d52c6f13228132462f481f5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/hand_mill.png"
-dest_files=["res://.godot/imported/hand_mill.png-4c7d9923c190bc61850be1f27e14b08d.ctex"]
+source_file="res://art/icons/prickly_pear_cactus.png"
+dest_files=["res://.godot/imported/prickly_pear_cactus.png-fedad1a8d52c6f13228132462f481f5a.ctex"]
 
 [params]
 

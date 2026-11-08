@@ -1365,9 +1365,11 @@ sources/2 = SubResource("TileSetScenesCollectionSource_jyhfs")
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 sources/1 = SubResource("TileSetAtlasSource_fuf3a")
 
-[node name="Main" type="Node2D" unique_id=1004566761 node_paths=PackedStringArray("TMM")]
+[node name="Main" type="Node2D" unique_id=1004566761 node_paths=PackedStringArray("TMM", "TooltipManager", "ItemManager")]
 script = ExtResource("1_o5qli")
 TMM = NodePath("TileMapManager")
+TooltipManager = NodePath("TooltipManager")
+ItemManager = NodePath("ItemManager")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1226002873]
 offset = Vector2(0, -30)

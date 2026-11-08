@@ -5,16 +5,23 @@ extends Node2D
 var RNG = RandomNumberGenerator.new()
 
 @export var DeathScreen :CanvasLayer
+@export var TooltipManager : Node2D
+@export var ItemManager : Node2D
 func game_over():
 	get_parent().game_over()
 
 func _ready():
-
+	connect_signals()
 	#create building
 	#TMM.TileLayer2.place_building(Vector2(-2,4),"mill")
 	#TMM.TileLayer2.place_building(Vector2(-3,4),"barrel")
 	TMM.TileLayer2.place_building(Vector2(-4,4),"barrel")
 	pass
+	
+func connect_signals():
+	ItemManager.create_tooltip.connect(TooltipManager.create_tooltip)
+	ItemManager.erase_tooltip.connect(TooltipManager.erase_tooltip)
+	
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mouse_down"):
@@ -31,7 +38,7 @@ func _process(_delta: float) -> void:
 		#print("\n---------------------------------\n")
 		#$BuildingPlacementManager/ValidBuildingLayer.display_invalid_tiles()
 		#$GodChoiceManager.destroy_land($GodChoiceManager.choices["burn land"])
-		$TooltipManager.create_tooltip(get_global_mouse_position(), "carrot", GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
+		$TooltipManager.create_tooltip(get_global_mouse_position(), "fish", GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
 	
 		
 func punish():

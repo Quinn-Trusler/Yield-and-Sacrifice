@@ -15,12 +15,19 @@ func _process(delta: float) -> void:
 
 
 func create_tooltip(pos : Vector2, tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES) -> void:
-	if tooltip:
-		tooltip.queue_free()
+	print("creating the following tootip %s "%[tooltip_name])
+	erase_tooltip()
 	tooltip = tooltip_scene.instantiate()
 	add_child(tooltip)
 	tooltip.setup_tooltip(tooltip_name, tooltip_type)
 	tooltip.position = pos
-	tooltip.print_all()
+
+func erase_tooltip() -> void:
+	if tooltip:
+		tooltip.queue_free()
+
+# Should take in top left and bottom right points and use them to determine where the popup goes
+# Above bellow side
+
 	
 	

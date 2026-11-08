@@ -1,6 +1,6 @@
 extends Node2D
 
-enum Click {NONE, LEFT, RIGHT, DROP_ONE, FORM_BUNDLE}
+enum Click {NONE, LEFT, RIGHT, DROP_ONE, FORM_BUNDLE, SHOW_TOOLTIP}
 
 var DRAGGABLE_ITEM = preload("res://scenes/item/draggable_item.tscn")
 var BUNDLED_ITEM = DRAGGABLE_ITEM
@@ -14,6 +14,9 @@ var left_click_drag_time : float = 0
 var right_click_drag_time : float = 0
 var min_drag_time : float = 0.2
 var focus_items = []
+var item_in_focus_time = 0
+var min_foucus_time_for_tooltip = 0.5
+var showing_tooltip : bool = false
 var crops_planted:Dictionary[String,int] = {}#{"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
 var items_in_bundle_field = []
 
@@ -42,6 +45,8 @@ var first_item_planted : bool = false
 
 signal item_picked_up(item_name, last_item)
 signal item_dropped()
+signal create_tooltip(pos, tooltip_name, tooltip_type)
+signal erase_tooltip()
 
 func spawn_all_items():
 	for item_name in GLOBALCONSTS.ITEM_DEF:
@@ -143,7 +148,9 @@ func deal_with_input(just_pressed : Click = Click.NONE, just_released : Click = 
 	
 	# Pickup or collect item
 	elif item_in_focus:
-		if just_pressed == Click.LEFT:
+		if just_pressed == Click.SHOW_TOOLTIP:
+			show_tooltip()
+		elif just_pressed == Click.LEFT:
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
@@ -203,6 +210,8 @@ func _process(delta: float) -> void:
 		deal_with_input(Click.DROP_ONE, Click.NONE)
 	if Input.is_action_just_released("drop_one_item"):
 		deal_with_input(Click.NONE, Click.DROP_ONE)
+	if Input.is_action_just_pressed("show_tooltip"):
+		deal_with_input(Click.SHOW_TOOLTIP, Click.NONE)
 	
 	if item_being_dragged:
 		item_being_dragged.go_to_mouse_pos()
@@ -210,6 +219,10 @@ func _process(delta: float) -> void:
 			left_click_drag_time += delta
 		if right_down:
 			right_click_drag_time += delta
+	if item_in_focus:
+		item_in_focus_time += delta
+		if item_in_focus_time >= min_foucus_time_for_tooltip:
+			show_tooltip()
 			
 func erase_item(item):
 	remove_from_focus_list(item)
@@ -298,6 +311,22 @@ func add_to_focus_list(item_obj):
 	if not item_being_dragged:
 		refocus()
 
+func hide_tooltip():
+	showing_tooltip = false
+	erase_tooltip.emit()
+
+func show_tooltip():
+	showing_tooltip = true
+	create_tooltip.emit(item_in_focus.position, item_in_focus.item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
+
+func set_item_in_focus(item) -> void:
+	item_in_focus = item
+	if item_in_focus:
+		item_in_focus.focus()
+	if showing_tooltip:
+		hide_tooltip()
+	item_in_focus_time = 0
+
 func refocus():
 	var largest_layer = 0
 	var ind = -1
@@ -307,13 +336,14 @@ func refocus():
 			if focus_items[i].get_index() > largest_layer:
 				largest_layer = focus_items[i].get_index()
 				ind = i
+				
+		if not(item_in_focus and item_in_focus == focus_items[ind]): # Not already focused on this item
+			if item_in_focus:
+				item_in_focus.stop_focus()
+			set_item_in_focus(focus_items[ind])
 	
-		if item_in_focus:
-			item_in_focus.stop_focus()
-		item_in_focus = focus_items[ind]
-		item_in_focus.focus()
 	else:
-		item_in_focus = null
+		set_item_in_focus(null)
 		
 
 func create_draggable_item(item_name,pos):

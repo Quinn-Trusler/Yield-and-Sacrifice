@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://3tex48fp062q"]
 
 [ext_resource type="Script" uid="uid://dbwu21wo8c65k" path="res://scenes/tooltip/recipe.gd" id="1_qf6oe"]
+[ext_resource type="Texture2D" uid="uid://jt8nq0t2gqsy" path="res://art/ui/arrow_right.png" id="2_rurik"]
 
-[node name="Recipe" type="VBoxContainer" unique_id=1286795591]
+[node name="Recipe" type="HBoxContainer" unique_id=1735450453 node_paths=PackedStringArray("VBox1")]
+alignment = 1
 script = ExtResource("1_qf6oe")
+VBox1 = NodePath("VBox1")
+arrow_texture = ExtResource("2_rurik")
+
+[node name="VBox1" type="VBoxContainer" parent="." unique_id=276176455]
+layout_mode = 2

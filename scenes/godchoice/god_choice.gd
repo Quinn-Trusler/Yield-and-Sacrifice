@@ -16,11 +16,21 @@ func set_all_buttons_invisible():
 	$BuyButton.visible = false
 	$GoldImg.visible = false
 	$Cost.visible = false
+
+func get_image(c_name : String, choice) -> Texture2D:
+	if not "img" in choice or choice["img"] == "icon_img":
+		if choice["type"] == GLOBALCONSTS.GOD_REWARD_TYPES.Item:
+			return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[c_name]["img"] + GLOBALCONSTS.IMG_EXTENSION)
+		if choice["type"] == GLOBALCONSTS.GOD_REWARD_TYPES.Placement:
+			return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[c_name]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
+	return load(choice["img"])
+		
 	
+
 func initialize(c_name,choice,gold_num : int, chain_i : int = -1):
 	#$Name.scale = Vector2(0.5,0.5)
 	choice_name = c_name
-	$Sprite2D.texture = load(choice["img"])
+	$Sprite2D.texture = get_image(c_name, choice)
 	$Name.text = choice["title"]
 	create_description(c_name,choice)
 	chain_id = chain_i

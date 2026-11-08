@@ -2,7 +2,7 @@ extends Node2D
 
 var BUILDING_DEF = GLOBALCONSTS.BUILDING_DEF
 var ITEM_DEF = GLOBALCONSTS.ITEM_DEF
-var recipe
+const RECIPE_SCENE = preload("res://scenes/tooltip/recipe.tscn")
 
 const recipe_display_names = {
 	"get_item_plants_onto_recipe" : "Grows On", 
@@ -17,6 +17,7 @@ const recipe_display_names = {
 
 
 @export var Name : Label
+@export var VBox : VBoxContainer
 
 func erase_recipe():
 	pass
@@ -78,9 +79,11 @@ func setup_item_tooltip(tooltip_name : String) -> void:
 func add_recipes_to_display(recipes : Array, display_name : String):
 	print("Recipe %s: "%[display_name], recipes)
 	if recipes != []:
-		# Instantiate recipe child
-		# Setup recipe child with recipes
-		pass
+		var recipe_scene = RECIPE_SCENE.instantiate()
+		VBox.add_child(recipe_scene) #add to vbox
+		recipe_scene.setup(recipes)
+		
+		
 
 
 # ---Recipe Getters---

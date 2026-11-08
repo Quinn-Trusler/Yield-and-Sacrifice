@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvbi2jn6d3m8"
-path="res://.godot/imported/oven.png-7aa69a3b9611ba07293f25d133e356eb.ctex"
+uid="uid://jt8nq0t2gqsy"
+path="res://.godot/imported/arrow_right.png-d1131c2fa1d4224a4e98f197b2bb0551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/oven.png"
-dest_files=["res://.godot/imported/oven.png-7aa69a3b9611ba07293f25d133e356eb.ctex"]
+source_file="res://art/ui/arrow_right.png"
+dest_files=["res://.godot/imported/arrow_right.png-d1131c2fa1d4224a4e98f197b2bb0551.ctex"]
 
 [params]
 

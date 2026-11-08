@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3fnrsmklktud"
-path="res://.godot/imported/pot.png-a27ac2f28001ba2769da4b91104fd618.ctex"
+uid="uid://bytvxt8eu0w4v"
+path="res://.godot/imported/farmland.png-e684d794cd1bbeb70b8ff1236ced55e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/godchoice/pot.png"
-dest_files=["res://.godot/imported/pot.png-a27ac2f28001ba2769da4b91104fd618.ctex"]
+source_file="res://art/icons/farmland.png"
+dest_files=["res://.godot/imported/farmland.png-e684d794cd1bbeb70b8ff1236ced55e0.ctex"]
 
 [params]
 
