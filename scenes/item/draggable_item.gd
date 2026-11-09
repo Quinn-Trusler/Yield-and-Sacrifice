@@ -27,11 +27,11 @@ func initialize(n,item_def, n_items : int = 1):
 	set_num(n_items)
 	item_name = n
 	if item_def["is_animated"]:
-		sprite_frames = load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION)
+		sprite_frames = load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img"]+GLOBALCONSTS.IMG_EXTENSION)
 	else:
 		sprite_frames = SpriteFrames.new()
-		sprite_frames.add_frame("default",load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img_name"]+GLOBALCONSTS.IMG_EXTENSION))
-		sprite_frames.add_frame("default",load(GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + item_def["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
+		sprite_frames.add_frame("default",load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img"]+GLOBALCONSTS.IMG_EXTENSION))
+		sprite_frames.add_frame("default",load(GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + item_def["img"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
 	
 	if "num_offset" in item_def:
 		$NumItems.position = Vector2(item_def["num_offset"][0], item_def["num_offset"][1])

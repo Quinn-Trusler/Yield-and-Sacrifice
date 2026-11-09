@@ -2,11 +2,13 @@ extends Node2D
 
 var BUILDING_DEF = GLOBALCONSTS.BUILDING_DEF
 var ITEM_DEF = GLOBALCONSTS.ITEM_DEF
+var CROP_DEF = GLOBALCONSTS.CROP_DEF
 const RECIPE_SCENE = preload("res://scenes/tooltip/recipe.tscn")
 
 const recipe_display_names = {
-	"get_item_plants_onto_recipe" : "Grows On", 
-	"get_item_that_grows_on_recipe" : "Grows",
+	"get_item_produced_by_crop_recipes" : "Currently Growing", 
+	"get_item_plants_onto_recipes" : "Grows", 
+	"get_item_that_grows_on_recipes" : "Grows On",
 	"get_item_produced_from_recipes" : "Collect From",
 	"get_building_produces_recipes" : "Produces",
 	"get_item_crafts_into_recipes" : "Crafts Into",
@@ -48,40 +50,51 @@ func setup_tooltip(tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TY
 			
 		GLOBALCONSTS.TOOLTIP_TYPES.FARMLAND:
 			setup_farmland_tooltip(tooltip_name)
+			
+		GLOBALCONSTS.TOOLTIP_TYPES.CROP:
+			setup_crop_tooltip(tooltip_name)
 
 func setup_building_tooltip(tooltip_name : String) -> void:
+	print("tooltip name: ", tooltip_name)
+	Name.text = BUILDING_DEF[tooltip_name]["display_name"]
 	var recipe_functions = [
 		get_building_crafting_recipes,
 		get_building_produces_recipes
 	]
 	for recipe_function in recipe_functions:
 		var recipes = recipe_function.call(tooltip_name)
-		add_recipes_to_display(recipes, recipe_function.get_method())
+		add_recipes_to_display(recipes, recipe_display_names[recipe_function.get_method()])
 	
 func setup_farmland_tooltip(tooltip_name : String) -> void:
-	var recipes = get_item_that_grows_on_recipe(tooltip_name)
-	add_recipes_to_display(recipes, get_item_plants_onto_recipe.get_method())
-	
+	Name.text = BUILDING_DEF[tooltip_name]["display_name"]
+	var recipes = get_item_that_grows_on_recipes(tooltip_name)
+	add_recipes_to_display(recipes, recipe_display_names[get_item_plants_onto_recipes.get_method()])
+
+func setup_crop_tooltip(tooltip_name : String)-> void:
+	#print("tooltip name", tooltip_name)
+	Name.text = CROP_DEF[tooltip_name]["display_name"]
+	var recipes = get_item_produced_by_crop_recipes(tooltip_name)
+	add_recipes_to_display(recipes, recipe_display_names[get_item_produced_by_crop_recipes.get_method()])
 	
 func setup_item_tooltip(tooltip_name : String) -> void:
 	#print("setup_item_tooltip", ITEM_DEF[tooltip_name]["display_name"])
 	var recipe_functions = [
-		get_item_plants_onto_recipe,
+		get_item_plants_onto_recipes,
 		get_item_produced_from_recipes,
 		get_item_crafted_from_recipes,
 		get_item_crafts_into_recipes]
-	
+	print("toolltip name", tooltip_name)
 	Name.text = ITEM_DEF[tooltip_name]["display_name"]
 	for recipe_function in recipe_functions:
 		var recipes = recipe_function.call(tooltip_name)
-		add_recipes_to_display(recipes, recipe_function.get_method())
+		add_recipes_to_display(recipes, recipe_display_names[recipe_function.get_method()])
 
 func add_recipes_to_display(recipes : Array, display_name : String):
 	print("Recipe %s: "%[display_name], recipes)
 	if recipes != []:
 		var recipe_scene = RECIPE_SCENE.instantiate()
 		VBox.add_child(recipe_scene) #add to vbox
-		recipe_scene.setup(recipes)
+		recipe_scene.setup(recipes, display_name)
 		
 		
 
@@ -90,14 +103,25 @@ func add_recipes_to_display(recipes : Array, display_name : String):
 # Input an item, building or farmland name and get back an array of recipes
 # I did try to name them well but they are very confusing
 
+# Returns an Array of whatever items is being produced by the crop
+func get_item_produced_by_crop_recipes(crop_name : String) -> Array:
+	var recipes = []
+	if "resources" in CROP_DEF[crop_name]:
+		for item_name in CROP_DEF[crop_name]["resources"]:
+			# Only add item_name once since resources may list the same item multiple times
+			if not item_name in recipes:
+				recipes.append(item_name)
+		return recipes
+	return recipes
+
 # Returns a list of land that the 'seed' item can be placed on
-func get_item_plants_onto_recipe(item_name : String):
+func get_item_plants_onto_recipes(item_name : String):
 	if "place_on" in ITEM_DEF[item_name]:
 		return ITEM_DEF[item_name]["place_on"]
 	return []
 	
 # Returns a Array of items that grow on a farmaland
-func get_item_that_grows_on_recipe(farmland_name : String) -> Array:
+func get_item_that_grows_on_recipes(farmland_name : String) -> Array:
 	var recipes = []
 	for item_name in ITEM_DEF:
 		if farmland_name in ITEM_DEF[item_name]["place_on"]:

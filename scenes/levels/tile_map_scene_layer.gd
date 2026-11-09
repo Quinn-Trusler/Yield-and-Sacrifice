@@ -26,7 +26,9 @@ func _register_child(child):
 	child.set_meta("tile_coords", coords)
 	var vectored_coords = Vector2i(coords[0], coords[1])
 	if child.BUILDING_TYPE == "crop":
-		child.initialize(GLOBALCONSTS.CROP_DEF[building_names_temp[vectored_coords]])
+		var crop_name = building_names_temp[vectored_coords]
+		var crop_def = GLOBALCONSTS.CROP_DEF[crop_name]
+		child.initialize(crop_name, crop_def)
 		building_names_temp.erase(vectored_coords)
 	elif child.BUILDING_TYPE == "building":
 		child.connectItemSignals(ItemManager)

@@ -20,9 +20,13 @@ func set_all_buttons_invisible():
 func get_image(c_name : String, choice) -> Texture2D:
 	if not "img" in choice or choice["img"] == "icon_img":
 		if choice["type"] == GLOBALCONSTS.GOD_REWARD_TYPES.Item:
-			return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[c_name]["img"] + GLOBALCONSTS.IMG_EXTENSION)
+			var reward_item_name = choice["reward"]
+			print("chocie", choice)
+			print("reward item name", reward_item_name)
+			return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[reward_item_name]["img"] + GLOBALCONSTS.IMG_EXTENSION)
 		if choice["type"] == GLOBALCONSTS.GOD_REWARD_TYPES.Placement:
-			return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[c_name]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
+			var reward_building_name = choice["reward"]
+			return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[reward_building_name]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
 	return load(choice["img"])
 		
 	

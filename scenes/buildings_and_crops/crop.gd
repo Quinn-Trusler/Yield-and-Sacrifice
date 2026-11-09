@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 #don't touch this
 var BUILDING_TYPE = "crop"
+var BUILDING_NAME = ""
 var IS_BUILDING = false
 var HAS_BURNT_STATE = false
 var burnt = false
@@ -30,7 +31,8 @@ var original_pos_y
 var delta_total = 0
 
 
-func initialize(crop_def):
+func initialize(crop_name, crop_def):
+	BUILDING_NAME = crop_name
 	if Cheats.CROP_GROWTH_TIME_OVERRIDE:
 		stage_growth_duration = Cheats.CROP_GROWTH_TIME_OVERRIDE
 	else:

@@ -7,7 +7,7 @@ var SHOP_TEXT = "To buy or not to buy?\nThat is the question"
 var BURNT_LAND = Vector2(8,2)
 var RNG = RandomNumberGenerator.new()
 var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","text":"default","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["carrot"],"unlock literal":true,"reward": "carrot","amt" : 2},
-"potato":{"title": "Potato","img": "res://art/items/potato.png","text":"Gain 2 potatoes. Plant on farmland.","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
+"potato":{"title": "Potato","text":"Gain 2 potatoes. Plant on farmland.","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["potato"],"unlock literal":true,"reward": "potato","amt" : 2},
 "rice":{"title": "Rice","img": "res://art/items/rice.png","text":"Gain 2 rice. Plant on water's edge.","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["rice"],"unlock literal":true,"reward": "rice","amt" : 2},
 "melon":{"title": "Melon","img": "res://art/items/melon.png","text":"Gain 2 melons. Plant on sandy farmland.","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["melon"],"unlock literal":true,"reward": "melon","amt" : 2},
 "pineapple":{"title": "Pineapple","img": "res://art/items/pineapple.png","text":"Gain 2 pineapples. Plant on sandy farmland.","type": GLOBALCONSTS.GOD_REWARD_TYPES.Item,"item unlock":["pineapple"],"unlock literal":true,"reward": "pineapple","amt" : 2},
@@ -17,7 +17,7 @@ var choices = {"carrot":{"title": "Carrot","img": "res://art/items/carrot.png","
 "mushroom patch":{"title": "Mushroom Patch", "img": "res://art/godchoice/mushroom.png","text":"Grows mushrooms that can be picked.","item unlock":["mushroom"],"unlock literal":true,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "mushroom_patch"},
 "cranberry bush":{"title": "Cranberry Bush","text":"Grows cranberries that can be picked. Place on water's edge.","item unlock":["cranberry"],"unlock literal":true,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "cranberry_bush"},
 "barrel":{"title": "Barrel","text":"Used to make alcohol.","item unlock":["barrel"],"unlock literal":false,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "barrel"},
-"prickly pear cactus":{"title": "Prickly Pear Cactus","img": "res://art/godchoice/prickly_pear_cactus.png","text":"Grows prickly pears that can be picked. Place on sand.","item unlock":["prickly_pear"],"unlock literal":true,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "prickly_pear_cactus"},
+"prickly pear cactus":{"title": "Prickly Pear Cactus","text":"Grows prickly pears that can be picked. Place on sand.","item unlock":["prickly_pear"],"unlock literal":true,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "prickly_pear_cactus"},
 "devil vine":{"title": "Devil Vine","img": "res://art/items/devil_pepper.png","text":"Grows devil peppers that can be picked.","item unlock":["devil_pepper"],"unlock literal":true,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "devil_vine"},
 "mill":{"title": "Mill","text":"Used to make flour and sugar.","item unlock":["mill"],"unlock literal":false,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "mill"},
 "pot":{"title": "Pot","text":"Used to make Jam.","item unlock":["pot"],"unlock literal":false,"type": GLOBALCONSTS.GOD_REWARD_TYPES.Placement,"reward": "pot"},

@@ -12,12 +12,11 @@ var absorbing_items : bool = false
 var item_in_focus = null
 var left_click_drag_time : float = 0
 var right_click_drag_time : float = 0
-var min_drag_time : float = 0.2
+var min_drag_time : float = 0.1
 var focus_items = []
 var item_in_focus_time = 0
-var min_foucus_time_for_tooltip = 0.5
 var showing_tooltip : bool = false
-var crops_planted:Dictionary[String,int] = {}#{"carrot":0,"potato":0,"wheat":0,"barley":0,"sugarcane":0,"melon":0,"rice":0, "pineapple":0}
+var crops_planted:Dictionary[String,int] = {}
 var items_in_bundle_field = []
 
 var left_down : bool = false
@@ -45,15 +44,14 @@ var first_item_planted : bool = false
 
 signal item_picked_up(item_name, last_item)
 signal item_dropped()
-signal create_tooltip(pos, tooltip_name, tooltip_type)
-signal erase_tooltip()
+signal add_tooltip_hover(pos, tooltip_name, tooltip_type, tooltip_hover_type)
+signal remove_tooltip_hover(tooltip_hover_type)
 
 func spawn_all_items():
 	for item_name in GLOBALCONSTS.ITEM_DEF:
 		create_draggable_item(item_name,Vector2(RNG.randi_range(-100,30),RNG.randi_range(-100,-50)))
 
 func spawn_testing_items():
-	spawn_all_items()
 	spawn_all_items()
 	create_draggable_item("potato",Vector2(-100,-30))
 	create_draggable_item("sugarcane",Vector2(-70,-30))
@@ -148,9 +146,7 @@ func deal_with_input(just_pressed : Click = Click.NONE, just_released : Click = 
 	
 	# Pickup or collect item
 	elif item_in_focus:
-		if just_pressed == Click.SHOW_TOOLTIP:
-			show_tooltip()
-		elif just_pressed == Click.LEFT:
+		if just_pressed == Click.LEFT:
 			if item_in_focus.item_name == "gold":
 				consume_gold()
 			else:
@@ -210,8 +206,6 @@ func _process(delta: float) -> void:
 		deal_with_input(Click.DROP_ONE, Click.NONE)
 	if Input.is_action_just_released("drop_one_item"):
 		deal_with_input(Click.NONE, Click.DROP_ONE)
-	if Input.is_action_just_pressed("show_tooltip"):
-		deal_with_input(Click.SHOW_TOOLTIP, Click.NONE)
 	
 	if item_being_dragged:
 		item_being_dragged.go_to_mouse_pos()
@@ -219,10 +213,6 @@ func _process(delta: float) -> void:
 			left_click_drag_time += delta
 		if right_down:
 			right_click_drag_time += delta
-	if item_in_focus:
-		item_in_focus_time += delta
-		if item_in_focus_time >= min_foucus_time_for_tooltip:
-			show_tooltip()
 			
 func erase_item(item):
 	remove_from_focus_list(item)
@@ -311,21 +301,19 @@ func add_to_focus_list(item_obj):
 	if not item_being_dragged:
 		refocus()
 
-func hide_tooltip():
-	showing_tooltip = false
-	erase_tooltip.emit()
+func _remove_tooltip_hover():
+	remove_tooltip_hover.emit(GLOBALCONSTS.TOOLTIP_HOVER_TYPES.ITEM)
 
-func show_tooltip():
-	showing_tooltip = true
-	create_tooltip.emit(item_in_focus.position, item_in_focus.item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
+func _add_tooltip_hover():
+	add_tooltip_hover.emit(item_in_focus.position, item_in_focus.item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM, GLOBALCONSTS.TOOLTIP_HOVER_TYPES.ITEM)
+
 
 func set_item_in_focus(item) -> void:
 	item_in_focus = item
+	_remove_tooltip_hover()
 	if item_in_focus:
 		item_in_focus.focus()
-	if showing_tooltip:
-		hide_tooltip()
-	item_in_focus_time = 0
+		_add_tooltip_hover()
 
 func refocus():
 	var largest_layer = 0
@@ -342,7 +330,7 @@ func refocus():
 				item_in_focus.stop_focus()
 			set_item_in_focus(focus_items[ind])
 	
-	else:
+	else:	
 		set_item_in_focus(null)
 		
 
@@ -377,6 +365,7 @@ func set_item_is_last(item):
 			item_is_last = true
 
 func pickup_item(item):
+	_remove_tooltip_hover()
 	item_in_focus = null
 	self.move_child(item, get_child_count() - 1)
 	item_being_dragged = item

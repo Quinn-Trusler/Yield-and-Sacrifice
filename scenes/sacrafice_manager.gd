@@ -159,7 +159,7 @@ var sacrifice_text_image_positions : Dictionary= {}
 func update_sacrifice_text():
 	$SacrificeGUI/SacrificeText.text = ""
 	for key in requirements:
-		var item_file_name = GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[key]["img_name"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION
+		var item_file_name = GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[key]["img"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION
 		$SacrificeGUI/SacrificeText.add_image(load(item_file_name))
 		if filled_requirements[key] >= requirements[key]:
 			$SacrificeGUI/SacrificeText.add_image(CHECKMARK_IMG)

@@ -2,12 +2,19 @@
 
 [ext_resource type="Script" uid="uid://dbwu21wo8c65k" path="res://scenes/tooltip/recipe.gd" id="1_qf6oe"]
 [ext_resource type="Texture2D" uid="uid://jt8nq0t2gqsy" path="res://art/ui/arrow_right.png" id="2_rurik"]
+[ext_resource type="FontFile" uid="uid://j337rhu63esg" path="res://font/yoster.ttf" id="3_bg6lr"]
 
-[node name="Recipe" type="HBoxContainer" unique_id=1735450453 node_paths=PackedStringArray("VBox1")]
+[node name="Recipe" type="HBoxContainer" unique_id=1735450453 node_paths=PackedStringArray("VBox1", "Name")]
 alignment = 1
 script = ExtResource("1_qf6oe")
 VBox1 = NodePath("VBox1")
 arrow_texture = ExtResource("2_rurik")
+Name = NodePath("VBox1/Name")
 
 [node name="VBox1" type="VBoxContainer" parent="." unique_id=276176455]
 layout_mode = 2
+
+[node name="Name" type="Label" parent="VBox1" unique_id=946690955]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bg6lr")
+theme_override_font_sizes/font_size = 8

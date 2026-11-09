@@ -79,22 +79,34 @@ func get_all_burnt_tiles():
 func is_valid_building_location(pos : Vector2i, building_name : String) -> bool:
 	return (TMM.TileLayer.is_no_building_placement_tiles_location(pos, building_name) and TMM.TerrainLayer.is_valid_building_location(pos, building_name) and TMM.TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
-func is_valid_gift_location(pos : Vector2i, building_name : String):
+func is_valid_gift_location(pos : Vector2i, building_name : String) -> bool:
 	return (TMM.TileLayer.gift_placeable_on_tile_layer(pos) and TMM.TerrainLayer.is_valid_building_location(pos, building_name) and TMM.TileLayer2.is_empty_building_location(pos) and not ui_tiles.has(pos))
 
-#uses tile position and not global position
-func get_building_interactable(pos):
-	if not TMM.EffectLayer.is_empty(pos):
-		var scene = TMM.EffectLayer.get_cell_scene(pos)
-		if scene:
-			if scene.BUILDING_TYPE == "fire":
+# Returns a building scene or null if there is none
+func get_building_scene(tile_pos : Vector2i):
+	if not TMM.EffectLayer.is_empty(tile_pos):
+		return TMM.EffectLayer.get_cell_scene(tile_pos)
+	if not TMM.TileLayer2.is_empty(tile_pos):#2nd layer cell not empty
+		return TMM.TileLayer2.get_cell_scene(tile_pos)
+	return null
+
+func get_farmland(tile_pos : Vector2i) -> String:
+	var tile_name = TMM.TileLayer.get_tile_name(tile_pos)
+	if not tile_name in GLOBALCONSTS.MIDDLE_TILES: # Not farmland return nothing
+		return ""
+	return tile_name
+	# TODO add swampwater edge condition in here, or maybe revamp the farmland system
+
+# returns false if no building
+func has_interactable_building(tile_pos : Vector2i) -> bool:
+	var scene = get_building_scene(tile_pos)
+	if scene:
+		match scene.BUILDING_TYPE:
+			"fire":
 				return true
-			else:
-				print("Building type other than fire in effect layer?????!!!???")
-	if not TMM.TileLayer2.is_empty(pos):#2nd layer cell not empty
-		var scene = TMM.TileLayer2.get_cell_scene(pos)
-		if scene:
-			if scene.BUILDING_TYPE == "building" or scene.BUILDING_TYPE == "crop":
+			"building":
+				return scene.is_harvestable()
+			"crop":
 				return scene.is_harvestable()
 	return false
 

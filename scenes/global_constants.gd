@@ -37,51 +37,51 @@ var NO_BUILDING_PLACEMENT_TILES = ["burnt land", "water","swamp_water","swamp_wa
 var UNBURNABLE_TILES = ["burnt land", "UI", "burnt_farmland","burnt_sandy_farmland","burnt_swamp_farmland"]
 var UNBURNABLE_TERRAIN_TILES = ["water","swamp_water","swamp_water_edge","lava"]
 var INITIALLY_UNBURNABLE_TILES = ["farmland", "sandy_farmland","swamp_farmland"] # Fire can not be placed directly on these tiles
-var CROP_DEF = {"carrot":{"stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
-"potato":{"stage_growth_duration":1.7,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potato","potato","potato"],"frames":CROP_FRAMES_FOLDER + "potato.tres","offset":Vector2(0,-2)},
-"wheat":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
-"barley":{"stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["barley","barley","barley"],"frames":CROP_FRAMES_FOLDER + "barley.tres","offset":Vector2(0,-3)},
-"sugarcane":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)},
-"rice":{"stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["rice","rice"],"frames":CROP_FRAMES_FOLDER + "rice.tres","offset":Vector2(0,0)},
-"melon":{"stage_growth_duration":1.3,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["melon","melon","melon"],"frames":CROP_FRAMES_FOLDER + "melon.tres","offset":Vector2(0,0)},
-"pineapple":{"stage_growth_duration":1.3,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["pineapple","pineapple","pineapple"],"frames":CROP_FRAMES_FOLDER + "pineapple.tres","offset":Vector2(0,-1.5)}
+var CROP_DEF = {"carrot":{"display_name":"Carrot Crop", "stage_growth_duration":2,"total_stages":4,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["carrot","carrot","carrot"],"frames":CROP_FRAMES_FOLDER + "carrot.tres","offset":Vector2.ZERO},
+"potato":{"display_name":"Potato Crop", "stage_growth_duration":1.7,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["potato","potato","potato"],"frames":CROP_FRAMES_FOLDER + "potato.tres","offset":Vector2(0,-2)},
+"wheat":{"display_name":"Wheat Crop", "stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["wheat","wheat","wheat"],"frames":CROP_FRAMES_FOLDER + "wheat.tres","offset":Vector2(0,-3)},
+"barley":{"display_name":"Barley Crop","stage_growth_duration":1,"total_stages":7,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["barley","barley","barley"],"frames":CROP_FRAMES_FOLDER + "barley.tres","offset":Vector2(0,-3)},
+"sugarcane":{"sugarcane":"Sugarcane Crop","stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["sugarcane","sugarcane","sugarcane"],"frames":CROP_FRAMES_FOLDER + "sugarcane.tres","offset":Vector2(0,-10)},
+"rice":{"display_name":"Rice Shoots","stage_growth_duration":2,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":0,"resources":["rice","rice"],"frames":CROP_FRAMES_FOLDER + "rice.tres","offset":Vector2(0,0)},
+"melon":{"display_name":"Melon Vines","stage_growth_duration":1.3,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["melon","melon","melon"],"frames":CROP_FRAMES_FOLDER + "melon.tres","offset":Vector2(0,0)},
+"pineapple":{"display_name":"Pineapple Plant","stage_growth_duration":1.3,"total_stages":6,"harvest_on_click":true,"pick_on_click":true,"pick_stage_setback":1,"resources":["pineapple","pineapple","pineapple"],"frames":CROP_FRAMES_FOLDER + "pineapple.tres","offset":Vector2(0,-1.5)}
 }
-var ITEM_DEF = {"carrot":{"display_name":"Carrot","img_name":"carrot","is_animated":false,"points":10,"place_on":["farmland","sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
-"potato":{"display_name":"potato","img_name":"potato","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
-"plastic_bag":{"display_name":"Plastic Bag","img_name":"plastic_bag","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [5, -1]},
-"rice":{"display_name":"Rice","img_name":"rice","is_animated":false,"points":10,"place_on":["swamp_water_edge"],"reaction":REACTIONS.NONE,  "num_offset" : [6.5, 0]},
-"prickly_pear":{"display_name":"Prickly Pear","img_name":"prickly_pear","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [3, -1]},
-"devil_pepper":{"display_name":"Devil Pepper","img_name":"devil_pepper","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [6,-3]},
-"wheat":{"display_name":"Wheat","img_name":"wheat","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
-"barley":{"display_name":"Barley","img_name":"barley","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
-"sugarcane":{"display_name":"Sugarname","img_name":"sugarcane","is_animated":false,"points":10,"place_on":["swamp_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
-"melon":{"display_name":"Melon","img_name":"melon","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
-"pineapple":{"display_name":"Pineapple","img_name":"pineapple","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
-"fish":{"display_name":"Fish","img_name":"fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"tropical_fish_1":{"display_name":"Tropical Fish 1","img_name":"tropical_fish_1","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"tropical_fish_2":{"display_name":"Tropical Fish 2","img_name":"tropical_fish_2","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"tropical_fish_3":{"display_name":"Tropical Fish 3","img_name":"tropical_fish_3","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"tentacle":{"display_name":"Tentacle","img_name":"tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,4]},
-"shrimp":{"display_name":"Shrimp","img_name":"shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"cooked_tentacle":{"display_name":"Cooked Tentacle","img_name":"cooked_tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,4]},
-"cooked_shrimp":{"display_name":"Cooked Shrimp","img_name":"cooked_shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
-"sugar":{"display_name":"Sugar","img_name":"sugar","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,3]},
-"cooked_rice":{"display_name":"Cooked Rice","img_name":"cooked_rice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [8.5,-1]},
-"flour":{"display_name":"Flour","img_name":"flour","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,1]},
-"barley_flour":{"display_name":"Barley Flour","img_name":"barley_flour","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,1]},
-"bread":{"display_name":"Bread","img_name":"bread","is_animated":false,"points":30,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8,4]},
-"barley_bread":{"display_name":"Barley Bread","img_name":"barley_bread","is_animated":false,"points":30,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8,4]},
-"mushroom":{"display_name":"Mushroom","img_name":"mushroom","is_animated":false,"points":8,"place_on":[],"reaction":REACTIONS.SHROOMS, "num_offset" : [4,0]},
-"cranberry":{"display_name":"Cranberry","img_name":"cranberry","is_animated":false,"points":8,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
-"cranberry_jam":{"display_name":"Cranberry Jam","img_name":"cranberry_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
-"melon_jam":{"display_name":"Melon Jam","img_name":"melon_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
-"pineapple_jam":{"display_name":"Pineapple Jam","img_name":"pineapple_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
-"prickly_pear_jam":{"display_name":"Prickly Pear Jam","img_name":"prickly_pear_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5,0]},
-"vodka":{"display_name":"Vodka","img_name":"vodka","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [3,3]},
-"rum":{"display_name":"Rum","img_name":"rum","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [5,2]},
-"sake":{"display_name":"Sake","img_name":"sake","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [3.5, 2]},
-"gold":{"display_name":"Gold","img_name":"coin","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE},
-"pepper_juice":{"display_name":"Pepper Juice","img_name":"pepper_juice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE}
+var ITEM_DEF = {"carrot":{"display_name":"Carrot","img":"carrot","is_animated":false,"points":10,"place_on":["farmland","sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [0,5]},
+"potato":{"display_name":"potato","img":"potato","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE,  "num_offset" : [4,3]},
+"plastic_bag":{"display_name":"Plastic Bag","img":"plastic_bag","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [5, -1]},
+"rice":{"display_name":"Rice","img":"rice","is_animated":false,"points":10,"place_on":["swamp_water_edge"],"reaction":REACTIONS.NONE,  "num_offset" : [6.5, 0]},
+"prickly_pear":{"display_name":"Prickly Pear","img":"prickly_pear","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [3, -1]},
+"devil_pepper":{"display_name":"Devil Pepper","img":"devil_pepper","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [6,-3]},
+"wheat":{"display_name":"Wheat","img":"wheat","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
+"barley":{"display_name":"Barley","img":"barley","is_animated":false,"points":10,"place_on":["farmland"],"reaction":REACTIONS.NONE, "num_offset" : [4,1]},
+"sugarcane":{"display_name":"Sugarname","img":"sugarcane","is_animated":false,"points":10,"place_on":["swamp_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [5,2]},
+"melon":{"display_name":"Melon","img":"melon","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
+"pineapple":{"display_name":"Pineapple","img":"pineapple","is_animated":false,"points":10,"place_on":["sandy_farmland"],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
+"fish":{"display_name":"Fish","img":"fish","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_1":{"display_name":"Tropical Fish 1","img":"tropical_fish_1","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_2":{"display_name":"Tropical Fish 2","img":"tropical_fish_2","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tropical_fish_3":{"display_name":"Tropical Fish 3","img":"tropical_fish_3","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"tentacle":{"display_name":"Tentacle","img":"tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,4]},
+"shrimp":{"display_name":"Shrimp","img":"shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"cooked_tentacle":{"display_name":"Cooked Tentacle","img":"cooked_tentacle","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,4]},
+"cooked_shrimp":{"display_name":"Cooked Shrimp","img":"cooked_shrimp","is_animated":false,"points":10,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [5,4]},
+"sugar":{"display_name":"Sugar","img":"sugar","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,3]},
+"cooked_rice":{"display_name":"Cooked Rice","img":"cooked_rice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE,  "num_offset" : [8.5,-1]},
+"flour":{"display_name":"Flour","img":"flour","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,1]},
+"barley_flour":{"display_name":"Barley Flour","img":"barley_flour","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [6,1]},
+"bread":{"display_name":"Bread","img":"bread","is_animated":false,"points":30,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8,4]},
+"barley_bread":{"display_name":"Barley Bread","img":"barley_bread","is_animated":false,"points":30,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8,4]},
+"mushroom":{"display_name":"Mushroom","img":"mushroom","is_animated":false,"points":8,"place_on":[],"reaction":REACTIONS.SHROOMS, "num_offset" : [4,0]},
+"cranberry":{"display_name":"Cranberry","img":"cranberry","is_animated":false,"points":8,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [8.5, 0]},
+"cranberry_jam":{"display_name":"Cranberry Jam","img":"cranberry_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
+"melon_jam":{"display_name":"Melon Jam","img":"melon_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
+"pineapple_jam":{"display_name":"Pineapple Jam","img":"pineapple_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5 , 0]},
+"prickly_pear_jam":{"display_name":"Prickly Pear Jam","img":"prickly_pear_jam","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE, "num_offset" : [4.5,0]},
+"vodka":{"display_name":"Vodka","img":"vodka","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [3,3]},
+"rum":{"display_name":"Rum","img":"rum","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [5,2]},
+"sake":{"display_name":"Sake","img":"sake","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.ALCOHOL, "num_offset" : [3.5, 2]},
+"gold":{"display_name":"Gold","img":"coin","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE},
+"pepper_juice":{"display_name":"Pepper Juice","img":"pepper_juice","is_animated":false,"points":20,"place_on":[],"reaction":REACTIONS.NONE}
 }
 var IMG_EXTENSION = ".png"
 
@@ -99,7 +99,7 @@ var BUILDING_DEF = {"fishing_spot":{"display_name":"Fishing Spot","icon_img" : "
 	"mushroom_patch":{"display_name":"Mushroom Patch","icon_img":"mushroom_patch","output_items":["mushroom"],"items_to_start_timer":0,"input_items":{},"total_stages":3,"stage_to_harvest":1,"time_per_stage":5,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["grass", "swamp_grass"], "frames": BUILDINGS_FRAMES_FOLDER + "mushroom_patch.tres", "offset": [0,0], "extra_tiles": [], "bounce":false},
 	"devil_vine":{"display_name":"Devil Vine","output_items":["devil_pepper"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":1,"destroy_on_harvest":false, "stage_loss_on_harvest": 4, "place_on":["sand"],"frames": BUILDINGS_FRAMES_FOLDER + "devil_vine.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
 	"prickly_pear_cactus":{"display_name":"Prickly Pear Cactus","icon_img":"prickly_pear_cactus","output_items":["prickly_pear"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":1,"time_per_stage":4,"destroy_on_harvest":false, "stage_loss_on_harvest": 1, "place_on":["sand"], "frames": BUILDINGS_FRAMES_FOLDER + "prickly_pear_cactus.tres", "offset": [0,-1], "extra_tiles": [], "bounce":false},
-	"cranberry_bush":{"display_name":"Cranberry Bush","icon_img":"cranbbery_bush","output_items":["cranberry", "cranberry", "cranberry"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":2,"destroy_on_harvest":false, "stage_loss_on_harvest": 3, "place_on":["swamp_water_edge"],"no_building_placement_override" : ["swamp_water_edge"], "frames": BUILDINGS_FRAMES_FOLDER + "cranberry_bush.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
+	"cranberry_bush":{"display_name":"Cranberry Bush","icon_img":"cranberry_bush","output_items":["cranberry", "cranberry", "cranberry"],"items_to_start_timer":0,"input_items":{},"total_stages":4,"stage_to_harvest":4,"time_per_stage":2,"destroy_on_harvest":false, "stage_loss_on_harvest": 3, "place_on":["swamp_water_edge"],"no_building_placement_override" : ["swamp_water_edge"], "frames": BUILDINGS_FRAMES_FOLDER + "cranberry_bush.tres", "offset": [0,0], "extra_tiles": [], "bounce":true},
 	"farmland":{"display_name": "Farmland","icon_img":"farmland","place_on": ["grass"]},
 	"sandy_farmland":{"display_name": "Sandy Farmland","icon_img":"sandy_farmland","place_on": ["sand"]},
 	"swamp_farmland":{"display_name": "Swamp Farmland","icon_img":"swamp_farmland","place_on": ["swamp_grass"]}
@@ -162,8 +162,9 @@ var SCATTER_ITEM_DIST = [40, 100]
 var SCATTER_ITEM_ROTATION = [-25,25]
 var SCATTER_ITEM_TIME = [0.6, 1.2]
 
-enum TOOLTIP_TYPES {ITEM, BUILDING, FARMLAND}
-
+enum TOOLTIP_TYPES {ITEM, BUILDING, FARMLAND, CROP}
+enum TOOLTIP_HOVER_TYPES {ITEM, TILE, SACRIFICE}
+var HOVER_TIME_TOOLTIP = 0.5
 
 var ITEM_POLYGONS = {"carrot":[[2.5, 5.0], [-7.5, 10.0], [-10.5, 10.0], [-10.5, 7.0], [-0.5, -3.5], [-1.5, -5.5], [1.5, -9.5], [8.5, -9.0], [10.5, -5.5], [9.5, -1.0], [3.5, 0.5]],
 "potato": [[0.0, 5.0], [4.5, 5.5], [7.5, 2.5], [7.5, -0.5], [1.5, -5.5], [-5.5, -5.5], [-7.5, -4.0], [-7.5, 0.5], [-4.5, 3.5]],

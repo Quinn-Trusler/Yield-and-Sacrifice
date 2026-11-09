@@ -2,13 +2,15 @@ extends HBoxContainer
 
 @export var VBox1 : VBoxContainer
 @export var arrow_texture : Texture2D
+@export var Name : Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
 
-func setup(recipes : Array) -> void:
+func setup(recipes : Array, display_name : String) -> void:
+	Name.text = display_name
 	if typeof(recipes[0]) == TYPE_ARRAY:
 		print("Double recipes: ", recipes)
 		for recipe in recipes:
@@ -20,8 +22,8 @@ func setup(recipes : Array) -> void:
 # Currently does not know what type of ingredient it is, so just tries to grab from any list
 func get_image(ingredient : String):
 	if ingredient in GLOBALCONSTS.ITEM_DEF:
-		assert("img_name" in GLOBALCONSTS.ITEM_DEF[ingredient], "no img_name in ITEM_DEF[%s]"%ingredient)
-		return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[ingredient]["img_name"] + GLOBALCONSTS.IMG_EXTENSION)
+		assert("img" in GLOBALCONSTS.ITEM_DEF[ingredient], "no img in ITEM_DEF[%s]"%ingredient)
+		return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[ingredient]["img"] + GLOBALCONSTS.IMG_EXTENSION)
 	elif ingredient in GLOBALCONSTS.BUILDING_DEF:
 		assert("icon_img" in GLOBALCONSTS.BUILDING_DEF[ingredient], "no icon_img in BUILDING_DEF[%s]"%ingredient)
 		return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[ingredient]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
