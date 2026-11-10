@@ -1607,12 +1607,13 @@ centered = false
 visible = false
 z_index = 1
 
-[node name="SacrificeManager" type="Node2D" parent="." unique_id=1921713198 node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager", "RoundNumber")]
+[node name="SacrificeManager" type="Node2D" parent="." unique_id=1921713198 node_paths=PackedStringArray("TutorialManager", "DialogManager", "ItemManager", "RoundNumber", "SacrificeText")]
 script = ExtResource("5_tbgi4")
 TutorialManager = NodePath("../TutorialManager")
 DialogManager = NodePath("../DialogManager")
 ItemManager = NodePath("../ItemManager")
 RoundNumber = NodePath("../RoundsRemaining")
+SacrificeText = NodePath("SacrificeGUI/SacrificeText")
 
 [node name="Timer" type="Timer" parent="SacrificeManager" unique_id=1253906982]
 autostart = true
@@ -1653,7 +1654,6 @@ offset_left = -87.0
 offset_top = -14.0
 offset_right = 87.0
 offset_bottom = 15.0
-mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("6_tefeu")
 theme_override_font_sizes/normal_font_size = 8
@@ -1661,6 +1661,7 @@ bbcode_enabled = true
 text = "Sacrifice"
 horizontal_alignment = 1
 vertical_alignment = 1
+meta_underlined = false
 
 [node name="SacrificeBar" type="TextureProgressBar" parent="SacrificeManager/SacrificeGUI" unique_id=1220429030]
 visible = false
@@ -1729,3 +1730,6 @@ script = ExtResource("33_5q0nq")
 [connection signal="area_exited" from="ItemManager/BundleField" to="ItemManager" method="_on_bundle_field_area_exited"]
 [connection signal="timeout" from="BuildingManager/FishTimer" to="BuildingManager" method="_on_fish_timer_timeout"]
 [connection signal="timeout" from="SacrificeManager/Timer" to="SacrificeManager" method="_on_timer_timeout"]
+[connection signal="meta_clicked" from="SacrificeManager/SacrificeGUI/SacrificeText" to="SacrificeManager" method="_on_sacrifice_text_meta_clicked"]
+[connection signal="meta_hover_ended" from="SacrificeManager/SacrificeGUI/SacrificeText" to="SacrificeManager" method="_on_sacrifice_text_meta_hover_ended"]
+[connection signal="meta_hover_started" from="SacrificeManager/SacrificeGUI/SacrificeText" to="SacrificeManager" method="_on_sacrifice_text_meta_hover_started"]

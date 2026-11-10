@@ -33,8 +33,11 @@ var first_sacrifice_made: bool = false
 @export var ItemManager: Node2D
 @export var RoundNumber: Node2D
 
+@export var SacrificeText : RichTextLabel
+
 
 func _ready():
+	SacrificeText.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	if Cheats.ROUND_TIME_OVERRIDE:
 		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
 	else:
@@ -157,17 +160,22 @@ var sacrifice_text_image_positions : Dictionary= {}
 
 #Updates the sacrifice text and images to match what they actualy are
 func update_sacrifice_text():
-	$SacrificeGUI/SacrificeText.text = ""
+	SacrificeText.text = ""
 	for key in requirements:
 		var item_file_name = GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[key]["img"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION
-		$SacrificeGUI/SacrificeText.add_image(load(item_file_name))
+		SacrificeText.append_text("[url=%s]"%[key])
+		SacrificeText.add_image(load(item_file_name))
+		SacrificeText.append_text("[/url]")
 		if filled_requirements[key] >= requirements[key]:
-			$SacrificeGUI/SacrificeText.add_image(CHECKMARK_IMG)
-			#var sacrifice_text_image_positions[key] = 
+			SacrificeText.add_image(CHECKMARK_IMG) 
+			
 		else:
-			$SacrificeGUI/SacrificeText.add_text(str(filled_requirements[key]))
-			$SacrificeGUI/SacrificeText.add_image(FORWARD_SLASH_IMG)
-			$SacrificeGUI/SacrificeText.add_text(str(requirements[key]))
+			#SacrificeText.add_text()
+			#print("text adding: ","[url=%s]{"%[key]+str(filled_requirements[key])+"}[/url]")
+			SacrificeText.append_text(str(filled_requirements[key]))
+			SacrificeText.add_image(FORWARD_SLASH_IMG)
+			SacrificeText.append_text(str(requirements[key]))
+			#SacrificeText.add_text()
 			
 		
 func give_coin_to_player():
@@ -225,3 +233,15 @@ func _on_timer_timeout() -> void:
 	
 func _attempt_eat_item(on_mouth : bool):
 	ItemManager.mouse_on_mouth = on_mouth
+
+
+func _on_sacrifice_text_meta_clicked(meta: Variant) -> void:
+	print("I just got meta data!: ", meta)
+
+
+func _on_sacrifice_text_meta_hover_started(meta: Variant) -> void:
+	print("I started hover meta data!: ", meta)
+
+
+func _on_sacrifice_text_meta_hover_ended(meta: Variant) -> void:
+	print("I ended hover meta data!: ", meta)
