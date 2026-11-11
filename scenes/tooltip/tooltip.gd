@@ -20,6 +20,7 @@ const recipe_display_names = {
 
 @export var Name : Label
 @export var VBox : VBoxContainer
+@export var Bg : VBoxContainer
 
 func erase_recipe():
 	pass
@@ -33,61 +34,53 @@ func setup_all():
 	print("--------------------------------------------------")
 	for item_name in ITEM_DEF:
 		print(item_name)
-		setup_item_tooltip(item_name)
+		setup_tooltip(item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM)
 	print("--------------------------------------------------")
 	for farmland_name in GLOBALCONSTS.MIDDLE_TILES:
 		print(farmland_name)
-		setup_farmland_tooltip(farmland_name)
+		setup_tooltip(farmland_name, GLOBALCONSTS.TOOLTIP_TYPES.FARMLAND)
+
 
 func setup_tooltip(tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES):
-	#print("Setting up tooltip")
+	
+	var recipe_functions = []
 	match tooltip_type:
 		GLOBALCONSTS.TOOLTIP_TYPES.ITEM:
-			setup_item_tooltip(tooltip_name)
-		
+			Name.text = ITEM_DEF[tooltip_name]["display_name"]
+			recipe_functions = [
+				get_item_plants_onto_recipes,
+				get_item_produced_from_recipes,
+				get_item_crafted_from_recipes,
+				get_item_crafts_into_recipes]
+				
 		GLOBALCONSTS.TOOLTIP_TYPES.BUILDING:
-			setup_building_tooltip(tooltip_name)
+			Name.text = BUILDING_DEF[tooltip_name]["display_name"]
+			recipe_functions = [
+				get_building_crafting_recipes,
+				get_building_produces_recipes
+			]
 			
 		GLOBALCONSTS.TOOLTIP_TYPES.FARMLAND:
-			setup_farmland_tooltip(tooltip_name)
+			Name.text = BUILDING_DEF[tooltip_name]["display_name"]
+			recipe_functions = [get_item_that_grows_on_recipes]
 			
 		GLOBALCONSTS.TOOLTIP_TYPES.CROP:
-			setup_crop_tooltip(tooltip_name)
+			Name.text = CROP_DEF[tooltip_name]["display_name"]
+			recipe_functions = [get_item_produced_by_crop_recipes]
+			
+	for recipe_function in recipe_functions:
+		var recipes = recipe_function.call(tooltip_name)
+		add_recipes_to_display(recipes, recipe_display_names[recipe_function.get_method()])
+	
+	await get_tree().process_frame # Wait since container does not update imidetly
+	var box_size = VBox.get_size()
+	Bg.set_height(box_size.y)
+	Bg.visible = true
+	print(VBox.get_size())
 
 func setup_building_tooltip(tooltip_name : String) -> void:
 	print("tooltip name: ", tooltip_name)
-	Name.text = BUILDING_DEF[tooltip_name]["display_name"]
-	var recipe_functions = [
-		get_building_crafting_recipes,
-		get_building_produces_recipes
-	]
-	for recipe_function in recipe_functions:
-		var recipes = recipe_function.call(tooltip_name)
-		add_recipes_to_display(recipes, recipe_display_names[recipe_function.get_method()])
-	
-func setup_farmland_tooltip(tooltip_name : String) -> void:
-	Name.text = BUILDING_DEF[tooltip_name]["display_name"]
-	var recipes = get_item_that_grows_on_recipes(tooltip_name)
-	add_recipes_to_display(recipes, recipe_display_names[get_item_plants_onto_recipes.get_method()])
 
-func setup_crop_tooltip(tooltip_name : String)-> void:
-	#print("tooltip name", tooltip_name)
-	Name.text = CROP_DEF[tooltip_name]["display_name"]
-	var recipes = get_item_produced_by_crop_recipes(tooltip_name)
-	add_recipes_to_display(recipes, recipe_display_names[get_item_produced_by_crop_recipes.get_method()])
-	
-func setup_item_tooltip(tooltip_name : String) -> void:
-	#print("setup_item_tooltip", ITEM_DEF[tooltip_name]["display_name"])
-	var recipe_functions = [
-		get_item_plants_onto_recipes,
-		get_item_produced_from_recipes,
-		get_item_crafted_from_recipes,
-		get_item_crafts_into_recipes]
-	print("toolltip name", tooltip_name)
-	Name.text = ITEM_DEF[tooltip_name]["display_name"]
-	for recipe_function in recipe_functions:
-		var recipes = recipe_function.call(tooltip_name)
-		add_recipes_to_display(recipes, recipe_display_names[recipe_function.get_method()])
 
 func add_recipes_to_display(recipes : Array, display_name : String):
 	print("Recipe %s: "%[display_name], recipes)
@@ -95,8 +88,6 @@ func add_recipes_to_display(recipes : Array, display_name : String):
 		var recipe_scene = RECIPE_SCENE.instantiate()
 		VBox.add_child(recipe_scene) #add to vbox
 		recipe_scene.setup(recipes, display_name)
-		
-		
 
 
 # ---Recipe Getters---

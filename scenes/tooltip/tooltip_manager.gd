@@ -109,6 +109,7 @@ func _create_tooltip(pos : Vector2, tooltip_name : String, tooltip_type : GLOBAL
 		tooltip.position = pos
 
 func _erase_tooltip() -> void:
+	#pass
 	showing_tooltip = false
 	if tooltip:
 		tooltip.queue_free()
