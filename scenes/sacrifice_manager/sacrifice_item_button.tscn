@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c7pxd5l1sxta5"]
+
+[ext_resource type="Script" uid="uid://cjkydsgj1aj4v" path="res://scenes/sacrifice_manager/sacrifice_item_button.gd" id="1_p5lvf"]
+
+[node name="SacrificeItemButton" type="TextureButton" unique_id=276446842]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_p5lvf")
+
+[connection signal="item_button_pressed" from="." to="." method="_on_item_button_pressed"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -34,6 +34,9 @@ var first_sacrifice_made: bool = false
 @export var SacrificeText : Node2D
 
 
+signal add_tooltip_hover(pos, tooltip_name, tooltip_type, tooltip_hover_type)
+signal remove_tooltip_hover()
+
 func _ready():
 	if Cheats.ROUND_TIME_OVERRIDE:
 		$Timer.wait_time = Cheats.ROUND_TIME_OVERRIDE
@@ -41,6 +44,25 @@ func _ready():
 		$Timer.wait_time = round_time
 	$Timer.start()
 	start()
+	
+	SacrificeText.item_button_mouse_entered.connect(_add_tooltip_hover)
+	SacrificeText.item_button_mouse_exited.connect(_remove_tooltip_hover)
+	SacrificeText.item_button_pressed.connect(_item_button_pressed)
+#SacrificeManager.add_item_hover.connect(TooltipManager.add_hover)
+	#SacrificeManager.remove_item_hover.connect(TooltipManager.remove_hover)
+
+func _add_tooltip_hover(pos : Vector2, item_name : String) -> void:
+	print("%s : Sacrifice manager Tooltip hover add: "%[item_name])
+	add_tooltip_hover.emit(pos, item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM,GLOBALCONSTS.TOOLTIP_HOVER_TYPES.SACRIFICE)
+	
+	
+func _remove_tooltip_hover(pos : Vector2, item_name : String) -> void:
+	print("%s : Sacrifice manager Tooltip hover remove"%[item_name])
+	remove_tooltip_hover.emit(GLOBALCONSTS.TOOLTIP_HOVER_TYPES.SACRIFICE)
+	
+	
+func _item_button_pressed(item_name) -> void:
+	print("%s : item has been pressed, nothing implemented"%[item_name])
 	
 func set_boss(boss_, boss_position):
 	boss = boss_.instantiate()
@@ -157,7 +179,7 @@ var sacrifice_text_image_positions : Dictionary= {}
 
 #Updates the sacrifice text and images to match what they actualy are
 func update_sacrifice_text():
-	SacrificeText.update(requirements, filled_requirements)
+	SacrificeText.update(filled_requirements, requirements)
 	
 		
 func give_coin_to_player():

@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://chjnoeh0g1jkq"]
 
-[ext_resource type="Script" uid="uid://d20ka6nvqyy5b" path="res://scenes/sacrifice_text.gd" id="1_coyk2"]
+[ext_resource type="Script" uid="uid://d20ka6nvqyy5b" path="res://scenes/sacrifice_manager/sacrifice_text.gd" id="1_coyk2"]
 [ext_resource type="Texture2D" uid="uid://bwgd3ynpi0rr8" path="res://art/ui/green_checkmark_outline.png" id="2_paugd"]
 [ext_resource type="Texture2D" uid="uid://o2kw6xt5jx47" path="res://art/ui/forward_slash.png" id="3_ae436"]
-[ext_resource type="PackedScene" uid="uid://1da326m3jcvo" path="res://scenes/sacrifice_text_label.tscn" id="4_ae436"]
+[ext_resource type="PackedScene" uid="uid://1da326m3jcvo" path="res://scenes/sacrifice_manager/sacrifice_text_label.tscn" id="4_ae436"]
+[ext_resource type="PackedScene" uid="uid://c7pxd5l1sxta5" path="res://scenes/sacrifice_manager/sacrifice_item_button.tscn" id="5_4bb1h"]
 
 [node name="SacrificeText" type="Node2D" unique_id=1714782258 node_paths=PackedStringArray("HBox")]
-position = Vector2(351, 368)
-scale = Vector2(4, 4)
 script = ExtResource("1_coyk2")
 HBox = NodePath("HBoxContainer")
 CheckmarkImg = ExtResource("2_paugd")
 ForwardSlashImg = ExtResource("3_ae436")
 SacrificeTextLabel = ExtResource("4_ae436")
+ItemButton = ExtResource("5_4bb1h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=105152394]
 anchors_preset = 8
@@ -20,10 +20,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.0
+offset_left = -45.875
 offset_top = -20.0
-offset_right = 48.75
+offset_right = 45.875
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 alignment = 1

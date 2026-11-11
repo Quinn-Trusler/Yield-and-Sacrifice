@@ -28,6 +28,8 @@ func connect_signals():
 	ItemManager.remove_tooltip_hover.connect(TooltipManager.remove_hover)
 	TMM.add_tooltip_hover.connect(TooltipManager.add_hover)
 	TMM.remove_tooltip_hover.connect(TooltipManager.remove_hover)
+	SacrificeManager.add_tooltip_hover.connect(TooltipManager.add_hover)
+	SacrificeManager.remove_tooltip_hover.connect(TooltipManager.remove_hover)
 	
 	
 func _process(_delta: float) -> void:
