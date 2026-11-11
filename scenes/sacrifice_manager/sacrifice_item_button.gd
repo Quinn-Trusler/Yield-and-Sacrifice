@@ -11,13 +11,14 @@ func set_item_name(i_name) -> void:
 	item_name = i_name
 
 
+
 func _on_mouse_entered() -> void:
-	item_button_mouse_entered.emit(position, item_name)
+	item_button_mouse_entered.emit(get_rect(), item_name)
 
 
 func _on_mouse_exited() -> void:
-	item_button_mouse_exited.emit(position,item_name)
+	item_button_mouse_exited.emit(get_rect(),item_name)
 
 
 func _on_pressed() -> void:
-	item_button_pressed.emit(position,item_name)
+	item_button_pressed.emit(get_rect(),item_name)

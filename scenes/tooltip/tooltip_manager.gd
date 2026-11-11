@@ -11,7 +11,7 @@ var hover_sacrifice = HoverObject.new()
 
 
 class HoverObject:
-	var pos : Vector2
+	var pos : Rect2
 	var tooltip_name : String
 	var tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES
 	var hover_time : float 
@@ -49,7 +49,7 @@ func remove_hover(tooltip_hover_type :GLOBALCONSTS.TOOLTIP_HOVER_TYPES):
 	hover_object.unset_hover()
 	
 
-func add_hover(pos : Vector2, tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES, tooltip_hover_type :GLOBALCONSTS.TOOLTIP_HOVER_TYPES):
+func add_hover(pos : Rect2, tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES, tooltip_hover_type :GLOBALCONSTS.TOOLTIP_HOVER_TYPES):
 	var hover_object = _get_hover_object_from_type(tooltip_hover_type)	
 	hover_object.set_hover(pos, tooltip_name, tooltip_type)
 
@@ -99,14 +99,15 @@ func _create_tooltip_with_hover_object(hover_object : HoverObject) -> void:
 	print("create tooltip",hover_object.pos, hover_object.tooltip_name, hover_object.tooltip_type)
 	_create_tooltip(hover_object.pos, hover_object.tooltip_name, hover_object.tooltip_type)
 
-func _create_tooltip(pos : Vector2, tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES) -> void:
+func _create_tooltip(pos : Rect2, tooltip_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES) -> void:
 	if not showing_tooltip: 
 		_erase_tooltip()
 		showing_tooltip = true
 		tooltip = tooltip_scene.instantiate()
 		add_child(tooltip)
 		tooltip.setup_tooltip(tooltip_name, tooltip_type)
-		tooltip.position = pos
+		
+		tooltip.position = Vector2(pos.get_center().x, pos.end.y)
 
 func _erase_tooltip() -> void:
 	#pass

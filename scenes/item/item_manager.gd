@@ -305,7 +305,7 @@ func _remove_tooltip_hover():
 	remove_tooltip_hover.emit(GLOBALCONSTS.TOOLTIP_HOVER_TYPES.ITEM)
 
 func _add_tooltip_hover():
-	add_tooltip_hover.emit(item_in_focus.position, item_in_focus.item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM, GLOBALCONSTS.TOOLTIP_HOVER_TYPES.ITEM)
+	add_tooltip_hover.emit(item_in_focus.get_rect(), item_in_focus.item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM, GLOBALCONSTS.TOOLTIP_HOVER_TYPES.ITEM)
 
 
 func set_item_in_focus(item) -> void:

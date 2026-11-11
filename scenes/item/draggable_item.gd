@@ -23,15 +23,23 @@ var push_zone_entrance_point : Vector2
 
 var in_focus = false
 
+func get_img():
+	return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[item_name]["img"]+GLOBALCONSTS.IMG_EXTENSION)
+	
+	
+func get_outline_img():
+	return load(GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[item_name]["img"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION)
+
+
 func initialize(n,item_def, n_items : int = 1):
 	set_num(n_items)
 	item_name = n
 	if item_def["is_animated"]:
-		sprite_frames = load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img"]+GLOBALCONSTS.IMG_EXTENSION)
+		sprite_frames = get_img()
 	else:
 		sprite_frames = SpriteFrames.new()
-		sprite_frames.add_frame("default",load(GLOBALCONSTS.ITEMS_FOLDER + item_def["img"]+GLOBALCONSTS.IMG_EXTENSION))
-		sprite_frames.add_frame("default",load(GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + item_def["img"]+"_outline"+GLOBALCONSTS.IMG_EXTENSION))
+		sprite_frames.add_frame("default",get_img())
+		sprite_frames.add_frame("default",get_outline_img())
 	
 	if "num_offset" in item_def:
 		$NumItems.position = Vector2(item_def["num_offset"][0], item_def["num_offset"][1])
@@ -100,6 +108,13 @@ func decrease_num(num : int = 1) -> void:
 	
 func increase_num(num : int = 1) -> void:
 	set_num(num_items + num)
+
+func get_rect() -> Rect2:
+	var image_size = get_img().get_size()
+	var rect = Rect2(position,image_size)
+	rect.position -= image_size / 2
+	return rect
+	
 
 func convert_polygon(poly):
 	var new_poly = []

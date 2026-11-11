@@ -51,12 +51,12 @@ func _ready():
 #SacrificeManager.add_item_hover.connect(TooltipManager.add_hover)
 	#SacrificeManager.remove_item_hover.connect(TooltipManager.remove_hover)
 
-func _add_tooltip_hover(pos : Vector2, item_name : String) -> void:
+func _add_tooltip_hover(rect : Rect2, item_name : String) -> void:
 	print("%s : Sacrifice manager Tooltip hover add: "%[item_name])
-	add_tooltip_hover.emit(pos, item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM,GLOBALCONSTS.TOOLTIP_HOVER_TYPES.SACRIFICE)
+	add_tooltip_hover.emit(rect, item_name, GLOBALCONSTS.TOOLTIP_TYPES.ITEM,GLOBALCONSTS.TOOLTIP_HOVER_TYPES.SACRIFICE)
 	
 	
-func _remove_tooltip_hover(pos : Vector2, item_name : String) -> void:
+func _remove_tooltip_hover(rect : Rect2, item_name : String) -> void:
 	print("%s : Sacrifice manager Tooltip hover remove"%[item_name])
 	remove_tooltip_hover.emit(GLOBALCONSTS.TOOLTIP_HOVER_TYPES.SACRIFICE)
 	

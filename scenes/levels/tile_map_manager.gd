@@ -23,6 +23,13 @@ func get_building_manager():
 func get_item_manager():
 	return ItemManager
 
+
+func get_tile_rect(tile_pos) -> Rect2:
+	var pos = TileLayer.to_global(TileLayer.map_to_local(tile_pos))
+	var tile_size = Vector2(16, 16)
+	var rect = Rect2(pos - tile_size/2,tile_size)
+	return rect
+
 func tooltip_process() -> void:
 	# Update tile in focus
 	var new_tile_in_focus = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
@@ -37,13 +44,14 @@ func tooltip_process() -> void:
 		var farmland_name = BuildingManager.get_farmland(tile_in_focus)
 		
 		if building_scene or farmland_name:
+			var tile_rect =  get_tile_rect(tile_in_focus)
 			if building_scene:
 				if building_scene.BUILDING_TYPE == "building":
-					_add_tooltip_hover(tile_in_focus, building_scene.BUILDING_NAME, GLOBALCONSTS.TOOLTIP_TYPES.BUILDING)
+					_add_tooltip_hover(tile_rect, building_scene.BUILDING_NAME, GLOBALCONSTS.TOOLTIP_TYPES.BUILDING)
 				else:
-					_add_tooltip_hover(tile_in_focus, building_scene.BUILDING_NAME, GLOBALCONSTS.TOOLTIP_TYPES.CROP)
+					_add_tooltip_hover(tile_rect, building_scene.BUILDING_NAME, GLOBALCONSTS.TOOLTIP_TYPES.CROP)
 			else:
-				_add_tooltip_hover(tile_in_focus, farmland_name, GLOBALCONSTS.TOOLTIP_TYPES.FARMLAND)
+				_add_tooltip_hover(tile_rect, farmland_name, GLOBALCONSTS.TOOLTIP_TYPES.FARMLAND)
 
 func _process(_delta: float) -> void:
 	var mouse_tile_pos = TileLayer.local_to_map(TileLayer.to_local(get_global_mouse_position()))
@@ -66,8 +74,8 @@ func _process(_delta: float) -> void:
 func _remove_tooltip_hover() -> void:
 	remove_tooltip_hover.emit(GLOBALCONSTS.TOOLTIP_HOVER_TYPES.TILE)
 
-func _add_tooltip_hover(tile_pos : Vector2i,building_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES) -> void:
-	add_tooltip_hover.emit(TileLayer.to_global(TileLayer.map_to_local(tile_pos)), building_name, tooltip_type, GLOBALCONSTS.TOOLTIP_HOVER_TYPES.TILE)
+func _add_tooltip_hover(tile_pos : Rect2,building_name : String, tooltip_type : GLOBALCONSTS.TOOLTIP_TYPES) -> void:
+	add_tooltip_hover.emit(tile_pos, building_name, tooltip_type, GLOBALCONSTS.TOOLTIP_HOVER_TYPES.TILE)
 
 func display_tile_outline(pos):#input tile coords
 	$TileOutline.visible = true

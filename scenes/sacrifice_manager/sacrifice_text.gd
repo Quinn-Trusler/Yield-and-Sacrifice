@@ -73,15 +73,18 @@ func add_image_button(item_name : String) -> void:
 
 # Add way to detect hover
 # Change text settings for rich text label -> probably remake something
-func _mouse_entered_button(pos : Vector2, item_name : String):
-	item_button_mouse_entered.emit(to_global(pos + HBox.position), item_name)
+func _mouse_entered_button(rect : Rect2, item_name : String):
+	rect.position = to_global(rect.position + HBox.position)
+	item_button_mouse_entered.emit(rect, item_name)
 
 
-func _mouse_exited_button(pos : Vector2, item_name : String):
-	item_button_mouse_exited.emit(to_global(pos + HBox.position), item_name)
+func _mouse_exited_button(rect : Rect2, item_name : String):
+	rect.position = to_global(rect.position + HBox.position)
+	item_button_mouse_exited.emit(rect, item_name)
 	
 
-func _pressed_button(pos : Vector2, item_name : String):
-	item_button_pressed.emit(to_global(pos + HBox.position), item_name)
+func _pressed_button(rect : Rect2, item_name : String):
+	rect.position = to_global(rect.position + HBox.position)
+	item_button_pressed.emit(rect, item_name)
 
 	
