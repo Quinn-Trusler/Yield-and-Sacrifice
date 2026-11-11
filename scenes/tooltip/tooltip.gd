@@ -22,6 +22,11 @@ const recipe_display_names = {
 @export var VBox : VBoxContainer
 @export var Bg : VBoxContainer
 
+
+func _ready() -> void:
+	VBox.position.y = Bg.HeightPadding
+
+
 func erase_recipe():
 	pass
 

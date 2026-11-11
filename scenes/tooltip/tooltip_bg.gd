@@ -8,7 +8,6 @@ extends VBoxContainer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	position.y = -HeightPadding
 
 func set_height(height : int) -> void:
 	var middle_height = height - (BgTop.get_size().y + BgBottom.get_size().y) + HeightPadding*2
