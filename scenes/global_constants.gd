@@ -10,6 +10,7 @@ var ITEMS_FOLDER = "res://art/items/"
 var OUTLINE_ITEMS_FOLDER = "res://art/outline_items/"
 var ITEM_FRAMES_FOLDER = "res://scenes/sprite_frames/items/"
 var ICON_IMAGE_FOLDER = "res://art/icons/"
+var OUTLINE_ICON_IMAGE_FOLDER = "res://art/outline_icons/"
 
 
 #used by other scripts

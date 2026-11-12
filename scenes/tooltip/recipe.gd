@@ -18,17 +18,16 @@ func setup(recipes : Array, display_name : String) -> void:
 	else:
 		for recipe in recipes:
 			single(recipe)
-		
 # Currently does not know what type of ingredient it is, so just tries to grab from any list
 func get_image(ingredient : String):
 	if ingredient in GLOBALCONSTS.ITEM_DEF:
 		assert("img" in GLOBALCONSTS.ITEM_DEF[ingredient], "no img in ITEM_DEF[%s]"%ingredient)
-		return load(GLOBALCONSTS.ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[ingredient]["img"] + GLOBALCONSTS.IMG_EXTENSION)
+		return load(GLOBALCONSTS.OUTLINE_ITEMS_FOLDER + GLOBALCONSTS.ITEM_DEF[ingredient]["img"] + "_outline" + GLOBALCONSTS.IMG_EXTENSION)
 	elif ingredient in GLOBALCONSTS.BUILDING_DEF:
 		assert("icon_img" in GLOBALCONSTS.BUILDING_DEF[ingredient], "no icon_img in BUILDING_DEF[%s]"%ingredient)
-		return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[ingredient]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
+		return load(GLOBALCONSTS.OUTLINE_ICON_IMAGE_FOLDER + GLOBALCONSTS.BUILDING_DEF[ingredient]["icon_img"] + GLOBALCONSTS.IMG_EXTENSION)
 	elif ingredient in GLOBALCONSTS.EXTRA_RECIPE_IMGS:
-		return load(GLOBALCONSTS.ICON_IMAGE_FOLDER + GLOBALCONSTS.EXTRA_RECIPE_IMGS[ingredient] + GLOBALCONSTS.IMG_EXTENSION)
+		return load(GLOBALCONSTS.OUTLINE_ICON_IMAGE_FOLDER + GLOBALCONSTS.EXTRA_RECIPE_IMGS[ingredient] + GLOBALCONSTS.IMG_EXTENSION)
 	else:
 		assert(false, "Ingredient: %s not defined in ITEM_DEF, BUILDINGS, EXTRA_RECIPE_IMGS"%[ingredient])
 
